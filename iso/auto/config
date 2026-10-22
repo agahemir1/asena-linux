@@ -4,8 +4,11 @@
 # (K09 install scope, K19 firmware); see iso/README.md.
 set -e
 
-# Proposal (K09): amd64 and UEFI only. Secure Boot is not verified, so the
-# image does not claim it.
+# Proposal (K09): amd64 and UEFI only.
+# K20: shim and GRUB come from Debian's signed packages. XanMod is unsigned,
+# so under Secure Boot the live menu boots Debian's signed kernel
+# (config/hooks/live/0100-asena-kernel-menu.hook.binary). Secure Boot support
+# is not claimed until the image is verified with it.
 # Proposal (K19): Debian's own default since 12, firmware from
 # non-free-firmware so common Wi-Fi and GPU hardware works in the live system.
 lb config noauto \
@@ -18,7 +21,8 @@ lb config noauto \
     --backports false \
     --binary-images iso-hybrid \
     --bootloaders grub-efi \
-    --uefi-secure-boot disable \
+    --uefi-secure-boot enable \
+    --bootappend-live "boot=live components quiet splash preempt=full" \
     --debian-installer none \
     --firmware-chroot true \
     --firmware-binary false \

@@ -1,0 +1,31 @@
+#!/bin/sh
+# Live boot menu (K20). Runs in binary/ after live-build wrote
+# boot/grub/grub.cfg. Entry 0 is Debian's signed kernel; the XanMod entry
+# becomes the default, Secure Boot lockdown and load failures use entry 0.
+set -e
+xanmod=$(find live -maxdepth 1 -name 'vmlinuz-*-xanmod*' -printf '%f\n' | sort -V | tail -n 1)
+if [ -z "$xanmod" ]; then
+    echo 'asena-kernel-menu: no XanMod kernel in live/' >&2
+    exit 1
+fi
+case $(grep -m 1 '^menuentry ' boot/grub/grub.cfg) in
+    *'(amd64)'*) ;;
+    *)
+        echo 'asena-kernel-menu: entry 0 is not the Debian amd64 kernel' >&2
+        exit 1
+        ;;
+esac
+title="Live system, kernel ${xanmod#vmlinuz-}"
+if ! grep -qF "menuentry \"$title\"" boot/grub/grub.cfg; then
+    echo "asena-kernel-menu: missing menu entry: $title" >&2
+    exit 1
+fi
+cat >>boot/grub/grub.cfg <<EOF
+
+# Asena (K20): XanMod by default; Debian's signed kernel under lockdown.
+set default="$title"
+if [ "\${lockdown}" = "y" ]; then
+  set default=0
+fi
+set fallback=0
+EOF

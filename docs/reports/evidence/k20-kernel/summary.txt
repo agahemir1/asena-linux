@@ -1,0 +1,2 @@
+secure-boot=off ASENA-KERNEL-TEST kernel=6.18.58-x64v2-xanmod1 sb="SecureBoot disabled" preempt="Dynamic Preempt: full" cmdline="BOOT_IMAGE=/boot/vmlinuz-6.18.58-x64v2-xanmod1 root=UUID=40be7151-40bd-4794-8ba3-faff978eaaae ro preempt=full console=ttyS0,115200"
+secure-boot=on ASENA-KERNEL-TEST kernel=6.12.113+deb13-amd64 sb="SecureBoot enabled" preempt="Dynamic Preempt: full" cmdline="BOOT_IMAGE=/boot/vmlinuz-6.12.113+deb13-amd64 root=UUID=40be7151-40bd-4794-8ba3-faff978eaaae ro preempt=full console=ttyS0,115200"

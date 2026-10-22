@@ -257,3 +257,18 @@ ve `greeter-1` altındadır. Gerçek greetd/TTY kabulü ayrı yapılır.
 kurulum ayrı greeter hesabı, onun state dizini ve doğrulanmış greetd/cage/PAM
 ortamı ister. Mevcut display manager değiştirilmez. VM'de TTY/SSH kurtarma erişimi
 ve anlık görüntüyle doğrulama bitmeden normal açılışa bağlanmaz.
+
+## Dağıtım denemeleri
+
+Çekirdek ve önyükleme (K20), yalnız geliştirme VM'sinde:
+
+```sh
+sudo apt-get install debootstrap qemu-system-x86 qemu-utils ovmf gdisk dosfstools
+ASENA_KERNEL_TEST_VM=1 bash scripts/test-kernel-vm.sh
+```
+
+Betik `target/kernel-test` altında 6 GB seyrek bir disk dosyasına debootstrap ile Debian kurar,
+`data/apt` ve `data/grub` dosyalarını ekler ve diski OVMF ile Secure Boot kapalı ve açık iki kez
+açar. Disk dosyası ve loop aygıtı dışında sisteme dokunmaz. VM'de KVM yoksa TCG kullanılır ve
+deneme 15 dakika kadar sürer. Sonuçlar `target/evidence/kernel-boot`; ayrıntı
+[iso/README.md](../iso/README.md).

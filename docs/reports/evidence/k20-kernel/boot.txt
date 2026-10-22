@@ -1,0 +1,35 @@
+# update-grub (first run; the script then moved from version_find_latest to version_sort)
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-6.18.58-x64v2-xanmod1
+Found initrd image: /boot/initrd.img-6.18.58-x64v2-xanmod1
+Found linux image: /boot/vmlinuz-6.12.113+deb13-amd64
+Found initrd image: /boot/initrd.img-6.12.113+deb13-amd64
+Adding boot menu entry for UEFI Firmware Settings ...
+Warning: version_find_latest() is deprecated. Use version_sort() instead.
+Warning: version_test_gt() is deprecated. Use version_sort() instead.
+Found signed fallback kernel: /boot/vmlinuz-6.12.113+deb13-amd64
+done
+
+# grub.cfg, Asena block
+### BEGIN /etc/grub.d/42_asena_kernel ###
+if [ "${lockdown}" = "y" ]; then
+  set default="gnulinux-advanced-40be7151-40bd-4794-8ba3-faff978eaaae>gnulinux-6.12.113+deb13-amd64-advanced-40be7151-40bd-4794-8ba3-faff978eaaae"
+fi
+set fallback="gnulinux-advanced-40be7151-40bd-4794-8ba3-faff978eaaae>gnulinux-6.12.113+deb13-amd64-advanced-40be7151-40bd-4794-8ba3-faff978eaaae"
+### END /etc/grub.d/42_asena_kernel ###
+
+# Secure Boot on: GRUB and kernel lines
+Booting `Debian GNU/Linux, with Linux 6.12.113+deb13-amd64'
+Dynamic Preempt: full
+EFI stub: UEFI Secure Boot is enabled.
+Kernel is locked down from EFI Secure Boot
+Linux version 6.12.113+deb13-amd64 
+error: prohibited by secure boot policy
+
+# Secure Boot off: kernel lines
+Booting `Debian GNU/Linux'
+Dynamic Preempt: full
+
+# update-grub again with version_sort on the same test disk: no warnings and the
+# same Asena block.
+Found signed fallback kernel: /boot/vmlinuz-6.12.113+deb13-amd64

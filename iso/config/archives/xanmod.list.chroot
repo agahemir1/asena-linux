@@ -1,0 +1,6 @@
+# Build-time XanMod archive (K20). scripts/build-iso.sh adds the key and the
+# pin from data/apt as xanmod.key.chroot and xanmod.pref.chroot; live-build
+# removes all three after the chroot stage. The image keeps
+# data/apt/sources.list.d/xanmod.sources with Signed-By instead. Plain HTTP
+# because the chroot has no CA certificates yet; APT checks the signature.
+deb http://deb.xanmod.org @DISTRIBUTION@ main

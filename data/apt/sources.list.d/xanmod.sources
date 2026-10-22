@@ -1,0 +1,7 @@
+# XanMod LTS kernel (K20). asena-xanmod.pref limits this archive to the
+# kernel packages; it also carries LLVM, DKMS and other builds.
+Types: deb
+URIs: https://deb.xanmod.org
+Suites: trixie
+Components: main
+Signed-By: /usr/share/keyrings/xanmod-archive-keyring.asc

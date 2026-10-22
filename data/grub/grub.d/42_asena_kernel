@@ -1,0 +1,45 @@
+#! /bin/sh
+# Installed as /etc/grub.d/42_asena_kernel (K20).
+# The default XanMod kernel is unsigned. Under UEFI Secure Boot the signed
+# GRUB runs in lockdown and refuses to load it, so lockdown boots Debian's
+# newest signed kernel directly. The same entry is the fallback when the
+# default entry fails to load.
+set -e
+
+# grub-mkconfig exports pkgdatadir; grub-mkconfig_lib reads the prefixes.
+# shellcheck disable=SC2034
+prefix="/usr"
+# shellcheck disable=SC2034
+exec_prefix="/usr"
+# shellcheck disable=SC2034
+datarootdir="/usr/share"
+
+# shellcheck source=/dev/null disable=SC2154
+. "${pkgdatadir}/grub-mkconfig_lib"
+
+kernels=
+for kernel in /boot/vmlinuz-*-amd64; do
+    if grub_file_is_not_garbage "$kernel"; then
+        kernels="$kernels $kernel"
+    fi
+done
+[ -n "$kernels" ] || exit 0
+# shellcheck disable=SC2086
+newest=$(printf '%s\n' $kernels | version_sort -r | head -n 1)
+version=${newest#/boot/vmlinuz-}
+
+# Entry ids as /etc/grub.d/10_linux writes them.
+device_id=$(grub_get_device_id "${GRUB_DEVICE}")
+entry="gnulinux-${version}-advanced-${device_id}"
+case "x${GRUB_DISABLE_SUBMENU}" in
+    xy | xtrue) ;;
+    *) entry="gnulinux-advanced-${device_id}>${entry}" ;;
+esac
+
+gettext_printf "Found signed fallback kernel: %s\n" "$newest" >&2
+cat <<EOF
+if [ "\${lockdown}" = "y" ]; then
+  set default="${entry}"
+fi
+set fallback="${entry}"
+EOF

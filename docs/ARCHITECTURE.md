@@ -95,6 +95,8 @@ asena/
 │   ├── asena-welcome/          # bin (libadwaita)
 │   └── asena-screenshot/       # bin (libadwaita)
 ├── data/
+│   ├── apt/                    # XanMod kaynağı, anahtarı ve pin'i (K20)
+│   ├── grub/                   # /etc/default/grub.d ve /etc/grub.d dosyaları (K20)
 │   ├── schemas/                # org.asenalinux.*.gschema.xml
 │   ├── wayfire/                # wayfire.ini: eklentiler, kısayollar, blur, başlık, girdi
 │   ├── sessions/               # asena.desktop  → /usr/share/wayland-sessions/

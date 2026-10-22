@@ -10,12 +10,23 @@ değişiklikler ISO'ya geçmez.
 
 | Yol | İş |
 |---|---|
-| `auto/config` | `lb config` seçenekleri: Debian 13, amd64, UEFI, firmware politikası |
+| `auto/config` | `lb config` seçenekleri: Debian 13, amd64, UEFI, Debian'ın imzalı shim ve GRUB'u, firmware politikası, canlı çekirdek satırı |
 | `auto/build`, `auto/clean` | live-build'in standart sarmalayıcıları |
-| `config/package-lists/asena-desktop.list.chroot` | Debian'dan gelen masaüstü çalışma zamanı paketleri |
+| `config/package-lists/asena-desktop.list.chroot` | Debian'dan gelen masaüstü çalışma zamanı paketleri ve XanMod LTS |
 | `config/package-lists/installer.list.chroot` | Calamares için yer (6D) |
+| `config/archives/xanmod.list.chroot` | Derleme sırasında XanMod deposu (K20) |
+| `config/hooks/live/0100-asena-kernel-menu.hook.binary` | Canlı önyükleme menüsü: XanMod varsayılan, Secure Boot'ta Debian çekirdeği |
 | `config/packages.chroot/` | Derlemede `scripts/build-iso.sh` doldurur: yerel `.deb` paketleri (şimdilik yamalı wlroots) |
-| `config/includes.chroot/`, `config/hooks/` | Henüz yok; sistem dosyaları önce Asena paketlerine konur |
+
+`scripts/build-iso.sh` derleme kopyasına ayrıca şunları ekler:
+
+- `data/apt/keyrings/xanmod-archive-keyring.asc` ve `data/apt/preferences.d/asena-xanmod.pref`,
+  `config/archives/xanmod.key.chroot` ve `xanmod.pref.chroot` olarak. live-build anahtarı yalnız
+  derleme chroot'unda ve geçici olarak güvenilir sayar, chroot aşamasının sonunda kaynakla
+  birlikte kaldırır.
+- `config/includes.chroot_after_packages/` altına imajın sistem dosyaları: `data/apt` (XanMod
+  kaynağı `Signed-By` ile, anahtar, pin) ve `data/grub` (`/etc/default/grub.d/asena.cfg`,
+  `/etc/grub.d/42_asena_kernel`). Faz 6A'da bu dosyaların sahibi Asena paketleri olur.
 
 ## Derleme
 
@@ -29,14 +40,59 @@ ASENA_SOURCE_COMMIT=<commit> bash scripts/build-iso.sh
 Çıktı ve `build-info.txt` (SHA-256, kaynak commit'i, live-build sürümü, yerel paketler)
 `target/iso` altında kalır. Derleme yaklaşık 10 GB yer ister.
 
-## Açık kararlar
+## Çekirdek (K20)
 
-| Kimlik | Konu | Bu iskeletteki öneri |
+Varsayılan çekirdek XanMod LTS (`linux-xanmod-lts-x64v2`), yanında Debian'ın imzalı
+`linux-image-amd64` çekirdeği kurulu kalır.
+
+- **Depo:** `deb.xanmod.org` yalnız çekirdek paketlerini sağlayabilir. Pin, depodaki clang/LLVM,
+  dkms, libbpf ve diğer paketlerin Debian'ınkilerin yerine geçmesini engeller. Anahtar parmak izi
+  `D38D 7D1D A134 9567 ADED 882D 86F7 D09E E734 E623` (XanMod Kernel, 22 Ekim 2026'da
+  `dl.xanmod.org/archive.key` adresinden alındı; XanMod parmak izini ayrıca yayımlamıyor).
+- **Kurulu sistem:** `42_asena_kernel`, `update-grub` sırasında Debian'ın en yeni `-amd64`
+  çekirdeğini bulur. GRUB Secure Boot nedeniyle kilitli moddaysa (`lockdown=y`) varsayılan girdi
+  bu çekirdektir; aynı girdi `fallback` olarak da yazılır. `asena.cfg` çekirdek satırına
+  `preempt=full` ekler.
+- **Canlı ISO:** live-build'in ilk girdisi Debian çekirdeğidir. Kanca XanMod girdisini varsayılan
+  yapar, kilitli modda ilk girdiye döner.
+
+### VM denemesi (23 Ekim 2026)
+
+`ASENA_KERNEL_TEST_VM=1 bash scripts/test-kernel-vm.sh` debootstrap ile küçük bir UEFI test
+diski kurar: Debian'ın imzalı shim, GRUB ve çekirdeği, XanMod LTS ve `data/apt`, `data/grub`
+dosyaları. Disk OVMF 4M secboot ile iki kez açılır. Sonuçlar
+[docs/reports/evidence/k20-kernel](../docs/reports/evidence/k20-kernel):
+
+| Senaryo | Açılan çekirdek | Secure Boot | Kesme modeli |
+|---|---|---|---|
+| Microsoft anahtarı yok | `6.18.58-x64v2-xanmod1` | kapalı | `full` |
+| `OVMF_VARS_4M.ms.fd` | `6.12.113+deb13-amd64` | açık, çekirdek kilitli | `full` |
+
+- Pin doğrulandı: `clang-21` için aday yok, `dkms` ve `libbpf1` Debian'dan, XanMod meta paketi 500.
+- Secure Boot açıkken GRUB menüden önce iki kez "prohibited by secure boot policy" yazar ve
+  açılışa devam eder. Satırlar Debian'ın standart GRUB başlığından gelir; Asena bloğu yalnız
+  `if` ve `set` kullanır. Hangi komutun reddedildiği ayrıca ayrılmadı.
+- Deneme iç içe QEMU'da TCG ile yapıldı; gerçek donanım ve gerçek firmware değildir.
+
+### Doğrulanmadı
+
+- Canlı ISO menü kancası yalnız örnek bir `binary/` ağacında denendi; ISO derlenmedi.
+- Gerçek donanımda Secure Boot. Microsoft'un 2011 sertifikalarının yerini 2023 sertifikalarına
+  bırakan firmware'lerde Debian shim'inin durumu.
+- x86-64-v2 desteklemeyen işlemciler (2009 öncesi) XanMod'u açamaz ve bu bir yükleme hatası
+  olmadığı için GRUB yedeğe geçmez; Debian girdisi menüden elle seçilir.
+- XanMod deposu kaynak paketi yayımlamıyor (`main/source/Sources` boş). ISO dağıtıldığında
+  GPL gereği XanMod'un aynı sürümünün kaynağı ISO ile birlikte sunulmalı (6C/6E).
+
+## Kararlar
+
+| Kimlik | Konu | Bu iskeletteki durum |
 |---|---|---|
-| K07 | Logo, duvar kâğıdı ve marka hakları | Görsel varlık eklenmedi |
-| K08 | Depo barındırma, alan adı, imza anahtarı | Yalnız yerel paketler; uzak Asena deposu yok |
-| K09 | Kurulum kapsamı | amd64 ve UEFI; Secure Boot kapalı ve desteklenir denmez; BIOS, dual boot ve şifreleme yok |
-| K19 | Firmware politikası | `main non-free-firmware`, firmware canlı sistemde |
+| K07 | Logo, duvar kâğıdı ve marka hakları | Karar verildi; logo taslakları inceleniyor, görsel varlık eklenmedi |
+| K08 | Depo barındırma, imza anahtarı | Karar verildi; barındırma açık, uzak Asena deposu yok |
+| K09 | Kurulum kapsamı | Öneri: amd64 ve UEFI; BIOS, dual boot ve şifreleme yok. Secure Boot zinciri Debian'ın imzalı paketleriyle açık, destek beyanı yok |
+| K19 | Firmware politikası | Öneri: `main non-free-firmware`, firmware canlı sistemde |
+| K20 | Çekirdek | Uygulandı: XanMod LTS varsayılan, Debian imzalı çekirdeği yedek |
 
 ## Henüz eksik olanlar
 

@@ -26,6 +26,18 @@ if [[ -d $repo/target/packages ]]; then
     find "$repo/target/packages" -name '*.deb' ! -name '*-dbgsym_*' ! -name '*-dev_*' \
         ! -name '*-examples_*' -exec cp -t "$work/config/packages.chroot/" {} +
 fi
+# XanMod archive for the chroot stage (K20). live-build trusts .key.chroot
+# only inside the build chroot and removes it with the source and pin.
+cp "$repo/data/apt/keyrings/xanmod-archive-keyring.asc" "$work/config/archives/xanmod.key.chroot"
+cp "$repo/data/apt/preferences.d/asena-xanmod.pref" "$work/config/archives/xanmod.pref.chroot"
+# System files of the image until Asena packages own them (Phase 6A).
+include=$work/config/includes.chroot_after_packages
+install -D -m 0644 "$repo/data/apt/sources.list.d/xanmod.sources" "$include/etc/apt/sources.list.d/xanmod.sources"
+install -D -m 0644 "$repo/data/apt/keyrings/xanmod-archive-keyring.asc" \
+    "$include/usr/share/keyrings/xanmod-archive-keyring.asc"
+install -D -m 0644 "$repo/data/apt/preferences.d/asena-xanmod.pref" "$include/etc/apt/preferences.d/asena-xanmod.pref"
+install -D -m 0644 "$repo/data/grub/default/asena.cfg" "$include/etc/default/grub.d/asena.cfg"
+install -D -m 0755 "$repo/data/grub/grub.d/42_asena_kernel" "$include/etc/grub.d/42_asena_kernel"
 cd "$work"
 lb config
 sudo lb build

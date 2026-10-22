@@ -3,6 +3,12 @@
 # patched libwlroots-0.18 from scripts/build-wlroots.sh, are added by
 # scripts/build-iso.sh through config/packages.chroot.
 
+# Kernel (K20): XanMod LTS from deb.xanmod.org next to Debian's signed
+# linux-image-amd64, which live-build installs itself. ca-certificates serves
+# the HTTPS source of the installed system.
+linux-xanmod-lts-x64v2
+ca-certificates
+
 # Compositor and session
 wayfire
 xwayland

@@ -1,0 +1,10 @@
+# deb.xanmod.org may only provide the XanMod kernel (K20). The archive also
+# carries clang/LLVM, dkms, libbpf and other packages that would otherwise
+# replace Debian's builds.
+Package: *
+Pin: origin deb.xanmod.org
+Pin-Priority: -1
+
+Package: linux-xanmod-* linux-image-*-xanmod* linux-headers-*-xanmod*
+Pin: origin deb.xanmod.org
+Pin-Priority: 500
