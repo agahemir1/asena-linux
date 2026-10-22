@@ -215,12 +215,12 @@ Shell olgunlaşana kadar uygulamaları yeniden yazmıyoruz; GNOME'un GTK4 uygula
 | Belge görüntüleyici | Papers | Evince |
 | Video | Celluloid | — |
 | Hesap makinesi | GNOME Calculator | — |
-| Yazılım merkezi | GNOME Software + Flatpak eklentisi | — |
+| Yazılım merkezi | Asena Yazılım: kendi APT ve Flatpak arka ucu, PackageKit yok (K21, [Faz 6F](../prompts/06f-yazilim.md)) | — |
 | Sistem izleyici | GNOME System Monitor | — |
 | Arşiv | File Roller | — |
 | Tarayıcı | Firefox ESR | — |
 
-**Kendi yazılabilecek uygulama adayları (Faz 7 sonrası):** dosya yöneticisi, APT ve Flatpak'ı birleştiren yazılım merkezi, GTK4 kurulum sihirbazı.
+**Kendi yazılabilecek uygulama adayları (Faz 7 sonrası):** dosya yöneticisi, GTK4 kurulum sihirbazı. Yazılım merkezi 23 Ekim'de 1.0 kapsamına alındı (K21).
 
 18 Ekim 2026 resmî trixie/main amd64 indeksi kontrolü: bütün aday ve yedek paketler
 mevcut. Bu, uygulamaların kurulup çalıştırıldığı anlamına gelmez.
@@ -235,7 +235,6 @@ mevcut. Bu, uygulamaların kurulup çalıştırıldığı anlamına gelmez.
 | Papers / Evince | `papers` / `evince` |
 | Celluloid | `celluloid` |
 | GNOME Calculator | `gnome-calculator` |
-| GNOME Software + Flatpak | `gnome-software`, `gnome-software-plugin-flatpak` |
 | GNOME System Monitor | `gnome-system-monitor` |
 | File Roller | `file-roller` |
 | Firefox ESR | `firefox-esr` (security deposundaki aday sürüm ayrıca Linux'ta toplanacak) |

@@ -37,7 +37,7 @@ penceresi gösterir.
 | Kamera | `org.asenalinux.Camera` | ⬜ Gizli | GStreamer kamera/PipeWire yolu gerekiyor |
 | Belgeler | `org.asenalinux.Documents` | ⬜ Gizli | PDF işleme kitaplığı (poppler veya benzeri) kararı gerekiyor |
 | Hava Durumu | `org.asenalinux.Weather` | ⬜ Gizli | HTTP istemcisi ve veri sağlayıcı kararı gerekiyor |
-| Yazılım | `org.asenalinux.Store` | ⬜ Gizli | PackageKit/Flatpak arka uç kararı gerekiyor |
+| Yazılım | `org.asenalinux.Store` | ⬜ Gizli | Kendi APT/Flatpak arka ucu (K21); plan [06f-yazilim.md](../../prompts/06f-yazilim.md) onay bekliyor |
 
 Durum: ⬜ başlamadı veya gizli · 🟨 sürüyor · ✅ kabul edildi. Hiçbir uygulama kullanıcı görsel kabulünden
 geçmediği için ✅ yoktur.
