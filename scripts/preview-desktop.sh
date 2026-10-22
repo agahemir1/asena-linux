@@ -104,7 +104,7 @@ done <"/proc/$shell_pid/environ"
 gsettings set org.asenalinux.power idle-enabled false 2>/dev/null || true
 # Same window buttons for third-party GTK applications as the packaged override.
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close' 2>/dev/null || true
-gsettings set org.asenalinux.desktop background-uri 'file:///usr/share/backgrounds/asena/asena-bozkurt.jpg' 2>/dev/null || true
+gsettings set org.asenalinux.desktop background-uri 'file:///usr/share/backgrounds/asena/asena-gece.jpg' 2>/dev/null || true
 gsettings set org.asenalinux.desktop background-mode 'zoom' 2>/dev/null || true
 if [[ $(gsettings get org.asenalinux.shell pinned-apps) == '@as []' ]]; then
     gsettings set org.asenalinux.shell pinned-apps "['org.asenalinux.Files.desktop', 'firefox-esr.desktop', 'org.asenalinux.Settings.desktop', 'foot.desktop']"

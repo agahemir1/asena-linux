@@ -8,7 +8,7 @@
     <key name="defaults-applied" type="b"><default>false</default></key>
     <key name="text-scaling-factor" type="d"><range min="0.75" max="2.0"/><default>1.0</default><summary>Text scale</summary></key>
     <key name="terminal" type="s"><choices><choice value="foot"/><choice value="ptyxis"/></choices><default>'foot'</default><summary>Terminal</summary></key>
-    <key name="background-uri" type="s"><default>'file:///usr/share/backgrounds/asena/asena-bozkurt.jpg'</default><summary>Background image</summary></key>
+    <key name="background-uri" type="s"><default>'file:///usr/share/backgrounds/asena/asena-gece.jpg'</default><summary>Background image</summary></key>
     <key name="background-mode" type="s">
       <choices><choice value="zoom"/><choice value="fit"/><choice value="center"/><choice value="solid"/></choices>
       <default>'zoom'</default><summary>Background scaling</summary>
