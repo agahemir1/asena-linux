@@ -1,0 +1,22 @@
+[package]
+name = "asena-packages"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+asena-core.workspace = true
+async-channel.workspace = true
+async-io.workspace = true
+futures-lite.workspace = true
+gio.workspace = true
+glib.workspace = true
+rust-apt.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+zbus.workspace = true
+
+[lints]
+workspace = true

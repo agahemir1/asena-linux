@@ -34,6 +34,7 @@ crates/asena-core/src/logging.rs
 crates/asena-core/src/night_light.rs
 crates/asena-core/src/notification.rs
 crates/asena-core/src/operation.rs
+crates/asena-core/src/packages.rs
 crates/asena-core/src/panels.rs
 crates/asena-core/src/power.rs
 crates/asena-core/src/screenshot.rs
@@ -76,6 +77,12 @@ crates/asena-lock/src/sleep.rs
 crates/asena-notes/src/main.rs
 crates/asena-notes/src/note.rs
 crates/asena-notes/src/window.rs
+crates/asena-packages/src/apt.rs
+crates/asena-packages/src/main.rs
+crates/asena-packages/src/offline.rs
+crates/asena-packages/src/plans.rs
+crates/asena-packages/src/polkit.rs
+crates/asena-packages/src/service.rs
 crates/asena-photos/src/main.rs
 crates/asena-photos/src/photo.rs
 crates/asena-photos/src/window.rs

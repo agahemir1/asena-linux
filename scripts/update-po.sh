@@ -24,6 +24,8 @@ xgettext --language=C --from-code=UTF-8 --keyword=_ --keyword=C_:1c,2 --join-exi
 # xgettext does not extract GSettings XML as Rust source.
 xgettext --language=GSettings --from-code=UTF-8 --join-existing \
     --output="$pot" data/schemas/*.gschema.xml
+# polkit action messages; xgettext finds polkit.its through its .loc rules.
+xgettext --from-code=UTF-8 --join-existing --output="$pot" data/polkit/*.policy
 while IFS= read -r language; do
     [[ -n $language && $language != \#* ]] || continue
     if [[ $mode == --check ]]; then

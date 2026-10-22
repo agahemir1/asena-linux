@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- Asena Software (K21). Packaging merges the po/ translations with msgfmt in XML mode. -->
+<policyconfig>
+  <vendor>Asena Linux</vendor>
+  <icon_name>org.asenalinux.Store</icon_name>
+
+  <action id="org.asenalinux.packages.refresh">
+    <description>Refresh the package lists</description>
+    <message>Authentication is required to refresh the package lists</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.asenalinux.packages.download">
+    <description>Download system updates</description>
+    <message>Authentication is required to download system updates</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.asenalinux.packages.install">
+    <description>Install software</description>
+    <message>Authentication is required to install software</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.asenalinux.packages.remove">
+    <description>Remove software</description>
+    <message>Authentication is required to remove software</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.asenalinux.packages.upgrade">
+    <description>Install system updates</description>
+    <message>Authentication is required to install system updates</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.asenalinux.packages.repair">
+    <description>Repair the package system</description>
+    <message>Authentication is required to repair the package system</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

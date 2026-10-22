@@ -1,0 +1,11 @@
+[Unit]
+Description=Asena package service
+
+[Service]
+Type=dbus
+BusName=org.asenalinux.Packages
+ExecStart=/usr/libexec/asena-packages
+Environment=DEBIAN_FRONTEND=noninteractive
+# Only changes the system through APT and dpkg; home directories are not its business.
+ProtectHome=read-only
+PrivateTmp=yes

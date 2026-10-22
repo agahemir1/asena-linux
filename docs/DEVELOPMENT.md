@@ -273,3 +273,17 @@ altındaki chroot kancalarını çalıştırır ve diski OVMF ile Secure Boot ka
 Açılış sırasında 10 saniyede bir ekran görüntüsü alır. Disk dosyası ve loop aygıtı dışında
 sisteme dokunmaz. VM'de KVM yoksa TCG kullanılır ve deneme 30 dakika kadar sürer. Sonuçlar
 `target/evidence/boot-test`; ayrıntı [iso/README.md](../iso/README.md).
+
+Paket servisi (K21, Faz 6F), yalnız geliştirme VM'sinde:
+
+```sh
+cargo build -p asena-packages
+ASENA_PACKAGES_TEST_VM=1 bash scripts/test-packages-vm.sh
+```
+
+Betik `asena-packages`'ı deneme süresince D-Bus ile etkinleşen sistem servisi olarak kurar
+(`/usr/local`, `/etc/dbus-1/system.d`, polkit eylemleri, `/run/systemd/system`) ve çıkışta
+kaldırır. Önce yetkisiz istekleri, sonra çağıran kullanıcıya geçici bir polkit kuralıyla `hello`
+paketinin kurulup kaldırılmasını, güncelleme listesini ve yeniden başlatma zamanlamasını dener.
+Makineyi yeniden başlatmaz; zamanlanan güncellemeyi iptal eder. Sonuçlar
+`target/evidence/packages-test`.

@@ -17,6 +17,7 @@ def main():
         "asena-store", "asena-text", "asena-documents", "asena-photos",
         "asena-player", "asena-archive", "asena-calculator", "asena-calendar",
         "asena-notes", "asena-clock", "asena-camera", "asena-weather",
+        "asena-packages",
     }
     actual = set()
     for path in sorted((root / "crates").glob("*/Cargo.toml")):

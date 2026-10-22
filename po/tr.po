@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: asena 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 20:34+0000\n"
+"POT-Creation-Date: 2026-10-22 22:05+0000\n"
 "PO-Revision-Date: 2026-10-21 18:00+0300\n"
 "Last-Translator: Asena contributors\n"
 "Language-Team: Turkish\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: crates/asena-app/src/dialogs.rs:33 crates/asena-shell/src/main.rs:111
+#: crates/asena-app/src/dialogs.rs:33 crates/asena-shell/src/main.rs:112
 msgid "Asena"
 msgstr "Asena"
 
@@ -28,14 +28,15 @@ msgstr "Asena Linux Türkçe çeviri ekibi"
 msgid "OK"
 msgstr "Tamam"
 
-#: crates/asena-app/src/dialogs.rs:76 crates/asena-calendar/src/window.rs:364
+#: crates/asena-app/src/dialogs.rs:76 crates/asena-calendar/src/window.rs:363
 #: crates/asena-files/src/window.rs:902 crates/asena-greeter/src/main.rs:313
 #: crates/asena-greeter/src/main.rs:362 crates/asena-lock/src/main.rs:140
 #: crates/asena-polkit-agent/src/main.rs:91
 #: crates/asena-polkit-agent/src/main.rs:201
+#: crates/asena-settings/src/displays.rs:716
 #: crates/asena-settings/src/pages.rs:1041
 #: crates/asena-shell/src/desktop.rs:149 crates/asena-shell/src/power.rs:207
-#: crates/asena-shell/src/taskbar.rs:167 crates/asena-text/src/window.rs:463
+#: crates/asena-shell/src/taskbar.rs:167 crates/asena-text/src/window.rs:462
 #: crates/asena-widgets/src/wireless.rs:240
 msgid "Cancel"
 msgstr "İptal"
@@ -113,45 +114,45 @@ msgstr "Arşivleri açmak için libarchive-tools paketini kurun."
 msgid "Could not open the archive"
 msgstr "Arşiv açılamadı"
 
-#: crates/asena-archive/src/window.rs:251
+#: crates/asena-archive/src/window.rs:250
 msgid "{count} more items"
 msgstr "{count} öge daha"
 
-#: crates/asena-archive/src/window.rs:265
+#: crates/asena-archive/src/window.rs:264
 msgid "Extract to"
 msgstr "Şuraya çıkar"
 
-#: crates/asena-archive/src/window.rs:283
+#: crates/asena-archive/src/window.rs:282
 msgid "Extracted"
 msgstr "Çıkarılan"
 
-#: crates/asena-archive/src/window.rs:300
+#: crates/asena-archive/src/window.rs:299
 msgid "The archive is not safe to extract"
 msgstr "Arşivi çıkarmak güvenli değil"
 
-#: crates/asena-archive/src/window.rs:301
+#: crates/asena-archive/src/window.rs:300
 msgid "It contains a path outside the destination folder: {path}"
 msgstr "Hedef klasörün dışına çıkan bir yol içeriyor: {path}"
 
-#: crates/asena-archive/src/window.rs:309 crates/asena-files/src/window.rs:943
+#: crates/asena-archive/src/window.rs:308 crates/asena-files/src/window.rs:943
 #: crates/asena-shell/src/desktop.rs:134
 msgid "Could not create the folder"
 msgstr "Klasör oluşturulamadı"
 
-#: crates/asena-archive/src/window.rs:331
+#: crates/asena-archive/src/window.rs:330
 msgid "Archive extracted"
 msgstr "Arşiv çıkarıldı"
 
-#: crates/asena-archive/src/window.rs:332
+#: crates/asena-archive/src/window.rs:331
 msgid "Show"
 msgstr "Göster"
 
-#: crates/asena-archive/src/window.rs:338
+#: crates/asena-archive/src/window.rs:337
 msgid "Could not extract the archive"
 msgstr "Arşiv çıkarılamadı"
 
 #: crates/asena-calculator/src/calc.rs:343
-#: crates/asena-calculator/src/window.rs:429
+#: crates/asena-calculator/src/window.rs:428
 msgid "Error"
 msgstr "Hata"
 
@@ -309,19 +310,19 @@ msgstr "Geçmiş"
 msgid "About Calculator"
 msgstr "Hesap Makinesi Hakkında"
 
-#: crates/asena-calculator/src/window.rs:337
+#: crates/asena-calculator/src/window.rs:336
 msgid "Clear memory"
 msgstr "Belleği temizle"
 
-#: crates/asena-calculator/src/window.rs:338
+#: crates/asena-calculator/src/window.rs:337
 msgid "Recall memory"
 msgstr "Bellekteki değeri getir"
 
-#: crates/asena-calculator/src/window.rs:339
+#: crates/asena-calculator/src/window.rs:338
 msgid "Add to memory"
 msgstr "Belleğe ekle"
 
-#: crates/asena-calculator/src/window.rs:340
+#: crates/asena-calculator/src/window.rs:339
 msgid "Subtract from memory"
 msgstr "Bellekten çıkar"
 
@@ -357,75 +358,75 @@ msgstr "Etkinlikleri dışa aktar…"
 msgid "About Calendar"
 msgstr "Takvim Hakkında"
 
-#: crates/asena-calendar/src/window.rs:215
+#: crates/asena-calendar/src/window.rs:214
 msgid "Could not read the calendar"
 msgstr "Takvim okunamadı"
 
-#: crates/asena-calendar/src/window.rs:238
+#: crates/asena-calendar/src/window.rs:237
 msgid "Could not save the calendar"
 msgstr "Takvim kaydedilemedi"
 
-#: crates/asena-calendar/src/window.rs:283
-#: crates/asena-calendar/src/window.rs:323
+#: crates/asena-calendar/src/window.rs:282
+#: crates/asena-calendar/src/window.rs:322
 msgid "All day"
 msgstr "Tüm gün"
 
-#: crates/asena-calendar/src/window.rs:315
+#: crates/asena-calendar/src/window.rs:314
 msgid "Edit event"
 msgstr "Etkinliği düzenle"
 
-#: crates/asena-calendar/src/window.rs:317
+#: crates/asena-calendar/src/window.rs:316
 msgid "New event"
 msgstr "Yeni etkinlik"
 
-#: crates/asena-calendar/src/window.rs:322
+#: crates/asena-calendar/src/window.rs:321
 msgid "Title"
 msgstr "Başlık"
 
-#: crates/asena-calendar/src/window.rs:325
+#: crates/asena-calendar/src/window.rs:324
 msgid "Starts (HH:MM)"
 msgstr "Başlangıç (SS:DD)"
 
-#: crates/asena-calendar/src/window.rs:328
+#: crates/asena-calendar/src/window.rs:327
 msgid "Ends (HH:MM)"
 msgstr "Bitiş (SS:DD)"
 
-#: crates/asena-calendar/src/window.rs:330
+#: crates/asena-calendar/src/window.rs:329
 msgid "Location"
 msgstr "Konum"
 
-#: crates/asena-calendar/src/window.rs:366 crates/asena-files/src/window.rs:995
+#: crates/asena-calendar/src/window.rs:365 crates/asena-files/src/window.rs:995
 msgid "Delete"
 msgstr "Sil"
 
-#: crates/asena-calendar/src/window.rs:369 crates/asena-text/src/window.rs:99
-#: crates/asena-text/src/window.rs:465
+#: crates/asena-calendar/src/window.rs:368 crates/asena-text/src/window.rs:99
+#: crates/asena-text/src/window.rs:464
 msgid "Save"
 msgstr "Kaydet"
 
-#: crates/asena-calendar/src/window.rs:439
+#: crates/asena-calendar/src/window.rs:438
 msgid "Calendar files"
 msgstr "Takvim dosyaları"
 
-#: crates/asena-calendar/src/window.rs:470
+#: crates/asena-calendar/src/window.rs:469
 msgid "{count} event imported"
 msgid_plural "{count} events imported"
 msgstr[0] "{count} etkinlik içe aktarıldı"
 msgstr[1] "{count} etkinlik içe aktarıldı"
 
-#: crates/asena-calendar/src/window.rs:479
+#: crates/asena-calendar/src/window.rs:478
 msgid "Could not import the file"
 msgstr "Dosya içe aktarılamadı"
 
-#: crates/asena-calendar/src/window.rs:489
+#: crates/asena-calendar/src/window.rs:488
 msgid "calendar"
 msgstr "takvim"
 
-#: crates/asena-calendar/src/window.rs:507
+#: crates/asena-calendar/src/window.rs:506
 msgid "Events exported"
 msgstr "Etkinlikler dışa aktarıldı"
 
-#: crates/asena-calendar/src/window.rs:510
+#: crates/asena-calendar/src/window.rs:509
 msgid "Could not export the events"
 msgstr "Etkinlikler dışa aktarılamadı"
 
@@ -449,7 +450,7 @@ msgstr "Saat"
 msgid "World clocks, stopwatch and timers"
 msgstr "Dünya saatleri, kronometre ve zamanlayıcı"
 
-#: crates/asena-clock/src/window.rs:86 crates/asena-clock/src/window.rs:425
+#: crates/asena-clock/src/window.rs:86 crates/asena-clock/src/window.rs:424
 msgid "Add city"
 msgstr "Şehir ekle"
 
@@ -458,8 +459,8 @@ msgid "World"
 msgstr "Dünya"
 
 #: crates/asena-clock/src/window.rs:115 crates/asena-clock/src/window.rs:186
-#: crates/asena-clock/src/window.rs:497 crates/asena-clock/src/window.rs:621
-#: crates/asena-clock/src/window.rs:638 crates/asena-settings/src/pages.rs:262
+#: crates/asena-clock/src/window.rs:496 crates/asena-clock/src/window.rs:620
+#: crates/asena-clock/src/window.rs:637 crates/asena-settings/src/pages.rs:262
 msgid "Start"
 msgstr "Başlangıç"
 
@@ -468,7 +469,6 @@ msgid "Lap"
 msgstr "Tur"
 
 #: crates/asena-clock/src/window.rs:120 crates/asena-clock/src/window.rs:189
-#: crates/asena-settings/src/displays.rs:650
 #: crates/asena-settings/src/pages.rs:314
 msgid "Reset"
 msgstr "Sıfırla"
@@ -481,7 +481,7 @@ msgstr "Kronometre"
 msgid "hours"
 msgstr "saat"
 
-#: crates/asena-clock/src/window.rs:165 crates/asena-clock/src/window.rs:378
+#: crates/asena-clock/src/window.rs:165 crates/asena-clock/src/window.rs:377
 msgid "min"
 msgstr "dk"
 
@@ -497,72 +497,72 @@ msgstr "Zamanlayıcı"
 msgid "About Clocks"
 msgstr "Saat Hakkında"
 
-#: crates/asena-clock/src/window.rs:364
+#: crates/asena-clock/src/window.rs:363
 msgid "Local time"
 msgstr "Yerel saat"
 
-#: crates/asena-clock/src/window.rs:370
+#: crates/asena-clock/src/window.rs:369
 msgid "Tomorrow"
 msgstr "Yarın"
 
-#: crates/asena-clock/src/window.rs:372
+#: crates/asena-clock/src/window.rs:371
 msgid "Yesterday"
 msgstr "Dün"
 
-#: crates/asena-clock/src/window.rs:376
+#: crates/asena-clock/src/window.rs:375
 msgid "Same time"
 msgstr "Aynı saat"
 
-#: crates/asena-clock/src/window.rs:377
+#: crates/asena-clock/src/window.rs:376
 msgid "h"
 msgstr "sa"
 
-#: crates/asena-clock/src/window.rs:397
+#: crates/asena-clock/src/window.rs:396
 msgid "Remove"
 msgstr "Kaldır"
 
-#: crates/asena-clock/src/window.rs:429
+#: crates/asena-clock/src/window.rs:428
 msgid "Search cities"
 msgstr "Şehir ara"
 
-#: crates/asena-clock/src/window.rs:495 crates/asena-clock/src/window.rs:586
+#: crates/asena-clock/src/window.rs:494 crates/asena-clock/src/window.rs:585
 msgid "Pause"
 msgstr "Duraklat"
 
-#: crates/asena-clock/src/window.rs:499 crates/asena-clock/src/window.rs:569
+#: crates/asena-clock/src/window.rs:498 crates/asena-clock/src/window.rs:568
 msgid "Resume"
 msgstr "Sürdür"
 
-#: crates/asena-clock/src/window.rs:532
+#: crates/asena-clock/src/window.rs:531
 msgid "Lap {number}"
 msgstr "Tur {number}"
 
-#: crates/asena-clock/src/window.rs:622 crates/asena-clock/src/window.rs:627
+#: crates/asena-clock/src/window.rs:621 crates/asena-clock/src/window.rs:626
 msgid "Timer finished"
 msgstr "Zamanlayıcı bitti"
 
-#: crates/asena-core/src/displays.rs:223
+#: crates/asena-core/src/displays.rs:229
 #: crates/asena-daemon/src/displays.rs:154
 msgid "The connected displays changed. Review the layout again."
 msgstr "Bağlı ekranlar değişti. Düzeni yeniden gözden geçirin."
 
-#: crates/asena-core/src/displays.rs:224
+#: crates/asena-core/src/displays.rs:230
 msgid "At least one display must stay on."
 msgstr "En az bir ekran açık kalmalıdır."
 
-#: crates/asena-core/src/displays.rs:225
+#: crates/asena-core/src/displays.rs:232
 msgid "{name} does not support this resolution."
 msgstr "{name} bu çözünürlüğü desteklemiyor."
 
-#: crates/asena-core/src/displays.rs:226
+#: crates/asena-core/src/displays.rs:235
 msgid "{name} does not support this scale."
 msgstr "{name} bu ölçeği desteklemiyor."
 
-#: crates/asena-core/src/displays.rs:227
+#: crates/asena-core/src/displays.rs:237
 msgid "Displays must not overlap."
 msgstr "Ekranlar üst üste binmemelidir."
 
-#: crates/asena-core/src/displays.rs:228
+#: crates/asena-core/src/displays.rs:238
 msgid "Every display must touch another one."
 msgstr "Her ekran başka bir ekrana bitişik olmalıdır."
 
@@ -662,7 +662,7 @@ msgstr "Bluetooth"
 msgid "devices pairing"
 msgstr "cihazlar eşleştirme"
 
-#: crates/asena-core/src/panels.rs:99 crates/asena-settings/src/displays.rs:645
+#: crates/asena-core/src/panels.rs:99 crates/asena-settings/src/displays.rs:710
 msgid "Displays"
 msgstr "Ekranlar"
 
@@ -783,7 +783,7 @@ msgid "The screenshot was cancelled."
 msgstr "Ekran görüntüsü iptal edildi."
 
 #: crates/asena-core/src/screenshot.rs:84
-#: crates/asena-screenshot/src/window.rs:254
+#: crates/asena-screenshot/src/window.rs:253
 msgid "The screenshot could not be taken."
 msgstr "Ekran görüntüsü alınamadı."
 
@@ -819,70 +819,70 @@ msgstr "Ayar şemasının sabit yolu yok."
 msgid "The displays do not support this layout."
 msgstr "Ekranlar bu düzeni desteklemiyor."
 
-#: crates/asena-daemon/src/displays.rs:264
+#: crates/asena-daemon/src/displays.rs:269
 msgid "This compositor does not support display settings."
 msgstr "Bu pencere yöneticisi ekran ayarlarını desteklemiyor."
 
-#: crates/asena-daemon/src/displays.rs:267
+#: crates/asena-daemon/src/displays.rs:274
 msgid "Another display change is waiting for confirmation."
 msgstr "Başka bir ekran değişikliği onay bekliyor."
 
-#: crates/asena-daemon/src/displays.rs:293
+#: crates/asena-daemon/src/displays.rs:301
 msgid "The display change was already reverted."
 msgstr "Ekran değişikliği zaten geri alındı."
 
-#: crates/asena-daemon/src/main.rs:34
+#: crates/asena-daemon/src/main.rs:35
 msgid "This request comes from another session."
 msgstr "Bu istek başka bir oturumdan geliyor."
 
-#: crates/asena-daemon/src/main.rs:41
+#: crates/asena-daemon/src/main.rs:42
 msgid "Too many display requests."
 msgstr "Çok fazla ekran isteği var."
 
-#: crates/asena-daemon/src/main.rs:55
+#: crates/asena-daemon/src/main.rs:57
 msgid "Display settings are unavailable."
 msgstr "Ekran ayarları kullanılamıyor."
 
-#: crates/asena-daemon/src/main.rs:61
+#: crates/asena-daemon/src/main.rs:64
 msgid "The display request timed out."
 msgstr "Ekran isteği zaman aşımına uğradı."
 
-#: crates/asena-daemon/src/main.rs:79 crates/asena-daemon/src/main.rs:120
+#: crates/asena-daemon/src/main.rs:82 crates/asena-daemon/src/main.rs:123
 #: crates/asena-lock/src/bus.rs:106 crates/asena-lock/src/bus.rs:133
 msgid "Run this command in the session you want to lock."
 msgstr "Bu komutu kilitlemek istediğiniz oturumda çalıştırın."
 
-#: crates/asena-daemon/src/main.rs:87 crates/asena-daemon/src/power.rs:171
+#: crates/asena-daemon/src/main.rs:90 crates/asena-daemon/src/power.rs:171
 msgid "Unknown idle action."
 msgstr "Bilinmeyen boşta kalma eylemi."
 
-#: crates/asena-daemon/src/main.rs:93
+#: crates/asena-daemon/src/main.rs:96
 msgid "Too many power requests."
 msgstr "Çok fazla güç isteği var."
 
-#: crates/asena-daemon/src/main.rs:100
+#: crates/asena-daemon/src/main.rs:103
 msgid "Power management is unavailable."
 msgstr "Güç yönetimi kullanılamıyor."
 
-#: crates/asena-daemon/src/main.rs:107
+#: crates/asena-daemon/src/main.rs:110
 msgid "The power request timed out."
 msgstr "Güç isteği zaman aşımına uğradı."
 
-#: crates/asena-daemon/src/main.rs:125 crates/asena-daemon/src/power.rs:44
+#: crates/asena-daemon/src/main.rs:128 crates/asena-daemon/src/power.rs:44
 #: crates/asena-daemon/src/power.rs:119 crates/asena-daemon/src/power.rs:154
 #: crates/asena-shell/src/power.rs:71
 msgid "A verified session locker is not available."
 msgstr "Doğrulanmış bir oturum kilitleyici kullanılamıyor."
 
-#: crates/asena-daemon/src/main.rs:134
+#: crates/asena-daemon/src/main.rs:137
 msgid "A lock request is already in progress."
 msgstr "Bir kilitleme isteği zaten sürüyor."
 
-#: crates/asena-daemon/src/main.rs:173
+#: crates/asena-daemon/src/main.rs:176
 msgid "The display layout is invalid."
 msgstr "Ekran düzeni geçersiz."
 
-#: crates/asena-daemon/src/main.rs:180
+#: crates/asena-daemon/src/main.rs:183
 msgid "The display request has no owner."
 msgstr "Ekran isteğinin sahibi bulunamadı."
 
@@ -1041,7 +1041,7 @@ msgid "Computer"
 msgstr "Bilgisayar"
 
 #: crates/asena-files/src/window.rs:556 crates/asena-settings/src/pages.rs:304
-#: crates/asena-settings/src/pages.rs:1136
+#: crates/asena-settings/src/pages.rs:1150
 msgid "Desktop"
 msgstr "Masaüstü"
 
@@ -1094,7 +1094,7 @@ msgstr "Çöpe taşı"
 msgid "Reload"
 msgstr "Yenile"
 
-#: crates/asena-files/src/window.rs:881 crates/asena-text/src/window.rs:290
+#: crates/asena-files/src/window.rs:881 crates/asena-text/src/window.rs:289
 msgid "Could not open the file"
 msgstr "Dosya açılamadı"
 
@@ -1180,7 +1180,7 @@ msgstr "Kimlik doğrulanamadı. Tekrar deneyin."
 msgid "Sign in"
 msgstr "Oturum aç"
 
-#: crates/asena-greeter/src/main.rs:245 crates/asena-lock/src/content.rs:129
+#: crates/asena-greeter/src/main.rs:245 crates/asena-lock/src/content.rs:139
 msgid "Caps Lock is on"
 msgstr "Caps Lock açık"
 
@@ -1268,7 +1268,7 @@ msgid "The session lock did not become ready."
 msgstr "Oturum kilidi hazır duruma gelmedi."
 
 #: crates/asena-notes/src/main.rs:16 crates/asena-notes/src/window.rs:119
-#: crates/asena-notes/src/window.rs:171 crates/asena-notes/src/window.rs:342
+#: crates/asena-notes/src/window.rs:171 crates/asena-notes/src/window.rs:341
 msgid "Notes"
 msgstr "Notlar"
 
@@ -1300,26 +1300,34 @@ msgstr "Not yok"
 msgid "Note"
 msgstr "Not"
 
-#: crates/asena-notes/src/window.rs:291
+#: crates/asena-notes/src/window.rs:290
 msgid "Could not read the notes"
 msgstr "Notlar okunamadı"
 
-#: crates/asena-notes/src/window.rs:312 crates/asena-notes/src/window.rs:372
-#: crates/asena-notes/src/window.rs:425
+#: crates/asena-notes/src/window.rs:311 crates/asena-notes/src/window.rs:371
+#: crates/asena-notes/src/window.rs:424
 msgid "Untitled note"
 msgstr "Başlıksız not"
 
-#: crates/asena-notes/src/window.rs:467
+#: crates/asena-notes/src/window.rs:466
 msgid "Could not save the note: {error}"
 msgstr "Not kaydedilemedi: {error}"
 
-#: crates/asena-notes/src/window.rs:493
+#: crates/asena-notes/src/window.rs:492
 msgid "Note moved to the trash"
 msgstr "Not çöpe taşındı"
 
-#: crates/asena-notes/src/window.rs:496
+#: crates/asena-notes/src/window.rs:495
 msgid "Could not delete the note"
 msgstr "Not silinemedi"
+
+#: crates/asena-packages/src/offline.rs:75
+msgid "Installing updates: {percent} %"
+msgstr "Güncellemeler kuruluyor: %{percent}"
+
+#: crates/asena-packages/src/offline.rs:81
+msgid "Installing updates"
+msgstr "Güncellemeler kuruluyor"
 
 #: crates/asena-photos/src/main.rs:16 crates/asena-photos/src/window.rs:91
 #: crates/asena-photos/src/window.rs:130 crates/asena-photos/src/window.rs:172
@@ -1375,7 +1383,7 @@ msgstr "Arka plan değiştirildi"
 msgid "Could not change the background"
 msgstr "Arka plan değiştirilemedi"
 
-#: crates/asena-photos/src/window.rs:446 crates/asena-player/src/window.rs:364
+#: crates/asena-photos/src/window.rs:446 crates/asena-player/src/window.rs:363
 msgid "{index} of {count}"
 msgstr "{index} / {count}"
 
@@ -1432,11 +1440,11 @@ msgstr "Sonraki"
 msgid "Now playing"
 msgstr "Şimdi çalıyor"
 
-#: crates/asena-player/src/window.rs:198
+#: crates/asena-player/src/window.rs:197
 msgid "These files cannot be played"
 msgstr "Bu dosyalar oynatılamıyor"
 
-#: crates/asena-player/src/window.rs:392
+#: crates/asena-player/src/window.rs:391
 msgid "Playback failed: {error}"
 msgstr "Oynatılamadı: {error}"
 
@@ -1509,20 +1517,20 @@ msgstr "Ekran görüntüleri klasörünü aç"
 msgid "About Screenshot"
 msgstr "Ekran Görüntüsü Hakkında"
 
-#: crates/asena-screenshot/src/window.rs:150
+#: crates/asena-screenshot/src/window.rs:149
 msgid "Copied to the clipboard"
 msgstr "Panoya kopyalandı"
 
-#: crates/asena-screenshot/src/window.rs:209
-#: crates/asena-screenshot/src/window.rs:274 crates/asenactl/src/main.rs:152
+#: crates/asena-screenshot/src/window.rs:208
+#: crates/asena-screenshot/src/window.rs:273 crates/asenactl/src/main.rs:152
 msgid "Screenshot saved"
 msgstr "Ekran görüntüsü kaydedildi"
 
-#: crates/asena-screenshot/src/window.rs:212
+#: crates/asena-screenshot/src/window.rs:211
 msgid "Could not save the screenshot"
 msgstr "Ekran görüntüsü kaydedilemedi"
 
-#: crates/asena-screenshot/src/window.rs:279
+#: crates/asena-screenshot/src/window.rs:278
 msgid "Could not take the screenshot"
 msgstr "Ekran görüntüsü alınamadı"
 
@@ -1706,85 +1714,85 @@ msgstr "Tepsi servisi kullanılamıyor."
 msgid "This tray item has no menu."
 msgstr "Bu tepsi öğesinin menüsü yok."
 
-#: crates/asena-settings/src/displays.rs:198
+#: crates/asena-settings/src/displays.rs:221
 msgid "Primary display"
 msgstr "Birincil ekran"
 
-#: crates/asena-settings/src/displays.rs:253
+#: crates/asena-settings/src/displays.rs:286
 msgid "{size} (recommended)"
 msgstr "{size} (önerilen)"
 
-#: crates/asena-settings/src/displays.rs:261
-#: crates/asena-settings/src/displays.rs:490
+#: crates/asena-settings/src/displays.rs:294
+#: crates/asena-settings/src/displays.rs:540
 msgid "Resolution"
 msgstr "Çözünürlük"
 
-#: crates/asena-settings/src/displays.rs:269
-#: crates/asena-settings/src/displays.rs:500
+#: crates/asena-settings/src/displays.rs:306
+#: crates/asena-settings/src/displays.rs:554
 msgid "Refresh rate"
 msgstr "Yenileme hızı"
 
-#: crates/asena-settings/src/displays.rs:352
-#: crates/asena-settings/src/displays.rs:496
+#: crates/asena-settings/src/displays.rs:393
+#: crates/asena-settings/src/displays.rs:548
 msgid "Scale"
 msgstr "Ölçek"
 
-#: crates/asena-settings/src/displays.rs:371
+#: crates/asena-settings/src/displays.rs:416
 msgid "Rotation"
 msgstr "Döndürme"
 
-#: crates/asena-settings/src/displays.rs:385
+#: crates/asena-settings/src/displays.rs:435
 msgid "Right of the primary display"
 msgstr "Birincil ekranın sağında"
 
-#: crates/asena-settings/src/displays.rs:386
+#: crates/asena-settings/src/displays.rs:436
 msgid "Left of the primary display"
 msgstr "Birincil ekranın solunda"
 
-#: crates/asena-settings/src/displays.rs:387
+#: crates/asena-settings/src/displays.rs:437
 msgid "Above the primary display"
 msgstr "Birincil ekranın üstünde"
 
-#: crates/asena-settings/src/displays.rs:388
+#: crates/asena-settings/src/displays.rs:438
 msgid "Below the primary display"
 msgstr "Birincil ekranın altında"
 
-#: crates/asena-settings/src/displays.rs:392
+#: crates/asena-settings/src/displays.rs:442
 msgid "Position"
 msgstr "Konum"
 
-#: crates/asena-settings/src/displays.rs:415
+#: crates/asena-settings/src/displays.rs:465
 msgid "Use this display"
 msgstr "Bu ekranı kullan"
 
-#: crates/asena-settings/src/displays.rs:458
-#: crates/asena-settings/src/displays.rs:565
+#: crates/asena-settings/src/displays.rs:508
+#: crates/asena-settings/src/displays.rs:629
 msgid "This session cannot change display settings"
 msgstr "Bu oturum ekran ayarlarını değiştiremiyor"
 
-#: crates/asena-settings/src/displays.rs:505
+#: crates/asena-settings/src/displays.rs:559
 msgid "Connector"
 msgstr "Bağlantı noktası"
 
-#: crates/asena-settings/src/displays.rs:588
+#: crates/asena-settings/src/displays.rs:653
 msgid "Reverting in {seconds} second."
 msgid_plural "Reverting in {seconds} seconds."
 msgstr[0] "{seconds} saniye içinde geri alınacak."
 msgstr[1] "{seconds} saniye içinde geri alınacak."
 
-#: crates/asena-settings/src/displays.rs:595
+#: crates/asena-settings/src/displays.rs:660
 msgid "Keep these display settings?"
 msgstr "Bu ekran ayarları korunsun mu?"
 
-#: crates/asena-settings/src/displays.rs:598
+#: crates/asena-settings/src/displays.rs:663
 msgid "Revert"
 msgstr "Geri al"
 
-#: crates/asena-settings/src/displays.rs:599
+#: crates/asena-settings/src/displays.rs:664
 msgid "Keep changes"
 msgstr "Değişiklikleri koru"
 
-#: crates/asena-settings/src/displays.rs:648
+#: crates/asena-settings/src/displays.rs:713
 msgid "Apply"
 msgstr "Uygula"
 
@@ -2338,39 +2346,39 @@ msgstr "Hareket"
 msgid "Animations"
 msgstr "Animasyonlar"
 
-#: crates/asena-settings/src/pages.rs:1131
+#: crates/asena-settings/src/pages.rs:1145
 msgid "Device"
 msgstr "Aygıt"
 
-#: crates/asena-settings/src/pages.rs:1132
+#: crates/asena-settings/src/pages.rs:1146
 msgid "Device name"
 msgstr "Aygıt adı"
 
-#: crates/asena-settings/src/pages.rs:1133
+#: crates/asena-settings/src/pages.rs:1147
 msgid "Operating system"
 msgstr "İşletim sistemi"
 
-#: crates/asena-settings/src/pages.rs:1139
+#: crates/asena-settings/src/pages.rs:1153
 msgid "Kernel"
 msgstr "Çekirdek"
 
-#: crates/asena-settings/src/pages.rs:1141
+#: crates/asena-settings/src/pages.rs:1155
 msgid "Hardware"
 msgstr "Donanım"
 
-#: crates/asena-settings/src/pages.rs:1142
+#: crates/asena-settings/src/pages.rs:1156
 msgid "Processor"
 msgstr "İşlemci"
 
-#: crates/asena-settings/src/pages.rs:1143
+#: crates/asena-settings/src/pages.rs:1157
 msgid "Memory"
 msgstr "Bellek"
 
-#: crates/asena-settings/src/pages.rs:1144
+#: crates/asena-settings/src/pages.rs:1158
 msgid "Disk"
 msgstr "Disk"
 
-#: crates/asena-settings/src/pages.rs:1178
+#: crates/asena-settings/src/pages.rs:1205
 msgid "{free} free of {size}"
 msgstr "{size} alanın {free} kadarı boş"
 
@@ -2439,11 +2447,11 @@ msgstr "Uygulama artık kurulu değil."
 msgid "Could not open the application"
 msgstr "Uygulama açılamadı"
 
-#: crates/asena-shell/src/main.rs:140
+#: crates/asena-shell/src/main.rs:141
 msgid "Applications"
 msgstr "Uygulamalar"
 
-#: crates/asena-shell/src/main.rs:246
+#: crates/asena-shell/src/main.rs:247
 msgid "Layer shell is unavailable. Start Asena in a supported Wayland session."
 msgstr ""
 "Layer shell kullanılamıyor. Asena'yı desteklenen bir Wayland oturumunda "
@@ -2687,7 +2695,7 @@ msgstr "Metin Düzenleyici"
 msgid "Edit text files"
 msgstr "Metin dosyalarını düzenleyin"
 
-#: crates/asena-text/src/window.rs:32 crates/asena-text/src/window.rs:335
+#: crates/asena-text/src/window.rs:32 crates/asena-text/src/window.rs:334
 msgid "Untitled"
 msgstr "Adsız"
 
@@ -2719,39 +2727,39 @@ msgstr "Önceki eşleşme"
 msgid "Next match"
 msgstr "Sonraki eşleşme"
 
-#: crates/asena-text/src/window.rs:242
+#: crates/asena-text/src/window.rs:241
 msgid "Line {line}, column {column}"
 msgstr "Satır {line}, sütun {column}"
 
-#: crates/asena-text/src/window.rs:263
+#: crates/asena-text/src/window.rs:262
 msgid "The file is too large to edit."
 msgstr "Dosya düzenlemek için çok büyük."
 
-#: crates/asena-text/src/window.rs:265
+#: crates/asena-text/src/window.rs:264
 msgid "The file is not UTF-8 text and cannot be edited here."
 msgstr "Dosya UTF-8 metin değil; burada düzenlenemez."
 
-#: crates/asena-text/src/window.rs:323
+#: crates/asena-text/src/window.rs:322
 msgid "Could not save the file"
 msgstr "Dosya kaydedilemedi"
 
-#: crates/asena-text/src/window.rs:458
+#: crates/asena-text/src/window.rs:457
 msgid "Save changes?"
 msgstr "Değişiklikler kaydedilsin mi?"
 
-#: crates/asena-text/src/window.rs:460
+#: crates/asena-text/src/window.rs:459
 msgid "Unsaved changes will be lost if you close without saving."
 msgstr "Kaydetmeden kapatırsanız kaydedilmemiş değişiklikler kaybolur."
 
-#: crates/asena-text/src/window.rs:464 crates/asena-text/src/window.rs:524
+#: crates/asena-text/src/window.rs:463 crates/asena-text/src/window.rs:523
 msgid "Close without saving"
 msgstr "Kaydetmeden kapat"
 
-#: crates/asena-text/src/window.rs:522
+#: crates/asena-text/src/window.rs:521
 msgid "Close without saving?"
 msgstr "Kaydetmeden kapatılsın mı?"
 
-#: crates/asena-text/src/window.rs:523
+#: crates/asena-text/src/window.rs:522
 msgid "Some documents have unsaved changes."
 msgstr "Bazı belgelerde kaydedilmemiş değişiklikler var."
 
@@ -2899,6 +2907,54 @@ msgstr "Menüye sabitlenmiş uygulamalar"
 #: data/schemas/org.asenalinux.shell.gschema.xml:18
 msgid "Show the panel on all monitors"
 msgstr "Paneli tüm monitörlerde göster"
+
+#: data/polkit/org.asenalinux.packages.policy:10
+msgid "Refresh the package lists"
+msgstr "Paket listelerini yenile"
+
+#: data/polkit/org.asenalinux.packages.policy:11
+msgid "Authentication is required to refresh the package lists"
+msgstr "Paket listelerini yenilemek için kimlik doğrulama gerekiyor"
+
+#: data/polkit/org.asenalinux.packages.policy:20
+msgid "Download system updates"
+msgstr "Sistem güncellemelerini indir"
+
+#: data/polkit/org.asenalinux.packages.policy:21
+msgid "Authentication is required to download system updates"
+msgstr "Sistem güncellemelerini indirmek için kimlik doğrulama gerekiyor"
+
+#: data/polkit/org.asenalinux.packages.policy:30
+msgid "Install software"
+msgstr "Yazılım kur"
+
+#: data/polkit/org.asenalinux.packages.policy:31
+msgid "Authentication is required to install software"
+msgstr "Yazılım kurmak için kimlik doğrulama gerekiyor"
+
+#: data/polkit/org.asenalinux.packages.policy:40
+msgid "Remove software"
+msgstr "Yazılım kaldır"
+
+#: data/polkit/org.asenalinux.packages.policy:41
+msgid "Authentication is required to remove software"
+msgstr "Yazılım kaldırmak için kimlik doğrulama gerekiyor"
+
+#: data/polkit/org.asenalinux.packages.policy:50
+msgid "Install system updates"
+msgstr "Sistem güncellemelerini kur"
+
+#: data/polkit/org.asenalinux.packages.policy:51
+msgid "Authentication is required to install system updates"
+msgstr "Sistem güncellemelerini kurmak için kimlik doğrulama gerekiyor"
+
+#: data/polkit/org.asenalinux.packages.policy:60
+msgid "Repair the package system"
+msgstr "Paket sistemini onar"
+
+#: data/polkit/org.asenalinux.packages.policy:61
+msgid "Authentication is required to repair the package system"
+msgstr "Paket sistemini onarmak için kimlik doğrulama gerekiyor"
 
 #~ msgid "No display information is available"
 #~ msgstr "Ekran bilgisi alınamıyor"

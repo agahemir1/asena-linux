@@ -12,6 +12,7 @@ pub mod logging;
 pub mod night_light;
 pub mod notification;
 pub mod operation;
+pub mod packages;
 pub mod panels;
 pub mod power;
 pub mod screenshot;

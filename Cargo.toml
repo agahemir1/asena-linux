@@ -45,6 +45,9 @@ libpulse-glib-binding = "=2.29.0"
 serde = { version = "=1.0.228", features = ["derive"] }
 serde_json = "=1.0.145"
 quick-xml = "=0.37.5"
+# libapt-pkg bindings for asena-packages (K21); GPL-3.0-or-later. cxx stays at
+# 1.0.198 through the MSRV-aware resolver, later releases need rustc 1.88.
+rust-apt = "=0.11.3"
 
 glib-build-tools = "=0.20.0"
 
