@@ -1,31 +1,26 @@
 #!/bin/sh
 # Live boot menu (K20). Runs in binary/ after live-build wrote
-# boot/grub/grub.cfg. Entry 0 is Debian's signed kernel; the XanMod entry
-# becomes the default, Secure Boot lockdown and load failures use entry 0.
+# boot/grub/grub.cfg from config/bootloaders/grub-pc/grub.cfg. Fills in the
+# XanMod kernel version and checks that the fallback entry, the first entry
+# of the advanced submenu, boots Debian's signed kernel.
 set -e
+cfg=boot/grub/grub.cfg
 xanmod=$(find live -maxdepth 1 -name 'vmlinuz-*-xanmod*' -printf '%f\n' | sort -V | tail -n 1)
-if [ -z "$xanmod" ]; then
-    echo 'asena-kernel-menu: no XanMod kernel in live/' >&2
+version=${xanmod#vmlinuz-}
+if [ -z "$xanmod" ] || [ ! -e "live/initrd.img-$version" ]; then
+    echo 'asena-kernel-menu: no XanMod kernel and initrd in live/' >&2
     exit 1
 fi
-case $(grep -m 1 '^menuentry ' boot/grub/grub.cfg) in
+if ! grep -q '@ASENA_XANMOD@' "$cfg"; then
+    echo "asena-kernel-menu: $cfg lacks @ASENA_XANMOD@" >&2
+    exit 1
+fi
+first=$(sed -n '/^submenu "Gelişmiş seçenekler"/,/^}/p' "$cfg" | grep -m 1 'menuentry ')
+case $first in
     *'(amd64)'*) ;;
     *)
-        echo 'asena-kernel-menu: entry 0 is not the Debian amd64 kernel' >&2
+        echo "asena-kernel-menu: fallback entry is not the Debian kernel: $first" >&2
         exit 1
         ;;
 esac
-title="Live system, kernel ${xanmod#vmlinuz-}"
-if ! grep -qF "menuentry \"$title\"" boot/grub/grub.cfg; then
-    echo "asena-kernel-menu: missing menu entry: $title" >&2
-    exit 1
-fi
-cat >>boot/grub/grub.cfg <<EOF
-
-# Asena (K20): XanMod by default; Debian's signed kernel under lockdown.
-set default="$title"
-if [ "\${lockdown}" = "y" ]; then
-  set default=0
-fi
-set fallback=0
-EOF
+sed -i "s|@ASENA_XANMOD@|$version|g" "$cfg"

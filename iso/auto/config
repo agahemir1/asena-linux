@@ -1,16 +1,17 @@
 #!/bin/sh
-# live-build configuration for the Asena live ISO (Phase 6C skeleton).
-# Values marked as proposals wait for decisions in docs/PLANNING.md
-# (K09 install scope, K19 firmware); see iso/README.md.
+# live-build configuration for the Asena live ISO (Phase 6C).
+# Each choice has a decision record in docs/PLANNING.md; see iso/README.md.
 set -e
 
-# Proposal (K09): amd64 and UEFI only.
+# K09: amd64 and UEFI only.
 # K20: shim and GRUB come from Debian's signed packages. XanMod is unsigned,
 # so under Secure Boot the live menu boots Debian's signed kernel
-# (config/hooks/live/0100-asena-kernel-menu.hook.binary). Secure Boot support
-# is not claimed until the image is verified with it.
-# Proposal (K19): Debian's own default since 12, firmware from
-# non-free-firmware so common Wi-Fi and GPU hardware works in the live system.
+# (config/bootloaders/grub-pc/grub.cfg). Secure Boot support is not claimed
+# until the image is verified with it.
+# K19: Debian's own default since 12, firmware from non-free-firmware so
+# common Wi-Fi and GPU hardware works in the live system.
+# K25, K26: Turkish live system with TR-Q and the Istanbul time zone; the
+# live user is asena with live-config's password "live".
 lb config noauto \
     --mode debian \
     --distribution trixie \
@@ -22,7 +23,7 @@ lb config noauto \
     --binary-images iso-hybrid \
     --bootloaders grub-efi \
     --uefi-secure-boot enable \
-    --bootappend-live "boot=live components quiet splash preempt=full" \
+    --bootappend-live "boot=live components quiet splash preempt=full locales=tr_TR.UTF-8 keyboard-layouts=tr timezone=Europe/Istanbul username=asena user-fullname=Asena hostname=asena" \
     --debian-installer none \
     --firmware-chroot true \
     --firmware-binary false \

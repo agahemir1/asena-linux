@@ -38,6 +38,9 @@ install -D -m 0644 "$repo/data/apt/keyrings/xanmod-archive-keyring.asc" \
 install -D -m 0644 "$repo/data/apt/preferences.d/asena-xanmod.pref" "$include/etc/apt/preferences.d/asena-xanmod.pref"
 install -D -m 0644 "$repo/data/grub/default/asena.cfg" "$include/etc/default/grub.d/asena.cfg"
 install -D -m 0755 "$repo/data/grub/grub.d/42_asena_kernel" "$include/etc/grub.d/42_asena_kernel"
+install -D -m 0644 "$repo/data/zram/zram-generator.conf" "$include/etc/systemd/zram-generator.conf"
+install -D -m 0644 "$repo/data/sysctl/90-asena-zram.conf" "$include/etc/sysctl.d/90-asena-zram.conf"
+install -D -m 0755 "$repo/data/live/0125-asena-greetd" "$include/usr/lib/live/config/0125-asena-greetd"
 cd "$work"
 lb config
 sudo lb build

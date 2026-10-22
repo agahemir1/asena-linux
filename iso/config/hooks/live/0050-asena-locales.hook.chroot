@@ -1,0 +1,9 @@
+#!/bin/sh
+# K25: both interface languages are ready in the live and the installed
+# system; live-config and Calamares then only select one.
+set -e
+for locale in tr_TR.UTF-8 en_US.UTF-8; do
+    sed -i "s/^# *\($locale UTF-8\)/\1/" /etc/locale.gen
+    grep -q "^$locale UTF-8" /etc/locale.gen || echo "$locale UTF-8" >>/etc/locale.gen
+done
+locale-gen

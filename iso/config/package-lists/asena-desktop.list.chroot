@@ -9,6 +9,13 @@
 linux-xanmod-lts-x64v2
 ca-certificates
 
+# CPU microcode from non-free-firmware (K19)
+intel-microcode
+amd64-microcode
+
+# Compressed swap in RAM, no swap partition (K24)
+systemd-zram-generator
+
 # Compositor and session
 wayfire
 xwayland

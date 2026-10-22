@@ -10,12 +10,14 @@ değişiklikler ISO'ya geçmez.
 
 | Yol | İş |
 |---|---|
-| `auto/config` | `lb config` seçenekleri: Debian 13, amd64, UEFI, Debian'ın imzalı shim ve GRUB'u, firmware politikası, canlı çekirdek satırı |
+| `auto/config` | `lb config` seçenekleri: Debian 13, amd64, UEFI, Debian'ın imzalı shim ve GRUB'u, firmware politikası, canlı çekirdek satırı (dil, klavye, saat dilimi, kullanıcı) |
 | `auto/build`, `auto/clean` | live-build'in standart sarmalayıcıları |
-| `config/package-lists/asena-desktop.list.chroot` | Debian'dan gelen masaüstü çalışma zamanı paketleri ve XanMod LTS |
+| `config/package-lists/asena-desktop.list.chroot` | Debian'dan gelen masaüstü çalışma zamanı paketleri, XanMod LTS, mikro kod, zram |
 | `config/package-lists/installer.list.chroot` | Calamares için yer (6D) |
 | `config/archives/xanmod.list.chroot` | Derleme sırasında XanMod deposu (K20) |
-| `config/hooks/live/0100-asena-kernel-menu.hook.binary` | Canlı önyükleme menüsü: XanMod varsayılan, Secure Boot'ta Debian çekirdeği |
+| `config/bootloaders/grub-pc/grub.cfg` | Canlı önyükleme menüsü: Asena Linux, İngilizce girdi, gelişmiş seçenekler ve araçlar |
+| `config/hooks/live/0050-asena-locales.hook.chroot` | `tr_TR.UTF-8` ve `en_US.UTF-8` yerel ayarlarını üretir (K25) |
+| `config/hooks/live/0100-asena-kernel-menu.hook.binary` | Menüye XanMod sürümünü yazar, yedek girdinin Debian çekirdeği olduğunu denetler |
 | `config/packages.chroot/` | Derlemede `scripts/build-iso.sh` doldurur: yerel `.deb` paketleri (şimdilik yamalı wlroots) |
 
 `scripts/build-iso.sh` derleme kopyasına ayrıca şunları ekler:
@@ -26,7 +28,9 @@ değişiklikler ISO'ya geçmez.
   birlikte kaldırır.
 - `config/includes.chroot_after_packages/` altına imajın sistem dosyaları: `data/apt` (XanMod
   kaynağı `Signed-By` ile, anahtar, pin) ve `data/grub` (`/etc/default/grub.d/asena.cfg`,
-  `/etc/grub.d/42_asena_kernel`). Faz 6A'da bu dosyaların sahibi Asena paketleri olur.
+  `/etc/grub.d/42_asena_kernel`), `data/zram` ve `data/sysctl` (K24), canlı sisteme özgü
+  live-config bileşeni `data/live/0125-asena-greetd` (K26). Faz 6A'da bu dosyaların sahibi Asena
+  paketleri olur; live-config bileşeni Calamares'in kurulumda kaldırdığı canlı pakete gider.
 
 ## Derleme
 
@@ -53,8 +57,9 @@ Varsayılan çekirdek XanMod LTS (`linux-xanmod-lts-x64v2`), yanında Debian'ın
   çekirdeğini bulur. GRUB Secure Boot nedeniyle kilitli moddaysa (`lockdown=y`) varsayılan girdi
   bu çekirdektir; aynı girdi `fallback` olarak da yazılır. `asena.cfg` çekirdek satırına
   `preempt=full` ekler.
-- **Canlı ISO:** live-build'in ilk girdisi Debian çekirdeğidir. Kanca XanMod girdisini varsayılan
-  yapar, kilitli modda ilk girdiye döner.
+- **Canlı ISO:** `config/bootloaders/grub-pc/grub.cfg` çekirdeği `lockdown` değişkenine göre
+  seçer: kilitli modda Debian'ın imzalı çekirdeği, değilse XanMod. XanMod yüklenemezse `fallback`
+  gelişmiş seçeneklerin ilk girdisine, Debian çekirdeğine geçer.
 
 ### VM denemesi (23 Ekim 2026)
 
@@ -76,7 +81,9 @@ dosyaları. Disk OVMF 4M secboot ile iki kez açılır. Sonuçlar
 
 ### Doğrulanmadı
 
-- Canlı ISO menü kancası yalnız örnek bir `binary/` ağacında denendi; ISO derlenmedi.
+- Canlı ISO menüsü yalnız live-build'in yer tutucu değişimini taklit eden örnek bir `binary/`
+  ağacında denendi (`grub-script-check` geçti, yanlış yedek girdide kanca derlemeyi durdurdu); ISO
+  derlenmedi.
 - Gerçek donanımda Secure Boot. Microsoft'un 2011 sertifikalarının yerini 2023 sertifikalarına
   bırakan firmware'lerde Debian shim'inin durumu.
 - x86-64-v2 desteklemeyen işlemciler (2009 öncesi) XanMod'u açamaz ve bu bir yükleme hatası
@@ -90,13 +97,17 @@ dosyaları. Disk OVMF 4M secboot ile iki kez açılır. Sonuçlar
 |---|---|---|
 | K07 | Logo, duvar kâğıdı ve marka hakları | Karar verildi; logo taslakları inceleniyor, görsel varlık eklenmedi |
 | K08 | Depo barındırma, imza anahtarı | Karar verildi; barındırma açık, uzak Asena deposu yok |
-| K09 | Kurulum kapsamı | Öneri: amd64 ve UEFI; BIOS, dual boot ve şifreleme yok. Secure Boot zinciri Debian'ın imzalı paketleriyle açık, destek beyanı yok |
-| K19 | Firmware politikası | Öneri: `main non-free-firmware`, firmware canlı sistemde |
+| K09 | Kurulum kapsamı | Karar: amd64 ve UEFI, boş diske tek sistem; BIOS, dual boot ve şifreleme yok. Secure Boot zinciri Debian'ın imzalı paketleriyle açık, destek beyanı yok |
+| K19 | Firmware politikası | Karar: `main non-free-firmware`, firmware canlı sistemde, mikro kod paketleri |
 | K20 | Çekirdek | Uygulandı: XanMod LTS varsayılan, Debian imzalı çekirdeği yedek |
+| K24 | Dosya sistemi ve takas | Karar: ext4; takas zram (`data/zram`, `data/sysctl`) |
+| K25 | Yerel ayar ve klavye | Uygulandı: Türkçe canlı sistem, İngilizce girdi, iki yerel ayar üretilir |
+| K26 | Canlı kullanıcı | Uygulandı: `asena`/`live`, greetd ile bir kez otomatik giriş (6A paketleri bekleniyor) |
+| K27 | Yetki ve ağ güvenliği | Karar: root kilitli, ilk kullanıcı `sudo`; güvenlik duvarı yok, dinleyen servis yok |
 
 ## Henüz eksik olanlar
 
 - Asena paketleri ve `asena-desktop` metapaketi (6A): shell, daemon, kilit, greeter, polkit ajanı,
   uygulamalar, şemalar, simgeler, portal ve oturum dosyaları, gtk4-layer-shell 1.3.0 backport'u.
-- greetd'nin varsayılan giriş yöneticisi olarak etkinleştirilmesi ve canlı oturum kullanıcısı.
+- greetd yapılandırması ve asena-greeter paketi (6A); canlı otomatik giriş bileşeni hazır.
 - Calamares yapılandırması (6D) ve Hoş geldin (6E).

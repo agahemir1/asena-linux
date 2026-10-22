@@ -1,0 +1,63 @@
+#!/bin/sh
+# live-config component (K26), installed as /usr/lib/live/config/0125-asena-greetd.
+# Live system only: greetd logs the live user into the Asena session once at
+# boot; after logging out the greeter appears. live-config runs only in the
+# live system and edits the overlay, so the installed system, which Calamares
+# unpacks from the squashfs, never gets this session.
+
+# shellcheck source=/dev/null
+. /usr/lib/live/config.sh
+
+Cmdline ()
+{
+	for _PARAMETER in ${LIVE_CONFIG_CMDLINE}
+	do
+		case "${_PARAMETER}" in
+			live-config.noautologin|noautologin|live-config.nox11autologin|nox11autologin)
+				LIVE_CONFIG_NOAUTOLOGIN="true"
+				;;
+
+			live-config.username=*|username=*)
+				LIVE_USERNAME="${_PARAMETER#*username=}"
+				;;
+		esac
+	done
+}
+
+Init ()
+{
+	case "${LIVE_CONFIG_NOAUTOLOGIN}" in
+		true)
+			exit 0
+			;;
+	esac
+
+	if ! pkg_is_installed "greetd" || \
+	   [ ! -e "${ASENA_GREETD_CONFIG}" ] || \
+	   component_was_executed "asena-greetd"
+	then
+		exit 0
+	fi
+
+	printf ' %s' asena-greetd
+}
+
+Config ()
+{
+	if ! grep -q '^\[initial_session\]' "${ASENA_GREETD_CONFIG}"
+	then
+		cat >> "${ASENA_GREETD_CONFIG}" << EOF
+
+[initial_session]
+command = "asena-session"
+user = "${LIVE_USERNAME}"
+EOF
+	fi
+
+	touch /var/lib/live/config/asena-greetd
+}
+
+ASENA_GREETD_CONFIG="${ASENA_GREETD_CONFIG:-/etc/greetd/config.toml}"
+Cmdline
+Init
+Config
