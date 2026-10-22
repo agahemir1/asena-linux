@@ -1128,6 +1128,20 @@ pub fn accessibility(context: &Context) -> adw::PreferencesPage {
 
 pub fn about(_context: &Context) -> adw::PreferencesPage {
     let page = page(&gettext("About"), "help-about-symbolic");
+    // The distribution's logo and name, both from os-release.
+    let banner = gtk::Box::new(gtk::Orientation::Vertical, 12);
+    banner.set_margin_bottom(12);
+    let logo = gtk::Image::new();
+    logo.set_pixel_size(96);
+    logo.set_visible(false);
+    let distribution = gtk::Label::new(None);
+    distribution.add_css_class("title-2");
+    distribution.set_wrap(true);
+    banner.append(&logo);
+    banner.append(&distribution);
+    let header = adw::PreferencesGroup::new();
+    header.add(&banner);
+    page.add(&header);
     let device = group(&gettext("Device"));
     rows::info(&device, &gettext("Device name"), &glib::host_name());
     let system = rows::info(&device, &gettext("Operating system"), "");
@@ -1146,8 +1160,12 @@ pub fn about(_context: &Context) -> adw::PreferencesPage {
     glib::spawn_future_local(async move {
         let read = |path: &'static str| std::fs::read_to_string(path).unwrap_or_default();
         let (os, kernel_text, cpu, mem) = gio::spawn_blocking(move || {
+            let os_release = read("/etc/os-release");
             (
-                system_info::os_name(&read("/etc/os-release")),
+                (
+                    system_info::os_name(&os_release),
+                    system_info::os_logo(&os_release),
+                ),
                 read("/proc/sys/kernel/osrelease").trim().to_owned(),
                 system_info::processor(&read("/proc/cpuinfo")),
                 system_info::memory_bytes(&read("/proc/meminfo")),
@@ -1155,7 +1173,16 @@ pub fn about(_context: &Context) -> adw::PreferencesPage {
         })
         .await
         .unwrap_or_default();
-        system.set_text(&os.unwrap_or_default());
+        let (os, os_logo) = os;
+        let name = os.unwrap_or_default();
+        system.set_text(&name);
+        distribution.set_text(&name);
+        distribution.set_visible(!name.is_empty());
+        let theme = gtk::IconTheme::for_display(&logo.display());
+        if let Some(icon) = os_logo.filter(|icon| theme.has_icon(icon)) {
+            logo.set_icon_name(Some(&icon));
+            logo.set_visible(true);
+        }
         kernel.set_text(&kernel_text);
         processor.set_text(
             &cpu.map(|(model, count)| format!("{model} × {count}"))

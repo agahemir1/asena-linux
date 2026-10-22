@@ -32,6 +32,8 @@ mod imp {
         pub cancel: TemplateChild<gtk::Button>,
         #[template_child]
         pub submit: TemplateChild<gtk::Button>,
+        #[template_child]
+        pub logo: TemplateChild<gtk::Image>,
         pub device: RefCell<Option<(gtk::gdk::Device, Vec<glib::SignalHandlerId>)>>,
     }
     #[glib::object_subclass]
@@ -47,6 +49,14 @@ mod imp {
         }
     }
     impl ObjectImpl for Content {
+        fn constructed(&self) {
+            self.parent_constructed();
+            // The logo comes from the system icon theme; without it the image stays hidden.
+            let display = self.obj().display();
+            if !gtk::IconTheme::for_display(&display).has_icon("asena-logo") {
+                self.logo.set_visible(false);
+            }
+        }
         fn dispose(&self) {
             if let Some((device, handlers)) = self.device.borrow_mut().take() {
                 for handler in handlers {

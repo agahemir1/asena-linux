@@ -1,3 +1,4 @@
+use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 mod imp {
     use super::*;
@@ -30,6 +31,8 @@ mod imp {
         pub submit: TemplateChild<gtk::Button>,
         #[template_child]
         pub power: TemplateChild<gtk::Box>,
+        #[template_child]
+        pub logo: TemplateChild<gtk::Image>,
     }
     #[glib::object_subclass]
     impl ObjectSubclass for Content {
@@ -44,6 +47,14 @@ mod imp {
         }
     }
     impl ObjectImpl for Content {
+        fn constructed(&self) {
+            self.parent_constructed();
+            // The logo comes from the system icon theme; without it the image stays hidden.
+            let display = self.obj().display();
+            if !gtk::IconTheme::for_display(&display).has_icon("asena-logo") {
+                self.logo.set_visible(false);
+            }
+        }
         fn dispose(&self) {
             self.dispose_template();
         }

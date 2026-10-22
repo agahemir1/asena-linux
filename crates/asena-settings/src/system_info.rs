@@ -1,12 +1,22 @@
 //! Readers for the About panel: operating system, processor and memory.
 
-/// `PRETTY_NAME` from os-release, with quotes removed.
-pub fn os_name(os_release: &str) -> Option<String> {
+/// An os-release value with quotes removed; `None` when missing or empty.
+fn os_release_value(os_release: &str, key: &str) -> Option<String> {
     os_release.lines().find_map(|line| {
-        let value = line.strip_prefix("PRETTY_NAME=")?;
+        let value = line.strip_prefix(key)?.strip_prefix('=')?;
         let value = value.trim().trim_matches('"').trim_matches('\'');
         (!value.is_empty()).then(|| value.to_owned())
     })
+}
+
+/// `PRETTY_NAME` from os-release.
+pub fn os_name(os_release: &str) -> Option<String> {
+    os_release_value(os_release, "PRETTY_NAME")
+}
+
+/// Icon name of the distribution logo, `LOGO` in os-release.
+pub fn os_logo(os_release: &str) -> Option<String> {
+    os_release_value(os_release, "LOGO")
 }
 
 /// Processor model and number of logical processors from /proc/cpuinfo.
@@ -44,6 +54,12 @@ mod tests {
             Some("Debian GNU/Linux 13 (trixie)")
         );
         assert_eq!(os_name("NAME=x"), None);
+        assert_eq!(
+            os_logo("ID=asena\nLOGO=asena-logo\n").as_deref(),
+            Some("asena-logo")
+        );
+        assert_eq!(os_logo("LOGO=\"\"\n"), None);
+        assert_eq!(os_logo("ID=debian\n"), None);
         let cpu = "processor\t: 0\nmodel name\t: AMD   Ryzen 5  5600X\nprocessor\t: 1\nmodel name\t: AMD Ryzen 5 5600X\n";
         assert_eq!(processor(cpu), Some(("AMD Ryzen 5 5600X".to_owned(), 2)));
         assert_eq!(
