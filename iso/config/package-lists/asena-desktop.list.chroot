@@ -16,6 +16,14 @@ amd64-microcode
 # Compressed swap in RAM, no swap partition (K24)
 systemd-zram-generator
 
+# Boot splash and identity (K07, K23). plymouth-label draws the splash's
+# text; its initramfs hook needs fontconfig.
+plymouth
+plymouth-label
+fontconfig
+fastfetch
+lsb-release
+
 # Compositor and session
 wayfire
 xwayland

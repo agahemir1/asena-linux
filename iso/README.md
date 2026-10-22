@@ -16,7 +16,10 @@ değişiklikler ISO'ya geçmez.
 | `config/package-lists/installer.list.chroot` | Calamares için yer (6D) |
 | `config/archives/xanmod.list.chroot` | Derleme sırasında XanMod deposu (K20) |
 | `config/bootloaders/grub-pc/grub.cfg` | Canlı önyükleme menüsü: Asena Linux, İngilizce girdi, gelişmiş seçenekler ve araçlar |
+| `config/bootloaders/splash.svg`, `grub-pc/live-theme/theme.txt` | Canlı menünün zemini (logo ve ad, `scripts/icons/brand.py` çizer) ve teması (K07) |
 | `config/hooks/live/0050-asena-locales.hook.chroot` | `tr_TR.UTF-8` ve `en_US.UTF-8` yerel ayarlarını üretir (K25) |
+| `config/hooks/live/0060-asena-identity.hook.chroot` | Debian'ın os-release dosyasını yönlendirip Asena'nınkini koyar (K23) |
+| `config/hooks/live/0070-asena-plymouth.hook.chroot` | Asena açılış ekranını seçer ve initramfs'leri yeniden üretir (K07) |
 | `config/hooks/live/0100-asena-kernel-menu.hook.binary` | Menüye XanMod sürümünü yazar, yedek girdinin Debian çekirdeği olduğunu denetler |
 | `config/packages.chroot/` | Derlemede `scripts/build-iso.sh` doldurur: yerel `.deb` paketleri (şimdilik yamalı wlroots) |
 
@@ -26,11 +29,13 @@ değişiklikler ISO'ya geçmez.
   `config/archives/xanmod.key.chroot` ve `xanmod.pref.chroot` olarak. live-build anahtarı yalnız
   derleme chroot'unda ve geçici olarak güvenilir sayar, chroot aşamasının sonunda kaynakla
   birlikte kaldırır.
-- `config/includes.chroot_after_packages/` altına imajın sistem dosyaları: `data/apt` (XanMod
-  kaynağı `Signed-By` ile, anahtar, pin) ve `data/grub` (`/etc/default/grub.d/asena.cfg`,
-  `/etc/grub.d/42_asena_kernel`), `data/zram` ve `data/sysctl` (K24), canlı sisteme özgü
-  live-config bileşeni `data/live/0125-asena-greetd` (K26). Faz 6A'da bu dosyaların sahibi Asena
-  paketleri olur; live-config bileşeni Calamares'in kurulumda kaldırdığı canlı pakete gider.
+- `config/includes.chroot_after_packages/` altına `scripts/stage-system-files.sh` ile imajın sistem
+  dosyaları: XanMod kaynağı, anahtarı ve pin'i (`data/apt`), GRUB ayarları (`data/grub`), zram
+  (`data/zram`, `data/sysctl`), canlı sisteme özgü live-config bileşeni (`data/live`), os-release,
+  `/etc/issue`, fastfetch yapılandırması ve logosu, `asena-logo` simgeleri, Plymouth teması
+  (`data/branding`, `data/fastfetch`, `data/icons`, `data/plymouth`). live-build bunları rsync ile
+  root sahipliğinde kopyalar. Faz 6A'da bu dosyaların sahibi Asena paketleri olur; live-config
+  bileşeni Calamares'in kurulumda kaldırdığı canlı pakete gider.
 
 ## Derleme
 
@@ -63,21 +68,42 @@ Varsayılan çekirdek XanMod LTS (`linux-xanmod-lts-x64v2`), yanında Debian'ın
 
 ### VM denemesi (23 Ekim 2026)
 
-`ASENA_KERNEL_TEST_VM=1 bash scripts/test-kernel-vm.sh` debootstrap ile küçük bir UEFI test
-diski kurar: Debian'ın imzalı shim, GRUB ve çekirdeği, XanMod LTS ve `data/apt`, `data/grub`
-dosyaları. Disk OVMF 4M secboot ile iki kez açılır. Sonuçlar
-[docs/reports/evidence/k20-kernel](../docs/reports/evidence/k20-kernel):
+`ASENA_BOOT_TEST_VM=1 bash scripts/test-boot-vm.sh` debootstrap ile küçük bir UEFI test diski
+kurar. Diskte Debian'ın imzalı shim, GRUB ve çekirdeği, XanMod LTS ve imajın sistem dosyaları
+vardır; dosyalar `scripts/stage-system-files.sh` ile yerleştirilir ve imajın chroot kancaları
+çalıştırılır. Disk OVMF 4M secboot ile iki kez açılır, açılış sırasında ekran görüntüsü alınır.
+Sonuçlar [docs/reports/evidence/boot-test](../docs/reports/evidence/boot-test):
 
-| Senaryo | Açılan çekirdek | Secure Boot | Kesme modeli |
-|---|---|---|---|
-| Microsoft anahtarı yok | `6.18.58-x64v2-xanmod1` | kapalı | `full` |
-| `OVMF_VARS_4M.ms.fd` | `6.12.113+deb13-amd64` | açık, çekirdek kilitli | `full` |
+| Senaryo | Açılan çekirdek | Secure Boot | Kesme modeli | Takas |
+|---|---|---|---|---|
+| Microsoft anahtarı yok | `6.18.58-x64v2-xanmod1` | kapalı | `full` | `/dev/zram0` 963 MB |
+| `OVMF_VARS_4M.ms.fd` | `6.12.113+deb13-amd64` | açık, çekirdek kilitli | `full` | `/dev/zram0` 966 MB |
 
 - Pin doğrulandı: `clang-21` için aday yok, `dkms` ve `libbpf1` Debian'dan, XanMod meta paketi 500.
 - Secure Boot açıkken GRUB menüden önce iki kez "prohibited by secure boot policy" yazar ve
   açılışa devam eder. Satırlar Debian'ın standart GRUB başlığından gelir; Asena bloğu yalnız
   `if` ve `set` kullanır. Hangi komutun reddedildiği ayrıca ayrılmadı.
 - Deneme iç içe QEMU'da TCG ile yapıldı; gerçek donanım ve gerçek firmware değildir.
+
+## Markalama ve sistem kimliği (K07, K23)
+
+Logo, kullanıcının 23 Ekim'de seçtiği çini plaka taslağıdır; kaynağı `scripts/icons/brand.py`.
+
+| Yer | Dosya | Durum |
+|---|---|---|
+| os-release, `lsb_release` | `data/branding/os-release`, `0060-asena-identity` | VM: "Asena Linux 1.0 RC", `ID=asena`, `ID_LIKE=debian`; Debian'ın dosyası `dpkg-divert` ile yönlendirildi |
+| GRUB menüsü | `data/grub/default/asena.cfg` | VM: "Asena GNU/Linux"; EFI dizini `debian` kaldı |
+| Canlı GRUB menüsü | `config/bootloaders/splash.svg`, `live-theme/theme.txt` | Görsel üretildi; ISO derlenmedi |
+| Plymouth | `data/plymouth/asena/` | VM: açılışta logo ve sekiz noktalı gösterge görüldü |
+| Konsol girişi | `data/branding/issue`, `issue.net` | VM: dosya yerinde |
+| fastfetch | `data/fastfetch/config.jsonc`, `data/branding/asena-logo.txt` | VM: Asena logosu ve "OS: Asena Linux 1.0 RC" |
+| Simge | `asena-logo`, `asena-logo-symbolic` | Ayarlar › Hakkında, giriş ve kilit ekranı kullanır |
+
+`grub-install` EFI dizinini `GRUB_DISTRIBUTOR` değerinden türetir. Debian'ın imzalı GRUB'u ise
+yapılandırmayı yalnız `EFI/debian/grub.cfg` içinde arar. Asena os-release'iyle dizin `EFI/asena`
+olurdu ve ilk GRUB paketi güncellemesinden sonra sistem açılmazdı (VM'de görüldü). Bu yüzden
+`asena.cfg` değeri yalnız `grub-mkconfig` için Asena yapar. Calamares (6D) `--bootloader-id debian`
+kullanmalıdır.
 
 ### Doğrulanmadı
 
@@ -95,12 +121,13 @@ dosyaları. Disk OVMF 4M secboot ile iki kez açılır. Sonuçlar
 
 | Kimlik | Konu | Bu iskeletteki durum |
 |---|---|---|
-| K07 | Logo, duvar kâğıdı ve marka hakları | Karar verildi; logo taslakları inceleniyor, görsel varlık eklenmedi |
+| K07 | Logo, duvar kâğıdı ve marka hakları | Uygulandı: logo, GRUB, canlı menü, Plymouth, fastfetch, konsol; Calamares ve Hoş geldin 6D/6E'de |
 | K08 | Depo barındırma, imza anahtarı | Karar verildi; barındırma açık, uzak Asena deposu yok |
 | K09 | Kurulum kapsamı | Karar: amd64 ve UEFI, boş diske tek sistem; BIOS, dual boot ve şifreleme yok. Secure Boot zinciri Debian'ın imzalı paketleriyle açık, destek beyanı yok |
 | K19 | Firmware politikası | Karar: `main non-free-firmware`, firmware canlı sistemde, mikro kod paketleri |
 | K20 | Çekirdek | Uygulandı: XanMod LTS varsayılan, Debian imzalı çekirdeği yedek |
-| K24 | Dosya sistemi ve takas | Karar: ext4; takas zram (`data/zram`, `data/sysctl`) |
+| K23 | Sistem kimliği | Uygulandı: Asena os-release, `ID_LIKE=debian`, `VERSION_CODENAME=trixie` |
+| K24 | Dosya sistemi ve takas | Uygulandı: zram VM açılışında etkin; ext4 bölümlemesi Calamares'te (6D) |
 | K25 | Yerel ayar ve klavye | Uygulandı: Türkçe canlı sistem, İngilizce girdi, iki yerel ayar üretilir |
 | K26 | Canlı kullanıcı | Uygulandı: `asena`/`live`, greetd ile bir kez otomatik giriş (6A paketleri bekleniyor) |
 | K27 | Yetki ve ağ güvenliği | Karar: root kilitli, ilk kullanıcı `sudo`; güvenlik duvarı yok, dinleyen servis yok |

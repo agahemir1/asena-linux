@@ -1,0 +1,10 @@
+#!/bin/sh
+# K23: Asena's os-release replaces Debian's. dpkg keeps the divert, so
+# base-files upgrades write Debian's version to /usr/lib/os-release.debian.
+# Phase 6A moves this into an Asena package.
+set -e
+if ! dpkg-divert --list /usr/lib/os-release | grep -q os-release.debian; then
+    dpkg-divert --local --no-rename --add --divert /usr/lib/os-release.debian /usr/lib/os-release
+    cp /usr/lib/os-release /usr/lib/os-release.debian
+fi
+install -m 0644 /usr/share/asena/os-release /usr/lib/os-release

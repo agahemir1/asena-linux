@@ -2,11 +2,11 @@
 # Builds the Asena live ISO from iso/ with live-build (Phase 6C).
 # Development VM only: lb build runs as root through sudo, downloads Debian
 # packages and needs about 10 GB in target/iso. Output and build-info.txt
-# stay in target/iso. Tools: sudo apt-get install live-build
+# stay in target/iso. Tools: sudo apt-get install live-build rsync librsvg2-bin
 set -euo pipefail
 [[ $(uname -s) == Linux ]] || { printf '%s\n' 'Linux is required.' >&2; exit 1; }
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
-for program in lb sha256sum sudo; do
+for program in lb rsync rsvg-convert sha256sum sudo; do
     command -v "$program" >/dev/null || { printf 'Missing %s; see the header of this script.\n' "$program" >&2; exit 1; }
 done
 work=$repo/target/iso
@@ -27,20 +27,12 @@ if [[ -d $repo/target/packages ]]; then
         ! -name '*-examples_*' -exec cp -t "$work/config/packages.chroot/" {} +
 fi
 # XanMod archive for the chroot stage (K20). live-build trusts .key.chroot
-# only inside the build chroot and removes it with the source and pin.
+# only inside the build chroot and removes it with the source and pin. With
+# rsync, live-build copies the includes as root:root.
 cp "$repo/data/apt/keyrings/xanmod-archive-keyring.asc" "$work/config/archives/xanmod.key.chroot"
 cp "$repo/data/apt/preferences.d/asena-xanmod.pref" "$work/config/archives/xanmod.pref.chroot"
 # System files of the image until Asena packages own them (Phase 6A).
-include=$work/config/includes.chroot_after_packages
-install -D -m 0644 "$repo/data/apt/sources.list.d/xanmod.sources" "$include/etc/apt/sources.list.d/xanmod.sources"
-install -D -m 0644 "$repo/data/apt/keyrings/xanmod-archive-keyring.asc" \
-    "$include/usr/share/keyrings/xanmod-archive-keyring.asc"
-install -D -m 0644 "$repo/data/apt/preferences.d/asena-xanmod.pref" "$include/etc/apt/preferences.d/asena-xanmod.pref"
-install -D -m 0644 "$repo/data/grub/default/asena.cfg" "$include/etc/default/grub.d/asena.cfg"
-install -D -m 0755 "$repo/data/grub/grub.d/42_asena_kernel" "$include/etc/grub.d/42_asena_kernel"
-install -D -m 0644 "$repo/data/zram/zram-generator.conf" "$include/etc/systemd/zram-generator.conf"
-install -D -m 0644 "$repo/data/sysctl/90-asena-zram.conf" "$include/etc/sysctl.d/90-asena-zram.conf"
-install -D -m 0755 "$repo/data/live/0125-asena-greetd" "$include/usr/lib/live/config/0125-asena-greetd"
+bash "$repo/scripts/stage-system-files.sh" "$work/config/includes.chroot_after_packages"
 cd "$work"
 lb config
 sudo lb build

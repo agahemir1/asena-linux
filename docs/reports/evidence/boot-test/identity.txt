@@ -1,0 +1,19 @@
+EFI/BOOT/BOOTX64.EFI
+EFI/BOOT/grubx64.efi
+EFI/BOOT/mmx64.efi
+EFI/debian/BOOTX64.CSV
+EFI/debian/fbx64.efi
+EFI/debian/grub.cfg
+EFI/debian/grubx64.efi
+EFI/debian/mmx64.efi
+EFI/debian/shimx64.efi
+
+Distributor ID:	Asena
+Description:	Asena Linux 1.0 RC
+Release:	1.0
+Codename:	trixie
+
+local diversion of /usr/lib/os-release to /usr/lib/os-release.debian
+
+Asena Linux 1.0 RC \n \l
+

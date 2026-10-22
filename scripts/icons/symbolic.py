@@ -248,7 +248,7 @@ def slashed(draw, x0=2.2, y0=2.2, x1=13.8, y1=13.8) -> Icon:
 
 
 # Brand and shell ------------------------------------------------------------
-@icon("actions", "asena-start-symbolic")
+@icon("actions", "asena-start-symbolic", "asena-logo-symbolic")
 def start():
     # Two overlapping squares: the eight point star of Anatolian ornament.
     i = Icon()

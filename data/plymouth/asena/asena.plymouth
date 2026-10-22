@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Asena
+Description=Asena Linux boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/asena
+ScriptFile=/usr/share/plymouth/themes/asena/asena.script

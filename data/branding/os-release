@@ -1,0 +1,12 @@
+# Asena Linux system identity (K23). Installed as /usr/lib/os-release, with
+# Debian's file diverted to /usr/lib/os-release.debian. VERSION_CODENAME stays
+# trixie so third-party archives that pick their suite from it keep working.
+PRETTY_NAME="Asena Linux 1.0 RC"
+NAME="Asena Linux"
+VERSION_ID="1.0"
+VERSION="1.0 RC"
+VERSION_CODENAME=trixie
+ID=asena
+ID_LIKE=debian
+HOME_URL="https://asenalinux.netlify.app/"
+LOGO=asena-logo

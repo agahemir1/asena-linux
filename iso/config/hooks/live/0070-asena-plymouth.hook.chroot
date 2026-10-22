@@ -1,0 +1,5 @@
+#!/bin/sh
+# K07: the Asena boot splash for every installed kernel.
+set -e
+plymouth-set-default-theme asena
+update-initramfs -u -k all

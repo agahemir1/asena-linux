@@ -1,0 +1,95 @@
+# Asena boot splash (K07): the logo on the night background and eight dots,
+# one per point of the star, lighting up in turn. Prompts for passwords and
+# questions (fsck, encrypted disks) are drawn under the dots.
+
+Window.SetBackgroundTopColor(0.051, 0.106, 0.118);
+Window.SetBackgroundBottomColor(0.027, 0.063, 0.071);
+
+centre_x = Window.GetX() + Window.GetWidth() / 2;
+centre_y = Window.GetY() + Window.GetHeight() / 2;
+
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.sprite.SetPosition(centre_x - logo.image.GetWidth() / 2,
+                        centre_y - logo.image.GetHeight() / 2 - 40, 1);
+
+dot_image = Image("dot.png");
+ring_y = centre_y + logo.image.GetHeight() / 2 + 40;
+for (i = 0; i < 8; i++)
+  {
+    angle = i * Math.Pi / 4;
+    dots[i] = Sprite(dot_image);
+    dots[i].SetPosition(centre_x + 16 * Math.Sin(angle) - dot_image.GetWidth() / 2,
+                        ring_y - 16 * Math.Cos(angle) - dot_image.GetHeight() / 2, 1);
+    dots[i].SetOpacity(0.25);
+  }
+
+# Functions read globals but assign locals; global.* writes the global.
+frame = 0;
+fun refresh_callback ()
+  {
+    global.frame = frame + 1;
+    lit = Math.Int(frame / 6) % 8;
+    for (i = 0; i < 8; i++)
+      {
+        if (i == lit)
+          {
+            dots[i].SetOpacity(1);
+          }
+        else
+          {
+            dots[i].SetOpacity(0.25);
+          }
+      }
+  }
+Plymouth.SetRefreshFunction(refresh_callback);
+
+prompt_y = ring_y + 50;
+prompt_sprite = Sprite();
+answer_sprite = Sprite();
+
+fun show_prompt (text, answer_text)
+  {
+    image = Image.Text(text, 0.93, 0.96, 0.96);
+    prompt_sprite.SetImage(image);
+    prompt_sprite.SetPosition(centre_x - image.GetWidth() / 2, prompt_y, 2);
+    image = Image.Text(answer_text, 0.93, 0.96, 0.96);
+    answer_sprite.SetImage(image);
+    answer_sprite.SetPosition(centre_x - image.GetWidth() / 2, prompt_y + 30, 2);
+    prompt_sprite.SetOpacity(1);
+    answer_sprite.SetOpacity(1);
+  }
+
+fun display_password_callback (text, bullets)
+  {
+    stars = "";
+    for (i = 0; i < bullets; i++)
+      {
+        stars = stars + "*";
+      }
+    show_prompt(text, stars);
+  }
+Plymouth.SetDisplayPasswordFunction(display_password_callback);
+
+fun display_question_callback (text, entry)
+  {
+    show_prompt(text, entry);
+  }
+Plymouth.SetDisplayQuestionFunction(display_question_callback);
+
+fun display_normal_callback ()
+  {
+    prompt_sprite.SetOpacity(0);
+    answer_sprite.SetOpacity(0);
+  }
+Plymouth.SetDisplayNormalFunction(display_normal_callback);
+
+message_sprite = Sprite();
+fun message_callback (text)
+  {
+    image = Image.Text(text, 0.62, 0.71, 0.71);
+    message_sprite.SetImage(image);
+    message_sprite.SetPosition(centre_x - image.GetWidth() / 2,
+                               Window.GetY() + Window.GetHeight() - 50, 2);
+  }
+Plymouth.SetMessageFunction(message_callback);
