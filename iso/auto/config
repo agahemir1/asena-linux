@@ -1,0 +1,27 @@
+#!/bin/sh
+# live-build configuration for the Asena live ISO (Phase 6C skeleton).
+# Values marked as proposals wait for decisions in docs/PLANNING.md
+# (K09 install scope, K19 firmware); see iso/README.md.
+set -e
+
+# Proposal (K09): amd64 and UEFI only. Secure Boot is not verified, so the
+# image does not claim it.
+# Proposal (K19): Debian's own default since 12, firmware from
+# non-free-firmware so common Wi-Fi and GPU hardware works in the live system.
+lb config noauto \
+    --mode debian \
+    --distribution trixie \
+    --architectures amd64 \
+    --archive-areas "main non-free-firmware" \
+    --security true \
+    --updates true \
+    --backports false \
+    --binary-images iso-hybrid \
+    --bootloaders grub-efi \
+    --uefi-secure-boot disable \
+    --debian-installer none \
+    --firmware-chroot true \
+    --firmware-binary false \
+    --iso-application "Asena Linux" \
+    --iso-volume "Asena Linux" \
+    "${@}"

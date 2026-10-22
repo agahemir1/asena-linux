@@ -146,6 +146,12 @@ CI Debian `trixie` konteynerinde dağıtım derleyicisini kullanır. İş sonund
   [K13 deneyi](research/blur-options.md), [geçiş](reports/wayfire-migration.md).
 
 
+## Sürüm denetimi
+
+Depo 22 Ekim 2026'dan beri git'tedir (`main`). `target/` (derleme çıktıları ve VM diski) izlenmez;
+`.gitattributes` bütün metin dosyalarını LF tutar. VM'deki `~/asena` kopyası `.git` taşımaz; ISO
+derlerken kaynak commit'i `ASENA_SOURCE_COMMIT` ile verilir (`iso/README.md`).
+
 ## Yerel masaüstü önizlemesi
 
 Hazırlanan VM için Windows PowerShell'de `scripts/open-dev-desktop.ps1` kaynakları

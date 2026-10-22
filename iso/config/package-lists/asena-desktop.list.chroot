@@ -1,0 +1,49 @@
+# Asena desktop runtime from Debian 13. The asena-desktop metapackage
+# (Phase 6A) takes over most of this list; locally built packages, such as the
+# patched libwlroots-0.18 from scripts/build-wlroots.sh, are added by
+# scripts/build-iso.sh through config/packages.chroot.
+
+# Compositor and session
+wayfire
+xwayland
+greetd
+cage
+dbus-user-session
+
+# Portals
+xdg-desktop-portal
+xdg-desktop-portal-gtk
+xdg-desktop-portal-wlr
+
+# System services the shell and Settings use
+network-manager
+bluez
+pipewire
+pipewire-pulse
+wireplumber
+polkitd
+accountsservice
+upower
+
+# Helpers the daemon and screenshot tools run
+wlsunset
+swayidle
+grim
+slurp
+
+# Fonts, icons, media and archives
+fonts-inter
+fonts-jetbrains-mono
+adwaita-icon-theme
+librsvg2-common
+libgtk-4-media-gstreamer
+gstreamer1.0-plugins-good
+libarchive-tools
+
+# Applications and languages
+foot
+firefox-esr
+firefox-esr-l10n-tr
+flatpak
+locales
+libc-l10n

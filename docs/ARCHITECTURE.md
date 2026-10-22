@@ -105,8 +105,8 @@ asena/
 │   └── wallpapers/
 ├── po/                         # tr.po (+ diğer diller), POTFILES
 ├── scripts/                    # setup-dev.sh, dev-session.sh, update-po.sh
-├── packaging/debian/           # .deb paketleme
-├── iso/                        # live-build yapılandırması
+├── packaging/                  # wlroots/ yaması (K17); debian/ Faz 6A'da
+├── iso/                        # live-build iskeleti (Faz 6C); iso/README.md
 ├── docs/
 └── prompts/
 ```

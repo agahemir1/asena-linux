@@ -68,6 +68,7 @@ Bir hedef veya öneri, onaylanmış ürün kararı sayılmaz. Aşağıdaki durum
 | K16 | Ekran kimliği, geri alma sahipliği ve kayıt | Faz 5D öncesi | Uygulandı (22 Ekim): kimlik üretici, model ve seri numarası, seri yoksa bağlantı noktası; tek sahip daemon; onaylı düzen ekran takımı başına `displays.json`. Gerçek monitör kabulü açık |
 | K17 | Debian wlroots 0.18 paketine yukarı akış düzeltmesi | Faz 6 paketleme | Kullanıcı onayladı (22 Ekim): `packaging/wlroots/` yaması ve `scripts/build-wlroots.sh`; geliştirme VM'sine `0.18.2-3+asena1` kuruldu. Asena deposuna yayın Faz 6B'de |
 | K18 | Harf kısayollarının klavye düzenine göre yeri | Faz 3 tercihleri | Uygulandı (22 Ekim): Wayfire fiziksel tuşa baktığı için daemon harf kısayollarını ilk düzende o harfi yazan tuşa çevirir (TR-F'de Super+A → `KEY_F`, Super+N → `KEY_I`). İkinci düzene geçmek kısayolları taşımaz. Gerçek klavyeyle denenmedi |
+| K19 | Canlı ve kurulu sistemde firmware politikası | Faz 6C öncesi | Öneri (22 Ekim, `iso/auto/config`): Debian 12'den beri resmî varsayılan olan `non-free-firmware` bileşeni ve canlı sistemde firmware; kullanıcı kararı bekliyor |
 
 Kullanıcının Faz 0 onayı altyapının açık tasarım ayrıntılarıyla ilerlemesine izin verir. K03 güvenlik uygulaması Faz 4 öncesinde, K13 üretim panel/menü malzemesi öncesinde ayrıca çözülür. Blur isteği yalnız opak geri dönüş çizilerek tamamlanmış sayılmaz. Paket metadata'sı kurulu Debian raporunun yerini almaz. İlave bağımlılık ve API kararları bakım/lisans kontrolünden geçer. Compositor 21 Ekim kullanıcı kararıyla Wayfire oldu (K13).
 

@@ -22,7 +22,7 @@ sürer; görsel, fiziksel donanım ve normal giriş kabulü açık tutulur. GitH
 | 3 | Hızlı ayarlar ve sistem servisleri | [03-hizli-ayarlar.md](../prompts/03-hizli-ayarlar.md) | Ses/ağ/güç, medya/tepsi ve daemon kaynakları; 34 Rust + 8 Python testi geçti, donanım/görsel kabul açık | 🟨 |
 | 4 | Oturum ve güvenlik | [04-oturum-guvenlik.md](../prompts/04-oturum-guvenlik.md) | Kilit/PAM, idle, greeter ve polkit ajanı; 56 Rust + 8 Python testi geçti, gerçek giriş/uyku açık | 🟨 |
 | 5 | Ayarlar Merkezi | [05-ayarlar.md](../prompts/05-ayarlar.md) | 17 panel gruplu ve gerçek veriye bağlı; klavye/fare/dil daemon'la uygulanıyor; ekran düzeni (5D) VM'de geçti, gerçek monitörler açık; görsel kabul açık | 🟨 |
-| 6 | Dağıtım | [06-dagitim.md](../prompts/06-dagitim.md) | .deb paketleri, APT deposu, ISO, Hoş geldin (ISO kullanıcının isteğiyle sonraya ertelendi) | ⬜ |
+| 6 | Dağıtım | [06-dagitim.md](../prompts/06-dagitim.md) | Depo git'te (22 Ekim); `iso/` live-build iskeleti ve `scripts/build-iso.sh` hazır, ISO derlenmedi; .deb paketleri, APT deposu, Calamares ve Hoş geldin başlamadı (ISO kullanıcının isteğiyle sonraya ertelendi) | ⬜ |
 | 7 | Cila | [07-cila.md](../prompts/07-cila.md) | Ekran görüntüsü portal yoluyla erken eklendi (21 Ekim); erişilebilirlik ve performans başlamadı | 🟨 |
 
 Durum: ⬜ başlamadı · 🟨 sürüyor · ✅ bitti
