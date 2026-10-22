@@ -1,0 +1,26 @@
+//! Shared infrastructure. No GTK widgets or compositor-specific code belongs here.
+pub mod apps;
+pub mod authorization;
+pub mod dbus;
+pub mod dbusmenu;
+pub mod displays;
+pub mod i18n;
+pub mod launcher;
+pub mod layout;
+pub mod lock;
+pub mod logging;
+pub mod night_light;
+pub mod notification;
+pub mod operation;
+pub mod panels;
+pub mod power;
+pub mod screenshot;
+pub mod search;
+pub mod session;
+pub mod settings;
+pub mod status;
+pub mod taskbar;
+pub mod text;
+pub mod theme;
+pub mod tray;
+pub mod usage;

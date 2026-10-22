@@ -1,0 +1,25 @@
+[package]
+name = "polkit-agent-rs"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+readme.workspace = true
+categories.workspace = true
+repository.workspace = true
+description.workspace = true
+homepage.workspace = true
+documentation = "https://docs.rs/polkit-agent-rs/"
+
+[package.metadata.docs.rs]
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
+all-features = true
+
+[dependencies]
+bitflags.workspace = true
+glib.workspace = true
+gio.workspace = true
+polkit-agent-rs-sys.workspace = true
+polkit-rs.workspace = true

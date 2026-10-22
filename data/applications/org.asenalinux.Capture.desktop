@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Screenshot
+Name[tr]=Ekran Görüntüsü
+Comment=Capture the screen
+Comment[tr]=Ekranın görüntüsünü alın
+Keywords=screenshot;capture;
+Keywords[tr]=ekran görüntüsü;yakala;
+Exec=asena-screenshot
+Icon=org.asenalinux.Capture
+Terminal=false
+Categories=Utility;Graphics;GTK;
+StartupNotify=true

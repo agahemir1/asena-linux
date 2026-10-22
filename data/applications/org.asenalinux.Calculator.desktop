@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Calculator
+Name[tr]=Hesap Makinesi
+Comment=Calculate and convert units
+Comment[tr]=Hesap yapın ve birim dönüştürün
+Keywords=math;convert;
+Keywords[tr]=matematik;dönüştür;
+Exec=asena-calculator
+Icon=org.asenalinux.Calculator
+Terminal=false
+Categories=Utility;Calculator;GTK;
+StartupNotify=true

@@ -1,0 +1,42 @@
+{
+  "wayland-client": {
+    "version": "0.31.11",
+    "license": "MIT",
+    "rust_version": "1.65",
+    "repository": "https://github.com/smithay/wayland-rs",
+    "updated_at": "2026-07-22T20:35:54.669482Z",
+    "yanked": false
+  },
+  "wayland-protocols-wlr": {
+    "version": "0.3.9",
+    "license": "MIT",
+    "rust_version": "1.65",
+    "repository": "https://github.com/smithay/wayland-rs",
+    "updated_at": "2026-03-31T02:22:47.529355Z",
+    "yanked": false
+  },
+  "async-io": {
+    "version": "2.6.0",
+    "license": "Apache-2.0 OR MIT",
+    "rust_version": "1.71",
+    "repository": "https://github.com/smol-rs/async-io",
+    "updated_at": "2025-09-14T14:03:50.201510Z",
+    "yanked": false
+  },
+  "futures-lite": {
+    "version": "2.6.1",
+    "license": "Apache-2.0 OR MIT",
+    "rust_version": "1.60",
+    "repository": "https://github.com/smol-rs/futures-lite",
+    "updated_at": "2025-08-04T00:29:25.672150Z",
+    "yanked": false
+  },
+  "clap": {
+    "version": "4.5.51",
+    "license": "MIT OR Apache-2.0",
+    "rust_version": "1.74",
+    "repository": "https://github.com/clap-rs/clap",
+    "updated_at": "2026-09-14T18:40:28.474794Z",
+    "yanked": false
+  }
+}

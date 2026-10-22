@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Media Player
+Name[tr]=Oynatıcı
+Comment=Play music and videos
+Comment[tr]=Müzik ve video oynatın
+Keywords=music;video;audio;
+Keywords[tr]=müzik;video;ses;
+Exec=asena-player %U
+Icon=org.asenalinux.Player
+Terminal=false
+Categories=AudioVideo;Player;GTK;
+StartupNotify=true
+MimeType=audio/mpeg;audio/ogg;audio/flac;audio/x-wav;audio/mp4;video/mp4;video/webm;video/x-matroska;video/ogg;

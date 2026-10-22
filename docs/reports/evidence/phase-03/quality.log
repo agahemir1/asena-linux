@@ -1,0 +1,199 @@
+Source checks passed: 14 crates, 75 Rust files, XML/resources/POTFILES/LF.
+   Compiling asena-core v0.1.0 (/home/asena/asena/crates/asena-core)
+   Compiling asena-wayland v0.1.0 (/home/asena/asena/crates/asena-wayland)
+   Compiling asena-services v0.1.0 (/home/asena/asena/crates/asena-services)
+   Compiling asena-widgets v0.1.0 (/home/asena/asena/crates/asena-widgets)
+   Compiling asena-daemon v0.1.0 (/home/asena/asena/crates/asena-daemon)
+   Compiling asena-polkit-agent v0.1.0 (/home/asena/asena/crates/asena-polkit-agent)
+   Compiling asena-greeter v0.1.0 (/home/asena/asena/crates/asena-greeter)
+   Compiling asena-screenshot v0.1.0 (/home/asena/asena/crates/asena-screenshot)
+   Compiling asena-welcome v0.1.0 (/home/asena/asena/crates/asena-welcome)
+   Compiling asena-shell v0.1.0 (/home/asena/asena/crates/asena-shell)
+   Compiling asenactl v0.1.0 (/home/asena/asena/crates/asenactl)
+   Compiling asena-settings v0.1.0 (/home/asena/asena/crates/asena-settings)
+   Compiling asena-lock v0.1.0 (/home/asena/asena/crates/asena-lock)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 03s
+    Checking asena-core v0.1.0 (/home/asena/asena/crates/asena-core)
+    Checking asena-wayland v0.1.0 (/home/asena/asena/crates/asena-wayland)
+    Checking asena-services v0.1.0 (/home/asena/asena/crates/asena-services)
+    Checking asena-widgets v0.1.0 (/home/asena/asena/crates/asena-widgets)
+    Checking asena-lock v0.1.0 (/home/asena/asena/crates/asena-lock)
+    Checking asena-polkit-agent v0.1.0 (/home/asena/asena/crates/asena-polkit-agent)
+    Checking asena-welcome v0.1.0 (/home/asena/asena/crates/asena-welcome)
+    Checking asenactl v0.1.0 (/home/asena/asena/crates/asenactl)
+    Checking asena-greeter v0.1.0 (/home/asena/asena/crates/asena-greeter)
+    Checking asena-daemon v0.1.0 (/home/asena/asena/crates/asena-daemon)
+    Checking asena-settings v0.1.0 (/home/asena/asena/crates/asena-settings)
+    Checking asena-screenshot v0.1.0 (/home/asena/asena/crates/asena-screenshot)
+    Checking asena-shell v0.1.0 (/home/asena/asena/crates/asena-shell)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 22.32s
+   Compiling asena-widgets v0.1.0 (/home/asena/asena/crates/asena-widgets)
+   Compiling asena-shell v0.1.0 (/home/asena/asena/crates/asena-shell)
+   Compiling asenactl v0.1.0 (/home/asena/asena/crates/asenactl)
+   Compiling asena-services v0.1.0 (/home/asena/asena/crates/asena-services)
+   Compiling asena-daemon v0.1.0 (/home/asena/asena/crates/asena-daemon)
+   Compiling asena-wayland v0.1.0 (/home/asena/asena/crates/asena-wayland)
+   Compiling asena-greeter v0.1.0 (/home/asena/asena/crates/asena-greeter)
+   Compiling asena-settings v0.1.0 (/home/asena/asena/crates/asena-settings)
+   Compiling asena-polkit-agent v0.1.0 (/home/asena/asena/crates/asena-polkit-agent)
+   Compiling asena-welcome v0.1.0 (/home/asena/asena/crates/asena-welcome)
+   Compiling asena-session v0.1.0 (/home/asena/asena/crates/asena-session)
+   Compiling asena-screenshot v0.1.0 (/home/asena/asena/crates/asena-screenshot)
+   Compiling asena-lock v0.1.0 (/home/asena/asena/crates/asena-lock)
+   Compiling asena-core v0.1.0 (/home/asena/asena/crates/asena-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 53.99s
+     Running unittests src/lib.rs (target/debug/deps/asena_core-d12869d45f8cb03f)
+
+running 24 tests
+test apps::tests::preserves_first_xdg_override_and_no_display_metadata ... ok
+test apps::tests::exact_id_precedes_class_and_suffix_heuristics ... ok
+test apps::tests::handles_wm_class_turkish_case_flatpak_and_unknown_ids ... ok
+test layout::tests::edges_reserve_only_the_selected_side ... ok
+test dbusmenu::tests::malformed_children_are_ignored_and_defaults_are_safe ... ok
+test night_light::tests::fixed_schedule_and_temperature_bounds ... ok
+test night_light::tests::failed_outputs_do_not_count_as_applied ... ok
+test notification::tests::respects_row_padding_and_rejects_bad_images ... ok
+test operation::tests::disconnect_and_reconnect_reject_old_replies ... ok
+test notification::tests::only_safe_markup_and_uri_survive ... ok
+test operation::tests::levels_are_bounded_and_invalid_numbers_rejected ... ok
+test search::tests::calculator_precedence_invalid_and_bounded_input ... ok
+test search::tests::turkish_and_match_classes ... ok
+test notification::tests::history_bounds_replacements_and_transient_privacy ... ok
+test taskbar::tests::clock_uses_next_boundary_instead_of_drifting_interval ... ok
+test taskbar::tests::pinned_order_then_open_order_and_blank_ids_stay_separate ... ok
+test text::tests::canonical_equivalence_and_accents ... ok
+test settings::tests::compiled_schema_has_expected_defaults ... ok
+test text::tests::preserves_spacing_symbols_and_other_scripts ... ok
+test text::tests::turkish_letters_and_cases ... ok
+test tray::tests::argb_is_converted_and_malformed_frames_are_skipped ... ok
+test usage::tests::atomic_round_trip_and_corrupt_cache ... ok
+test settings::tests::missing_schema_is_recoverable ... ok
+test apps::tests::reads_real_desktop_fixture ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src/main.rs (target/debug/deps/asena_daemon-30da578344f07b43)
+
+running 2 tests
+test labwc::tests::generation_is_idempotent_and_keeps_other_config ... ok
+test appearance::tests::mirrors_external_changes_without_resetting_one_time_defaults ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/main.rs (target/debug/deps/asena_greeter-75ffd0a60b1d6049)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asena_lock-c9517804a249596e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asena_polkit_agent-00531e47991a4aa6)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asena_screenshot-7739916b954b4389)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/asena_services-0ce1a86dd36817c8)
+
+running 4 tests
+test audio_worker::tests::acknowledgement_requires_the_observed_target ... ok
+test network::tests::security_and_password_boundaries ... ok
+test brightness::tests::sysfs_fixture_rejects_zero_and_clamps_driver_values ... ok
+test toplevel_model::tests::updates_preserve_object_identity_and_closed_disconnect_clears_model ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asena_session-20bbaa5bb16be1be)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asena_settings-a97ef7b9f1ea0cdb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asena_shell-65cacc86cb324d98)
+
+running 2 tests
+test background::tests::solid_and_missing_images_are_recoverable ... ok
+test background::tests::scaling_modes_keep_transparent_padding_and_crop_zoom ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.26s
+
+     Running unittests src/lib.rs (target/debug/deps/asena_wayland-202d00583fb3f08c)
+
+running 1 test
+test toplevel::tests::states_replace_previous_values_and_ignore_unknown_values ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asena_welcome-de605b0945920abb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/asena_widgets-1dd083c14b28e0c9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/asenactl-a66fd51c365c739d)
+
+running 1 test
+test tests::command_grammar_accepts_documented_commands_and_rejects_unknown_actions ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+   Doc-tests asena_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests asena_services
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests asena_wayland
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests asena_widgets
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+test_character_literals_and_comments_are_preserved (test_gettext.GettextTests.test_character_literals_and_comments_are_preserved) ... ok
+test_lifetimes_do_not_hide_messages_or_change_lines (test_gettext.GettextTests.test_lifetimes_do_not_hide_messages_or_change_lines) ... ok
+test_development_uses_repo_paths_with_spaces (test_session.SessionTests.test_development_uses_repo_paths_with_spaces) ... ok
+test_invalid_arguments_do_not_start_compositor (test_session.SessionTests.test_invalid_arguments_do_not_start_compositor) ... ok
+test_nested_autostart_does_not_touch_user_manager (test_session.SessionTests.test_nested_autostart_does_not_touch_user_manager) ... ok
+test_nested_shutdown_does_not_stop_real_session (test_session.SessionTests.test_nested_shutdown_does_not_stop_real_session) ... ok
+test_normal_session_uses_generated_config_or_system_default (test_session.SessionTests.test_normal_session_uses_generated_config_or_system_default) ... ok
+test_unstaged_config_with_spaces_gives_actionable_error (test_session.SessionTests.test_unstaged_config_with_spaces_gives_actionable_error) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.277s
+
+OK

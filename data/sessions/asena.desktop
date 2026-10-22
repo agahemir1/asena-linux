@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Asena
+Name[tr]=Asena
+Exec=asena-session
+TryExec=asena-session
+Type=Application

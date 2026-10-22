@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Software
+Name[tr]=Yazılım
+Comment=Install and update applications
+Comment[tr]=Uygulama kurun ve güncelleyin
+Keywords=install;
+Keywords[tr]=kur;
+Exec=asena-store
+Icon=org.asenalinux.Store
+Terminal=false
+Categories=System;PackageManager;GTK;
+StartupNotify=true
+NoDisplay=true

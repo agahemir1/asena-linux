@@ -1,0 +1,10 @@
+/* Test material only. The compositor performs the background blur. */
+@import url("resource:///org/asenalinux/style/shell.css");
+
+window.asena-panel {
+  background-color: alpha(@window_bg_color, 0.6);
+}
+
+.asena-surface {
+  background-color: alpha(@popover_bg_color, 0.6);
+}

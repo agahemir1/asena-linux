@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Editor
+Name[tr]=Düzenleyici
+GenericName=Text Editor
+Exec=/bin/true
+Icon=org.example.Editor
+StartupWMClass=ExampleEditor
+Keywords=Text;Document;

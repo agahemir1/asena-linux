@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="asena">
+  <schema id="org.asenalinux.session" path="/org/asenalinux/session/">
+    <key name="language" type="s"><default>''</default><summary>Session language</summary></key>
+  </schema>
+</schemalist>

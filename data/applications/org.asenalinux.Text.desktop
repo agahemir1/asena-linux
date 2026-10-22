@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Text Editor
+Name[tr]=Metin Düzenleyici
+Comment=Edit text files
+Comment[tr]=Metin dosyalarını düzenleyin
+Keywords=text;editor;code;
+Keywords[tr]=metin;düzenleyici;kod;
+Exec=asena-text %F
+Icon=org.asenalinux.Text
+Terminal=false
+Categories=Utility;TextEditor;GTK;
+StartupNotify=true
+MimeType=text/plain;text/markdown;text/x-csrc;text/x-python;text/x-rust;application/json;application/xml;

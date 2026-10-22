@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="asena">
+  <schema id="org.asenalinux.shell" path="/org/asenalinux/shell/">
+    <key name="panel-edge" type="s"><choices><choice value="bottom"/><choice value="top"/><choice value="left"/><choice value="right"/></choices><default>'bottom'</default><summary>Panel position</summary></key>
+    <key name="panel-thickness" type="i"><range min="32" max="96"/><default>48</default><summary>Panel size</summary></key>
+    <key name="icon-size" type="i"><range min="16" max="64"/><default>26</default><summary>Icon size</summary></key>
+    <key name="panel-alignment" type="s"><choices><choice value="start"/><choice value="center"/><choice value="end"/></choices><default>'start'</default><summary>Panel alignment</summary></key>
+    <key name="panel-monitor" type="s"><default>''</default><summary>Panel monitor</summary></key>
+    <key name="menu-layout" type="s"><choices><choice value="compact"/><choice value="classic"/><choice value="grid"/></choices><default>'compact'</default><summary>Menu type</summary></key>
+    <key name="clock-format" type="s"><choices><choice value="24h"/><choice value="12h"/></choices><default>'24h'</default><summary>Clock format</summary></key>
+    <key name="pinned-apps" type="as">
+      <default>[]</default>
+      <summary>Pinned applications</summary>
+      <description>Desktop file IDs in taskbar order.</description>
+    </key>
+    <key name="menu-pinned-apps" type="as"><default>['org.asenalinux.Files.desktop', 'firefox-esr.desktop', 'org.asenalinux.Settings.desktop', 'org.asenalinux.Text.desktop', 'org.asenalinux.Photos.desktop', 'org.asenalinux.Calculator.desktop']</default><summary>Menu pinned applications</summary></key>
+    <key name="clock-show-seconds" type="b"><default>false</default><summary>Show seconds</summary></key>
+    <key name="panel-on-all-monitors" type="b"><default>true</default><summary>Show the panel on all monitors</summary></key>
+  </schema>
+</schemalist>

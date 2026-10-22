@@ -1,0 +1,78 @@
+{
+ "panel": {
+  "region": [
+   430,
+   686,
+   850,
+   706
+  ],
+  "on": 2.04,
+  "off": 25.89
+ },
+ "window-behind-panel": {
+  "region": [
+   430,
+   686,
+   850,
+   706
+  ],
+  "on": 2.71,
+  "off": 16.09
+ },
+ "menu": {
+  "region": [
+   262,
+   290,
+   372,
+   600
+  ],
+  "on": 2.78,
+  "off": 16.86
+ },
+ "quick-settings": {
+  "region": [
+   930,
+   532,
+   1250,
+   546
+  ],
+  "on": 2.75,
+  "off": 16.34
+ },
+ "sidebar": {
+  "region": [
+   906,
+   400,
+   1262,
+   470
+  ],
+  "on": 2.68,
+  "off": 15.49
+ },
+ "panel-scale-2": {
+  "region": [
+   300,
+   700,
+   1000,
+   712
+  ],
+  "on": 2.03,
+  "off": 25.59
+ },
+ "usage-on": {
+  "idle_seconds": 5,
+  "idle_cpu_percent": 0.0,
+  "motion_steps": 60,
+  "motion_seconds": 3.06,
+  "motion_cpu_percent": 43.8,
+  "rss_kib": 169764
+ },
+ "usage-off": {
+  "idle_seconds": 5,
+  "idle_cpu_percent": 0.0,
+  "motion_steps": 60,
+  "motion_seconds": 3.06,
+  "motion_cpu_percent": 27.5,
+  "rss_kib": 169496
+ }
+}

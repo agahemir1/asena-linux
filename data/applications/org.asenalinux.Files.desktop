@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Files
+Name[tr]=Dosyalar
+Comment=Browse files and folders
+Comment[tr]=Dosya ve klasörlere göz atın
+Keywords=folder;directory;
+Keywords[tr]=klasör;dizin;
+Exec=asena-files %U
+Icon=org.asenalinux.Files
+Terminal=false
+Categories=System;FileTools;FileManager;GTK;
+StartupNotify=true
+MimeType=inode/directory;

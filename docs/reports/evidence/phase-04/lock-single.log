@@ -1,0 +1,7 @@
+()
+()
+()
+()
+()
+Abandoned lock accepted a new locker; PAM was required to unlock.
+Lock surfaces, duplicate, wrong/correct PAM password and crash/recovery probe passed. Hotplug remains a separate gate.

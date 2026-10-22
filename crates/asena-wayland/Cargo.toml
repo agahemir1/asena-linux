@@ -1,0 +1,21 @@
+[package]
+name = "asena-wayland"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+wayland-client.workspace = true
+wayland-protocols-wlr.workspace = true
+async-channel.workspace = true
+async-io.workspace = true
+futures-lite.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+glib.workspace = true
+
+[lints]
+workspace = true

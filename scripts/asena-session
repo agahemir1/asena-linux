@@ -1,0 +1,70 @@
+#!/bin/sh
+set -eu
+
+if [ "$(uname -s)" != Linux ]; then
+    printf '%s\n' 'Asena sessions require Linux.' >&2
+    exit 1
+fi
+case ${1:-} in
+    --dev)
+        : "${ASENA_SOURCE_DIR:?Use target/debug/asena-session --dev or scripts/dev-session.sh}"
+        # The daemon rewrites this file, so it must be a disposable copy.
+        config=${ASENA_DEV_CONFIG:-}
+        if [ -z "$config" ]; then
+            printf '%s\n' 'Use scripts/dev-session.sh; it prepares a temporary compositor configuration.' >&2
+            exit 2
+        fi
+        export ASENA_DEV=1
+        export PATH="$ASENA_SOURCE_DIR/target/debug:$PATH"
+        export ASENA_SHELL="$ASENA_SOURCE_DIR/target/debug/asena-shell"
+        export ASENA_DAEMON="$ASENA_SOURCE_DIR/target/debug/asena-daemon"
+        export ASENA_AUTOSTART="$ASENA_SOURCE_DIR/scripts/session-autostart.sh"
+        # Wayfire sends the output of programs it starts to /dev/null. This
+        # process becomes Wayfire, so its stderr stays the session log.
+        export ASENA_DEV_LOG="/proc/$$/fd/2"
+        export GSETTINGS_SCHEMA_DIR="$ASENA_SOURCE_DIR/target/schemas"
+        export ASENA_LOCALE_DIR="$ASENA_SOURCE_DIR/target/locale"
+        export XDG_DATA_DIRS="$ASENA_SOURCE_DIR/target/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+        ;;
+    '')
+        unset ASENA_DEV ASENA_SHELL ASENA_DAEMON ASENA_SOURCE_DIR ASENA_CAPTURE_PROTOCOLS ASENA_DEV_CONFIG ASENA_DEV_LOG
+        system=/usr/share/asena/wayfire/wayfire.ini
+        # asena-daemon keeps this copy in sync with the Asena settings and
+        # Wayfire reloads it, so preferences apply from the first login.
+        directory=${XDG_CONFIG_HOME:-$HOME/.config}/asena
+        config=$directory/wayfire.ini
+        if [ -L "$directory" ] || [ -L "$config" ]; then
+            config=$system
+        elif [ ! -f "$config" ]; then
+            if ! { mkdir -p "$directory" && cp "$system" "$config"; } 2>/dev/null; then
+                config=$system
+            fi
+        fi
+        export ASENA_AUTOSTART=/usr/libexec/asena/session-autostart.sh
+        ;;
+    *) printf '%s\n' 'Usage: asena-session [--dev]' >&2; exit 2 ;;
+esac
+if [ "$#" -gt 1 ]; then
+    printf '%s\n' 'Usage: asena-session [--dev]' >&2
+    exit 2
+fi
+export XDG_CURRENT_DESKTOP=Asena
+export XDG_SESSION_DESKTOP=Asena
+export XDG_SESSION_TYPE=wayland
+flatpak_dirs="${XDG_DATA_HOME:-$HOME/.local/share}/flatpak/exports/share:/var/lib/flatpak/exports/share"
+case ":${XDG_DATA_DIRS:-}:" in
+    *":$flatpak_dirs:"*) ;;
+    *) export XDG_DATA_DIRS="$flatpak_dirs:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}" ;;
+esac
+export GDK_BACKEND=wayland
+export QT_QPA_PLATFORM='wayland;xcb'
+export _JAVA_AWT_WM_NONREPARENTING=1
+export ASENA_WAYFIRE_CONFIG="$config"
+if [ "${ASENA_DEV:-0}" = 1 ]; then
+    exec wayfire -c "$config"
+fi
+# Wayfire has no shutdown hook; the user services end with the compositor.
+status=0
+wayfire -c "$config" || status=$?
+systemctl --user stop asena-session.target || true
+exit "$status"

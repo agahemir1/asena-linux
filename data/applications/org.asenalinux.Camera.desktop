@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Camera
+Name[tr]=Kamera
+Comment=Take photos and videos
+Comment[tr]=Fotoğraf ve video çekin
+Keywords=webcam;
+Keywords[tr]=web kamerası;
+Exec=asena-camera
+Icon=org.asenalinux.Camera
+Terminal=false
+Categories=AudioVideo;Video;GTK;
+StartupNotify=true
+NoDisplay=true

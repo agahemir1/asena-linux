@@ -1,0 +1,2 @@
+Notifications 1.2: replace, sanitized body, action, reasons 1/2/3, invalid ID and in-memory history passed.
+Notification name collision preserves the existing owner.

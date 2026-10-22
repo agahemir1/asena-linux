@@ -1,0 +1,16 @@
+[package]
+name = "asenactl"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+asena-core.workspace = true
+clap.workspace = true
+glib.workspace = true
+zbus.workspace = true
+
+[lints]
+workspace = true

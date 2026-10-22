@@ -1,0 +1,946 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 79405  100 79405    0     0  52148      0  0:00:01  0:00:01 --:--:-- 52171
+/home/asena/asena/target/backports/gtk4-layer-shell-1.3.0.tar.gz: OK
+The Meson build system
+Version: 1.7.0
+Source dir: /home/asena/asena/target/backports/gtk4-layer-shell-1.3.0
+Build dir: /home/asena/asena/target/backports/build-layer-shell-1.3.0
+Build type: native build
+Project name: gtk4-layer-shell
+Project version: 1.3.0
+C compiler for the host machine: cc (gcc 14.2.0 "cc (Debian 14.2.0-19) 14.2.0")
+C linker for the host machine: cc ld.bfd 2.44
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Run-time dependency glib-2.0 found: YES 2.84.4
+Run-time dependency gtk4 found: YES 4.18.6
+Run-time dependency wayland-client found: YES 1.23.1
+Run-time dependency wayland-server found: YES 1.23.1
+Build-time dependency wayland-scanner found: YES 1.23.1
+Run-time dependency wayland-protocols found: YES 1.44
+Program /usr/bin/wayland-scanner found: YES (/usr/bin/wayland-scanner)
+Program python3 found: YES (/usr/bin/python3)
+Build targets in project: 58
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.build_root'}
+
+gtk4-layer-shell 1.3.0
+
+  User defined options
+    docs         : false
+    examples     : false
+    introspection: false
+    libdir       : lib
+    prefix       : /home/asena/asena/target/native/gtk4-layer-shell-1.3.0
+    smoke-tests  : false
+    tests        : true
+    vapi         : false
+
+Found ninja-1.12.1 at /usr/bin/ninja
+ninja: Entering directory `/home/asena/asena/target/backports/build-layer-shell-1.3.0'
+[1/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/ext-session-lock-v1.c'
+[2/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/wlr-layer-shell-unstable-v1-client.h'
+[3/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/wlr-layer-shell-unstable-v1.c'
+[4/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/xdg-shell-client.h'
+[5/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/xdg-shell.c'
+[6/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/ext-session-lock-v1-client.h'
+[7/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/xdg-dialog-v1-client.h'
+[8/828] Generating 'src/liblayer-shell-preload.so.p/wlr-layer-shell-unstable-v1.c'
+[9/828] Generating 'src/libgtk4-layer-shell.so.1.3.0.p/xdg-dialog-v1.c'
+[10/828] Generating 'src/liblayer-shell-preload.so.p/xdg-shell-client.h'
+[11/828] Generating 'src/liblayer-shell-preload.so.p/wlr-layer-shell-unstable-v1-client.h'
+[12/828] Generating 'src/liblayer-shell-preload.so.p/xdg-shell.c'
+[13/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/meson-generated_xdg-dialog-v1.c.o
+[14/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[15/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/meson-generated_xdg-shell.c.o
+[16/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/meson-generated_ext-session-lock-v1.c.o
+[17/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/xdg-surface-server.c.o
+[18/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/stolen-from-libwayland.c.o
+[19/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/session-lock.c.o
+[20/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/libwayland-shim.c.o
+[21/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/layer-surface.c.o
+[22/828] Generating 'src/liblayer-shell-preload.so.p/ext-session-lock-v1-client.h'
+[23/828] Generating 'src/liblayer-shell-preload.so.p/ext-session-lock-v1.c'
+[24/828] Generating 'src/liblayer-shell-preload.so.p/xdg-dialog-v1-client.h'
+[25/828] Generating 'src/liblayer-shell-preload.so.p/xdg-dialog-v1.c'
+[26/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/registry.c.o
+[27/828] Generating 'test/mock-server/mock-server.p/wlr-layer-shell-unstable-v1-server.h'
+[28/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/lock-surface.c.o
+[29/828] Generating 'test/mock-server/mock-server.p/wlr-layer-shell-unstable-v1.c'
+[30/828] Generating 'test/mock-server/mock-server.p/xdg-shell.c'
+[31/828] Generating 'test/mock-server/mock-server.p/xdg-shell-server.h'
+[32/828] Generating 'test/mock-server/mock-server.p/ext-session-lock-v1-server.h'
+[33/828] Generating 'test/mock-server/mock-server.p/ext-session-lock-v1.c'
+[34/828] Generating 'test/mock-server/mock-server.p/xdg-dialog-v1-server.h'
+[35/828] Generating 'test/mock-server/mock-server.p/xdg-dialog-v1.c'
+[36/828] Generating 'test/layer-test-is-supported-true.p/wlr-layer-shell-unstable-v1.c'
+[37/828] Generating 'test/layer-test-is-supported-true.p/wlr-layer-shell-unstable-v1-client.h'
+[38/828] Generating 'test/layer-test-is-supported-true.p/ext-session-lock-v1-client.h'
+[39/828] Generating 'test/layer-test-is-supported-true.p/xdg-shell-client.h'
+[40/828] Generating 'test/layer-test-is-supported-true.p/xdg-shell.c'
+[41/828] Generating 'test/layer-test-is-supported-true.p/ext-session-lock-v1.c'
+[42/828] Generating 'test/layer-test-is-supported-true.p/xdg-dialog-v1.c'
+[43/828] Generating 'test/layer-test-is-supported-true.p/xdg-dialog-v1-client.h'
+[44/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/stubbed-surface.c.o
+[45/828] Generating 'test/layer-test-layer-surface-not-created.p/wlr-layer-shell-unstable-v1-client.h'
+[46/828] Generating 'test/layer-test-layer-surface-not-created.p/wlr-layer-shell-unstable-v1.c'
+[47/828] Generating 'test/layer-test-layer-surface-not-created.p/xdg-shell-client.h'
+[48/828] Generating 'test/layer-test-layer-surface-not-created.p/ext-session-lock-v1-client.h'
+[49/828] Generating 'test/layer-test-layer-surface-not-created.p/xdg-dialog-v1-client.h'
+[50/828] Generating 'test/layer-test-layer-surface-not-created.p/xdg-shell.c'
+[51/828] Generating 'test/layer-test-layer-surface-not-created.p/ext-session-lock-v1.c'
+[52/828] Generating 'test/layer-test-layer-surface-not-created.p/xdg-dialog-v1.c'
+[53/828] Generating 'test/layer-test-creation-properties.p/wlr-layer-shell-unstable-v1-client.h'
+[54/828] Generating 'test/layer-test-creation-properties.p/wlr-layer-shell-unstable-v1.c'
+[55/828] Generating 'test/layer-test-creation-properties.p/xdg-shell-client.h'
+[56/828] Generating 'test/layer-test-creation-properties.p/xdg-shell.c'
+[57/828] Generating 'test/layer-test-creation-properties.p/ext-session-lock-v1-client.h'
+[58/828] Generating 'test/layer-test-creation-properties.p/ext-session-lock-v1.c'
+[59/828] Generating 'test/layer-test-creation-properties.p/xdg-dialog-v1-client.h'
+[60/828] Generating 'test/layer-test-creation-properties.p/xdg-dialog-v1.c'
+[61/828] Generating 'test/layer-test-is-layer-window.p/wlr-layer-shell-unstable-v1.c'
+[62/828] Generating 'test/layer-test-is-layer-window.p/wlr-layer-shell-unstable-v1-client.h'
+[63/828] Generating 'test/layer-test-is-layer-window.p/xdg-shell-client.h'
+[64/828] Generating 'test/layer-test-is-layer-window.p/ext-session-lock-v1.c'
+[65/828] Generating 'test/layer-test-is-layer-window.p/ext-session-lock-v1-client.h'
+[66/828] Generating 'test/layer-test-is-layer-window.p/xdg-shell.c'
+[67/828] Generating 'test/layer-test-is-layer-window.p/xdg-dialog-v1-client.h'
+[68/828] Generating 'test/layer-test-is-layer-window.p/xdg-dialog-v1.c'
+[69/828] Generating 'test/layer-test-single-anchors.p/wlr-layer-shell-unstable-v1-client.h'
+[70/828] Generating 'test/layer-test-single-anchors.p/wlr-layer-shell-unstable-v1.c'
+[71/828] Generating 'test/layer-test-single-anchors.p/ext-session-lock-v1-client.h'
+[72/828] Generating 'test/layer-test-single-anchors.p/ext-session-lock-v1.c'
+[73/828] Generating 'test/layer-test-single-anchors.p/xdg-shell-client.h'
+[74/828] Generating 'test/layer-test-single-anchors.p/xdg-shell.c'
+[75/828] Generating 'test/layer-test-single-anchors.p/xdg-dialog-v1.c'
+[76/828] Generating 'test/layer-test-single-anchors.p/xdg-dialog-v1-client.h'
+[77/828] Generating 'test/layer-test-multi-anchors.p/wlr-layer-shell-unstable-v1.c'
+[78/828] Generating 'test/layer-test-multi-anchors.p/wlr-layer-shell-unstable-v1-client.h'
+[79/828] Generating 'test/layer-test-multi-anchors.p/xdg-shell-client.h'
+[80/828] Generating 'test/layer-test-multi-anchors.p/ext-session-lock-v1-client.h'
+[81/828] Generating 'test/layer-test-multi-anchors.p/xdg-shell.c'
+[82/828] Generating 'test/layer-test-multi-anchors.p/ext-session-lock-v1.c'
+[83/828] Generating 'test/layer-test-multi-anchors.p/xdg-dialog-v1-client.h'
+[84/828] Generating 'test/layer-test-multi-anchors.p/xdg-dialog-v1.c'
+[85/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/wlr-layer-shell-unstable-v1-client.h'
+[86/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/xdg-shell-client.h'
+[87/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/wlr-layer-shell-unstable-v1.c'
+[88/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/xdg-shell.c'
+[89/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/ext-session-lock-v1-client.h'
+[90/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/ext-session-lock-v1.c'
+[91/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/xdg-dialog-v1-client.h'
+[92/828] Generating 'test/layer-test-set-anchor-normalizes-booleans.p/xdg-dialog-v1.c'
+[93/828] Generating 'test/layer-test-set-layer.p/xdg-shell.c'
+[94/828] Generating 'test/layer-test-set-layer.p/wlr-layer-shell-unstable-v1-client.h'
+[95/828] Generating 'test/layer-test-set-layer.p/wlr-layer-shell-unstable-v1.c'
+[96/828] Generating 'test/layer-test-set-layer.p/xdg-shell-client.h'
+[97/828] Generating 'test/layer-test-set-layer.p/xdg-dialog-v1-client.h'
+[98/828] Generating 'test/layer-test-set-layer.p/ext-session-lock-v1.c'
+[99/828] Generating 'test/layer-test-set-layer.p/ext-session-lock-v1-client.h'
+[100/828] Generating 'test/layer-test-set-layer.p/xdg-dialog-v1.c'
+[101/828] Generating 'test/layer-test-get-layer.p/wlr-layer-shell-unstable-v1-client.h'
+[102/828] Generating 'test/layer-test-get-layer.p/wlr-layer-shell-unstable-v1.c'
+[103/828] Generating 'test/layer-test-get-layer.p/xdg-shell-client.h'
+[104/828] Generating 'test/layer-test-get-layer.p/xdg-shell.c'
+[105/828] Generating 'test/layer-test-get-layer.p/ext-session-lock-v1-client.h'
+[106/828] Generating 'test/layer-test-get-layer.p/ext-session-lock-v1.c'
+[107/828] Generating 'test/layer-test-set-margin.p/wlr-layer-shell-unstable-v1-client.h'
+[108/828] Generating 'test/layer-test-get-layer.p/xdg-dialog-v1.c'
+[109/828] Generating 'test/layer-test-get-layer.p/xdg-dialog-v1-client.h'
+[110/828] Generating 'test/layer-test-set-margin.p/wlr-layer-shell-unstable-v1.c'
+[111/828] Generating 'test/layer-test-set-margin.p/xdg-shell-client.h'
+[112/828] Generating 'test/layer-test-set-margin.p/ext-session-lock-v1-client.h'
+[113/828] Generating 'test/layer-test-set-margin.p/xdg-shell.c'
+[114/828] Generating 'test/layer-test-set-margin.p/xdg-dialog-v1-client.h'
+[115/828] Generating 'test/layer-test-set-margin.p/ext-session-lock-v1.c'
+[116/828] Generating 'test/layer-test-set-margin.p/xdg-dialog-v1.c'
+[117/828] Generating 'test/layer-test-get-margin.p/wlr-layer-shell-unstable-v1-client.h'
+[118/828] Generating 'test/layer-test-get-margin.p/wlr-layer-shell-unstable-v1.c'
+[119/828] Generating 'test/layer-test-get-margin.p/xdg-shell-client.h'
+[120/828] Generating 'test/layer-test-get-margin.p/xdg-shell.c'
+[121/828] Generating 'test/layer-test-get-margin.p/ext-session-lock-v1-client.h'
+[122/828] Generating 'test/layer-test-get-margin.p/ext-session-lock-v1.c'
+[123/828] Generating 'test/layer-test-get-margin.p/xdg-dialog-v1-client.h'
+[124/828] Generating 'test/layer-test-get-margin.p/xdg-dialog-v1.c'
+[125/828] Generating 'test/layer-test-uses-widget-size.p/wlr-layer-shell-unstable-v1-client.h'
+[126/828] Generating 'test/layer-test-uses-widget-size.p/wlr-layer-shell-unstable-v1.c'
+[127/828] Generating 'test/layer-test-uses-widget-size.p/xdg-shell.c'
+[128/828] Generating 'test/layer-test-uses-widget-size.p/ext-session-lock-v1.c'
+[129/828] Generating 'test/layer-test-uses-widget-size.p/xdg-dialog-v1-client.h'
+[130/828] Generating 'test/layer-test-uses-widget-size.p/xdg-shell-client.h'
+[131/828] Generating 'test/layer-test-set-default-size.p/wlr-layer-shell-unstable-v1-client.h'
+[132/828] Generating 'test/layer-test-uses-widget-size.p/xdg-dialog-v1.c'
+[133/828] Generating 'test/layer-test-set-default-size.p/wlr-layer-shell-unstable-v1.c'
+[134/828] Generating 'test/layer-test-uses-widget-size.p/ext-session-lock-v1-client.h'
+[135/828] Generating 'test/layer-test-set-default-size.p/xdg-shell-client.h'
+[136/828] Generating 'test/layer-test-set-default-size.p/xdg-shell.c'
+[137/828] Generating 'test/layer-test-set-default-size.p/ext-session-lock-v1.c'
+[138/828] Generating 'test/layer-test-set-default-size.p/ext-session-lock-v1-client.h'
+[139/828] Generating 'test/layer-test-set-default-size.p/xdg-dialog-v1-client.h'
+[140/828] Generating 'test/layer-test-adapts-to-screen-size.p/wlr-layer-shell-unstable-v1-client.h'
+[141/828] Generating 'test/layer-test-set-default-size.p/xdg-dialog-v1.c'
+[142/828] Generating 'test/layer-test-adapts-to-screen-size.p/wlr-layer-shell-unstable-v1.c'
+[143/828] Generating 'test/layer-test-adapts-to-screen-size.p/xdg-shell-client.h'
+[144/828] Generating 'test/layer-test-adapts-to-screen-size.p/xdg-shell.c'
+[145/828] Generating 'test/layer-test-adapts-to-screen-size.p/xdg-dialog-v1-client.h'
+[146/828] Generating 'test/layer-test-adapts-to-screen-size.p/ext-session-lock-v1-client.h'
+[147/828] Generating 'test/layer-test-adapts-to-screen-size.p/ext-session-lock-v1.c'
+[148/828] Generating 'test/layer-test-adapts-to-screen-size.p/xdg-dialog-v1.c'
+[149/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/wlr-layer-shell-unstable-v1-client.h'
+[150/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/wlr-layer-shell-unstable-v1.c'
+[151/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/xdg-shell.c'
+[152/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/xdg-shell-client.h'
+[153/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/xdg-dialog-v1-client.h'
+[154/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/ext-session-lock-v1.c'
+[155/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/xdg-dialog-v1.c'
+[156/828] Generating 'test/layer-test-auto-exclusive-zone-no-margin.p/ext-session-lock-v1-client.h'
+[157/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/wlr-layer-shell-unstable-v1-client.h'
+[158/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/wlr-layer-shell-unstable-v1.c'
+[159/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/xdg-shell-client.h'
+[160/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/xdg-shell.c'
+[161/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/ext-session-lock-v1.c'
+[162/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/xdg-dialog-v1-client.h'
+[163/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/ext-session-lock-v1-client.h'
+[164/828] Generating 'test/layer-test-auto-exclusive-zone-with-margin.p/xdg-dialog-v1.c'
+[165/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/wlr-layer-shell-unstable-v1.c'
+[166/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/wlr-layer-shell-unstable-v1-client.h'
+[167/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/ext-session-lock-v1-client.h'
+[168/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/xdg-shell.c'
+[169/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/ext-session-lock-v1.c'
+[170/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/xdg-shell-client.h'
+[171/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/xdg-dialog-v1-client.h'
+[172/828] Generating 'test/layer-test-auto-exclusive-zone-weird-bool-values.p/xdg-dialog-v1.c'
+[173/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/wlr-layer-shell-unstable-v1-client.h'
+[174/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/wlr-layer-shell-unstable-v1.c'
+[175/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/xdg-shell-client.h'
+[176/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/xdg-shell.c'
+[177/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/ext-session-lock-v1.c'
+[178/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/xdg-dialog-v1-client.h'
+[179/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/ext-session-lock-v1-client.h'
+[180/828] Generating 'test/layer-test-get-explicit-exclusive-zone.p/xdg-dialog-v1.c'
+[181/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/wlr-layer-shell-unstable-v1-client.h'
+[182/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/wlr-layer-shell-unstable-v1.c'
+[183/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/ext-session-lock-v1-client.h'
+[184/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/xdg-shell-client.h'
+[185/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/xdg-shell.c'
+[186/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/ext-session-lock-v1.c'
+[187/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/xdg-dialog-v1-client.h'
+[188/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/wlr-layer-shell-unstable-v1.c'
+[189/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/wlr-layer-shell-unstable-v1-client.h'
+[190/828] Generating 'test/layer-test-get-auto-exclusive-zone.p/xdg-dialog-v1.c'
+[191/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/ext-session-lock-v1-client.h'
+[192/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/xdg-shell-client.h'
+[193/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/ext-session-lock-v1.c'
+[194/828] Generating 'test/layer-test-layer-surface-popup.p/wlr-layer-shell-unstable-v1-client.h'
+[195/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/xdg-shell.c'
+[196/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/xdg-dialog-v1.c'
+[197/828] Generating 'test/layer-test-exclusive-zone-below-negative-1.p/xdg-dialog-v1-client.h'
+[198/828] Generating 'test/layer-test-layer-surface-popup.p/wlr-layer-shell-unstable-v1.c'
+[199/828] Generating 'test/layer-test-layer-surface-popup.p/xdg-shell-client.h'
+[200/828] Generating 'test/layer-test-layer-surface-popup.p/xdg-shell.c'
+[201/828] Generating 'test/layer-test-layer-surface-popup.p/xdg-dialog-v1-client.h'
+[202/828] Generating 'test/layer-test-layer-surface-popup.p/xdg-dialog-v1.c'
+[203/828] Generating 'test/layer-test-layer-surface-popup.p/ext-session-lock-v1-client.h'
+[204/828] Generating 'test/layer-test-layer-surface-popup.p/ext-session-lock-v1.c'
+[205/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/wlr-layer-shell-unstable-v1-client.h'
+[206/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/xdg-shell.c'
+[207/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/wlr-layer-shell-unstable-v1.c'
+[208/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/xdg-shell-client.h'
+[209/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/ext-session-lock-v1.c'
+[210/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/xdg-dialog-v1-client.h'
+[211/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/ext-session-lock-v1-client.h'
+[212/828] Generating 'test/layer-test-layer-surface-click-activated-popup.p/xdg-dialog-v1.c'
+[213/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/wlr-layer-shell-unstable-v1-client.h'
+[214/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/xdg-shell-client.h'
+[215/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/wlr-layer-shell-unstable-v1.c'
+[216/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/ext-session-lock-v1-client.h'
+[217/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/xdg-dialog-v1.c'
+[218/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/xdg-shell.c'
+[219/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/ext-session-lock-v1.c'
+[220/828] Generating 'test/layer-test-xdg-toplevel-popup-with-layer-surface.p/xdg-dialog-v1-client.h'
+[221/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/wlr-layer-shell-unstable-v1-client.h'
+[222/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/wlr-layer-shell-unstable-v1.c'
+[223/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/xdg-shell-client.h'
+[224/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/ext-session-lock-v1.c'
+[225/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/ext-session-lock-v1-client.h'
+[226/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/xdg-dialog-v1-client.h'
+[227/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/xdg-shell.c'
+[228/828] Generating 'test/layer-test-xdg-toplevel-popup-without-layer-surface.p/xdg-dialog-v1.c'
+[229/828] Generating 'test/layer-test-close-layer-surface.p/wlr-layer-shell-unstable-v1-client.h'
+[230/828] Generating 'test/layer-test-close-layer-surface.p/wlr-layer-shell-unstable-v1.c'
+[231/828] Generating 'test/layer-test-close-layer-surface.p/xdg-shell-client.h'
+[232/828] Generating 'test/layer-test-close-layer-surface.p/ext-session-lock-v1-client.h'
+[233/828] Generating 'test/layer-test-close-layer-surface.p/xdg-shell.c'
+[234/828] Generating 'test/layer-test-close-layer-surface.p/ext-session-lock-v1.c'
+[235/828] Generating 'test/layer-test-close-layer-surface.p/xdg-dialog-v1-client.h'
+[236/828] Generating 'test/layer-test-get-namespace-default.p/wlr-layer-shell-unstable-v1.c'
+[237/828] Generating 'test/layer-test-close-layer-surface.p/xdg-dialog-v1.c'
+[238/828] Generating 'test/layer-test-get-namespace-default.p/wlr-layer-shell-unstable-v1-client.h'
+[239/828] Generating 'test/layer-test-get-namespace-default.p/ext-session-lock-v1-client.h'
+[240/828] Generating 'test/layer-test-get-namespace-default.p/xdg-shell-client.h'
+[241/828] Generating 'test/layer-test-get-namespace-default.p/xdg-shell.c'
+[242/828] Generating 'test/layer-test-get-namespace-default.p/ext-session-lock-v1.c'
+[243/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/wlr-layer-shell-unstable-v1-client.h'
+[244/828] Generating 'test/layer-test-get-namespace-default.p/xdg-dialog-v1-client.h'
+[245/828] Generating 'test/layer-test-get-namespace-default.p/xdg-dialog-v1.c'
+[246/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/wlr-layer-shell-unstable-v1.c'
+[247/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/ext-session-lock-v1-client.h'
+[248/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/xdg-shell.c'
+[249/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/ext-session-lock-v1.c'
+[250/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/xdg-dialog-v1-client.h'
+[251/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/xdg-shell-client.h'
+[252/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/wlr-layer-shell-unstable-v1.c'
+[253/828] Generating 'test/layer-test-get-namespace-on-non-layer-window.p/xdg-dialog-v1.c'
+[254/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/wlr-layer-shell-unstable-v1-client.h'
+[255/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/xdg-shell-client.h'
+[256/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/xdg-shell.c'
+[257/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/ext-session-lock-v1-client.h'
+[258/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/ext-session-lock-v1.c'
+[259/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/xdg-dialog-v1-client.h'
+[260/828] Generating 'test/layer-test-get-namespace-custom-namespace.p/xdg-dialog-v1.c'
+[261/828] Generating 'test/layer-test-set-keyboard-mode.p/wlr-layer-shell-unstable-v1-client.h'
+[262/828] Generating 'test/layer-test-set-keyboard-mode.p/wlr-layer-shell-unstable-v1.c'
+[263/828] Generating 'test/layer-test-set-keyboard-mode.p/ext-session-lock-v1-client.h'
+[264/828] Generating 'test/layer-test-set-keyboard-mode.p/xdg-shell.c'
+[265/828] Generating 'test/layer-test-set-keyboard-mode.p/xdg-shell-client.h'
+[266/828] Generating 'test/layer-test-set-keyboard-mode.p/ext-session-lock-v1.c'
+[267/828] Generating 'test/layer-test-set-keyboard-mode.p/xdg-dialog-v1-client.h'
+[268/828] Generating 'test/layer-test-set-keyboard-mode.p/xdg-dialog-v1.c'
+[269/828] Generating 'test/layer-test-get-keyboard-mode.p/wlr-layer-shell-unstable-v1-client.h'
+[270/828] Generating 'test/layer-test-get-keyboard-mode.p/wlr-layer-shell-unstable-v1.c'
+[271/828] Generating 'test/layer-test-get-keyboard-mode.p/xdg-shell.c'
+[272/828] Generating 'test/layer-test-get-keyboard-mode.p/ext-session-lock-v1-client.h'
+[273/828] Generating 'test/layer-test-get-keyboard-mode.p/ext-session-lock-v1.c'
+[274/828] Generating 'test/layer-test-get-keyboard-mode.p/xdg-shell-client.h'
+[275/828] Generating 'test/layer-test-get-keyboard-mode.p/xdg-dialog-v1-client.h'
+[276/828] Generating 'test/layer-test-get-keyboard-mode.p/xdg-dialog-v1.c'
+[277/828] Generating 'test/layer-test-get-monitor.p/wlr-layer-shell-unstable-v1-client.h'
+[278/828] Generating 'test/layer-test-get-monitor.p/wlr-layer-shell-unstable-v1.c'
+[279/828] Generating 'test/layer-test-get-monitor.p/xdg-shell.c'
+[280/828] Generating 'test/layer-test-get-monitor.p/xdg-shell-client.h'
+[281/828] Generating 'test/layer-test-get-monitor.p/ext-session-lock-v1-client.h'
+[282/828] Generating 'test/layer-test-get-monitor.p/ext-session-lock-v1.c'
+[283/828] Generating 'test/layer-test-get-monitor.p/xdg-dialog-v1-client.h'
+[284/828] Generating 'test/layer-test-get-monitor.p/xdg-dialog-v1.c'
+[285/828] Generating 'test/layer-test-set-monitor.p/wlr-layer-shell-unstable-v1.c'
+[286/828] Generating 'test/layer-test-set-monitor.p/wlr-layer-shell-unstable-v1-client.h'
+[287/828] Generating 'test/layer-test-set-monitor.p/xdg-shell-client.h'
+[288/828] Generating 'test/layer-test-set-monitor.p/xdg-shell.c'
+[289/828] Generating 'test/layer-test-set-monitor.p/xdg-dialog-v1.c'
+[290/828] Generating 'test/layer-test-set-monitor.p/ext-session-lock-v1.c'
+[291/828] Generating 'test/layer-test-set-monitor.p/ext-session-lock-v1-client.h'
+[292/828] Generating 'test/layer-test-set-monitor.p/xdg-dialog-v1-client.h'
+[293/828] Generating 'test/layer-test-monitor-removed.p/wlr-layer-shell-unstable-v1.c'
+[294/828] Generating 'test/layer-test-monitor-removed.p/wlr-layer-shell-unstable-v1-client.h'
+[295/828] Generating 'test/layer-test-monitor-removed.p/xdg-shell.c'
+[296/828] Generating 'test/layer-test-monitor-removed.p/ext-session-lock-v1-client.h'
+[297/828] Generating 'test/layer-test-monitor-removed.p/xdg-shell-client.h'
+[298/828] Generating 'test/layer-test-monitor-removed.p/ext-session-lock-v1.c'
+[299/828] Generating 'test/layer-test-monitor-removed.p/xdg-dialog-v1-client.h'
+[300/828] Generating 'test/layer-test-monitor-removed.p/xdg-dialog-v1.c'
+[301/828] Generating 'test/layer-test-only-monitor-removed.p/wlr-layer-shell-unstable-v1-client.h'
+[302/828] Generating 'test/layer-test-only-monitor-removed.p/wlr-layer-shell-unstable-v1.c'
+[303/828] Generating 'test/layer-test-only-monitor-removed.p/xdg-shell-client.h'
+[304/828] Generating 'test/layer-test-only-monitor-removed.p/xdg-shell.c'
+[305/828] Generating 'test/layer-test-only-monitor-removed.p/ext-session-lock-v1.c'
+[306/828] Generating 'test/layer-test-only-monitor-removed.p/ext-session-lock-v1-client.h'
+[307/828] Generating 'test/layer-test-only-monitor-removed.p/xdg-dialog-v1-client.h'
+[308/828] Generating 'test/layer-test-only-monitor-removed.p/xdg-dialog-v1.c'
+[309/828] Generating 'test/layer-test-respect-close.p/wlr-layer-shell-unstable-v1-client.h'
+[310/828] Generating 'test/layer-test-respect-close.p/wlr-layer-shell-unstable-v1.c'
+[311/828] Generating 'test/layer-test-respect-close.p/ext-session-lock-v1-client.h'
+[312/828] Generating 'test/layer-test-respect-close.p/xdg-shell.c'
+[313/828] Generating 'test/layer-test-respect-close.p/ext-session-lock-v1.c'
+[314/828] Generating 'test/layer-test-respect-close.p/xdg-shell-client.h'
+[315/828] Generating 'test/layer-test-respect-close.p/xdg-dialog-v1-client.h'
+[316/828] Generating 'test/layer-test-respect-close.p/xdg-dialog-v1.c'
+[317/828] Generating 'test/layer-test-create-xdg-toplevel.p/wlr-layer-shell-unstable-v1-client.h'
+[318/828] Generating 'test/layer-test-create-xdg-toplevel.p/wlr-layer-shell-unstable-v1.c'
+[319/828] Generating 'test/layer-test-create-xdg-toplevel.p/xdg-shell-client.h'
+[320/828] Generating 'test/layer-test-create-xdg-toplevel.p/xdg-shell.c'
+[321/828] Generating 'test/layer-test-create-xdg-toplevel.p/ext-session-lock-v1-client.h'
+[322/828] Generating 'test/layer-test-hide-and-show.p/wlr-layer-shell-unstable-v1-client.h'
+[323/828] Generating 'test/layer-test-create-xdg-toplevel.p/ext-session-lock-v1.c'
+[324/828] Generating 'test/layer-test-create-xdg-toplevel.p/xdg-dialog-v1-client.h'
+[325/828] Generating 'test/layer-test-create-xdg-toplevel.p/xdg-dialog-v1.c'
+[326/828] Generating 'test/layer-test-hide-and-show.p/wlr-layer-shell-unstable-v1.c'
+[327/828] Generating 'test/layer-test-hide-and-show.p/xdg-shell-client.h'
+[328/828] Generating 'test/layer-test-hide-and-show.p/ext-session-lock-v1-client.h'
+[329/828] Generating 'test/layer-test-hide-and-show.p/ext-session-lock-v1.c'
+[330/828] Generating 'test/layer-test-hide-and-show.p/xdg-shell.c'
+[331/828] Generating 'test/layer-test-hide-and-show.p/xdg-dialog-v1-client.h'
+[332/828] Generating 'test/layer-test-hide-and-show.p/xdg-dialog-v1.c'
+[333/828] Generating 'test/layer-test-init-after-window-created.p/wlr-layer-shell-unstable-v1-client.h'
+[334/828] Generating 'test/layer-test-init-after-window-created.p/wlr-layer-shell-unstable-v1.c'
+[335/828] Generating 'test/layer-test-init-after-window-created.p/xdg-shell.c'
+[336/828] Generating 'test/layer-test-init-after-window-created.p/ext-session-lock-v1.c'
+[337/828] Generating 'test/layer-test-init-after-window-created.p/xdg-dialog-v1-client.h'
+[338/828] Generating 'test/layer-test-init-after-window-created.p/xdg-shell-client.h'
+[339/828] Generating 'test/layer-test-init-after-window-created.p/xdg-dialog-v1.c'
+[340/828] Generating 'test/layer-test-init-after-window-created.p/ext-session-lock-v1-client.h'
+[341/828] Generating 'test/layer-test-configure-delay.p/wlr-layer-shell-unstable-v1.c'
+[342/828] Generating 'test/layer-test-configure-delay.p/wlr-layer-shell-unstable-v1-client.h'
+[343/828] Generating 'test/layer-test-configure-delay.p/xdg-shell-client.h'
+[344/828] Generating 'test/layer-test-configure-delay.p/xdg-shell.c'
+[345/828] Generating 'test/layer-test-configure-delay.p/ext-session-lock-v1-client.h'
+[346/828] Generating 'test/layer-test-configure-delay.p/ext-session-lock-v1.c'
+[347/828] Generating 'test/layer-test-configure-delay.p/xdg-dialog-v1-client.h'
+[348/828] Generating 'test/layer-test-configure-delay.p/xdg-dialog-v1.c'
+[349/828] Generating 'test/layer-test-popup-configure-delay.p/wlr-layer-shell-unstable-v1-client.h'
+[350/828] Generating 'test/layer-test-popup-configure-delay.p/wlr-layer-shell-unstable-v1.c'
+[351/828] Generating 'test/layer-test-popup-configure-delay.p/xdg-shell-client.h'
+[352/828] Generating 'test/layer-test-popup-configure-delay.p/ext-session-lock-v1-client.h'
+[353/828] Generating 'test/layer-test-popup-configure-delay.p/ext-session-lock-v1.c'
+[354/828] Generating 'test/layer-test-popup-configure-delay.p/xdg-dialog-v1.c'
+[355/828] Generating 'test/layer-test-popup-configure-delay.p/xdg-dialog-v1-client.h'
+[356/828] Generating 'test/layer-test-popup-configure-delay.p/xdg-shell.c'
+[357/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/wlr-layer-shell-unstable-v1.c'
+[358/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/xdg-shell.c'
+[359/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/wlr-layer-shell-unstable-v1-client.h'
+[360/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/ext-session-lock-v1-client.h'
+[361/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/xdg-shell-client.h'
+[362/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/ext-session-lock-v1.c'
+[363/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/xdg-dialog-v1-client.h'
+[364/828] Generating 'test/lock-test-lock-can-be-created-without-locking.p/xdg-dialog-v1.c'
+[365/828] Generating 'test/lock-test-can-lock-display.p/wlr-layer-shell-unstable-v1-client.h'
+[366/828] Generating 'test/lock-test-can-lock-display.p/wlr-layer-shell-unstable-v1.c'
+[367/828] Generating 'test/lock-test-can-lock-display.p/xdg-shell-client.h'
+[368/828] Generating 'test/lock-test-can-lock-display.p/ext-session-lock-v1-client.h'
+[369/828] Generating 'test/lock-test-can-lock-display.p/ext-session-lock-v1.c'
+[370/828] Generating 'test/lock-test-can-lock-display.p/xdg-dialog-v1.c'
+[371/828] Generating 'test/lock-test-can-lock-display.p/xdg-shell.c'
+[372/828] Generating 'test/lock-test-can-lock-display.p/xdg-dialog-v1-client.h'
+[373/828] Generating 'test/lock-test-can-relock-display.p/wlr-layer-shell-unstable-v1-client.h'
+[374/828] Generating 'test/lock-test-can-relock-display.p/ext-session-lock-v1-client.h'
+[375/828] Generating 'test/lock-test-can-relock-display.p/wlr-layer-shell-unstable-v1.c'
+[376/828] Generating 'test/lock-test-can-relock-display.p/xdg-shell-client.h'
+[377/828] Generating 'test/lock-test-can-relock-display.p/xdg-shell.c'
+[378/828] Generating 'test/lock-test-can-relock-display.p/ext-session-lock-v1.c'
+[379/828] Generating 'test/lock-test-can-relock-display.p/xdg-dialog-v1-client.h'
+[380/828] Generating 'test/lock-test-can-reuse-lock-window.p/wlr-layer-shell-unstable-v1-client.h'
+[381/828] Generating 'test/lock-test-can-relock-display.p/xdg-dialog-v1.c'
+[382/828] Generating 'test/lock-test-can-reuse-lock-window.p/xdg-shell-client.h'
+[383/828] Generating 'test/lock-test-can-reuse-lock-window.p/wlr-layer-shell-unstable-v1.c'
+[384/828] Generating 'test/lock-test-can-reuse-lock-window.p/xdg-shell.c'
+[385/828] Generating 'test/lock-test-can-reuse-lock-window.p/ext-session-lock-v1.c'
+[386/828] Generating 'test/lock-test-can-reuse-lock-window.p/ext-session-lock-v1-client.h'
+[387/828] Generating 'test/lock-test-can-reuse-lock-window.p/xdg-dialog-v1.c'
+[388/828] Generating 'test/lock-test-can-reuse-lock-window.p/xdg-dialog-v1-client.h'
+[389/828] Generating 'test/lock-test-multiple-monitors.p/wlr-layer-shell-unstable-v1-client.h'
+[390/828] Generating 'test/lock-test-multiple-monitors.p/xdg-shell.c'
+[391/828] Generating 'test/lock-test-multiple-monitors.p/wlr-layer-shell-unstable-v1.c'
+[392/828] Generating 'test/lock-test-multiple-monitors.p/xdg-shell-client.h'
+[393/828] Generating 'test/lock-test-multiple-monitors.p/ext-session-lock-v1-client.h'
+[394/828] Generating 'test/lock-test-multiple-monitors.p/ext-session-lock-v1.c'
+[395/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/gtk4-session-lock.c.o
+[396/828] Generating 'test/lock-test-multiple-monitors.p/xdg-dialog-v1-client.h'
+[397/828] Generating 'test/lock-test-multiple-monitors.p/xdg-dialog-v1.c'
+[398/828] Generating 'test/lock-test-monitors-changed-while-locked.p/wlr-layer-shell-unstable-v1.c'
+[399/828] Generating 'test/lock-test-monitors-changed-while-locked.p/wlr-layer-shell-unstable-v1-client.h'
+[400/828] Generating 'test/lock-test-monitors-changed-while-locked.p/xdg-shell.c'
+[401/828] Generating 'test/lock-test-monitors-changed-while-locked.p/xdg-shell-client.h'
+[402/828] Generating 'test/lock-test-monitors-changed-while-locked.p/xdg-dialog-v1.c'
+[403/828] Generating 'test/lock-test-monitors-changed-while-locked.p/ext-session-lock-v1-client.h'
+[404/828] Generating 'test/lock-test-monitors-changed-while-locked.p/xdg-dialog-v1-client.h'
+[405/828] Generating 'test/lock-test-monitors-changed-while-locked.p/ext-session-lock-v1.c'
+[406/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/wlr-layer-shell-unstable-v1-client.h'
+[407/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/wlr-layer-shell-unstable-v1.c'
+[408/828] Compiling C object src/libgtk4-layer-shell.so.1.3.0.p/gtk4-layer-shell.c.o
+[409/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/xdg-dialog-v1-client.h'
+[410/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/xdg-shell-client.h'
+[411/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/ext-session-lock-v1-client.h'
+[412/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/ext-session-lock-v1.c'
+[413/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/xdg-shell.c'
+[414/828] Generating 'test/lock-test-monitors-changed-after-unlocked.p/xdg-dialog-v1.c'
+[415/828] Generating 'test/lock-test-immediate-failure.p/wlr-layer-shell-unstable-v1-client.h'
+[416/828] Generating 'test/lock-test-immediate-failure.p/wlr-layer-shell-unstable-v1.c'
+[417/828] Generating 'test/lock-test-immediate-failure.p/xdg-shell.c'
+[418/828] Generating 'test/lock-test-immediate-failure.p/xdg-shell-client.h'
+[419/828] Generating 'test/lock-test-immediate-failure.p/ext-session-lock-v1-client.h'
+[420/828] Generating 'test/lock-test-immediate-failure.p/xdg-dialog-v1-client.h'
+[421/828] Generating 'test/lock-test-immediate-failure.p/ext-session-lock-v1.c'
+[422/828] Generating 'test/lock-test-immediate-failure.p/xdg-dialog-v1.c'
+[423/828] Generating 'test/lock-test-async-failure.p/wlr-layer-shell-unstable-v1-client.h'
+[424/828] Generating 'test/lock-test-async-failure.p/wlr-layer-shell-unstable-v1.c'
+[425/828] Generating 'test/lock-test-async-failure.p/xdg-dialog-v1-client.h'
+[426/828] Generating 'test/lock-test-async-failure.p/xdg-shell.c'
+[427/828] Generating 'test/lock-test-async-failure.p/ext-session-lock-v1-client.h'
+[428/828] Generating 'test/lock-test-async-failure.p/xdg-shell-client.h'
+[429/828] Generating 'test/lock-test-async-failure.p/xdg-dialog-v1.c'
+[430/828] Generating 'test/lock-test-async-failure.p/ext-session-lock-v1.c'
+[431/828] Generating 'test/lock-test-popup-on-lock-screen.p/wlr-layer-shell-unstable-v1.c'
+[432/828] Generating 'test/lock-test-popup-on-lock-screen.p/wlr-layer-shell-unstable-v1-client.h'
+[433/828] Generating 'test/lock-test-popup-on-lock-screen.p/ext-session-lock-v1-client.h'
+[434/828] Generating 'test/lock-test-popup-on-lock-screen.p/xdg-shell.c'
+[435/828] Generating 'test/lock-test-popup-on-lock-screen.p/ext-session-lock-v1.c'
+[436/828] Generating 'test/lock-test-popup-on-lock-screen.p/xdg-shell-client.h'
+[437/828] Generating 'test/lock-test-popup-on-lock-screen.p/xdg-dialog-v1.c'
+[438/828] Generating 'test/lock-test-popup-on-lock-screen.p/xdg-dialog-v1-client.h'
+[439/828] Generating 'test/lock-test-works-without-monitor-signal.p/wlr-layer-shell-unstable-v1-client.h'
+[440/828] Generating 'test/lock-test-works-without-monitor-signal.p/wlr-layer-shell-unstable-v1.c'
+[441/828] Generating 'test/lock-test-works-without-monitor-signal.p/xdg-shell.c'
+[442/828] Generating 'test/lock-test-works-without-monitor-signal.p/ext-session-lock-v1-client.h'
+[443/828] Generating 'test/lock-test-works-without-monitor-signal.p/ext-session-lock-v1.c'
+[444/828] Generating 'test/lock-test-works-without-monitor-signal.p/xdg-dialog-v1-client.h'
+[445/828] Generating 'test/lock-test-works-without-monitor-signal.p/xdg-dialog-v1.c'
+[446/828] Generating 'test/lock-test-works-without-monitor-signal.p/xdg-shell-client.h'
+[447/828] Compiling C object src/liblayer-shell-preload.so.p/meson-generated_xdg-shell.c.o
+[448/828] Linking target src/libgtk4-layer-shell.so.1.3.0
+[449/828] Compiling C object src/liblayer-shell-preload.so.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[450/828] Compiling C object src/liblayer-shell-preload.so.p/meson-generated_xdg-dialog-v1.c.o
+[451/828] Compiling C object src/liblayer-shell-preload.so.p/meson-generated_ext-session-lock-v1.c.o
+[452/828] Compiling C object src/liblayer-shell-preload.so.p/stolen-from-libwayland.c.o
+[453/828] Compiling C object src/liblayer-shell-preload.so.p/layer-shell-preload.c.o
+[454/828] Compiling C object src/liblayer-shell-preload.so.p/xdg-surface-server.c.o
+[455/828] Compiling C object src/liblayer-shell-preload.so.p/session-lock.c.o
+[456/828] Compiling C object src/liblayer-shell-preload.so.p/stubbed-surface.c.o
+[457/828] Compiling C object src/liblayer-shell-preload.so.p/lock-surface.c.o
+[458/828] Generating symbol file src/libgtk4-layer-shell.so.1.3.0.p/libgtk4-layer-shell.so.1.3.0.symbols
+[459/828] Compiling C object src/liblayer-shell-preload.so.p/libwayland-shim.c.o
+[460/828] Compiling C object src/liblayer-shell-preload.so.p/layer-surface.c.o
+[461/828] Compiling C object test/mock-server/mock-server.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[462/828] Compiling C object test/mock-server/mock-server.p/meson-generated_xdg-dialog-v1.c.o
+[463/828] Compiling C object test/mock-server/mock-server.p/meson-generated_ext-session-lock-v1.c.o
+[464/828] Compiling C object src/liblayer-shell-preload.so.p/registry.c.o
+[465/828] Compiling C object test/mock-server/mock-server.p/meson-generated_xdg-shell.c.o
+[466/828] Compiling C object test/layer-test-is-supported-true.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[467/828] Compiling C object test/layer-test-is-supported-true.p/meson-generated_xdg-shell.c.o
+[468/828] Compiling C object test/mock-server/mock-server.p/mock-server.c.o
+[469/828] Compiling C object test/layer-test-is-supported-true.p/meson-generated_ext-session-lock-v1.c.o
+[470/828] Compiling C object test/layer-test-is-supported-true.p/meson-generated_xdg-dialog-v1.c.o
+[471/828] Compiling C object test/layer-test-layer-surface-not-created.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[472/828] Compiling C object test/layer-test-layer-surface-not-created.p/meson-generated_xdg-shell.c.o
+[473/828] Compiling C object test/layer-test-layer-surface-not-created.p/meson-generated_ext-session-lock-v1.c.o
+[474/828] Compiling C object test/layer-test-layer-surface-not-created.p/meson-generated_xdg-dialog-v1.c.o
+[475/828] Compiling C object test/mock-server/mock-server.p/overrides.c.o
+[476/828] Compiling C object test/layer-test-creation-properties.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[477/828] Compiling C object test/layer-test-creation-properties.p/meson-generated_xdg-shell.c.o
+[478/828] Compiling C object test/layer-test-creation-properties.p/meson-generated_ext-session-lock-v1.c.o
+[479/828] Compiling C object test/layer-test-creation-properties.p/meson-generated_xdg-dialog-v1.c.o
+[480/828] Compiling C object test/unit-tests/test-get-version.p/test-get-version.c.o
+[481/828] Compiling C object test/layer-test-layer-surface-not-created.p/layer-tests_test-layer-surface-not-created.c.o
+[482/828] Compiling C object test/layer-test-layer-surface-not-created.p/integration-test-common_integration-test-common.c.o
+[483/828] Compiling C object test/layer-test-is-supported-true.p/layer-tests_test-is-supported-true.c.o
+[484/828] Compiling C object test/layer-test-is-supported-true.p/integration-test-common_integration-test-common.c.o
+[485/828] Compiling C object test/layer-test-is-layer-window.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[486/828] Compiling C object test/layer-test-is-layer-window.p/meson-generated_xdg-shell.c.o
+[487/828] Compiling C object test/layer-test-is-layer-window.p/meson-generated_ext-session-lock-v1.c.o
+[488/828] Compiling C object test/layer-test-is-layer-window.p/meson-generated_xdg-dialog-v1.c.o
+[489/828] Compiling C object test/layer-test-single-anchors.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[490/828] Compiling C object test/layer-test-single-anchors.p/meson-generated_xdg-shell.c.o
+[491/828] Compiling C object test/layer-test-single-anchors.p/meson-generated_ext-session-lock-v1.c.o
+[492/828] Compiling C object test/layer-test-single-anchors.p/meson-generated_xdg-dialog-v1.c.o
+[493/828] Compiling C object test/layer-test-creation-properties.p/layer-tests_test-creation-properties.c.o
+[494/828] Compiling C object test/layer-test-multi-anchors.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[495/828] Compiling C object test/layer-test-multi-anchors.p/meson-generated_xdg-shell.c.o
+[496/828] Compiling C object test/layer-test-multi-anchors.p/meson-generated_ext-session-lock-v1.c.o
+[497/828] Compiling C object test/layer-test-multi-anchors.p/meson-generated_xdg-dialog-v1.c.o
+[498/828] Compiling C object test/layer-test-is-layer-window.p/integration-test-common_integration-test-common.c.o
+[499/828] Compiling C object test/layer-test-creation-properties.p/integration-test-common_integration-test-common.c.o
+[500/828] Compiling C object test/layer-test-set-anchor-normalizes-booleans.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[501/828] Compiling C object test/layer-test-set-anchor-normalizes-booleans.p/meson-generated_xdg-shell.c.o
+[502/828] Compiling C object test/layer-test-single-anchors.p/layer-tests_test-single-anchors.c.o
+[503/828] Compiling C object test/layer-test-set-anchor-normalizes-booleans.p/meson-generated_ext-session-lock-v1.c.o
+[504/828] Compiling C object test/layer-test-is-layer-window.p/layer-tests_test-is-layer-window.c.o
+[505/828] Compiling C object test/layer-test-set-anchor-normalizes-booleans.p/meson-generated_xdg-dialog-v1.c.o
+[506/828] Compiling C object test/layer-test-set-layer.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[507/828] Compiling C object test/layer-test-multi-anchors.p/layer-tests_test-multi-anchors.c.o
+[508/828] Compiling C object test/layer-test-set-layer.p/meson-generated_xdg-shell.c.o
+[509/828] Compiling C object test/layer-test-set-layer.p/meson-generated_xdg-dialog-v1.c.o
+[510/828] Compiling C object test/layer-test-set-layer.p/meson-generated_ext-session-lock-v1.c.o
+[511/828] Compiling C object test/layer-test-single-anchors.p/integration-test-common_integration-test-common.c.o
+[512/828] Compiling C object test/layer-test-get-layer.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[513/828] Compiling C object test/layer-test-get-layer.p/meson-generated_xdg-shell.c.o
+[514/828] Compiling C object test/layer-test-get-layer.p/meson-generated_ext-session-lock-v1.c.o
+[515/828] Compiling C object test/layer-test-get-layer.p/meson-generated_xdg-dialog-v1.c.o
+[516/828] Compiling C object test/layer-test-multi-anchors.p/integration-test-common_integration-test-common.c.o
+[517/828] Compiling C object test/layer-test-set-anchor-normalizes-booleans.p/layer-tests_test-set-anchor-normalizes-booleans.c.o
+[518/828] Compiling C object test/layer-test-set-margin.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[519/828] Compiling C object test/layer-test-set-margin.p/meson-generated_xdg-shell.c.o
+[520/828] Compiling C object test/layer-test-set-anchor-normalizes-booleans.p/integration-test-common_integration-test-common.c.o
+[521/828] Compiling C object test/layer-test-set-layer.p/layer-tests_test-set-layer.c.o
+[522/828] Compiling C object test/layer-test-set-margin.p/meson-generated_ext-session-lock-v1.c.o
+[523/828] Compiling C object test/layer-test-set-layer.p/integration-test-common_integration-test-common.c.o
+[524/828] Compiling C object test/layer-test-set-margin.p/meson-generated_xdg-dialog-v1.c.o
+[525/828] Compiling C object test/layer-test-get-margin.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[526/828] Compiling C object test/layer-test-get-margin.p/meson-generated_xdg-shell.c.o
+[527/828] Compiling C object test/layer-test-get-margin.p/meson-generated_ext-session-lock-v1.c.o
+[528/828] Compiling C object test/layer-test-get-margin.p/meson-generated_xdg-dialog-v1.c.o
+[529/828] Compiling C object test/layer-test-get-layer.p/layer-tests_test-get-layer.c.o
+[530/828] Compiling C object test/layer-test-uses-widget-size.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[531/828] Compiling C object test/layer-test-uses-widget-size.p/meson-generated_xdg-shell.c.o
+[532/828] Compiling C object test/layer-test-get-layer.p/integration-test-common_integration-test-common.c.o
+[533/828] Compiling C object test/layer-test-uses-widget-size.p/meson-generated_ext-session-lock-v1.c.o
+[534/828] Compiling C object test/layer-test-uses-widget-size.p/meson-generated_xdg-dialog-v1.c.o
+[535/828] Compiling C object test/layer-test-set-margin.p/integration-test-common_integration-test-common.c.o
+[536/828] Compiling C object test/layer-test-set-default-size.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[537/828] Compiling C object test/layer-test-get-margin.p/integration-test-common_integration-test-common.c.o
+[538/828] Compiling C object test/layer-test-set-margin.p/layer-tests_test-set-margin.c.o
+[539/828] Compiling C object test/layer-test-set-default-size.p/meson-generated_xdg-shell.c.o
+[540/828] Compiling C object test/layer-test-set-default-size.p/meson-generated_ext-session-lock-v1.c.o
+[541/828] Compiling C object test/layer-test-set-default-size.p/meson-generated_xdg-dialog-v1.c.o
+[542/828] Compiling C object test/layer-test-get-margin.p/layer-tests_test-get-margin.c.o
+[543/828] Compiling C object test/layer-test-adapts-to-screen-size.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[544/828] Compiling C object test/layer-test-adapts-to-screen-size.p/meson-generated_xdg-shell.c.o
+[545/828] Compiling C object test/layer-test-adapts-to-screen-size.p/meson-generated_ext-session-lock-v1.c.o
+[546/828] Compiling C object test/layer-test-adapts-to-screen-size.p/meson-generated_xdg-dialog-v1.c.o
+[547/828] Compiling C object test/layer-test-uses-widget-size.p/layer-tests_test-uses-widget-size.c.o
+[548/828] Compiling C object test/layer-test-auto-exclusive-zone-no-margin.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[549/828] Compiling C object test/layer-test-auto-exclusive-zone-no-margin.p/meson-generated_xdg-shell.c.o
+[550/828] Compiling C object test/layer-test-auto-exclusive-zone-no-margin.p/meson-generated_ext-session-lock-v1.c.o
+[551/828] Compiling C object test/layer-test-uses-widget-size.p/integration-test-common_integration-test-common.c.o
+[552/828] Compiling C object test/layer-test-auto-exclusive-zone-no-margin.p/meson-generated_xdg-dialog-v1.c.o
+[553/828] Compiling C object test/layer-test-set-default-size.p/layer-tests_test-set-default-size.c.o
+[554/828] Compiling C object test/layer-test-set-default-size.p/integration-test-common_integration-test-common.c.o
+[555/828] Compiling C object test/layer-test-auto-exclusive-zone-with-margin.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[556/828] Compiling C object test/layer-test-auto-exclusive-zone-with-margin.p/meson-generated_xdg-shell.c.o
+[557/828] Compiling C object test/layer-test-adapts-to-screen-size.p/integration-test-common_integration-test-common.c.o
+[558/828] Compiling C object test/layer-test-auto-exclusive-zone-with-margin.p/meson-generated_ext-session-lock-v1.c.o
+[559/828] Compiling C object test/layer-test-auto-exclusive-zone-with-margin.p/meson-generated_xdg-dialog-v1.c.o
+[560/828] Compiling C object test/layer-test-auto-exclusive-zone-weird-bool-values.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[561/828] Compiling C object test/layer-test-auto-exclusive-zone-weird-bool-values.p/meson-generated_xdg-shell.c.o
+[562/828] Compiling C object test/layer-test-auto-exclusive-zone-weird-bool-values.p/meson-generated_ext-session-lock-v1.c.o
+[563/828] Compiling C object test/layer-test-adapts-to-screen-size.p/layer-tests_test-adapts-to-screen-size.c.o
+[564/828] Compiling C object test/layer-test-auto-exclusive-zone-weird-bool-values.p/meson-generated_xdg-dialog-v1.c.o
+[565/828] Compiling C object test/layer-test-auto-exclusive-zone-no-margin.p/integration-test-common_integration-test-common.c.o
+[566/828] Compiling C object test/layer-test-get-explicit-exclusive-zone.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[567/828] Compiling C object test/layer-test-auto-exclusive-zone-no-margin.p/layer-tests_test-auto-exclusive-zone-no-margin.c.o
+[568/828] Compiling C object test/layer-test-get-explicit-exclusive-zone.p/meson-generated_xdg-shell.c.o
+[569/828] Compiling C object test/layer-test-get-explicit-exclusive-zone.p/meson-generated_ext-session-lock-v1.c.o
+[570/828] Compiling C object test/layer-test-get-explicit-exclusive-zone.p/meson-generated_xdg-dialog-v1.c.o
+[571/828] Compiling C object test/layer-test-auto-exclusive-zone-with-margin.p/layer-tests_test-auto-exclusive-zone-with-margin.c.o
+[572/828] Compiling C object test/layer-test-get-auto-exclusive-zone.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[573/828] Compiling C object test/layer-test-auto-exclusive-zone-weird-bool-values.p/integration-test-common_integration-test-common.c.o
+[574/828] Compiling C object test/layer-test-get-auto-exclusive-zone.p/meson-generated_xdg-shell.c.o
+[575/828] Compiling C object test/layer-test-auto-exclusive-zone-with-margin.p/integration-test-common_integration-test-common.c.o
+[576/828] Compiling C object test/layer-test-get-auto-exclusive-zone.p/meson-generated_ext-session-lock-v1.c.o
+[577/828] Compiling C object test/layer-test-auto-exclusive-zone-weird-bool-values.p/layer-tests_test-auto-exclusive-zone-weird-bool-values.c.o
+[578/828] Compiling C object test/layer-test-get-auto-exclusive-zone.p/meson-generated_xdg-dialog-v1.c.o
+[579/828] Compiling C object test/layer-test-exclusive-zone-below-negative-1.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[580/828] Compiling C object test/layer-test-exclusive-zone-below-negative-1.p/meson-generated_ext-session-lock-v1.c.o
+[581/828] Compiling C object test/layer-test-exclusive-zone-below-negative-1.p/meson-generated_xdg-shell.c.o
+[582/828] Compiling C object test/layer-test-exclusive-zone-below-negative-1.p/meson-generated_xdg-dialog-v1.c.o
+[583/828] Compiling C object test/layer-test-get-explicit-exclusive-zone.p/integration-test-common_integration-test-common.c.o
+[584/828] Compiling C object test/layer-test-layer-surface-popup.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[585/828] Compiling C object test/layer-test-get-explicit-exclusive-zone.p/layer-tests_test-get-explicit-exclusive-zone.c.o
+[586/828] Compiling C object test/layer-test-layer-surface-popup.p/meson-generated_xdg-shell.c.o
+[587/828] Compiling C object test/layer-test-layer-surface-popup.p/meson-generated_ext-session-lock-v1.c.o
+[588/828] Compiling C object test/layer-test-layer-surface-popup.p/meson-generated_xdg-dialog-v1.c.o
+[589/828] Compiling C object test/layer-test-get-auto-exclusive-zone.p/layer-tests_test-get-auto-exclusive-zone.c.o
+[590/828] Compiling C object test/layer-test-exclusive-zone-below-negative-1.p/integration-test-common_integration-test-common.c.o
+[591/828] Compiling C object test/layer-test-layer-surface-click-activated-popup.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[592/828] Compiling C object test/layer-test-exclusive-zone-below-negative-1.p/layer-tests_test-exclusive-zone-below-negative-1.c.o
+[593/828] Compiling C object test/layer-test-layer-surface-click-activated-popup.p/meson-generated_ext-session-lock-v1.c.o
+[594/828] Compiling C object test/layer-test-layer-surface-click-activated-popup.p/meson-generated_xdg-shell.c.o
+[595/828] Compiling C object test/layer-test-layer-surface-click-activated-popup.p/meson-generated_xdg-dialog-v1.c.o
+[596/828] Compiling C object test/layer-test-get-auto-exclusive-zone.p/integration-test-common_integration-test-common.c.o
+[597/828] Compiling C object test/layer-test-xdg-toplevel-popup-with-layer-surface.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[598/828] Compiling C object test/layer-test-xdg-toplevel-popup-with-layer-surface.p/meson-generated_xdg-shell.c.o
+[599/828] Compiling C object test/layer-test-xdg-toplevel-popup-with-layer-surface.p/meson-generated_xdg-dialog-v1.c.o
+[600/828] Compiling C object test/layer-test-xdg-toplevel-popup-with-layer-surface.p/meson-generated_ext-session-lock-v1.c.o
+[601/828] Compiling C object test/layer-test-layer-surface-click-activated-popup.p/layer-tests_test-layer-surface-click-activated-popup.c.o
+[602/828] Compiling C object test/layer-test-layer-surface-popup.p/integration-test-common_integration-test-common.c.o
+[603/828] Compiling C object test/layer-test-layer-surface-click-activated-popup.p/integration-test-common_integration-test-common.c.o
+[604/828] Compiling C object test/layer-test-xdg-toplevel-popup-without-layer-surface.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[605/828] Compiling C object test/layer-test-xdg-toplevel-popup-without-layer-surface.p/meson-generated_xdg-shell.c.o
+[606/828] Compiling C object test/layer-test-xdg-toplevel-popup-without-layer-surface.p/meson-generated_ext-session-lock-v1.c.o
+[607/828] Compiling C object test/layer-test-xdg-toplevel-popup-without-layer-surface.p/meson-generated_xdg-dialog-v1.c.o
+[608/828] Compiling C object test/layer-test-layer-surface-popup.p/layer-tests_test-layer-surface-popup.c.o
+[609/828] Compiling C object test/layer-test-xdg-toplevel-popup-with-layer-surface.p/layer-tests_test-xdg-toplevel-popup-with-layer-surface.c.o
+[610/828] Compiling C object test/layer-test-close-layer-surface.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[611/828] Compiling C object test/layer-test-close-layer-surface.p/meson-generated_xdg-shell.c.o
+[612/828] Compiling C object test/layer-test-close-layer-surface.p/meson-generated_xdg-dialog-v1.c.o
+[613/828] Compiling C object test/layer-test-close-layer-surface.p/meson-generated_ext-session-lock-v1.c.o
+[614/828] Compiling C object test/layer-test-xdg-toplevel-popup-with-layer-surface.p/integration-test-common_integration-test-common.c.o
+[615/828] Compiling C object test/layer-test-get-namespace-default.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[616/828] Compiling C object test/layer-test-get-namespace-default.p/meson-generated_xdg-shell.c.o
+[617/828] Compiling C object test/layer-test-get-namespace-default.p/meson-generated_xdg-dialog-v1.c.o
+[618/828] Compiling C object test/layer-test-get-namespace-default.p/meson-generated_ext-session-lock-v1.c.o
+[619/828] Compiling C object test/layer-test-xdg-toplevel-popup-without-layer-surface.p/layer-tests_test-xdg-toplevel-popup-without-layer-surface.c.o
+[620/828] Compiling C object test/layer-test-xdg-toplevel-popup-without-layer-surface.p/integration-test-common_integration-test-common.c.o
+[621/828] Compiling C object test/layer-test-get-namespace-on-non-layer-window.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[622/828] Compiling C object test/layer-test-get-namespace-on-non-layer-window.p/meson-generated_xdg-shell.c.o
+[623/828] Compiling C object test/layer-test-get-namespace-on-non-layer-window.p/meson-generated_ext-session-lock-v1.c.o
+[624/828] Compiling C object test/layer-test-get-namespace-default.p/layer-tests_test-get-namespace-default.c.o
+[625/828] Compiling C object test/layer-test-get-namespace-on-non-layer-window.p/meson-generated_xdg-dialog-v1.c.o
+[626/828] Compiling C object test/layer-test-close-layer-surface.p/layer-tests_test-close-layer-surface.c.o
+[627/828] Compiling C object test/layer-test-get-namespace-custom-namespace.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[628/828] Compiling C object test/layer-test-get-namespace-custom-namespace.p/meson-generated_xdg-shell.c.o
+[629/828] Compiling C object test/layer-test-close-layer-surface.p/integration-test-common_integration-test-common.c.o
+[630/828] Compiling C object test/layer-test-get-namespace-custom-namespace.p/meson-generated_xdg-dialog-v1.c.o
+[631/828] Compiling C object test/layer-test-get-namespace-custom-namespace.p/meson-generated_ext-session-lock-v1.c.o
+[632/828] Compiling C object test/layer-test-set-keyboard-mode.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[633/828] Compiling C object test/layer-test-set-keyboard-mode.p/meson-generated_xdg-shell.c.o
+[634/828] Compiling C object test/layer-test-set-keyboard-mode.p/meson-generated_ext-session-lock-v1.c.o
+[635/828] Compiling C object test/layer-test-get-namespace-default.p/integration-test-common_integration-test-common.c.o
+[636/828] Compiling C object test/layer-test-set-keyboard-mode.p/meson-generated_xdg-dialog-v1.c.o
+[637/828] Compiling C object test/layer-test-get-namespace-on-non-layer-window.p/integration-test-common_integration-test-common.c.o
+[638/828] Compiling C object test/layer-test-get-keyboard-mode.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[639/828] Compiling C object test/layer-test-get-namespace-on-non-layer-window.p/layer-tests_test-get-namespace-on-non-layer-window.c.o
+[640/828] Compiling C object test/layer-test-get-keyboard-mode.p/meson-generated_xdg-shell.c.o
+[641/828] Compiling C object test/layer-test-get-keyboard-mode.p/meson-generated_ext-session-lock-v1.c.o
+[642/828] Compiling C object test/layer-test-get-keyboard-mode.p/meson-generated_xdg-dialog-v1.c.o
+[643/828] Compiling C object test/layer-test-set-keyboard-mode.p/layer-tests_test-set-keyboard-mode.c.o
+[644/828] Compiling C object test/layer-test-get-namespace-custom-namespace.p/layer-tests_test-get-namespace-custom-namespace.c.o
+[645/828] Compiling C object test/layer-test-get-monitor.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[646/828] Compiling C object test/layer-test-get-monitor.p/meson-generated_xdg-shell.c.o
+[647/828] Compiling C object test/layer-test-get-monitor.p/meson-generated_ext-session-lock-v1.c.o
+[648/828] Compiling C object test/layer-test-get-monitor.p/meson-generated_xdg-dialog-v1.c.o
+[649/828] Compiling C object test/layer-test-get-namespace-custom-namespace.p/integration-test-common_integration-test-common.c.o
+[650/828] Compiling C object test/layer-test-set-keyboard-mode.p/integration-test-common_integration-test-common.c.o
+[651/828] Compiling C object test/layer-test-set-monitor.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[652/828] Compiling C object test/layer-test-set-monitor.p/meson-generated_xdg-shell.c.o
+[653/828] Compiling C object test/layer-test-set-monitor.p/meson-generated_ext-session-lock-v1.c.o
+[654/828] Compiling C object test/layer-test-set-monitor.p/meson-generated_xdg-dialog-v1.c.o
+[655/828] Compiling C object test/layer-test-get-keyboard-mode.p/integration-test-common_integration-test-common.c.o
+[656/828] Compiling C object test/layer-test-monitor-removed.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[657/828] Compiling C object test/layer-test-get-keyboard-mode.p/layer-tests_test-get-keyboard-mode.c.o
+[658/828] Compiling C object test/layer-test-monitor-removed.p/meson-generated_xdg-shell.c.o
+[659/828] Compiling C object test/layer-test-monitor-removed.p/meson-generated_ext-session-lock-v1.c.o
+[660/828] Compiling C object test/layer-test-monitor-removed.p/meson-generated_xdg-dialog-v1.c.o
+[661/828] Compiling C object test/layer-test-get-monitor.p/layer-tests_test-get-monitor.c.o
+[662/828] Compiling C object test/layer-test-only-monitor-removed.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[663/828] Compiling C object test/layer-test-only-monitor-removed.p/meson-generated_xdg-shell.c.o
+[664/828] Compiling C object test/layer-test-only-monitor-removed.p/meson-generated_ext-session-lock-v1.c.o
+[665/828] Compiling C object test/layer-test-only-monitor-removed.p/meson-generated_xdg-dialog-v1.c.o
+[666/828] Compiling C object test/layer-test-get-monitor.p/integration-test-common_integration-test-common.c.o
+[667/828] Compiling C object test/layer-test-set-monitor.p/integration-test-common_integration-test-common.c.o
+[668/828] Compiling C object test/layer-test-set-monitor.p/layer-tests_test-set-monitor.c.o
+[669/828] Compiling C object test/layer-test-respect-close.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[670/828] Compiling C object test/layer-test-respect-close.p/meson-generated_xdg-shell.c.o
+[671/828] Compiling C object test/layer-test-respect-close.p/meson-generated_ext-session-lock-v1.c.o
+[672/828] Compiling C object test/layer-test-respect-close.p/meson-generated_xdg-dialog-v1.c.o
+[673/828] Compiling C object test/layer-test-monitor-removed.p/layer-tests_test-monitor-removed.c.o
+[674/828] Compiling C object test/layer-test-create-xdg-toplevel.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[675/828] Compiling C object test/layer-test-create-xdg-toplevel.p/meson-generated_xdg-shell.c.o
+[676/828] Compiling C object test/layer-test-create-xdg-toplevel.p/meson-generated_ext-session-lock-v1.c.o
+[677/828] Compiling C object test/layer-test-create-xdg-toplevel.p/meson-generated_xdg-dialog-v1.c.o
+[678/828] Compiling C object test/layer-test-monitor-removed.p/integration-test-common_integration-test-common.c.o
+[679/828] Compiling C object test/layer-test-only-monitor-removed.p/integration-test-common_integration-test-common.c.o
+[680/828] Compiling C object test/layer-test-only-monitor-removed.p/layer-tests_test-only-monitor-removed.c.o
+[681/828] Compiling C object test/layer-test-respect-close.p/layer-tests_test-respect-close.c.o
+[682/828] Compiling C object test/layer-test-hide-and-show.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[683/828] Compiling C object test/layer-test-hide-and-show.p/meson-generated_xdg-shell.c.o
+[684/828] Compiling C object test/layer-test-hide-and-show.p/meson-generated_xdg-dialog-v1.c.o
+[685/828] Compiling C object test/layer-test-respect-close.p/integration-test-common_integration-test-common.c.o
+[686/828] Compiling C object test/layer-test-hide-and-show.p/meson-generated_ext-session-lock-v1.c.o
+[687/828] Compiling C object test/layer-test-init-after-window-created.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[688/828] Compiling C object test/layer-test-init-after-window-created.p/meson-generated_xdg-shell.c.o
+[689/828] Compiling C object test/layer-test-init-after-window-created.p/meson-generated_ext-session-lock-v1.c.o
+[690/828] Compiling C object test/layer-test-init-after-window-created.p/meson-generated_xdg-dialog-v1.c.o
+[691/828] Compiling C object test/layer-test-create-xdg-toplevel.p/layer-tests_test-create-xdg-toplevel.c.o
+[692/828] Compiling C object test/layer-test-configure-delay.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[693/828] Compiling C object test/layer-test-configure-delay.p/meson-generated_xdg-shell.c.o
+[694/828] Compiling C object test/layer-test-create-xdg-toplevel.p/integration-test-common_integration-test-common.c.o
+[695/828] Compiling C object test/layer-test-hide-and-show.p/layer-tests_test-hide-and-show.c.o
+[696/828] Compiling C object test/layer-test-configure-delay.p/meson-generated_ext-session-lock-v1.c.o
+[697/828] Compiling C object test/layer-test-configure-delay.p/meson-generated_xdg-dialog-v1.c.o
+[698/828] Compiling C object test/layer-test-hide-and-show.p/integration-test-common_integration-test-common.c.o
+[699/828] Compiling C object test/layer-test-popup-configure-delay.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[700/828] Compiling C object test/layer-test-popup-configure-delay.p/meson-generated_xdg-shell.c.o
+[701/828] Compiling C object test/layer-test-popup-configure-delay.p/meson-generated_ext-session-lock-v1.c.o
+[702/828] Compiling C object test/layer-test-popup-configure-delay.p/meson-generated_xdg-dialog-v1.c.o
+[703/828] Compiling C object test/layer-test-init-after-window-created.p/layer-tests_test-init-after-window-created.c.o
+[704/828] Compiling C object test/layer-test-init-after-window-created.p/integration-test-common_integration-test-common.c.o
+[705/828] Compiling C object test/lock-test-lock-can-be-created-without-locking.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[706/828] Compiling C object test/lock-test-lock-can-be-created-without-locking.p/meson-generated_ext-session-lock-v1.c.o
+[707/828] Compiling C object test/lock-test-lock-can-be-created-without-locking.p/meson-generated_xdg-shell.c.o
+[708/828] Compiling C object test/lock-test-lock-can-be-created-without-locking.p/meson-generated_xdg-dialog-v1.c.o
+[709/828] Compiling C object test/layer-test-configure-delay.p/integration-test-common_integration-test-common.c.o
+[710/828] Compiling C object test/layer-test-configure-delay.p/layer-tests_test-configure-delay.c.o
+[711/828] Compiling C object test/lock-test-can-lock-display.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[712/828] Compiling C object test/lock-test-can-lock-display.p/meson-generated_xdg-shell.c.o
+[713/828] Compiling C object test/lock-test-can-lock-display.p/meson-generated_ext-session-lock-v1.c.o
+[714/828] Compiling C object test/layer-test-popup-configure-delay.p/integration-test-common_integration-test-common.c.o
+[715/828] Compiling C object test/lock-test-can-lock-display.p/meson-generated_xdg-dialog-v1.c.o
+[716/828] Compiling C object test/lock-test-lock-can-be-created-without-locking.p/lock-tests_test-lock-can-be-created-without-locking.c.o
+[717/828] Compiling C object test/layer-test-popup-configure-delay.p/layer-tests_test-popup-configure-delay.c.o
+[718/828] Compiling C object test/lock-test-can-relock-display.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[719/828] Compiling C object test/lock-test-can-relock-display.p/meson-generated_xdg-shell.c.o
+[720/828] Compiling C object test/lock-test-can-relock-display.p/meson-generated_ext-session-lock-v1.c.o
+[721/828] Compiling C object test/lock-test-can-relock-display.p/meson-generated_xdg-dialog-v1.c.o
+[722/828] Compiling C object test/lock-test-lock-can-be-created-without-locking.p/integration-test-common_integration-test-common.c.o
+[723/828] Compiling C object test/lock-test-can-reuse-lock-window.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[724/828] Compiling C object test/lock-test-can-reuse-lock-window.p/meson-generated_ext-session-lock-v1.c.o
+[725/828] Compiling C object test/lock-test-can-reuse-lock-window.p/meson-generated_xdg-shell.c.o
+[726/828] Compiling C object test/lock-test-can-reuse-lock-window.p/meson-generated_xdg-dialog-v1.c.o
+[727/828] Compiling C object test/lock-test-can-lock-display.p/lock-tests_test-can-lock-display.c.o
+[728/828] Compiling C object test/lock-test-can-relock-display.p/lock-tests_test-can-relock-display.c.o
+[729/828] Compiling C object test/lock-test-multiple-monitors.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[730/828] Compiling C object test/lock-test-multiple-monitors.p/meson-generated_xdg-shell.c.o
+[731/828] Compiling C object test/lock-test-multiple-monitors.p/meson-generated_ext-session-lock-v1.c.o
+[732/828] Compiling C object test/lock-test-multiple-monitors.p/meson-generated_xdg-dialog-v1.c.o
+[733/828] Compiling C object test/lock-test-can-lock-display.p/integration-test-common_integration-test-common.c.o
+[734/828] Compiling C object test/lock-test-monitors-changed-while-locked.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[735/828] Compiling C object test/lock-test-monitors-changed-while-locked.p/meson-generated_xdg-shell.c.o
+[736/828] Compiling C object test/lock-test-can-reuse-lock-window.p/lock-tests_test-can-reuse-lock-window.c.o
+[737/828] Compiling C object test/lock-test-monitors-changed-while-locked.p/meson-generated_ext-session-lock-v1.c.o
+[738/828] Compiling C object test/lock-test-monitors-changed-while-locked.p/meson-generated_xdg-dialog-v1.c.o
+[739/828] Compiling C object test/lock-test-can-reuse-lock-window.p/integration-test-common_integration-test-common.c.o
+[740/828] Compiling C object test/lock-test-can-relock-display.p/integration-test-common_integration-test-common.c.o
+[741/828] Compiling C object test/lock-test-monitors-changed-after-unlocked.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[742/828] Compiling C object test/lock-test-monitors-changed-after-unlocked.p/meson-generated_ext-session-lock-v1.c.o
+[743/828] Compiling C object test/lock-test-monitors-changed-after-unlocked.p/meson-generated_xdg-shell.c.o
+[744/828] Compiling C object test/lock-test-monitors-changed-after-unlocked.p/meson-generated_xdg-dialog-v1.c.o
+[745/828] Compiling C object test/lock-test-multiple-monitors.p/lock-tests_test-multiple-monitors.c.o
+[746/828] Compiling C object test/lock-test-multiple-monitors.p/integration-test-common_integration-test-common.c.o
+[747/828] Compiling C object test/lock-test-immediate-failure.p/meson-generated_xdg-shell.c.o
+[748/828] Compiling C object test/lock-test-immediate-failure.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[749/828] Compiling C object test/lock-test-immediate-failure.p/meson-generated_ext-session-lock-v1.c.o
+[750/828] Compiling C object test/lock-test-immediate-failure.p/meson-generated_xdg-dialog-v1.c.o
+[751/828] Compiling C object test/lock-test-monitors-changed-while-locked.p/lock-tests_test-monitors-changed-while-locked.c.o
+[752/828] Compiling C object test/lock-test-monitors-changed-while-locked.p/integration-test-common_integration-test-common.c.o
+[753/828] Compiling C object test/lock-test-async-failure.p/meson-generated_xdg-shell.c.o
+[754/828] Compiling C object test/lock-test-monitors-changed-after-unlocked.p/lock-tests_test-monitors-changed-after-unlocked.c.o
+[755/828] Compiling C object test/lock-test-async-failure.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[756/828] Compiling C object test/lock-test-async-failure.p/meson-generated_xdg-dialog-v1.c.o
+[757/828] Compiling C object test/lock-test-async-failure.p/meson-generated_ext-session-lock-v1.c.o
+[758/828] Compiling C object test/lock-test-popup-on-lock-screen.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[759/828] Compiling C object test/lock-test-monitors-changed-after-unlocked.p/integration-test-common_integration-test-common.c.o
+[760/828] Compiling C object test/lock-test-popup-on-lock-screen.p/meson-generated_xdg-shell.c.o
+[761/828] Compiling C object test/lock-test-popup-on-lock-screen.p/meson-generated_xdg-dialog-v1.c.o
+[762/828] Compiling C object test/lock-test-popup-on-lock-screen.p/meson-generated_ext-session-lock-v1.c.o
+[763/828] Compiling C object test/lock-test-immediate-failure.p/lock-tests_test-immediate-failure.c.o
+[764/828] Compiling C object test/lock-test-works-without-monitor-signal.p/meson-generated_wlr-layer-shell-unstable-v1.c.o
+[765/828] Compiling C object test/lock-test-works-without-monitor-signal.p/meson-generated_xdg-shell.c.o
+[766/828] Compiling C object test/lock-test-works-without-monitor-signal.p/meson-generated_ext-session-lock-v1.c.o
+[767/828] Compiling C object test/lock-test-async-failure.p/integration-test-common_integration-test-common.c.o
+[768/828] Compiling C object test/lock-test-works-without-monitor-signal.p/meson-generated_xdg-dialog-v1.c.o
+[769/828] Compiling C object test/lock-test-immediate-failure.p/integration-test-common_integration-test-common.c.o
+[770/828] Linking target src/liblayer-shell-preload.so
+[771/828] Linking target test/mock-server/mock-server
+[772/828] Compiling C object test/lock-test-async-failure.p/lock-tests_test-async-failure.c.o
+[773/828] Compiling C object test/lock-test-popup-on-lock-screen.p/lock-tests_test-popup-on-lock-screen.c.o
+[774/828] Compiling C object test/lock-test-popup-on-lock-screen.p/integration-test-common_integration-test-common.c.o
+[775/828] Linking target test/layer-test-is-supported-true
+[776/828] Linking target test/unit-tests/test-get-version
+[777/828] Compiling C object test/lock-test-works-without-monitor-signal.p/integration-test-common_integration-test-common.c.o
+[778/828] Linking target test/layer-test-layer-surface-not-created
+[779/828] Compiling C object test/lock-test-works-without-monitor-signal.p/lock-tests_test-works-without-monitor-signal.c.o
+[780/828] Linking target test/layer-test-single-anchors
+[781/828] Linking target test/layer-test-set-anchor-normalizes-booleans
+[782/828] Linking target test/layer-test-creation-properties
+[783/828] Linking target test/layer-test-is-layer-window
+[784/828] Linking target test/layer-test-multi-anchors
+[785/828] Linking target test/layer-test-set-layer
+[786/828] Linking target test/layer-test-set-margin
+[787/828] Linking target test/layer-test-get-layer
+[788/828] Linking target test/layer-test-get-margin
+[789/828] Linking target test/layer-test-uses-widget-size
+[790/828] Linking target test/layer-test-auto-exclusive-zone-no-margin
+[791/828] Linking target test/layer-test-auto-exclusive-zone-with-margin
+[792/828] Linking target test/layer-test-set-default-size
+[793/828] Linking target test/layer-test-adapts-to-screen-size
+[794/828] Linking target test/layer-test-get-auto-exclusive-zone
+[795/828] Linking target test/layer-test-auto-exclusive-zone-weird-bool-values
+[796/828] Linking target test/layer-test-get-explicit-exclusive-zone
+[797/828] Linking target test/layer-test-exclusive-zone-below-negative-1
+[798/828] Linking target test/layer-test-layer-surface-click-activated-popup
+[799/828] Linking target test/layer-test-layer-surface-popup
+[800/828] Linking target test/layer-test-get-namespace-on-non-layer-window
+[801/828] Linking target test/layer-test-xdg-toplevel-popup-with-layer-surface
+[802/828] Linking target test/layer-test-xdg-toplevel-popup-without-layer-surface
+[803/828] Linking target test/layer-test-get-namespace-custom-namespace
+[804/828] Linking target test/layer-test-get-namespace-default
+[805/828] Linking target test/layer-test-close-layer-surface
+[806/828] Linking target test/layer-test-set-monitor
+[807/828] Linking target test/layer-test-get-monitor
+[808/828] Linking target test/layer-test-get-keyboard-mode
+[809/828] Linking target test/layer-test-set-keyboard-mode
+[810/828] Linking target test/layer-test-only-monitor-removed
+[811/828] Linking target test/layer-test-monitor-removed
+[812/828] Linking target test/layer-test-respect-close
+[813/828] Linking target test/layer-test-popup-configure-delay
+[814/828] Linking target test/layer-test-create-xdg-toplevel
+[815/828] Linking target test/lock-test-lock-can-be-created-without-locking
+[816/828] Linking target test/layer-test-hide-and-show
+[817/828] Linking target test/layer-test-configure-delay
+[818/828] Linking target test/layer-test-init-after-window-created
+[819/828] Linking target test/lock-test-can-lock-display
+[820/828] Linking target test/lock-test-multiple-monitors
+[821/828] Linking target test/lock-test-can-relock-display
+[822/828] Linking target test/lock-test-can-reuse-lock-window
+[823/828] Linking target test/lock-test-monitors-changed-after-unlocked
+[824/828] Linking target test/lock-test-async-failure
+[825/828] Linking target test/lock-test-monitors-changed-while-locked
+[826/828] Linking target test/lock-test-immediate-failure
+[827/828] Linking target test/lock-test-popup-on-lock-screen
+[828/828] Linking target test/lock-test-works-without-monitor-signal
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /usr/bin/ninja -C /home/asena/asena/target/backports/build-layer-shell-1.3.0
+ninja: Entering directory `/home/asena/asena/target/backports/build-layer-shell-1.3.0'
+ninja: no work to do.
+ 1/53 unit-test-get-version                               OK               0.05s
+ 2/53 layer-test-is-supported-true                        OK               0.31s
+ 3/53 layer-test-layer-surface-not-created                OK               0.38s
+ 4/53 layer-test-creation-properties                      OK               0.50s
+ 5/53 layer-test-is-layer-window                          OK               0.49s
+ 6/53 layer-test-set-anchor-normalizes-booleans           OK               0.36s
+ 7/53 layer-test-single-anchors                           OK               0.67s
+ 8/53 layer-test-get-layer                                OK               0.32s
+ 9/53 layer-test-multi-anchors                            OK               0.82s
+10/53 layer-test-set-layer                                OK               0.72s
+11/53 layer-test-set-margin                               OK               0.47s
+12/53 layer-test-get-margin                               OK               0.47s
+13/53 layer-test-uses-widget-size                         OK               0.83s
+14/53 layer-test-set-default-size                         OK               0.85s
+15/53 layer-test-adapts-to-screen-size                    OK               0.82s
+16/53 layer-test-auto-exclusive-zone-weird-bool-values    OK               0.32s
+17/53 layer-test-auto-exclusive-zone-no-margin            OK               0.82s
+18/53 layer-test-auto-exclusive-zone-with-margin          OK               0.47s
+19/53 layer-test-get-explicit-exclusive-zone              OK               0.32s
+20/53 layer-test-exclusive-zone-below-negative-1          OK               0.39s
+21/53 layer-test-get-auto-exclusive-zone                  OK               0.62s
+22/53 layer-test-layer-surface-popup                      OK               0.62s
+23/53 layer-test-layer-surface-click-activated-popup      OK               0.58s
+24/53 layer-test-xdg-toplevel-popup-with-layer-surface    OK               0.66s
+25/53 layer-test-get-namespace-default                    OK               0.40s
+26/53 layer-test-xdg-toplevel-popup-without-layer-surface OK               0.58s
+27/53 layer-test-close-layer-surface                      OK               0.49s
+28/53 layer-test-get-namespace-on-non-layer-window        OK               0.32s
+29/53 layer-test-get-namespace-custom-namespace           OK               0.39s
+30/53 layer-test-get-keyboard-mode                        OK               0.35s
+31/53 layer-test-set-keyboard-mode                        OK               0.48s
+32/53 layer-test-get-monitor                              OK               0.37s
+33/53 layer-test-monitor-removed                          OK               0.48s
+34/53 layer-test-only-monitor-removed                     OK               0.58s
+35/53 layer-test-set-monitor                              OK               0.73s
+36/53 layer-test-respect-close                            OK               0.59s
+37/53 layer-test-create-xdg-toplevel                      OK               0.57s
+38/53 layer-test-init-after-window-created                OK               0.48s
+39/53 layer-test-hide-and-show                            OK               0.64s
+40/53 layer-test-configure-delay                          OK               0.65s
+41/53 lock-test-lock-can-be-created-without-locking       OK               0.32s
+42/53 layer-test-popup-configure-delay                    OK               0.82s
+43/53 lock-test-can-lock-display                          OK               0.57s
+44/53 lock-test-can-relock-display                        OK               0.72s
+45/53 lock-test-can-reuse-lock-window                     OK               0.73s
+46/53 lock-test-multiple-monitors                         OK               0.58s
+47/53 lock-test-immediate-failure                         OK               0.47s
+48/53 lock-test-monitors-changed-while-locked             OK               0.98s
+49/53 lock-test-monitors-changed-after-unlocked           OK               0.71s
+50/53 check-all-tests-are-in-meson                        OK               0.09s
+51/53 lock-test-async-failure                             OK               0.57s
+52/53 lock-test-works-without-monitor-signal              OK               0.48s
+53/53 lock-test-popup-on-lock-screen                      OK               0.72s
+
+Ok:                 53  
+Expected Fail:      0   
+Fail:               0   
+Unexpected Pass:    0   
+Skipped:            0   
+Timeout:            0   
+
+Full log written to /home/asena/asena/target/backports/build-layer-shell-1.3.0/meson-logs/testlog.txt
+ninja: Entering directory `/home/asena/asena/target/backports/build-layer-shell-1.3.0'
+ninja: no work to do.
+Installing src/libgtk4-layer-shell.so.1.3.0 to /home/asena/asena/target/native/gtk4-layer-shell-1.3.0/lib
+Installing src/liblayer-shell-preload.so to /home/asena/asena/target/native/gtk4-layer-shell-1.3.0/lib
+Installing /home/asena/asena/target/backports/gtk4-layer-shell-1.3.0/include/gtk4-layer-shell.h to /home/asena/asena/target/native/gtk4-layer-shell-1.3.0/include/gtk4-layer-shell
+Installing /home/asena/asena/target/backports/gtk4-layer-shell-1.3.0/include/gtk4-session-lock.h to /home/asena/asena/target/native/gtk4-layer-shell-1.3.0/include/gtk4-layer-shell
+Installing /home/asena/asena/target/backports/build-layer-shell-1.3.0/meson-private/gtk4-layer-shell-0.pc to /home/asena/asena/target/native/gtk4-layer-shell-1.3.0/lib/pkgconfig
+Installing symlink pointing to libgtk4-layer-shell.so.1.3.0 to /home/asena/asena/target/native/gtk4-layer-shell-1.3.0/lib/libgtk4-layer-shell.so.0
+Installing symlink pointing to libgtk4-layer-shell.so.0 to /home/asena/asena/target/native/gtk4-layer-shell-1.3.0/lib/libgtk4-layer-shell.so
+Native backport is isolated. Source scripts/native-env.sh before building or launching.

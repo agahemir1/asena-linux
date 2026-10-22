@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/asenalinux">
+    <file>style/shell.css</file>
+    <file>ui/lock.ui</file>
+    <file>ui/greeter.ui</file>
+    <file>ui/polkit.ui</file>
+    <file>ui/settings.ui</file>
+  </gresource>
+</gresources>

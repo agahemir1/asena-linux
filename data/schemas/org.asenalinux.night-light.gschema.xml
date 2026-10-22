@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="asena">
+  <schema id="org.asenalinux.night-light" path="/org/asenalinux/night-light/">
+    <key name="enabled" type="b"><default>false</default><summary>Night light</summary></key>
+    <key name="temperature" type="u"><range min="1000" max="6500"/><default>3500</default><summary>Color temperature</summary></key>
+  </schema>
+</schemalist>

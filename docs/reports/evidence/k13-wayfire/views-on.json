@@ -1,0 +1,237 @@
+[
+ {
+  "activated": false,
+  "app-id": "asena-background",
+  "base-geometry": {
+   "height": 720,
+   "width": 1280,
+   "x": 0,
+   "y": 0
+  },
+  "bbox": {
+   "height": 720,
+   "width": 1280,
+   "x": 0,
+   "y": 0
+  },
+  "focusable": true,
+  "fullscreen": false,
+  "geometry": {
+   "height": 720,
+   "width": 1280,
+   "x": 0,
+   "y": 0
+  },
+  "id": 5,
+  "last-focus-timestamp": 0,
+  "layer": "background",
+  "mapped": true,
+  "max-size": {
+   "height": 0,
+   "width": 0
+  },
+  "min-size": {
+   "height": 0,
+   "width": 0
+  },
+  "minimized": false,
+  "output-id": 1,
+  "output-name": "HEADLESS-2",
+  "parent": -1,
+  "pid": 46055,
+  "role": "desktop-environment",
+  "sticky": false,
+  "tiled-edges": 0,
+  "title": "layer-shell",
+  "type": "background",
+  "wset-index": 18446744073709551615
+ },
+ {
+  "activated": false,
+  "app-id": "asena-panel",
+  "base-geometry": {
+   "height": 48,
+   "width": 1280,
+   "x": 0,
+   "y": 672
+  },
+  "bbox": {
+   "height": 48,
+   "width": 1280,
+   "x": 0,
+   "y": 672
+  },
+  "focusable": true,
+  "fullscreen": false,
+  "geometry": {
+   "height": 48,
+   "width": 1280,
+   "x": 0,
+   "y": 672
+  },
+  "id": 6,
+  "last-focus-timestamp": 0,
+  "layer": "top",
+  "mapped": true,
+  "max-size": {
+   "height": 0,
+   "width": 0
+  },
+  "min-size": {
+   "height": 0,
+   "width": 0
+  },
+  "minimized": false,
+  "output-id": 1,
+  "output-name": "HEADLESS-2",
+  "parent": -1,
+  "pid": 46055,
+  "role": "desktop-environment",
+  "sticky": false,
+  "tiled-edges": 0,
+  "title": "layer-shell",
+  "type": "panel",
+  "wset-index": 18446744073709551615
+ },
+ {
+  "activated": false,
+  "app-id": "asena-background",
+  "base-geometry": {
+   "height": 360,
+   "width": 640,
+   "x": 0,
+   "y": 0
+  },
+  "bbox": {
+   "height": 360,
+   "width": 640,
+   "x": 0,
+   "y": 0
+  },
+  "focusable": true,
+  "fullscreen": false,
+  "geometry": {
+   "height": 360,
+   "width": 640,
+   "x": 0,
+   "y": 0
+  },
+  "id": 7,
+  "last-focus-timestamp": 0,
+  "layer": "background",
+  "mapped": true,
+  "max-size": {
+   "height": 0,
+   "width": 0
+  },
+  "min-size": {
+   "height": 0,
+   "width": 0
+  },
+  "minimized": false,
+  "output-id": 3,
+  "output-name": "HEADLESS-1",
+  "parent": -1,
+  "pid": 46055,
+  "role": "desktop-environment",
+  "sticky": false,
+  "tiled-edges": 0,
+  "title": "layer-shell",
+  "type": "background",
+  "wset-index": 18446744073709551615
+ },
+ {
+  "activated": false,
+  "app-id": "asena-panel",
+  "base-geometry": {
+   "height": 48,
+   "width": 640,
+   "x": 0,
+   "y": 312
+  },
+  "bbox": {
+   "height": 48,
+   "width": 640,
+   "x": 0,
+   "y": 312
+  },
+  "focusable": true,
+  "fullscreen": false,
+  "geometry": {
+   "height": 48,
+   "width": 640,
+   "x": 0,
+   "y": 312
+  },
+  "id": 8,
+  "last-focus-timestamp": 0,
+  "layer": "top",
+  "mapped": true,
+  "max-size": {
+   "height": 0,
+   "width": 0
+  },
+  "min-size": {
+   "height": 0,
+   "width": 0
+  },
+  "minimized": false,
+  "output-id": 3,
+  "output-name": "HEADLESS-1",
+  "parent": -1,
+  "pid": 46055,
+  "role": "desktop-environment",
+  "sticky": false,
+  "tiled-edges": 0,
+  "title": "layer-shell",
+  "type": "panel",
+  "wset-index": 18446744073709551615
+ },
+ {
+  "activated": true,
+  "app-id": "asena-pattern",
+  "base-geometry": {
+   "height": 572,
+   "width": 1272,
+   "x": 4,
+   "y": 74
+  },
+  "bbox": {
+   "height": 610,
+   "width": 1280,
+   "x": 0,
+   "y": 40
+  },
+  "focusable": true,
+  "fullscreen": false,
+  "geometry": {
+   "height": 610,
+   "width": 1280,
+   "x": 0,
+   "y": 40
+  },
+  "id": 10,
+  "last-focus-timestamp": 3527151383429,
+  "layer": "workspace",
+  "mapped": true,
+  "max-size": {
+   "height": 0,
+   "width": 0
+  },
+  "min-size": {
+   "height": 13,
+   "width": 6
+  },
+  "minimized": false,
+  "output-id": 1,
+  "output-name": "HEADLESS-2",
+  "parent": -1,
+  "pid": 46191,
+  "role": "toplevel",
+  "sticky": false,
+  "tiled-edges": 0,
+  "title": "foot",
+  "type": "toplevel",
+  "wset-index": 1
+ }
+]

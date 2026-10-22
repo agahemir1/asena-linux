@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.asenalinux.Settings
+Exec=/usr/bin/asena-settings

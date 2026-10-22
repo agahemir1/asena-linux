@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Archive
+Name[tr]=Arşiv
+Comment=Open and extract archives
+Comment[tr]=Arşivleri açın ve çıkarın
+Keywords=zip;tar;extract;
+Keywords[tr]=zip;tar;çıkar;sıkıştır;
+Exec=asena-archive %F
+Icon=org.asenalinux.Archive
+Terminal=false
+Categories=Utility;Archiving;Compression;GTK;
+StartupNotify=true
+MimeType=application/zip;application/x-tar;application/x-compressed-tar;application/x-xz-compressed-tar;application/x-bzip-compressed-tar;application/x-7z-compressed;

@@ -1,0 +1,2 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.38s
+Greeter GUI protocol, cancel/retry, exit and username-only persistence passed. Real greetd/TTY login remains open.

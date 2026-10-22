@@ -1,0 +1,21 @@
+[package]
+name = "asena-player"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+asena-core.workspace = true
+asena-app.workspace = true
+asena-widgets.workspace = true
+adw.workspace = true
+gtk.workspace = true
+gio.workspace = true
+glib.workspace = true
+gettext-rs.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+
+[lints]
+workspace = true

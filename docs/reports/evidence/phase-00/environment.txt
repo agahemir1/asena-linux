@@ -1,0 +1,231 @@
+2026-10-19T02:54:12Z
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+VERSION_ID="13"
+VERSION="13 (trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13.7
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+Linux 6.12.113+deb13-cloud-amd64 x86_64 GNU/Linux
+/usr/bin/rustc
+/usr/bin/cargo
+rustc 1.85.1 (4eb161250 2025-03-15) (built from a source tarball)
+cargo 1.85.1 (d73d2caf9 2024-12-31)
+rustc 1.85.1 (4eb161250 2025-03-15) (built from a source tarball)
+4.18.6
+1.7.6
+1.0.4
+labwc 0.8.3
+labwc:
+  Installed: 0.8.3-1
+  Candidate: 0.8.3-1
+  Version table:
+ *** 0.8.3-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+libgtk-4-dev:
+  Installed: 4.18.6+ds-2
+  Candidate: 4.18.6+ds-2
+  Version table:
+ *** 4.18.6+ds-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+libadwaita-1-dev:
+  Installed: 1.7.6-1~deb13u1
+  Candidate: 1.7.6-1~deb13u1
+  Version table:
+ *** 1.7.6-1~deb13u1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+libgtk4-layer-shell-dev:
+  Installed: 1.0.4-2
+  Candidate: 1.0.4-2
+  Version table:
+ *** 1.0.4-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+rustc:
+  Installed: 1.85.1+dfsg1-1+deb13u1
+  Candidate: 1.85.1+dfsg1-1+deb13u1
+  Version table:
+     1.96.1+dfsg1-2~bpo13+1 100
+        100 mirror+file:/etc/apt/mirrors/debian.list trixie-backports/main amd64 Packages
+ *** 1.85.1+dfsg1-1+deb13u1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+cargo:
+  Installed: 1.85.1+dfsg1-1+deb13u1
+  Candidate: 1.85.1+dfsg1-1+deb13u1
+  Version table:
+     1.96.1+dfsg1-2~bpo13+1 100
+        100 mirror+file:/etc/apt/mirrors/debian.list trixie-backports/main amd64 Packages
+ *** 1.85.1+dfsg1-1+deb13u1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+greetd:
+  Installed: (none)
+  Candidate: 0.10.3-4
+  Version table:
+     0.10.3-7~bpo13+1 100
+        100 mirror+file:/etc/apt/mirrors/debian.list trixie-backports/main amd64 Packages
+     0.10.3-4 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+cage:
+  Installed: (none)
+  Candidate: 0.2.0-2
+  Version table:
+     0.2.0-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+xdg-desktop-portal-wlr:
+  Installed: 0.7.1-2
+  Candidate: 0.7.1-2
+  Version table:
+ *** 0.7.1-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+xdg-desktop-portal-gtk:
+  Installed: 1.15.3-1
+  Candidate: 1.15.3-1
+  Version table:
+ *** 1.15.3-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+blueprint-compiler:
+  Installed: 0.16.0-3
+  Candidate: 0.16.0-3
+  Version table:
+ *** 0.16.0-3 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+fonts-inter:
+  Installed: 4.1+ds-1
+  Candidate: 4.1+ds-1
+  Version table:
+ *** 4.1+ds-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+fonts-jetbrains-mono:
+  Installed: 2.304+ds-5
+  Candidate: 2.304+ds-5
+  Version table:
+ *** 2.304+ds-5 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+wlsunset:
+  Installed: 0.3.0-1
+  Candidate: 0.3.0-1
+  Version table:
+ *** 0.3.0-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+swayidle:
+  Installed: 1.8.0-1
+  Candidate: 1.8.0-1
+  Version table:
+ *** 1.8.0-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+grim:
+  Installed: 1.4.0+ds-2+b1
+  Candidate: 1.4.0+ds-2+b1
+  Version table:
+ *** 1.4.0+ds-2+b1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+slurp:
+  Installed: 1.5.0-1
+  Candidate: 1.5.0-1
+  Version table:
+ *** 1.5.0-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+nautilus:
+  Installed: (none)
+  Candidate: 48.3-2
+  Version table:
+     48.3-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+ptyxis:
+  Installed: (none)
+  Candidate: 48.5-1~deb13u1
+  Version table:
+     48.5-1~deb13u1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+gnome-console:
+  Installed: (none)
+  Candidate: 48.0.1-2+b1
+  Version table:
+     48.0.1-2+b1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+gnome-text-editor:
+  Installed: (none)
+  Candidate: 48.3-3
+  Version table:
+     48.3-3 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+loupe:
+  Installed: (none)
+  Candidate: 48.1-3
+  Version table:
+     48.1-3 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+papers:
+  Installed: (none)
+  Candidate: 48.3-1
+  Version table:
+     48.3-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+evince:
+  Installed: (none)
+  Candidate: 48.1-3+deb13u1
+  Version table:
+     48.1-3+deb13u1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+        500 mirror+file:/etc/apt/mirrors/debian-security.list trixie-security/main amd64 Packages
+celluloid:
+  Installed: (none)
+  Candidate: 0.28-2
+  Version table:
+     0.28-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+gnome-calculator:
+  Installed: (none)
+  Candidate: 1:48.1-2+b1
+  Version table:
+     1:48.1-2+b1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+gnome-software:
+  Installed: (none)
+  Candidate: 48.3-2
+  Version table:
+     48.3-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+gnome-software-plugin-flatpak:
+  Installed: (none)
+  Candidate: 48.3-2
+  Version table:
+     48.3-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+gnome-system-monitor:
+  Installed: (none)
+  Candidate: 48.1-2
+  Version table:
+     48.1-2 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+file-roller:
+  Installed: (none)
+  Candidate: 44.5-1
+  Version table:
+     44.5-1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages
+firefox-esr:
+  Installed: (none)
+  Candidate: 153.5.0esr-1~deb13u1
+  Version table:
+     153.5.0esr-1~deb13u1 500
+        500 mirror+file:/etc/apt/mirrors/debian-security.list trixie-security/main amd64 Packages
+     140.15.0esr-1~deb13u1 500
+        500 mirror+file:/etc/apt/mirrors/debian.list trixie/main amd64 Packages

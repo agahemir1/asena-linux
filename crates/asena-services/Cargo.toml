@@ -1,0 +1,30 @@
+[package]
+name = "asena-services"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+asena-core.workspace = true
+asena-wayland.workspace = true
+gio.workspace = true
+glib.workspace = true
+async-channel.workspace = true
+tracing.workspace = true
+
+zbus.workspace = true
+futures-lite.workspace = true
+async-io.workspace = true
+
+libpulse-binding.workspace = true
+libpulse-glib-binding.workspace = true
+
+thiserror.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
+
+[lints]
+workspace = true

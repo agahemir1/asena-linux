@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Clocks
+Name[tr]=Saat
+Comment=World clocks, stopwatch and timers
+Comment[tr]=Dünya saatleri, kronometre ve zamanlayıcı
+Keywords=time;timer;stopwatch;alarm;
+Keywords[tr]=zaman;zamanlayıcı;kronometre;alarm;
+Exec=asena-clock
+Icon=org.asenalinux.Clock
+Terminal=false
+Categories=Utility;Clock;GTK;
+StartupNotify=true

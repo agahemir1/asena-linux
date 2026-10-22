@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Documents
+Name[tr]=Belgeler
+Comment=View documents
+Comment[tr]=Belgeleri görüntüleyin
+Keywords=pdf;
+Keywords[tr]=pdf;
+Exec=asena-documents %U
+Icon=org.asenalinux.Documents
+Terminal=false
+Categories=Office;Viewer;GTK;
+StartupNotify=true
+NoDisplay=true

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Settings
+Name[tr]=Ayarlar
+Comment=Configure the system and desktop
+Comment[tr]=Sistemi ve masaüstünü yapılandırın
+Keywords=preferences;configuration;
+Keywords[tr]=tercihler;yapılandırma;
+Exec=asena-settings
+Icon=org.asenalinux.Settings
+Terminal=false
+Categories=Settings;DesktopSettings;GTK;
+StartupNotify=true

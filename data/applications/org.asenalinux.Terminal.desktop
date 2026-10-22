@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Terminal
+Name[tr]=Uçbirim
+Comment=Use the command line
+Comment[tr]=Komut satırını kullanın
+Keywords=shell;console;
+Keywords[tr]=kabuk;konsol;
+Exec=asena-terminal
+Icon=org.asenalinux.Terminal
+Terminal=false
+Categories=System;TerminalEmulator;GTK;
+StartupNotify=true
+NoDisplay=true

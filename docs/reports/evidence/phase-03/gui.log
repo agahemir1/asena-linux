@@ -1,0 +1,7 @@
+(<false>,)
+(<false>,)
+Mute: yes
+Mute: no
+Mute: yes
+Mute: no
+Native audio actions, observed mute state, absent backlight, daemon and appearance smoke passed.

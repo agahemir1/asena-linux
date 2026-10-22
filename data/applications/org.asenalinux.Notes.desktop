@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Notes
+Name[tr]=Notlar
+Comment=Write and organize notes
+Comment[tr]=Not alın ve düzenleyin
+Keywords=markdown;todo;
+Keywords[tr]=markdown;yapılacak;
+Exec=asena-notes
+Icon=org.asenalinux.Notes
+Terminal=false
+Categories=Office;GTK;
+StartupNotify=true

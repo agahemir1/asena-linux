@@ -1,0 +1,25 @@
+[package]
+name = "asena-shell"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+asena-core.workspace = true
+asena-widgets.workspace = true
+adw.workspace = true
+gtk.workspace = true
+gio.workspace = true
+glib.workspace = true
+gtk4-layer-shell.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+asena-services.workspace = true
+asena-wayland.workspace = true
+async-channel.workspace = true
+zbus.workspace = true
+futures-lite.workspace = true
+
+[lints]
+workspace = true

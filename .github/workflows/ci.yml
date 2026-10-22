@@ -1,0 +1,38 @@
+name: Debian 13
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    container: debian:trixie
+    timeout-minutes: 30
+    env:
+      # Exercise the distribution compiler even if runner tooling adds rustup.
+      PATH: /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+    steps:
+      - name: Bootstrap checkout dependencies
+        run: apt-get update && apt-get install -y --no-install-recommends ca-certificates git
+      - uses: actions/checkout@v7
+      - name: Install Debian development dependencies
+        run: bash scripts/setup-dev.sh
+      - name: Record package versions
+        run: bash scripts/collect-environment.sh
+      - name: Record backport version
+        run: . scripts/native-env.sh && pkg-config --modversion gtk4-layer-shell-0
+      - name: Check workspace and data
+        run: bash scripts/check-quality.sh
+      - name: Save dependency resolution and environment
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: debian13-evidence
+          path: |
+            Cargo.lock
+            target/evidence/
+          if-no-files-found: warn

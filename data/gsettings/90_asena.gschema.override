@@ -1,0 +1,4 @@
+# Installed into /usr/share/glib-2.0/schemas by the Asena session package.
+# Third-party GTK applications read these through xdg-desktop-portal-gtk.
+[org.gnome.desktop.wm.preferences]
+button-layout='appmenu:minimize,maximize,close'

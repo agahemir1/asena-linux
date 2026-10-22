@@ -1,0 +1,20 @@
+[Icon Theme]
+Name=Asena-purple
+Comment=Asena icons with purple folders
+Inherits=Asena,Adwaita,hicolor
+Hidden=true
+Directories=scalable/apps,scalable/places
+
+[scalable/apps]
+Context=Applications
+Size=128
+MinSize=8
+MaxSize=1024
+Type=Scalable
+
+[scalable/places]
+Context=Places
+Size=128
+MinSize=8
+MaxSize=1024
+Type=Scalable

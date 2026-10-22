@@ -1,0 +1,571 @@
+/* Asena Odak shell and shared application styles.
+ *
+ * Colors come only from libadwaita named colors and its accent variables
+ * (--accent-bg-color, --accent-color), so light and dark styles and the accent
+ * preference apply everywhere. Geometry follows docs/VISION.md:
+ * controls 8px, cards 12px, transient surfaces 16px, spacing 4/8/12/16/24.
+ * This file draws the opaque material used when transparency is off or high
+ * contrast is requested. asena-widgets layers the translucent glass on top;
+ * Wayfire's blur plugin blurs what lies behind it.
+ */
+
+/* Background --------------------------------------------------------------- */
+.asena-background {
+  background-color: @window_bg_color;
+}
+
+/* Panel -------------------------------------------------------------------- */
+window.asena-panel {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+window.asena-panel.edge-bottom {
+  box-shadow: inset 0 1px alpha(currentColor, 0.08);
+}
+
+window.asena-panel.edge-top {
+  box-shadow: inset 0 -1px alpha(currentColor, 0.08);
+}
+
+window.asena-panel.edge-left {
+  box-shadow: inset -1px 0 alpha(currentColor, 0.08);
+}
+
+window.asena-panel.edge-right {
+  box-shadow: inset 1px 0 alpha(currentColor, 0.08);
+}
+
+window.asena-panel button {
+  min-width: 36px;
+  min-height: 36px;
+  margin: 4px 2px;
+  padding: 0 6px;
+  border-radius: 8px;
+  transition: background-color 150ms ease-out;
+}
+
+window.asena-panel button:hover {
+  background-color: alpha(currentColor, 0.08);
+}
+
+window.asena-panel button:active,
+window.asena-panel button:checked {
+  background-color: alpha(currentColor, 0.14);
+}
+
+window.asena-panel .asena-start {
+  margin-left: 6px;
+  color: var(--accent-color);
+}
+
+window.asena-panel .asena-start image {
+  -gtk-icon-size: 20px;
+}
+
+window.asena-panel .asena-task {
+  min-width: 44px;
+  padding: 0;
+}
+
+window.asena-panel .asena-task.active {
+  background-color: color-mix(in srgb, var(--accent-bg-color) 14%, transparent);
+}
+
+/* Running indicator: a short bar on the screen edge, wider for the active app. */
+.asena-task-indicators {
+  margin: 2px;
+}
+
+.asena-dot {
+  min-width: 6px;
+  min-height: 3px;
+  border-radius: 2px;
+  background-color: alpha(currentColor, 0.5);
+  transition: min-width 150ms ease-out, min-height 150ms ease-out;
+}
+
+.asena-dot.vertical {
+  min-width: 3px;
+  min-height: 6px;
+}
+
+.asena-task.active .asena-dot {
+  min-width: 16px;
+  background-color: var(--accent-bg-color);
+}
+
+.asena-task.active .asena-dot.vertical {
+  min-width: 3px;
+  min-height: 16px;
+}
+
+window.asena-panel .asena-status {
+  padding: 0 10px;
+}
+
+.asena-status-icon {
+  -gtk-icon-size: 16px;
+}
+
+.asena-status-label {
+  font-size: 12px;
+  font-weight: 600;
+  font-feature-settings: "tnum";
+}
+
+window.asena-panel .asena-clock {
+  padding: 0 10px;
+}
+
+.asena-clock-time {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.asena-clock-date {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.asena-unread {
+  margin-right: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+/* Transient surfaces --------------------------------------------------------- */
+.asena-scrim {
+  background: none;
+}
+
+.asena-surface {
+  background-color: @popover_bg_color;
+  color: @popover_fg_color;
+  border-radius: 16px;
+  border: 1px solid alpha(currentColor, 0.08);
+  box-shadow: 0 18px 44px @shade_color, 0 3px 10px @shade_color;
+}
+
+window.asena-surface {
+  border-radius: 16px;
+}
+
+.asena-surface list,
+.asena-surface listview,
+.asena-surface flowbox {
+  background: none;
+}
+
+popover.asena-popover > contents,
+popover.asena-desktop-menu > contents {
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.asena-menu-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.asena-icon-button {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
+  border-radius: 10px;
+  background-color: alpha(currentColor, 0.06);
+}
+
+.asena-icon-button:hover {
+  background-color: alpha(currentColor, 0.11);
+}
+
+.asena-icon-button:active {
+  background-color: alpha(currentColor, 0.16);
+}
+
+.asena-icon-button.active {
+  background-color: var(--accent-bg-color);
+  color: var(--accent-fg-color);
+}
+
+/* Start menu ----------------------------------------------------------------- */
+.asena-menu {
+  padding: 14px;
+}
+
+.asena-menu-search {
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background-color: alpha(currentColor, 0.06);
+  font-size: 14px;
+}
+
+.asena-menu-search:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--accent-color) 60%, transparent);
+  outline-offset: -2px;
+}
+
+.asena-menu-header {
+  padding: 2px 0;
+}
+
+.asena-menu-user {
+  padding: 4px 8px 4px 4px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.asena-menu-list > row {
+  border-radius: 8px;
+  margin: 1px 0;
+}
+
+.asena-menu-app {
+  padding: 6px 8px;
+}
+
+.asena-menu-list > row:hover {
+  background-color: alpha(currentColor, 0.07);
+}
+
+.asena-menu-list > row:selected {
+  background-color: color-mix(in srgb, var(--accent-bg-color) 16%, transparent);
+  color: inherit;
+}
+
+.asena-menu-list > row:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-color) 70%, transparent);
+  outline-offset: -2px;
+}
+
+.asena-menu-section {
+  padding: 12px 8px 4px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+.asena-menu-letter label,
+label.asena-menu-section.asena-menu-letter,
+.asena-menu-letter > label {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+.asena-menu-letter {
+  border-radius: 8px;
+}
+
+.asena-menu-letter:hover {
+  background-color: color-mix(in srgb, var(--accent-bg-color) 10%, transparent);
+}
+
+.asena-menu-picker {
+  background-color: @popover_bg_color;
+  border-radius: 12px;
+}
+
+.asena-menu-picker-letter {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: color-mix(in srgb, var(--accent-bg-color) 12%, transparent);
+  color: var(--accent-color);
+}
+
+.asena-menu-picker-letter:hover {
+  background-color: var(--accent-bg-color);
+  color: var(--accent-fg-color);
+}
+
+.asena-menu-picker-letter:disabled {
+  background: none;
+  color: alpha(currentColor, 0.25);
+}
+
+.asena-menu-categories > row {
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.asena-menu-categories > row:selected {
+  background-color: color-mix(in srgb, var(--accent-bg-color) 16%, transparent);
+  color: inherit;
+}
+
+.asena-menu-tile {
+  min-width: 96px;
+  min-height: 96px;
+  padding: 10px 4px;
+  border-radius: 12px;
+}
+
+.asena-menu-tile:hover {
+  background-color: alpha(currentColor, 0.07);
+}
+
+.asena-menu-empty {
+  opacity: 0.6;
+  padding: 24px;
+}
+
+/* Quick settings ------------------------------------------------------------- */
+.asena-qs {
+  padding: 14px;
+}
+
+.asena-qs-slider {
+  min-height: 40px;
+}
+
+.asena-qs-slider scale trough {
+  min-height: 6px;
+  border-radius: 3px;
+}
+
+.asena-qs-slider scale highlight {
+  border-radius: 3px;
+}
+
+.asena-qs-value {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.asena-qs-list {
+  border-radius: 12px;
+  background-color: alpha(currentColor, 0.04);
+  border: 1px solid alpha(currentColor, 0.06);
+}
+
+.asena-qs-row + .asena-qs-row {
+  border-top: 1px solid alpha(currentColor, 0.06);
+}
+
+.asena-qs-row-line {
+  padding: 8px 8px 8px 12px;
+}
+
+.asena-qs-row-title {
+  font-weight: 600;
+}
+
+.asena-qs-row.active .asena-qs-row-icon {
+  color: var(--accent-color);
+}
+
+.asena-qs-detail {
+  padding: 0 12px 10px 44px;
+}
+
+.asena-qs-mode {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  background-color: alpha(currentColor, 0.06);
+  transition: background-color 150ms ease-out;
+}
+
+.asena-qs-mode:hover {
+  background-color: alpha(currentColor, 0.11);
+}
+
+.asena-qs-mode.active {
+  background-color: var(--accent-bg-color);
+  color: var(--accent-fg-color);
+}
+
+.asena-qs-footer {
+  padding-top: 10px;
+  border-top: 1px solid alpha(currentColor, 0.08);
+}
+
+.asena-wireless-row {
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+/* Notification sidebar and popups ------------------------------------------- */
+.asena-sidebar {
+  padding: 18px;
+}
+
+.nc-clock-card {
+  padding: 2px 4px 0;
+}
+
+.nc-clock-time {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.nc-clock-date {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+calendar.nc-calendar-card {
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid alpha(currentColor, 0.06);
+  background-color: alpha(currentColor, 0.04);
+}
+
+.asena-sidebar-media {
+  padding: 12px;
+  border-radius: 12px;
+  background-color: alpha(currentColor, 0.05);
+}
+
+.asena-media-art,
+.asena-media-placeholder {
+  min-width: 56px;
+  min-height: 56px;
+  border-radius: 10px;
+}
+
+.asena-media-placeholder {
+  background-color: alpha(currentColor, 0.08);
+}
+
+.asena-media-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  background-color: var(--accent-bg-color);
+  color: var(--accent-fg-color);
+}
+
+.nc-header {
+  padding-top: 4px;
+}
+
+.nc-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nc-badge {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.nc-text-btn {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.asena-notification-card {
+  padding: 12px;
+  border-radius: 12px;
+  background-color: alpha(currentColor, 0.05);
+  border: 1px solid alpha(currentColor, 0.06);
+}
+
+.notification-app-name {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.notification-time {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.notification-close-btn {
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0;
+  border-radius: 9999px;
+}
+
+.notification-summary {
+  font-weight: 600;
+}
+
+.notification-body {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.notification-action-btn {
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: alpha(currentColor, 0.08);
+}
+
+/* Desktop -------------------------------------------------------------------- */
+gridview.asena-desktop {
+  background: none;
+  padding: 12px;
+}
+
+gridview.asena-desktop > child {
+  margin: 2px;
+  padding: 0;
+  border-radius: 10px;
+  background: none;
+}
+
+gridview.asena-desktop > child:hover {
+  background-color: alpha(@light_1, 0.12);
+}
+
+gridview.asena-desktop > child:selected {
+  background-color: color-mix(in srgb, var(--accent-bg-color) 38%, transparent);
+}
+
+gridview.asena-desktop > child:focus-visible {
+  outline: 2px solid alpha(@light_1, 0.8);
+  outline-offset: -2px;
+}
+
+.asena-desktop-item {
+  padding: 8px 4px 6px;
+}
+
+.asena-desktop-item label {
+  color: @light_1;
+  font-size: 12px;
+  text-shadow: 0 1px 2px alpha(@dark_5, 0.9), 0 0 1px alpha(@dark_5, 0.9);
+}
+
+.asena-desktop-item image {
+  -gtk-icon-shadow: 0 2px 4px alpha(@dark_5, 0.45);
+}
+
+/* Shared application states ---------------------------------------------------- */
+.asena-empty-state {
+  padding: 32px 16px;
+}
+
+.asena-empty-state-icon {
+  opacity: 0.4;
+  margin-bottom: 8px;
+}
+
+.asena-empty-state-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.asena-empty-state-subtitle {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+window.asena-lock {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}

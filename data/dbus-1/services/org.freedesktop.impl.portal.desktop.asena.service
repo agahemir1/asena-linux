@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=org.freedesktop.impl.portal.desktop.asena
+Exec=/bin/false
+SystemdService=asena-daemon.service

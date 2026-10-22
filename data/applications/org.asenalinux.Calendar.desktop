@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Calendar
+Name[tr]=Takvim
+Comment=Keep track of your events
+Comment[tr]=Etkinliklerinizi takip edin
+Keywords=event;schedule;
+Keywords[tr]=etkinlik;ajanda;
+Exec=asena-calendar
+Icon=org.asenalinux.Calendar
+Terminal=false
+Categories=Office;Calendar;GTK;
+StartupNotify=true

@@ -1,0 +1,23 @@
+[package]
+name = "asena-polkit-agent"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+asena-core.workspace = true
+asena-widgets.workspace = true
+gtk.workspace = true
+adw.workspace = true
+gio.workspace = true
+glib.workspace = true
+async-channel.workspace = true
+polkit-agent.workspace = true
+polkit.workspace = true
+zeroize.workspace = true
+tracing.workspace = true
+
+[lints]
+workspace = true

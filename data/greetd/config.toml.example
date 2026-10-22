@@ -1,0 +1,11 @@
+# Example only. Do not replace the current display manager automatically.
+[terminal]
+vt = 7
+switch = true
+
+[general]
+source_profile = false
+
+[default_session]
+command = "/usr/bin/dbus-run-session -- /usr/bin/cage -s -- /usr/bin/asena-greeter"
+user = "asena-greeter"

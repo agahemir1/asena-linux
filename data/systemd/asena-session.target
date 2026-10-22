@@ -1,0 +1,6 @@
+[Unit]
+Description=Asena desktop session
+DefaultDependencies=no
+BindsTo=graphical-session.target
+Before=graphical-session.target
+Wants=asena-shell.service asena-daemon.service asena-polkit-agent.service

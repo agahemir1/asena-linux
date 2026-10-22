@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="asena">
+  <schema id="org.asenalinux.power" path="/org/asenalinux/power/">
+    <key name="idle-enabled" type="b"><default>false</default><summary>Idle actions</summary></key>
+    <key name="dim-seconds" type="u"><range min="0" max="86400"/><default>300</default><summary>Dim after</summary></key>
+    <key name="lock-seconds" type="u"><range min="0" max="86400"/><default>600</default><summary>Lock after</summary></key>
+    <key name="off-seconds" type="u"><range min="0" max="86400"/><default>900</default><summary>Turn screen off after</summary></key>
+    <key name="suspend-seconds" type="u"><range min="0" max="86400"/><default>1800</default><summary>Suspend after</summary></key>
+  </schema>
+</schemalist>

@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Photos
+Name[tr]=Fotoğraflar
+Comment=View your photos
+Comment[tr]=Fotoğraflarınıza bakın
+Keywords=image;picture;
+Keywords[tr]=resim;görsel;
+Exec=asena-photos %U
+Icon=org.asenalinux.Photos
+Terminal=false
+Categories=Graphics;Viewer;Photography;GTK;
+StartupNotify=true
+MimeType=image/jpeg;image/png;image/webp;image/gif;image/bmp;image/tiff;image/svg+xml;

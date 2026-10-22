@@ -1,0 +1,68 @@
+{
+  "version": {
+    "id": 1577038,
+    "crate": "polkit-agent-rs",
+    "num": "0.3.0",
+    "dl_path": "/api/v1/crates/polkit-agent-rs/0.3.0/download",
+    "readme_path": "/api/v1/crates/polkit-agent-rs/0.3.0/readme",
+    "updated_at": "2025-05-24T08:29:40.122929Z",
+    "created_at": "2025-05-24T08:29:40.122929Z",
+    "downloads": 2238,
+    "features": {},
+    "yanked": false,
+    "yank_message": null,
+    "lib_links": null,
+    "license": "MIT",
+    "links": {
+      "dependencies": "/api/v1/crates/polkit-agent-rs/0.3.0/dependencies",
+      "version_downloads": "/api/v1/crates/polkit-agent-rs/0.3.0/downloads",
+      "authors": "/api/v1/crates/polkit-agent-rs/0.3.0/authors"
+    },
+    "crate_size": 9441,
+    "published_by": {
+      "id": 126749,
+      "login": "Decodetalkers",
+      "name": "Access",
+      "avatar": "https://avatars.githubusercontent.com/u/60290287?v=4",
+      "url": "https://github.com/Decodetalkers",
+      "github_username_matches": true,
+      "created_at": "2020-01-25T12:21:09Z"
+    },
+    "audit_actions": [
+      {
+        "action": "publish",
+        "user": {
+          "id": 126749,
+          "login": "Decodetalkers",
+          "name": "Access",
+          "avatar": "https://avatars.githubusercontent.com/u/60290287?v=4",
+          "url": "https://github.com/Decodetalkers",
+          "github_username_matches": true,
+          "created_at": "2020-01-25T12:21:09Z"
+        },
+        "time": "2025-05-24T08:29:40.122929Z"
+      }
+    ],
+    "checksum": "df3f07cf3c781ea7494fb52866f332528ce359b23c4678babc2f2205cb7c3fea",
+    "rust_version": null,
+    "has_lib": true,
+    "bin_names": [],
+    "edition": "2024",
+    "description": "High-level bindings for libpolkit-gobject-1",
+    "homepage": "https://github.com/Decodetalkers/polkit-rs",
+    "documentation": "https://docs.rs/polkit-agent-rs/",
+    "repository": "https://github.com/Decodetalkers/polkit-rs",
+    "trustpub_data": null,
+    "linecounts": {
+      "languages": {
+        "Rust": {
+          "code_lines": 567,
+          "comment_lines": 15,
+          "files": 8
+        }
+      },
+      "total_code_lines": 567,
+      "total_comment_lines": 15
+    }
+  }
+}

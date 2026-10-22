@@ -1,0 +1,80 @@
+{
+  "version": {
+    "id": 1167486,
+    "crate": "greetd_ipc",
+    "num": "0.10.3",
+    "dl_path": "/api/v1/crates/greetd_ipc/0.10.3/download",
+    "readme_path": "/api/v1/crates/greetd_ipc/0.10.3/readme",
+    "updated_at": "2024-06-07T11:10:55.397135Z",
+    "created_at": "2024-06-07T11:10:55.397135Z",
+    "downloads": 109693,
+    "features": {
+      "codec": [
+        "thiserror"
+      ],
+      "sync-codec": [
+        "codec"
+      ],
+      "tokio-codec": [
+        "codec",
+        "tokio",
+        "async-trait"
+      ]
+    },
+    "yanked": false,
+    "yank_message": null,
+    "lib_links": null,
+    "license": "GPL-3.0-only",
+    "links": {
+      "dependencies": "/api/v1/crates/greetd_ipc/0.10.3/dependencies",
+      "version_downloads": "/api/v1/crates/greetd_ipc/0.10.3/downloads",
+      "authors": "/api/v1/crates/greetd_ipc/0.10.3/authors"
+    },
+    "crate_size": 16117,
+    "published_by": {
+      "id": 84266,
+      "login": "kennylevinsen",
+      "name": "Kenny Levinsen",
+      "avatar": "https://avatars.githubusercontent.com/u/176245?v=4",
+      "url": "https://github.com/kennylevinsen",
+      "github_username_matches": true,
+      "created_at": "2010-01-04T17:40:54Z"
+    },
+    "audit_actions": [
+      {
+        "action": "publish",
+        "user": {
+          "id": 84266,
+          "login": "kennylevinsen",
+          "name": "Kenny Levinsen",
+          "avatar": "https://avatars.githubusercontent.com/u/176245?v=4",
+          "url": "https://github.com/kennylevinsen",
+          "github_username_matches": true,
+          "created_at": "2010-01-04T17:40:54Z"
+        },
+        "time": "2024-06-07T11:10:55.397135Z"
+      }
+    ],
+    "checksum": "700d2e5bfc91a042d1d531b46de245085c6a179debedf149aa97c7ca71492078",
+    "rust_version": null,
+    "has_lib": true,
+    "bin_names": [],
+    "edition": "2018",
+    "description": "An implementation of the greetd IPC protocol",
+    "homepage": "https://kl.wtf/projects/greetd",
+    "documentation": null,
+    "repository": "https://git.sr.ht/~kennylevinsen/greetd/",
+    "trustpub_data": null,
+    "linecounts": {
+      "languages": {
+        "Rust": {
+          "code_lines": 203,
+          "comment_lines": 0,
+          "files": 4
+        }
+      },
+      "total_code_lines": 203,
+      "total_comment_lines": 0
+    }
+  }
+}

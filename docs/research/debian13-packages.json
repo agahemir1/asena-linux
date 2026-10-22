@@ -1,0 +1,193 @@
+{
+  "checked_on": "2026-10-18",
+  "method": "Official Debian trixie main amd64 Packages index; not apt policy or installed-system evidence",
+  "url": "https://deb.debian.org/debian/dists/trixie/main/binary-amd64/Packages.xz",
+  "download_sha256": "7778d3e3f303b7ddb8ce0fe7c8d57473a076c6bf2e8f241f75421d2396352498",
+  "packages": {
+    "labwc": {
+      "version": "0.8.3-1",
+      "architecture": "amd64",
+      "source": "labwc"
+    },
+    "libgtk-4-dev": {
+      "version": "4.18.6+ds-2",
+      "architecture": "amd64",
+      "source": "gtk4"
+    },
+    "libadwaita-1-dev": {
+      "version": "1.7.6-1~deb13u1",
+      "architecture": "amd64",
+      "source": "libadwaita-1"
+    },
+    "libgtk4-layer-shell-dev": {
+      "version": "1.0.4-2",
+      "architecture": "amd64",
+      "source": "gtk4-layer-shell"
+    },
+    "rustc": {
+      "version": "1.85.1+dfsg1-1+deb13u1",
+      "architecture": "amd64",
+      "source": "rustc"
+    },
+    "cargo": {
+      "version": "1.85.1+dfsg1-1+deb13u1",
+      "architecture": "amd64",
+      "source": "rustc"
+    },
+    "rustfmt": {
+      "version": "1.85.1+dfsg1-1+deb13u1",
+      "architecture": "amd64",
+      "source": "rustc"
+    },
+    "rust-clippy": {
+      "version": "1.85.1+dfsg1-1+deb13u1",
+      "architecture": "amd64",
+      "source": "rustc"
+    },
+    "greetd": {
+      "version": "0.10.3-4",
+      "architecture": "amd64",
+      "source": "greetd"
+    },
+    "cage": {
+      "version": "0.2.0-2",
+      "architecture": "amd64",
+      "source": "cage"
+    },
+    "xdg-desktop-portal-wlr": {
+      "version": "0.7.1-2",
+      "architecture": "amd64",
+      "source": "xdg-desktop-portal-wlr"
+    },
+    "xdg-desktop-portal-gtk": {
+      "version": "1.15.3-1",
+      "architecture": "amd64",
+      "source": "xdg-desktop-portal-gtk"
+    },
+    "blueprint-compiler": {
+      "version": "0.16.0-3",
+      "architecture": "all",
+      "source": "blueprint-compiler"
+    },
+    "fonts-inter": {
+      "version": "4.1+ds-1",
+      "architecture": "all",
+      "source": "fonts-inter"
+    },
+    "fonts-jetbrains-mono": {
+      "version": "2.304+ds-5",
+      "architecture": "all",
+      "source": "fonts-jetbrains-mono"
+    },
+    "wlsunset": {
+      "version": "0.3.0-1",
+      "architecture": "amd64",
+      "source": "wlsunset"
+    },
+    "swayidle": {
+      "version": "1.8.0-1",
+      "architecture": "amd64",
+      "source": "swayidle"
+    },
+    "grim": {
+      "version": "1.4.0+ds-2+b1",
+      "architecture": "amd64",
+      "source": "grim (1.4.0+ds-2)"
+    },
+    "slurp": {
+      "version": "1.5.0-1",
+      "architecture": "amd64",
+      "source": "slurp"
+    },
+    "nautilus": {
+      "version": "48.3-2",
+      "architecture": "amd64",
+      "source": "nautilus"
+    },
+    "ptyxis": {
+      "version": "48.5-1~deb13u1",
+      "architecture": "amd64",
+      "source": "ptyxis"
+    },
+    "gnome-console": {
+      "version": "48.0.1-2+b1",
+      "architecture": "amd64",
+      "source": "gnome-console (48.0.1-2)"
+    },
+    "gnome-text-editor": {
+      "version": "48.3-3",
+      "architecture": "amd64",
+      "source": "gnome-text-editor"
+    },
+    "loupe": {
+      "version": "48.1-3",
+      "architecture": "amd64",
+      "source": "loupe"
+    },
+    "papers": {
+      "version": "48.3-1",
+      "architecture": "amd64",
+      "source": "papers"
+    },
+    "evince": {
+      "version": "48.1-3+deb13u1",
+      "architecture": "amd64",
+      "source": "evince"
+    },
+    "celluloid": {
+      "version": "0.28-2",
+      "architecture": "amd64",
+      "source": "celluloid"
+    },
+    "gnome-calculator": {
+      "version": "1:48.1-2+b1",
+      "architecture": "amd64",
+      "source": "gnome-calculator (1:48.1-2)"
+    },
+    "gnome-software": {
+      "version": "48.3-2",
+      "architecture": "amd64",
+      "source": "gnome-software"
+    },
+    "gnome-software-plugin-flatpak": {
+      "version": "48.3-2",
+      "architecture": "amd64",
+      "source": "gnome-software"
+    },
+    "gnome-system-monitor": {
+      "version": "48.1-2",
+      "architecture": "amd64",
+      "source": "gnome-system-monitor"
+    },
+    "file-roller": {
+      "version": "44.5-1",
+      "architecture": "amd64",
+      "source": "file-roller"
+    },
+    "firefox-esr": {
+      "version": "140.15.0esr-1~deb13u1",
+      "architecture": "amd64",
+      "source": "firefox-esr"
+    },
+    "libgettextpo-dev": {
+      "version": "0.23.1-2",
+      "architecture": "amd64",
+      "source": "gettext"
+    },
+    "gettext": {
+      "version": "0.23.1-2",
+      "architecture": "amd64",
+      "source": "gettext"
+    },
+    "foot": {
+      "version": "1.21.0-2",
+      "architecture": "amd64",
+      "source": "foot"
+    },
+    "wayland-utils": {
+      "version": "1.2.0-2",
+      "architecture": "amd64",
+      "source": "wayland-utils"
+    }
+  }
+}

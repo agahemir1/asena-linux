@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Weather
+Name[tr]=Hava Durumu
+Comment=Show the weather forecast
+Comment[tr]=Hava tahminini gösterin
+Keywords=forecast;
+Keywords[tr]=tahmin;
+Exec=asena-weather
+Icon=org.asenalinux.Weather
+Terminal=false
+Categories=Utility;GTK;
+StartupNotify=true
+NoDisplay=true

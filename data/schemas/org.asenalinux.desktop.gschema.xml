@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="asena">
+  <schema id="org.asenalinux.desktop" path="/org/asenalinux/desktop/">
+    <key name="color-scheme" type="s"><choices><choice value="default"/><choice value="prefer-dark"/><choice value="prefer-light"/></choices><default>'default'</default><summary>Color scheme</summary></key>
+    <key name="accent-color" type="s"><choices><choice value="blue"/><choice value="teal"/><choice value="green"/><choice value="yellow"/><choice value="orange"/><choice value="red"/><choice value="pink"/><choice value="purple"/><choice value="slate"/></choices><default>'teal'</default><summary>Accent color</summary></key>
+    <key name="font-name" type="s"><default>'Inter 11'</default><summary>Interface font</summary></key>
+    <key name="monospace-font-name" type="s"><default>'JetBrains Mono 11'</default><summary>Monospace font</summary></key>
+    <key name="defaults-applied" type="b"><default>false</default></key>
+    <key name="text-scaling-factor" type="d"><range min="0.75" max="2.0"/><default>1.0</default><summary>Text scale</summary></key>
+    <key name="terminal" type="s"><choices><choice value="foot"/><choice value="ptyxis"/></choices><default>'foot'</default><summary>Terminal</summary></key>
+    <key name="background-uri" type="s"><default>'file:///usr/share/backgrounds/asena/asena-bozkurt.jpg'</default><summary>Background image</summary></key>
+    <key name="background-mode" type="s">
+      <choices><choice value="zoom"/><choice value="fit"/><choice value="center"/><choice value="solid"/></choices>
+      <default>'zoom'</default><summary>Background scaling</summary>
+    </key>
+    <key name="show-desktop-icons" type="b"><default>true</default><summary>Show desktop icons</summary></key>
+    <key name="enable-animations" type="b"><default>true</default><summary>Animations</summary></key>
+    <key name="transparency" type="b"><default>true</default><summary>Transparency effects</summary><description>Translucent panel and shell surfaces with a blurred background. Off, or in high contrast, they are opaque.</description></key>
+  </schema>
+</schemalist>

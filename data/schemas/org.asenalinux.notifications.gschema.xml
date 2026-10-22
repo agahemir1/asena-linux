@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="asena">
+  <schema id="org.asenalinux.notifications" path="/org/asenalinux/notifications/">
+    <key name="do-not-disturb" type="b"><default>false</default><summary>Do not disturb</summary></key>
+    <key name="blocked-applications" type="as"><default>[]</default><summary>Blocked applications</summary></key>
+  </schema>
+</schemalist>
