@@ -1,0 +1,178 @@
+---
+import Base from '../layouts/Base.astro';
+import BootStrip from '../components/BootStrip.astro';
+import Icon from '../components/Icon.astro';
+import { route, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+const c = {
+  tr: {
+    title: 'İndir',
+    description: 'Asena Linux henüz indirilemiyor. Bugün çalışanlar, ilk sürümün kapsamı ve yol haritası.',
+    heading: 'Henüz indirilemiyor',
+    lead: 'İlk kurulabilir ISO derlendiğinde burada, SHA-256 özetiyle birlikte yayımlanacak. O güne kadar bu sayfa, neyin hazır olduğunu düz anlatıyor.',
+    follow: 'Haber akışına abone ol',
+    news: 'Haberler',
+    readyTitle: 'Bugün ne çalışıyor?',
+    readyNote: 'Hepsi geliştirme sanal makinesinde çalışıyor. Gerçek donanım, gerçek oturum açma ve görsel kabul testleri sürüyor.',
+    ready: [
+      'Panel, başlat menüsü, bildirimler, denetim merkezi ve masaüstü simgeleri',
+      'Kilit ekranı, giriş ekranı ve polkit yetki penceresi',
+      'Ayarlar: on yedi bölüm, ekran düzeninde 15 saniyelik geri alma',
+      'On iki uygulama; aralarında Debian ve Flathub’ı birlikte gösteren Yazılım',
+      'Yeniden başlatmada sistem güncellemesi',
+      'Açılışta Asena markası: GRUB menüsü, Plymouth ekranı, fastfetch',
+    ],
+    bootTitle: 'Açılıştan masaüstüne',
+    bootText: 'Önyükleme zinciri bir test diskinde iki kez denendi: Secure Boot kapalıyken XanMod çekirdeği, açıkken Debian’ın imzalı çekirdeği açıldı.',
+    scopeTitle: 'İlk sürümün kapsamı',
+    scope: [
+      ['Mimari', '64 bit x86 (amd64), UEFI. Eski BIOS kipi desteklenmeyecek.'],
+      ['Kurulum', 'Boş bir diske tek sistem. Yanında başka bir işletim sistemi ve disk şifreleme ilk sürümde yok.'],
+      ['Çekirdek', 'XanMod LTS varsayılan ve x86-64-v2 destekleyen bir işlemci ister. Daha eski işlemcilerde menüden Debian çekirdeği seçilir.'],
+      ['Secure Boot', 'Debian’ın imzalı önyükleme zinciri kullanılır. Sanal makinede açıldı; gerçek donanımda henüz denenmedi.'],
+      ['Donanım yazılımı', 'Debian’ın non-free-firmware bileşeni ve işlemci mikro kodları canlı sistemde ve kurulumda hazır gelir.'],
+    ],
+    roadTitle: 'Yol haritası',
+    road: [
+      ['M1', 'Günlük kullanılabilir', 'Panel, menü, bildirimler ve hızlı ayarlar.', 'Sürüyor'],
+      ['M2', 'Tam masaüstü', 'Giriş ekranından kapanışa her şey Asena’nın; Ayarlar Merkezi.', 'Sürüyor'],
+      ['M3', 'Dağıtım', 'Paketler, imzalı depo, canlı ISO, kurulum aracı ve Hoş geldin uygulaması.', 'Başladı'],
+      ['M4', '1.0', 'Performans bütçeleri ve erişilebilirlik hedefleri karşılanmış sürüm.', 'Başlamadı'],
+    ],
+  },
+  en: {
+    title: 'Download',
+    description: 'Asena Linux cannot be downloaded yet. What works today, the scope of the first release and the roadmap.',
+    heading: 'Not available yet',
+    lead: 'When the first installable ISO is built, it will be published here with its SHA-256 checksum. Until then this page says plainly what is ready.',
+    follow: 'Subscribe to the news feed',
+    news: 'News',
+    readyTitle: 'What works today?',
+    readyNote: 'All of it runs in the development virtual machine. Testing on real hardware, real login and visual review are under way.',
+    ready: [
+      'Panel, start menu, notifications, control center and desktop icons',
+      'Lock screen, login screen and the polkit authentication dialog',
+      'Settings: seventeen sections, a 15-second revert for display changes',
+      'Twelve apps, including Software, which lists Debian and Flathub together',
+      'System updates applied on restart',
+      'Asena branding at boot: GRUB menu, Plymouth splash, fastfetch',
+    ],
+    bootTitle: 'From boot to desktop',
+    bootText: 'The boot chain was tried twice on a test disk: with Secure Boot off the XanMod kernel started, with it on Debian’s signed kernel did.',
+    scopeTitle: 'Scope of the first release',
+    scope: [
+      ['Architecture', '64-bit x86 (amd64), UEFI. Legacy BIOS mode will not be supported.'],
+      ['Installation', 'One system on an empty disk. Installing next to another operating system and disk encryption are not in the first release.'],
+      ['Kernel', 'XanMod LTS is the default and needs a processor with x86-64-v2. On older processors, pick the Debian kernel from the menu.'],
+      ['Secure Boot', 'Debian’s signed boot chain is used. It booted in a virtual machine; it has not been tried on real hardware yet.'],
+      ['Firmware', 'Debian’s non-free-firmware component and processor microcode come ready in the live system and the installation.'],
+    ],
+    roadTitle: 'Roadmap',
+    road: [
+      ['M1', 'Usable every day', 'Panel, menu, notifications and quick settings.', 'In progress'],
+      ['M2', 'Complete desktop', 'Everything from the login screen to shutdown is Asena’s; Settings.', 'In progress'],
+      ['M3', 'Distribution', 'Packages, a signed repository, the live ISO, the installer and the Welcome app.', 'Started'],
+      ['M4', '1.0', 'A release that meets the performance budgets and accessibility goals.', 'Not started'],
+    ],
+  },
+}[lang];
+---
+
+<Base lang={lang} title={c.title} description={c.description} alternate={route('download', other)}>
+  <header class="page-intro wrap">
+    <span class="eyebrow" data-reveal>{c.title}</span>
+    <h1 data-reveal>{c.heading}</h1>
+    <p class="lead" data-reveal style="--reveal-i:1">{c.lead}</p>
+    <div class="actions" data-reveal style="--reveal-i:2">
+      <a class="btn btn-primary" href={`${route('news', lang)}rss.xml`}>{c.follow}</a>
+      <a class="btn btn-quiet" href={route('news', lang)}>{c.news}<Icon name="go-next" size={16} /></a>
+    </div>
+  </header>
+
+  <section class="block wrap ready">
+    <div class="block-head" data-reveal>
+      <h2>{c.readyTitle}</h2>
+      <p>{c.readyNote}</p>
+    </div>
+    <ul class="checks">
+      {
+        c.ready.map((item, i) => (
+          <li data-reveal style={`--reveal-i:${i % 3}`}>
+            <Icon name="object-select" size={18} />
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="block wrap">
+    <div class="block-head" data-reveal>
+      <h2>{c.bootTitle}</h2>
+      <p>{c.bootText}</p>
+    </div>
+    <BootStrip lang={lang} />
+  </section>
+
+  <section class="block wrap">
+    <div class="block-head" data-reveal><h2>{c.scopeTitle}</h2></div>
+    <dl class="scope">
+      {
+        c.scope.map(([term, text], i) => (
+          <div data-reveal style={`--reveal-i:${i % 3}`}>
+            <dt>{term}</dt>
+            <dd>{text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="block wrap">
+    <div class="block-head" data-reveal><h2>{c.roadTitle}</h2></div>
+    <ol class="road">
+      {
+        c.road.map(([id, name, text, state], i) => (
+          <li data-reveal style={`--reveal-i:${i}`} data-state={i < 2 ? 'active' : i === 2 ? 'started' : 'todo'}>
+            <span class="milestone">{id}</span>
+            <div>
+              <h3>{name}</h3>
+              <p>{text}</p>
+            </div>
+            <span class="state">{state}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+  .checks { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: var(--space-3) var(--space-6); }
+  .checks li { display: flex; gap: var(--space-3); align-items: flex-start; padding-block: var(--space-3); border-bottom: 1px solid var(--border-subtle); }
+  .checks :global(.icon) { flex: none; margin-top: 3px; color: var(--accent-text); }
+  .scope { display: grid; border-top: 1px solid var(--border-subtle); }
+  .scope div { display: grid; grid-template-columns: minmax(140px, 0.32fr) 1fr; gap: var(--space-4); padding-block: var(--space-4); border-bottom: 1px solid var(--border-subtle); }
+  .scope dt { font-weight: 620; }
+  .scope dd { color: var(--text-secondary); }
+  @media (max-width: 640px) { .scope div { grid-template-columns: 1fr; gap: var(--space-1); } }
+
+  .road { list-style: none; padding: 0; position: relative; display: grid; gap: var(--space-2); }
+  .road::before { content: ''; position: absolute; left: 27px; top: 28px; bottom: 28px; width: 2px; background: linear-gradient(var(--accent) 0 40%, var(--border-strong) 60%); }
+  .road li { position: relative; display: grid; grid-template-columns: 56px 1fr auto; gap: var(--space-4); align-items: center; padding: var(--space-4) 0; }
+  .milestone { position: relative; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--surface-raised); border: 2px solid var(--border-strong); font: 650 var(--fs-small) var(--font-mono); }
+  [data-state='active'] .milestone { border-color: var(--accent); color: var(--accent-text); box-shadow: 0 0 0 6px var(--accent-subtle); }
+  [data-state='started'] .milestone { border-color: color-mix(in oklab, var(--accent) 55%, var(--border-strong)); }
+  .road h3 { font-size: 1.15rem; }
+  .road p { color: var(--text-secondary); font-size: var(--fs-small); }
+  .state { font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+  [data-state='active'] .state { color: var(--accent-text); }
+  @media (max-width: 560px) { .road li { grid-template-columns: 56px 1fr; } .state { grid-column: 2; } }
+</style>

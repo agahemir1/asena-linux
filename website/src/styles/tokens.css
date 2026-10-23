@@ -1,0 +1,112 @@
+/*
+ * Asena Odak tokens for the web. Colour values come from
+ * docs/design/DESIGN_SYSTEM.md and crates/asena-core/src/theme.rs; components
+ * use these properties only.
+ */
+:root {
+  color-scheme: light dark;
+
+  /* libadwaita 1.7 accents, as in asena_core::theme::ACCENTS. */
+  --accent-blue: #3584e4;
+  --accent-teal: #2190a4;
+  --accent-green: #3a944a;
+  --accent-yellow: #c88800;
+  --accent-orange: #ed5b00;
+  --accent-red: #e62d42;
+  --accent-pink: #d56199;
+  --accent-purple: #9141ac;
+  --accent-slate: #6f8396;
+  --accent: var(--accent-teal);
+  --accent-fg: #ffffff;
+  --accent-text: light-dark(color-mix(in oklab, var(--accent) 78%, black), color-mix(in oklab, var(--accent) 62%, white));
+  --accent-subtle: color-mix(in oklab, var(--accent) 16%, transparent);
+
+  /* The logo's glaze and band (data/branding/asena-emblem.svg). */
+  --brand-glaze-1: #62d2c9;
+  --brand-glaze-2: #25a7a6;
+  --brand-glaze-3: #147a7a;
+  --brand-band: #fffaf0;
+  --brand-band-2: #e3d6bc;
+
+  --surface-base: light-dark(#f6f8fa, #14181d);
+  --surface-sunken: light-dark(#eef1f4, #0e1115);
+  --surface-raised: light-dark(#ffffff, #1c2128);
+  --surface-overlay: light-dark(#ffffff, #242a32);
+  --text-primary: light-dark(#1f2328, #f0f3f6);
+  --text-secondary: light-dark(#59636e, #9aa4ae);
+  --border-subtle: light-dark(rgb(0 0 0 / 0.08), rgb(255 255 255 / 0.08));
+  --border-strong: light-dark(rgb(0 0 0 / 0.14), rgb(255 255 255 / 0.16));
+  --status-success: light-dark(#1a7f37, #3fb950);
+  --status-warning: light-dark(#9a6700, #d29922);
+  --status-error: light-dark(#cf222e, #f85149);
+
+  /* Glass: the shell's frosted material on the web. */
+  --glass-bg: light-dark(rgb(246 248 250 / 0.74), rgb(20 24 29 / 0.62));
+  --glass-border: light-dark(rgb(255 255 255 / 0.7), rgb(255 255 255 / 0.09));
+  --glass-blur: 22px;
+
+  /* Text and controls laid over photographs, the same in both styles. */
+  --scrim: #080a0e;
+  --on-image: #f0f3f6;
+  --on-image-2: rgb(240 243 246 / 0.86);
+  --on-image-3: rgb(240 243 246 / 0.66);
+  --on-image-glass: rgb(20 24 29 / 0.45);
+  --on-image-line: rgb(255 255 255 / 0.2);
+
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 24px -12px rgb(0 0 0 / 0.18);
+  --shadow-window: 0 2px 6px rgb(0 0 0 / 0.12), 0 40px 90px -30px rgb(0 0 0 / 0.55);
+
+  --font-sans: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Cantarell, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+  --fs-display: clamp(2.9rem, 1.4rem + 6.4vw, 6.5rem);
+  --fs-h1: clamp(2.3rem, 1.5rem + 3.4vw, 4.25rem);
+  --fs-h2: clamp(1.8rem, 1.3rem + 2vw, 2.9rem);
+  --fs-h3: clamp(1.2rem, 1.08rem + 0.5vw, 1.45rem);
+  --fs-lead: clamp(1.1rem, 1rem + 0.45vw, 1.35rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-xs: 0.8125rem;
+
+  /* DESIGN.md spacing scale, extended for page sections. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 144px;
+
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-dialog: 16px;
+  --radius-pill: 9999px;
+
+  /* VISION.md motion: open 180 ms ease-out-cubic, close 120 ms ease-in-cubic, state 150 ms. */
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-cubic: cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-open: 180ms;
+  --dur-close: 120ms;
+  --dur-state: 150ms;
+  --dur-reveal: 900ms;
+
+  --page-max: 1240px;
+  --gutter: clamp(16px, 4.2vw, 48px);
+  --measure: 64ch;
+  --header-h: 64px;
+}
+
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark'] { color-scheme: dark; }
+
+:root[data-accent='blue'] { --accent: var(--accent-blue); }
+:root[data-accent='green'] { --accent: var(--accent-green); }
+:root[data-accent='yellow'] { --accent: var(--accent-yellow); }
+:root[data-accent='orange'] { --accent: var(--accent-orange); }
+:root[data-accent='red'] { --accent: var(--accent-red); }
+:root[data-accent='pink'] { --accent: var(--accent-pink); }
+:root[data-accent='purple'] { --accent: var(--accent-purple); }
+:root[data-accent='slate'] { --accent: var(--accent-slate); }

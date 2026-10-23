@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Emblem from '../components/Emblem.astro';
+---
+
+<Base lang="tr" title="Sayfa bulunamadı" alternate="/en/" noSearch>
+  <section class="wrap missing">
+    <Emblem size="96px" />
+    <h1>Sayfa bulunamadı</h1>
+    <p class="lead">Bu adreste bir sayfa yok. Bağlantı eski olabilir ya da adres yanlış yazılmış olabilir.</p>
+    <p class="lead" lang="en">There is no page at this address. The link may be old or the address mistyped.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Ana sayfa</a>
+      <a class="btn btn-quiet" href="/en/" lang="en">Home</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .missing { min-height: 70vh; display: grid; place-content: center; justify-items: center; gap: var(--space-4); text-align: center; padding-block: var(--space-9); }
+  .missing .lead { max-width: 44ch; }
+  .actions { display: flex; gap: var(--space-3); margin-top: var(--space-4); }
+</style>

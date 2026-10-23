@@ -1,0 +1,223 @@
+---
+import Base from '../layouts/Base.astro';
+import DesktopTour from '../components/DesktopTour.astro';
+import ShotSwitcher from '../components/ShotSwitcher.astro';
+import BlurCompare from '../components/BlurCompare.astro';
+import AccentPicker from '../components/AccentPicker.astro';
+import { route, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+
+const c = {
+  tr: {
+    title: 'Masaüstü',
+    description: 'Asena masaüstünün paneli, başlat menüsü, denetim merkezi, bildirim paneli, cam malzemesi, vurgu renkleri ve kısayolları.',
+    lead: 'Asena’nın masaüstü, Wayfire üzerinde çalışan ve Rust ile GTK4’te yazılmış bir kabuk. Bu sayfadaki görüntülerin hepsi geliştirme sanal makinesindeki gerçek oturumdan alındı.',
+    tourHint: 'Paneldeki halkalara ya da yandaki düğmelere tıklayın.',
+    baseAlt: 'Boş Asena masaüstü, altta panel',
+    surfaces: [
+      { id: 'menu', shot: 'menu-dark', label: 'Başlat menüsü', alt: 'Başlat menüsü açık', keys: ['Super', 'Boşluk'] },
+      { id: 'quick', shot: 'quick-dark', label: 'Denetim merkezi', alt: 'Denetim merkezi açık', keys: ['Super', 'A'] },
+      { id: 'notifications', shot: 'notifications-dark', label: 'Bildirimler', alt: 'Bildirim ve takvim paneli açık', keys: ['Super', 'N'] },
+    ] as const,
+    menuTitle: 'Üç menü, aynı arama',
+    menuText: 'Varsayılan menü tek sütunlu Odak listesidir. İsterseniz kategorili klasik menüye ya da uygulama ızgarasına geçersiniz. Sabitlenenler, arama ve kısayollar üçünde de aynı kalır.',
+    menuLabel: 'Menü tipi',
+    menus: [
+      { label: 'Odak', shot: 'menu-dark', alt: 'Odak menüsü: sabitlenenler ve harf başlıklı liste' },
+      { label: 'Klasik', shot: 'menu-classic-dark', alt: 'Klasik menü: solda kategoriler, sağda uygulamalar' },
+      { label: 'Izgara', shot: 'menu-grid-dark', alt: 'Izgara menü: büyük simgelerle uygulamalar' },
+    ],
+    glassTitle: 'Buzlu cam, gerçek bulanıklık',
+    glassText: 'Panel, menü, denetim merkezi ve bildirim paneli arkalarında kalanı gerçekten bulanıklaştırır; bu işi compositor yapar. Görünüm’de Saydamlık efektlerini kapatırsanız ya da yüksek kontrast açıksa yüzeyler opak olur ve bulanıklık hiç yüklenmez. Saydamlık değerleri gerçek ekran kartlarında ölçüldükten sonra kesinleşecek.',
+    glass: { shot: 'menu-dark', label: 'Cam', alt: 'Cam menü: arkadaki tepeler bulanık görünüyor' },
+    opaque: { shot: 'menu-opaque-dark', label: 'Opak', alt: 'Opak menü' },
+    slider: 'Cam ve opak görünümü karşılaştır',
+    accentTitle: 'Dokuz vurgu rengi',
+    accentText: 'Seçtiğiniz renk Asena’nın kendi uygulamalarına, klasör simgelerine ve Flatpak uygulamalarına birlikte geçer. Bir renge tıklayın; bu site de onu kullanır.',
+    styleTitle: 'Açık ve koyu',
+    styleText: 'Sistem tercihine uyar ya da birini kendiniz seçersiniz. Geçiş anında olur, açık pencereler de birlikte değişir.',
+    styleLabel: 'Görünüm',
+    styles: [
+      { label: 'Koyu', shot: 'menu-dark', alt: 'Koyu görünümde başlat menüsü' },
+      { label: 'Açık', shot: 'menu-light', alt: 'Açık görünümde başlat menüsü ve panel' },
+    ],
+    panelTitle: 'Panel dört kenarda da çalışır',
+    panelText: 'Alt, üst, sol ya da sağ. Dikey panelde simgeler dik durur, saat dar düzene geçer. Değişiklik oturumu kapatmadan uygulanır.',
+    panelLabel: 'Panel konumu',
+    panels: [
+      { label: 'Alt', shot: 'desktop-dark', alt: 'Panel ekranın altında' },
+      { label: 'Üst', shot: 'panel-top', alt: 'Panel ekranın üstünde' },
+      { label: 'Sol', shot: 'panel-left', alt: 'Panel ekranın solunda, dikey' },
+      { label: 'Sağ', shot: 'panel-right', alt: 'Panel ekranın sağında, dikey' },
+    ],
+    keysTitle: 'Klavye kısayolları',
+    keysText: 'Harfli kısayollar ilk klavye düzeninizde o harfi yazan tuşa bağlanır; TR-F klavyede de doğru tuştadır.',
+    keys: [
+      { keys: ['Super', 'Boşluk'], action: 'Başlat menüsü' },
+      { keys: ['Super', 'A'], action: 'Denetim merkezi' },
+      { keys: ['Super', 'N'], action: 'Bildirimler ve takvim' },
+      { keys: ['Super', 'Enter'], action: 'Uçbirim' },
+      { keys: ['Alt', 'Tab'], action: 'Pencereler arasında geç' },
+      { keys: ['Print'], action: 'Ekranın görüntüsünü kaydet' },
+      { keys: ['Ses', 'Mikrofon', 'Parlaklık'], action: 'Klavyedeki ortam tuşları', sep: '·' },
+    ],
+  },
+  en: {
+    title: 'Desktop',
+    description: 'The Asena desktop: panel, start menu, control center, notification panel, glass, accent colors and shortcuts.',
+    lead: 'Asena’s desktop is a shell written in Rust and GTK4, running on Wayfire. Every image on this page was taken from a real session in the development virtual machine.',
+    tourHint: 'Click the rings on the panel or the buttons beside them.',
+    baseAlt: 'The empty Asena desktop with the panel along the bottom',
+    surfaces: [
+      { id: 'menu', shot: 'menu-dark', label: 'Start menu', alt: 'The start menu is open', keys: ['Super', 'Space'] },
+      { id: 'quick', shot: 'quick-dark', label: 'Control center', alt: 'The control center is open', keys: ['Super', 'A'] },
+      { id: 'notifications', shot: 'notifications-dark', label: 'Notifications', alt: 'The notification and calendar panel is open', keys: ['Super', 'N'] },
+    ] as const,
+    menuTitle: 'Three menus, one search',
+    menuText: 'The default is the single-column Odak list. You can switch to a classic menu with categories or to an app grid. Pinned apps, search and shortcuts stay the same in all three.',
+    menuLabel: 'Menu type',
+    menus: [
+      { label: 'Odak', shot: 'menu-dark', alt: 'The Odak menu: pinned apps and a list with letter headings' },
+      { label: 'Classic', shot: 'menu-classic-dark', alt: 'The classic menu: categories on the left, apps on the right' },
+      { label: 'Grid', shot: 'menu-grid-dark', alt: 'The grid menu: apps with large icons' },
+    ],
+    glassTitle: 'Frosted glass, real blur',
+    glassText: 'The panel, menu, control center and notification panel really blur what is behind them; the compositor does that work. Turn off Transparency effects in Appearance, or use high contrast, and the surfaces go opaque and the blur is not loaded at all. The transparency values will be settled after measuring on real graphics cards.',
+    glass: { shot: 'menu-dark', label: 'Glass', alt: 'Glass menu: the hills behind it are blurred' },
+    opaque: { shot: 'menu-opaque-dark', label: 'Opaque', alt: 'Opaque menu' },
+    slider: 'Compare glass and opaque',
+    accentTitle: 'Nine accent colors',
+    accentText: 'The color you pick reaches Asena’s own apps, the folder icons and Flatpak apps together. Click a color and this site uses it too.',
+    styleTitle: 'Light and dark',
+    styleText: 'It follows the system preference, or you pick one yourself. The switch is instant and open windows change with it.',
+    styleLabel: 'Style',
+    styles: [
+      { label: 'Dark', shot: 'menu-dark', alt: 'The start menu in the dark style' },
+      { label: 'Light', shot: 'menu-light', alt: 'The start menu and panel in the light style' },
+    ],
+    panelTitle: 'The panel works on any edge',
+    panelText: 'Bottom, top, left or right. On a vertical panel the icons stay upright and the clock switches to a narrow layout. The change applies without logging out.',
+    panelLabel: 'Panel position',
+    panels: [
+      { label: 'Bottom', shot: 'desktop-dark', alt: 'The panel at the bottom of the screen' },
+      { label: 'Top', shot: 'panel-top', alt: 'The panel at the top of the screen' },
+      { label: 'Left', shot: 'panel-left', alt: 'The panel on the left, vertical' },
+      { label: 'Right', shot: 'panel-right', alt: 'The panel on the right, vertical' },
+    ],
+    keysTitle: 'Keyboard shortcuts',
+    keysText: 'Letter shortcuts are bound to whichever key types that letter in your first keyboard layout, so they land right on Turkish F keyboards too.',
+    keys: [
+      { keys: ['Super', 'Space'], action: 'Start menu' },
+      { keys: ['Super', 'A'], action: 'Control center' },
+      { keys: ['Super', 'N'], action: 'Notifications and calendar' },
+      { keys: ['Super', 'Enter'], action: 'Terminal' },
+      { keys: ['Alt', 'Tab'], action: 'Switch windows' },
+      { keys: ['Print'], action: 'Save a screenshot of the screen' },
+      { keys: ['Volume', 'Mic', 'Brightness'], action: 'The media keys on your keyboard', sep: '·' },
+    ],
+  },
+}[lang];
+---
+
+<Base lang={lang} title={c.title} description={c.description} alternate={route('desktop', other)}>
+  <header class="page-intro wrap">
+    <h1 data-reveal>{c.title}</h1>
+    <p class="lead" data-reveal style="--reveal-i:1">{c.lead}</p>
+  </header>
+
+  <section class="wrap tour-block" data-reveal="scale">
+    <DesktopTour lang={lang} baseAlt={c.baseAlt} hint={c.tourHint} surfaces={[...c.surfaces]} />
+  </section>
+
+  <section class="block wrap two-col">
+    <div class="block-head" data-reveal>
+      <h2>{c.menuTitle}</h2>
+      <p>{c.menuText}</p>
+    </div>
+    <div data-reveal style="--reveal-i:1">
+      <ShotSwitcher lang={lang} label={c.menuLabel} options={c.menus} focus={{ scale: 1.9, x: 0, y: 100 }} />
+    </div>
+  </section>
+
+  <section class="block wrap two-col reverse">
+    <div class="block-head" data-reveal>
+      <h2>{c.glassTitle}</h2>
+      <p>{c.glassText}</p>
+    </div>
+    <div data-reveal style="--reveal-i:1">
+      <BlurCompare lang={lang} before={c.glass} after={c.opaque} sliderLabel={c.slider} focus={{ scale: 2.2, x: 0, y: 100 }} />
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <div class="block-head" data-reveal>
+      <h2>{c.accentTitle}</h2>
+      <p>{c.accentText}</p>
+    </div>
+    <div data-reveal style="--reveal-i:1"><AccentPicker lang={lang} /></div>
+  </section>
+
+  <section class="block wrap two-col">
+    <div class="block-head" data-reveal>
+      <h2>{c.styleTitle}</h2>
+      <p>{c.styleText}</p>
+    </div>
+    <div data-reveal style="--reveal-i:1">
+      <ShotSwitcher lang={lang} label={c.styleLabel} options={c.styles} focus={{ scale: 1.9, x: 0, y: 100 }} />
+    </div>
+  </section>
+
+  <section class="block wrap">
+    <div class="block-head" data-reveal>
+      <h2>{c.panelTitle}</h2>
+      <p>{c.panelText}</p>
+    </div>
+    <div data-reveal style="--reveal-i:1"><ShotSwitcher lang={lang} label={c.panelLabel} options={c.panels} /></div>
+  </section>
+
+  <section class="block wrap two-col">
+    <div class="block-head" data-reveal>
+      <h2>{c.keysTitle}</h2>
+      <p>{c.keysText}</p>
+    </div>
+    <dl class="shortcuts" data-reveal style="--reveal-i:1">
+      {
+        c.keys.map((row) => (
+          <div>
+            <dt>
+              {row.keys.map((key, i) => (
+                <>
+                  {i > 0 && <span class="plus">{'sep' in row ? row.sep : '+'}</span>}
+                  <kbd>{key}</kbd>
+                </>
+              ))}
+            </dt>
+            <dd>{row.action}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</Base>
+
+<style>
+  .tour-block { margin-bottom: var(--space-6); }
+  .two-col { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: clamp(var(--space-6), 5vw, var(--space-8)); align-items: center; }
+  .two-col .block-head { margin: 0; }
+  .two-col.reverse > :first-child { order: 2; }
+  @media (max-width: 900px) {
+    .two-col { grid-template-columns: 1fr; }
+    .two-col.reverse > :first-child { order: 0; }
+  }
+  .shortcuts { display: grid; border-top: 1px solid var(--border-subtle); }
+  .shortcuts div { display: grid; grid-template-columns: minmax(150px, 0.8fr) 1fr; gap: var(--space-4); align-items: center; padding-block: var(--space-3); border-bottom: 1px solid var(--border-subtle); }
+  .shortcuts dt { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .plus { color: var(--text-secondary); }
+  .shortcuts dd { color: var(--text-secondary); }
+</style>

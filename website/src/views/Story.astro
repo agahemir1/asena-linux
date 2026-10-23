@@ -1,0 +1,393 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { wallpaper } from '../lib/media';
+import { route, type Lang } from '../i18n/routes';
+import emblem from '@data/branding/asena-emblem.svg';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+
+const c = {
+  tr: {
+    title: 'Hikâye',
+    description: 'Asena adının geldiği Göktürk kurt söylencesi, Ergenekon, logonun Selçuklu yıldızı ve duvar kâğıtlarındaki motifler.',
+    heading: 'Asena’nın hikâyesi',
+    lead: 'Bir kurt, bir dağ ve bir yıldız. Dağıtımın adı, logosu ve duvar kâğıtları Türklerin en eski anlatılarından ve Anadolu’nun el sanatlarından geliyor.',
+    chapters: [
+      {
+        image: 'asena-bozkurt',
+        eyebrow: 'Kurt ana',
+        title: 'Sağ kalan çocuk ve dişi kurt',
+        body: [
+          'Göktürklerin kökeni, yedinci yüzyılda derlenen Çin tarihi Zhou shu’da iki ayrı kurt anlatısıyla geçer. Birinde komşu bir ülkenin saldırısında bütün boy öldürülür, yalnız on yaşlarında bir oğlan kalır. Askerler onu küçük diye öldürmez, sakat bırakıp sazlığa atar. Bir dişi kurt bulur, besler.',
+          'Kurt sonra Turfan’ın (Gaochang) kuzeyindeki dağlarda bir mağaraya sığınır ve orada on oğul doğurur. Her oğul bir soy kurar; bunlardan biri Aşina’dır. Göktürk kağanları bu soydan gelir.',
+        ],
+      },
+      {
+        image: 'asena-gece',
+        eyebrow: 'Ad',
+        title: 'Kaynaklarda adı geçmez',
+        body: [
+          'Çin kaynakları dişi kurda bir ad vermez; Aşina, hanedanın adıdır. Kurdun Asena diye anılması yirminci yüzyılda yaygınlaştı. Ziya Gökalp 1922’de Asena’nın Çinlilere göre kurt anlamına geldiğini yazmıştı.',
+          'Söylencenin Göktürk döneminde de anlatıldığına bir iz, Moğolistan’daki altıncı yüzyıldan kalma Bugut yazıtıdır: taşın tepesinde, altında küçük bir insan figürü olan bir kurt kabartması vardır.',
+        ],
+      },
+      {
+        image: 'ergenekon-atesi',
+        eyebrow: 'Ergenekon',
+        title: 'Dağı eriten ateş',
+        body: [
+          'Ergenekon, dağlarla çevrili bir vadiye sığınan ve kuşaklar sonra dağı eriterek dışarı çıkan bir halkın anlatısıdır. Yazılı en eski biçimi on dördüncü yüzyılda Reşîdüddin’in Câmiü’t-tevârîh’indedir ve orada Moğolların ataları için anlatılır. On yedinci yüzyılda Ebülgazi Bahadır Han Şecere-i Türk’te yeniden anlatır.',
+          'En akılda kalan sahne demir dağın körüklerle, ateşle eritilmesidir. Zhou shu da Göktürklerin Altay eteklerinde demir işlediğini yazar. Yolu bir bozkurdun gösterdiği ayrıntı ise yirminci yüzyılın Türkçe anlatımlarında yerleşti.',
+        ],
+      },
+      {
+        image: 'altay-otagi',
+        eyebrow: 'Altay',
+        title: 'Keçe otağ, açık bozkır',
+        body: [
+          'Göktürk Kağanlığı altıncı yüzyılda Altay dağlarının eteklerinden doğdu ve kısa sürede Moğolistan’dan Karadeniz’in kuzeyine uzandı. Keçe çadırlar, at sürüleri ve mevsimle yer değiştiren hayat, bu duvar kâğıdının sakin sabahında yaşıyor.',
+        ],
+      },
+    ],
+    logoEyebrow: 'Logo',
+    logoTitle: 'Sekiz köşeli yıldız, çini sırrıyla',
+    logoBody: [
+      'Logo, Anadolu Selçuklu sanatında sık görülen sekiz köşeli yıldızdan çizildi: iç içe geçmiş iki kare ve aralarındaki krem rengi bant. Yüzeyi, Selçuklu çinilerinin firuze sırrını hatırlatan turkuaz bir camla kaplı.',
+      'Aynı yıldız paneldeki başlat düğmesidir; masaüstünün varsayılan vurgu rengi de turkuazdır. Logo açılış ekranında, giriş ve kilit ekranında ve Ayarlar › Hakkında’da görünür.',
+    ],
+    galleryTitle: 'Duvar kâğıtları',
+    galleryLead: 'On duvar kâğıdı, her biri bir motifin üzerine. Büyütmek için birine tıklayın.',
+    credit: 'Duvar kâğıtlarını proje sahibi Google Antigravity’nin görüntü üretimiyle hazırladı; hiçbiri başka bir kaynaktan alınmadı. Lisansları CC BY-SA 4.0, Asena Linux katkıcıları.',
+    close: 'Kapat',
+    previous: 'Önceki',
+    next: 'Sonraki',
+    sourcesTitle: 'Kaynaklar',
+    sourcesNote: 'Söylencelerin birçok anlatımı vardır; burada en bilinen ana hatlar verildi.',
+  },
+  en: {
+    title: 'Story',
+    description: 'The Türk wolf legend behind the name Asena, Ergenekon, the Seljuk star of the logo and the motifs in the wallpapers.',
+    heading: 'The story of Asena',
+    lead: 'A wolf, a mountain and a star. The distribution’s name, logo and wallpapers come from some of the oldest Turkic tales and from the crafts of Anatolia.',
+    chapters: [
+      {
+        image: 'asena-bozkurt',
+        eyebrow: 'The mother wolf',
+        title: 'The boy who survived, and the she-wolf',
+        body: [
+          'The origin of the Türks appears in the Zhou shu, a Chinese history compiled in the seventh century, as two separate wolf tales. In one, a neighbouring state wipes out the whole tribe and only a boy of about ten is left. The soldiers spare him for being so young, maim him and leave him in a marsh. A she-wolf finds him and feeds him.',
+          'The wolf later takes refuge in a cave in the mountains north of Turfan (Gaochang) and gives birth to ten sons there. Each son founds a lineage; one of them is the Ashina. The Türk khagans descend from that line.',
+        ],
+      },
+      {
+        image: 'asena-gece',
+        eyebrow: 'The name',
+        title: 'The sources never name her',
+        body: [
+          'The Chinese sources give the she-wolf no name; Ashina is the name of the dynasty. Calling the wolf Asena became common in the twentieth century. In 1922 Ziya Gökalp wrote that, according to the Chinese, Asena meant wolf.',
+          'One trace that the legend was told in the Türk period itself is the sixth-century Bugut inscription in Mongolia: the top of the stone carries a wolf with a small human figure beneath it.',
+        ],
+      },
+      {
+        image: 'ergenekon-atesi',
+        eyebrow: 'Ergenekon',
+        title: 'The fire that melted a mountain',
+        body: [
+          'Ergenekon is the tale of a people who shelter in a valley ringed by mountains and, generations later, melt the mountain to get out. Its oldest written form is in Rashid al-Din’s fourteenth-century Jami al-tawarikh, where it is told of the ancestors of the Mongols. In the seventeenth century Abu al-Ghazi Bahadur Khan retold it in his Genealogy of the Turks.',
+          'The scene people remember is the iron mountain melted with bellows and fire. The Zhou shu, too, says the Türks worked iron on the slopes of the Altai. The detail of a grey wolf leading the way settled in twentieth-century Turkish retellings.',
+        ],
+      },
+      {
+        image: 'altay-otagi',
+        eyebrow: 'Altai',
+        title: 'Felt tents, open steppe',
+        body: [
+          'The Türk Khaganate rose from the foothills of the Altai in the sixth century and soon stretched from Mongolia to north of the Black Sea. Felt tents, herds of horses and a life that moved with the seasons live on in the quiet morning of this wallpaper.',
+        ],
+      },
+    ],
+    logoEyebrow: 'Logo',
+    logoTitle: 'An eight-pointed star in tile glaze',
+    logoBody: [
+      'The logo is drawn from the eight-pointed star common in Anatolian Seljuk art: two interlaced squares with a cream band between them. Its face is a turquoise glaze, a nod to the firuze glaze of Seljuk tiles.',
+      'The same star is the start button on the panel, and turquoise is the desktop’s default accent. The logo appears on the boot screen, the login and lock screens and in Settings › About.',
+    ],
+    galleryTitle: 'Wallpapers',
+    galleryLead: 'Ten wallpapers, each on one motif. Click one to enlarge it.',
+    credit: 'The project owner made the wallpapers with Google Antigravity’s image generation; none is taken from another source. They are licensed CC BY-SA 4.0, Asena Linux contributors.',
+    close: 'Close',
+    previous: 'Previous',
+    next: 'Next',
+    sourcesTitle: 'Sources',
+    sourcesNote: 'These legends exist in many versions; the outline here follows the best known.',
+  },
+}[lang];
+
+const gallery = {
+  tr: [
+    ['asena-gece', 'Asena Gece', 'Ay ışığında bozkır ve tepede bir kurt. Varsayılan duvar kâğıdı.'],
+    ['asena-bozkurt', 'Bozkurt', 'Sisli vadilere bakan bir kurt.'],
+    ['ergenekon-atesi', 'Ergenekon Ateşi', 'Mağara ağzında demirci ocağı ve örs; dağı eriten ateşe bir selam.'],
+    ['altay-otagi', 'Altay Otağı', 'Altay eteklerinde keçe bir otağ ve otlayan atlar.'],
+    ['cift-basli-kartal', 'Çift Başlı Kartal', 'Selçuklu taş işçiliğinde çift başlı kartal. Konya Kalesi’nden gelen benzer kabartmalar bugün İnce Minareli Medrese’deki müzede.'],
+    ['selcuklu-yildizi', 'Selçuklu Yıldızı', 'Taç kapı süslemelerini andıran taş oymada yıldız geçmeler.'],
+    ['selcuklu-geometri', 'Selçuklu Geometrisi', 'Kündekârî: çivi ve tutkal olmadan birbirine geçirilen ahşap parçalar. En eski örneklerinden biri Konya Alaeddin Camii’nin 1155 tarihli minberi.'],
+    ['iznik-zerafeti', 'İznik Zarafeti', 'On altıncı yüzyıl İznik çinilerinin lale, karanfil ve kıvrık dal motifleri; kobalt mavisi, firuze ve mercan kırmızısı.'],
+    ['turkuaz-ebru', 'Turkuaz Ebru', 'Su üzerine serpilen boyalarla yapılan kâğıt bezeme. Türk ebrusu 2014’te UNESCO’nun Somut Olmayan Kültürel Miras listesine girdi.'],
+    ['al-sancak-hilal', 'Al Sancak', 'Kırmızı kumaş üzerinde işlenmiş ay yıldız.'],
+  ],
+  en: [
+    ['asena-gece', 'Asena Night', 'Moonlit steppe with a wolf on the hill. The default wallpaper.'],
+    ['asena-bozkurt', 'Grey Wolf', 'A wolf looking over misty valleys.'],
+    ['ergenekon-atesi', 'Ergenekon Fire', 'A smith’s hearth and anvil at a cave mouth, a nod to the fire that melted the mountain.'],
+    ['altay-otagi', 'Altai Tent', 'A felt tent in the Altai foothills, with horses grazing.'],
+    ['cift-basli-kartal', 'Double-Headed Eagle', 'A double-headed eagle in Seljuk stonework. Similar reliefs from the Konya citadel are now in the museum at the İnce Minareli Madrasa.'],
+    ['selcuklu-yildizi', 'Seljuk Star', 'Interlaced stars carved in stone, in the manner of Seljuk portals.'],
+    ['selcuklu-geometri', 'Seljuk Geometry', 'Kündekari: pieces of wood fitted together without nails or glue. One of the oldest examples is the 1155 minbar of the Alaeddin Mosque in Konya.'],
+    ['iznik-zerafeti', 'İznik Elegance', 'Tulips, carnations and scrolling stems of sixteenth-century İznik tiles, in cobalt, turquoise and coral red.'],
+    ['turkuaz-ebru', 'Turquoise Ebru', 'Paper decorated by floating colors on water. Turkish ebru joined UNESCO’s Intangible Cultural Heritage list in 2014.'],
+    ['al-sancak-hilal', 'Al Sancak', 'A crescent and star embroidered on red cloth.'],
+  ],
+}[lang] as [string, string, string][];
+
+const sources = [
+  { label: 'Asena (Wikipedia)', href: 'https://en.wikipedia.org/wiki/Asena' },
+  { label: 'Epic of Ergenekon (Wikipedia)', href: 'https://en.wikipedia.org/wiki/Epic_of_Ergenekon' },
+  { label: 'UNESCO: Ebru, Turkish art of marbling', href: 'https://ich.unesco.org/en/RL/ebru-turkish-art-of-marbling-00644' },
+  { label: 'TDV İslâm Ansiklopedisi: Kündekârî', href: 'https://islamansiklopedisi.org.tr/kundekari' },
+  { label: 'TDV İslâm Ansiklopedisi: Konya İnce Minareli Medrese Taş ve Ahşap Eserler Müzesi', href: 'https://islamansiklopedisi.org.tr/konya-ince-minareli-medrese-tas-ve-ahsap-eserler-muzesi' },
+];
+const hero = wallpaper('asena-bozkurt');
+---
+
+<Base lang={lang} title={c.title} description={c.description} alternate={route('story', other)} overlayHeader>
+  <section class="story-hero">
+    <div class="bg" aria-hidden="true">
+      <Image src={hero} alt="" format="webp" quality={78} widths={[768, 1280, 1920, 2560, 3840]} sizes="100vw" priority />
+    </div>
+    <div class="wrap hero-text">
+      <span class="eyebrow">{c.title}</span>
+      <h1>{c.heading}</h1>
+      <p>{c.lead}</p>
+    </div>
+  </section>
+
+  <section class="chapters" data-chapters>
+    <div class="backdrops" aria-hidden="true">
+      {
+        c.chapters.map((chapter, i) => (
+          <div class="backdrop" data-index={i} data-active={i === 0 ? '' : undefined}>
+            <Image src={wallpaper(chapter.image)} alt="" format="webp" quality={76} widths={[768, 1280, 1920, 2560]} sizes="100vw" loading="lazy" />
+          </div>
+        ))
+      }
+    </div>
+    <div class="wrap texts">
+      {
+        c.chapters.map((chapter, i) => (
+          <article class="chapter" data-index={i}>
+            <div class="card">
+              <span class="eyebrow">{chapter.eyebrow}</span>
+              <h2>{chapter.title}</h2>
+              {chapter.body.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section logo">
+    <div class="wrap logo-grid">
+      <div class="logo-art" data-reveal="scale">
+        <img src={emblem.src} width="128" height="128" alt="" />
+      </div>
+      <div data-reveal style="--reveal-i:1">
+        <span class="eyebrow">{c.logoEyebrow}</span>
+        <h2>{c.logoTitle}</h2>
+        {c.logoBody.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section gallery-section">
+    <div class="wrap">
+      <header class="block-head" data-reveal>
+        <h2>{c.galleryTitle}</h2>
+        <p>{c.galleryLead}</p>
+      </header>
+      <ul class="gallery" data-gallery>
+        {
+          gallery.map(([name, title], i) => (
+            <li data-reveal="scale" style={`--reveal-i:${i % 5}`}>
+              <button type="button" data-open={i} aria-label={title}>
+                <Image src={wallpaper(name)} alt="" format="webp" quality={74} widths={[480, 768, 1080]} sizes="(min-width: 1100px) 360px, (min-width: 640px) 45vw, 92vw" loading="lazy" />
+                <span class="cap"><strong>{title}</strong></span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="credit" data-reveal>{c.credit}</p>
+    </div>
+  </section>
+
+  <dialog class="lightbox" data-lightbox aria-label={c.galleryTitle}>
+    <div class="lb-frame">
+      {
+        gallery.map(([name, title, caption], i) => (
+          <figure data-index={i}>
+            <Image src={wallpaper(name)} alt={`${title}. ${caption}`} format="webp" quality={82} widths={[1280, 1920, 2560]} sizes="96vw" loading="lazy" />
+            <figcaption>
+              <strong>{title}</strong>
+              <span>{caption}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+      <button class="lb-close" type="button" data-close aria-label={c.close}><Icon name="window-close" size={18} /></button>
+      <button class="lb-nav prev" type="button" data-step="-1" aria-label={c.previous}><Icon name="go-previous" size={20} /></button>
+      <button class="lb-nav next" type="button" data-step="1" aria-label={c.next}><Icon name="go-next" size={20} /></button>
+    </div>
+  </dialog>
+
+  <section class="wrap-narrow sources" data-reveal>
+    <h2>{c.sourcesTitle}</h2>
+    <p class="muted">{c.sourcesNote}</p>
+    <ul>
+      {sources.map((source) => <li><a href={source.href} rel="noopener">{source.label}</a></li>)}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .story-hero { position: relative; min-height: max(620px, 100svh); display: grid; align-items: end; color: var(--on-image); overflow: clip; isolation: isolate; }
+  .story-hero .bg { position: absolute; inset: 0; z-index: -1; }
+  .story-hero .bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%; animation: kenburns 18s ease-out both; }
+  .story-hero .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--surface-base) 0%, color-mix(in srgb, var(--scrim) 55%, transparent) 30%, color-mix(in srgb, var(--scrim) 15%, transparent) 70%, color-mix(in srgb, var(--scrim) 45%, transparent) 100%); }
+  @keyframes kenburns { from { transform: scale(1.12); } to { transform: scale(1); } }
+  .hero-text { padding-block: var(--space-10) clamp(var(--space-8), 12vh, var(--space-10)); display: grid; gap: var(--space-4); }
+  .hero-text .eyebrow { color: var(--brand-glaze-1); margin: 0; }
+  .hero-text h1 { font-size: var(--fs-display); letter-spacing: -0.04em; line-height: 0.98; max-width: 12ch; animation: rise 1100ms var(--ease-out-expo) 200ms both; }
+  .hero-text p { max-width: 46ch; font-size: var(--fs-lead); color: var(--on-image-2); animation: rise 1100ms var(--ease-out-expo) 380ms both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+  .chapters { position: relative; }
+  .backdrops { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
+  .backdrop { position: absolute; inset: 0; opacity: 0; transition: opacity 1100ms var(--ease-out-cubic); }
+  .backdrop :global(img) { width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 8s ease-out; }
+  .backdrop[data-active] { opacity: 1; }
+  .backdrop[data-active] :global(img) { transform: scale(1); }
+  .backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--scrim) 10%, transparent) 30%, color-mix(in srgb, var(--scrim) 70%, transparent) 100%); }
+  .texts { position: relative; margin-top: -100vh; margin-top: -100dvh; }
+  .chapter { min-height: 110vh; display: flex; align-items: center; justify-content: flex-end; padding-block: 20vh; }
+  .card {
+    width: min(100%, 540px);
+    padding: clamp(var(--space-5), 3.5vw, var(--space-7));
+    border-radius: var(--radius-dialog);
+    background: color-mix(in srgb, var(--scrim) 58%, transparent);
+    border: 1px solid var(--on-image-line);
+    color: var(--on-image);
+    backdrop-filter: blur(18px) saturate(1.3);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3);
+    box-shadow: var(--shadow-window);
+    display: grid;
+    gap: var(--space-4);
+  }
+  .card .eyebrow { color: var(--brand-glaze-1); margin: 0; }
+  .card h2 { font-size: clamp(1.7rem, 1.3rem + 1.5vw, 2.5rem); }
+  .card p { color: var(--on-image-2); line-height: 1.7; }
+  .chapter:last-child { padding-bottom: 40vh; }
+
+  .logo { background: var(--surface-sunken); }
+  .logo-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(var(--space-6), 6vw, var(--space-9)); align-items: center; }
+  .logo-grid h2 { margin-bottom: var(--space-4); }
+  .logo-grid p { color: var(--text-secondary); max-width: 58ch; }
+  .logo-grid p + p { margin-top: var(--space-3); }
+  .logo-art { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 45%, color-mix(in oklab, var(--brand-glaze-2) 26%, transparent), transparent 66%); }
+  .logo-art img { width: 58%; height: auto; filter: drop-shadow(0 30px 40px rgb(0 0 0 / 0.35)); animation: float 7s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-10px) rotate(-2deg); } }
+  @media (max-width: 800px) { .logo-grid { grid-template-columns: 1fr; } .logo-art { max-width: 320px; margin-inline: auto; } }
+
+  .gallery { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--space-4); }
+  .gallery button { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: var(--radius-card); overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface-sunken); }
+  .gallery :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out-expo), filter 400ms ease; }
+  .gallery button:hover :global(img), .gallery button:focus-visible :global(img) { transform: scale(1.06); }
+  .cap { position: absolute; inset: auto 0 0; padding: var(--space-6) var(--space-4) var(--space-3); text-align: left; color: var(--on-image); background: linear-gradient(0deg, color-mix(in srgb, var(--scrim) 75%, transparent), transparent); font-size: var(--fs-small); }
+  .credit { margin-top: var(--space-5); color: var(--text-secondary); font-size: var(--fs-small); max-width: 70ch; }
+
+  .lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: color-mix(in srgb, var(--scrim) 94%, transparent); color: var(--on-image); }
+  .lightbox::backdrop { background: transparent; }
+  .lightbox[open] { animation: lb-in 260ms var(--ease-out-cubic); }
+  @keyframes lb-in { from { opacity: 0; } }
+  .lb-frame { position: relative; height: 100%; display: grid; place-items: center; padding: var(--space-8) var(--space-9) var(--space-6); }
+  .lb-frame figure { display: none; max-width: 100%; max-height: 100%; }
+  .lb-frame figure[data-active] { display: grid; gap: var(--space-4); animation: lb-fig 420ms var(--ease-out-expo); }
+  @keyframes lb-fig { from { opacity: 0; transform: scale(0.97); } }
+  .lb-frame :global(img) { max-height: calc(100dvh - 220px); width: auto; border-radius: var(--radius-card); box-shadow: var(--shadow-window); }
+  .lb-frame figcaption { display: grid; gap: 4px; max-width: 70ch; }
+  .lb-frame figcaption span { color: var(--on-image-2); }
+  .lb-close, .lb-nav { position: absolute; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--on-image-line); background: var(--on-image-glass); color: var(--on-image); }
+  .lb-close { top: var(--space-4); right: var(--space-4); }
+  .lb-nav { top: 50%; transform: translateY(-50%); }
+  .lb-nav.prev { left: var(--space-4); }
+  .lb-nav.next { right: var(--space-4); }
+  @media (max-width: 700px) {
+    .lb-frame { padding: var(--space-9) var(--space-3) var(--space-6); }
+    .lb-nav { top: auto; bottom: var(--space-4); transform: none; }
+  }
+
+  .sources { padding-block: var(--space-8) 0; }
+  .sources h2 { font-size: var(--fs-h3); margin-bottom: var(--space-2); }
+  .sources ul { margin-top: var(--space-4); padding-left: 1.1em; display: grid; gap: var(--space-2); font-size: var(--fs-small); }
+</style>
+
+<script>
+  for (const chapters of document.querySelectorAll<HTMLElement>('[data-chapters]')) {
+    const backdrops = [...chapters.querySelectorAll<HTMLElement>('.backdrop')];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const index = (entry.target as HTMLElement).dataset.index;
+          backdrops.forEach((backdrop) => backdrop.toggleAttribute('data-active', backdrop.dataset.index === index));
+        }
+      },
+      { rootMargin: '-50% 0px -50% 0px' },
+    );
+    chapters.querySelectorAll('.chapter').forEach((chapter) => observer.observe(chapter));
+  }
+
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+  const figures = dialog ? [...dialog.querySelectorAll<HTMLElement>('figure')] : [];
+  let current = 0;
+  const show = (index: number) => {
+    current = (index + figures.length) % figures.length;
+    figures.forEach((figure, i) => figure.toggleAttribute('data-active', i === current));
+    figures[current]?.querySelector('img')?.setAttribute('loading', 'eager');
+  };
+  document.querySelectorAll<HTMLButtonElement>('[data-gallery] [data-open]').forEach((button) =>
+    button.addEventListener('click', () => {
+      show(Number(button.dataset.open));
+      dialog?.showModal();
+    }),
+  );
+  dialog?.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+  dialog?.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((button) =>
+    button.addEventListener('click', () => show(current + Number(button.dataset.step))),
+  );
+  dialog?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') show(current + 1);
+    if (event.key === 'ArrowLeft') show(current - 1);
+  });
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog || (event.target as HTMLElement).classList.contains('lb-frame')) dialog.close();
+  });
+</script>

@@ -1,0 +1,152 @@
+---
+import Screen from './Screen.astro';
+import type { Lang } from '../i18n/routes';
+
+interface Surface {
+  id: 'menu' | 'quick' | 'notifications';
+  shot: string;
+  label: string;
+  alt: string;
+  keys: readonly string[];
+}
+
+interface Props {
+  lang: Lang;
+  baseAlt: string;
+  hint: string;
+  surfaces: Surface[];
+}
+
+const { lang, baseAlt, hint, surfaces } = Astro.props;
+---
+
+<div class="tour" data-desktop-tour>
+  <div class="stage shot">
+    <Screen lang={lang} name="desktop-dark" alt={baseAlt} sizes="(min-width: 1240px) 1160px, 96vw" priority />
+    {
+      surfaces.map((surface) => (
+        <div class="surface" data-surface={surface.id} aria-hidden="true">
+          <Screen lang={lang} name={surface.shot} alt={surface.alt} sizes="(min-width: 1240px) 1160px, 96vw" />
+        </div>
+      ))
+    }
+    {
+      surfaces.map((surface) => (
+        <button class="hotspot" type="button" data-open={surface.id} aria-pressed="false" aria-label={surface.label}>
+          <span />
+        </button>
+      ))
+    }
+  </div>
+  <div class="controls">
+    <p class="hint">{hint}</p>
+    <ul>
+      {
+        surfaces.map((surface) => (
+          <li>
+            <button type="button" data-open={surface.id} aria-pressed="false">
+              <span class="label">{surface.label}</span>
+              <span class="keys">
+                {surface.keys.map((key, i) => (
+                  <>
+                    {i > 0 && '+'}
+                    <kbd>{key}</kbd>
+                  </>
+                ))}
+              </span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style>
+  .stage { position: relative; aspect-ratio: 16 / 9; }
+  .stage > :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .surface { position: absolute; inset: 0; pointer-events: none; }
+  .surface :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: translateY(0.8%);
+    transition: opacity var(--dur-close) var(--ease-in-cubic), transform var(--dur-close) var(--ease-in-cubic);
+  }
+  /* Only the surface itself is revealed, so it opens like it does on the desktop. */
+  .surface[data-surface='menu'] :global(img) { clip-path: inset(42.2% 79.2% 4.7% 0 round 1.2%); }
+  .surface[data-surface='quick'] :global(img) { clip-path: inset(77.2% 0 4.7% 80.6% round 1.2%); transform: translate(0.4%, 0.8%); }
+  .surface[data-surface='notifications'] :global(img) { clip-path: inset(0.4% 0 4.7% 79.5% round 1.2%); transform: translateX(1.2%); }
+  .surface[data-open] :global(img) {
+    opacity: 1;
+    transform: none;
+    transition: opacity var(--dur-open) var(--ease-out-cubic), transform var(--dur-open) var(--ease-out-cubic);
+  }
+
+  .hotspot {
+    position: absolute;
+    top: 95.6%;
+    width: 2.8%;
+    height: 4.4%;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    transform: translateX(-50%);
+  }
+  .hotspot[data-open='menu'] { left: 1.5%; }
+  .hotspot[data-open='quick'] { left: 95.3%; width: 3.4%; }
+  .hotspot[data-open='notifications'] { left: 98.4%; }
+  .hotspot span {
+    position: absolute;
+    inset: -30%;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    opacity: 0.9;
+    animation: beckon 2.2s var(--ease-out-cubic) infinite;
+  }
+  .hotspot:hover { background: color-mix(in srgb, var(--on-image) 14%, transparent); }
+  .hotspot[aria-pressed='true'] span, .tour.used .hotspot span { animation: none; opacity: 0; }
+  @keyframes beckon { 0% { transform: scale(0.6); opacity: 0.9; } 70%, 100% { transform: scale(1.5); opacity: 0; } }
+
+  .controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-5); }
+  .hint { color: var(--text-secondary); font-size: var(--fs-small); }
+  .controls ul { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; padding: 0; }
+  .controls button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 8px 10px 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-raised);
+    font-size: var(--fs-small);
+    transition: border-color var(--dur-state) ease, background-color var(--dur-state) ease;
+  }
+  .controls button:hover { border-color: var(--border-strong); }
+  .controls button[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-subtle); }
+  .keys { display: inline-flex; align-items: center; gap: 4px; color: var(--text-secondary); }
+</style>
+
+<script>
+  for (const tour of document.querySelectorAll<HTMLElement>('[data-desktop-tour]')) {
+    let open: string | null = null;
+    const set = (id: string | null) => {
+      open = id;
+      tour.querySelectorAll<HTMLElement>('.surface').forEach((s) => s.toggleAttribute('data-open', s.dataset.surface === id));
+      tour.querySelectorAll<HTMLButtonElement>('button[data-open]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.open === id)));
+      if (id) tour.classList.add('used');
+    };
+    tour.querySelectorAll<HTMLButtonElement>('button[data-open]').forEach((button) =>
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        set(open === button.dataset.open ? null : (button.dataset.open ?? null));
+      }),
+    );
+    tour.querySelector('.stage')?.addEventListener('click', () => set(null));
+    tour.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') set(null);
+    });
+  }
+</script>

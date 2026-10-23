@@ -1,0 +1,13 @@
+---
+import NewsPost from '../../../views/NewsPost.astro';
+import { newsFor } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await newsFor('en');
+  return posts.map((entry) => ({ params: { slug: entry.data.permalink }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+---
+
+<NewsPost lang="en" entry={entry} />

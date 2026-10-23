@@ -1,0 +1,39 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { translationOf } from '../lib/content';
+import { route, type Lang } from '../i18n/routes';
+import { formatDate, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  entry: CollectionEntry<'news'>;
+}
+
+const { lang, entry } = Astro.props;
+const t = useTranslations(lang);
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+const { Content } = await render(entry);
+const alternate = await translationOf('news', entry.data.key, other);
+---
+
+<Base lang={lang} title={entry.data.title} description={entry.data.description} alternate={alternate}>
+  <article class="wrap-narrow post">
+    <a class="back" href={route('news', lang)}><Icon name="go-previous" size={14} />{t('news.back')}</a>
+    <header>
+      <time datetime={entry.data.date.toISOString().slice(0, 10)}>{formatDate(entry.data.date, lang)}</time>
+      <h1>{entry.data.title}</h1>
+      <p class="lead">{entry.data.description}</p>
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</Base>
+
+<style>
+  .post { padding-top: var(--space-8); }
+  .back { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-small); text-decoration: none; margin-bottom: var(--space-6); }
+  header { display: grid; gap: var(--space-3); margin-bottom: var(--space-7); padding-bottom: var(--space-6); border-bottom: 1px solid var(--border-subtle); }
+  time { font-size: var(--fs-small); color: var(--text-secondary); }
+  h1 { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.1rem); }
+</style>

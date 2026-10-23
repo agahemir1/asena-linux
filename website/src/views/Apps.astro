@@ -1,0 +1,184 @@
+---
+import Base from '../layouts/Base.astro';
+import Screen from '../components/Screen.astro';
+import { apps, appIcon } from '../lib/apps';
+import { route, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+const c = {
+  tr: {
+    title: 'Uygulamalar',
+    description: 'Asena’nın kendi on iki uygulaması: Dosyalar, Ayarlar, Yazılım, Metin Düzenleyici, Notlar, Takvim, Saat, Hesap Makinesi, Fotoğraflar, Oynatıcı, Arşiv ve Ekran Görüntüsü.',
+    lead: 'On iki uygulama, hepsi aynı çatıyla yazıldı ve gerçek verinizle çalışır. Görüntüler, içi örnek dosyalarla doldurulmuş bir kullanıcı hesabından alındı.',
+    list: 'Uygulamalar',
+    window: (name: string) => `${name} penceresi`,
+    bundledTitle: 'Yanında gelenler',
+    bundled: 'Firefox ESR (Türkçe dil paketiyle) ve Foot uçbirimi kurulu gelir. Gerisi Yazılım’dan kurulur: Debian arşivi ve isterseniz Flathub.',
+    hidden: 'Dört uygulama daha (Uçbirim, Kamera, Belgeler, Hava Durumu) hazır olana kadar menüde görünmüyor.',
+  },
+  en: {
+    title: 'Apps',
+    description: 'Asena’s own twelve apps: Files, Settings, Software, Text Editor, Notes, Calendar, Clocks, Calculator, Photos, Media Player, Archive and Screenshot.',
+    lead: 'Twelve apps, all written on one framework and working with your real data. The screenshots come from a user account filled with sample files.',
+    list: 'Apps',
+    window: (name: string) => `The ${name} window`,
+    bundledTitle: 'Included alongside',
+    bundled: 'Firefox ESR (with the Turkish language pack) and the Foot terminal come installed. Everything else installs from Software: the Debian archive and, if you want it, Flathub.',
+    hidden: 'Four more apps (Terminal, Camera, Documents, Weather) stay out of the menu until they are ready.',
+  },
+}[lang];
+---
+
+<Base lang={lang} title={c.title} description={c.description} alternate={route('apps', other)}>
+  <header class="page-intro wrap">
+    <h1 data-reveal>{c.title}</h1>
+    <p class="lead" data-reveal style="--reveal-i:1">{c.lead}</p>
+  </header>
+
+  <section class="wrap browser" data-app-browser>
+    <div class="list" role="tablist" aria-label={c.list} aria-orientation="vertical">
+      {
+        apps.map((app, i) => (
+          <a
+            href={`#${app.slug}`}
+            role="tab"
+            id={`tab-${app.slug}`}
+            aria-controls={app.slug}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            data-slug={app.slug}
+          >
+            <img src={appIcon(app.id).src} width="40" height="40" alt="" />
+            <span>{app.name[lang]}</span>
+          </a>
+        ))
+      }
+    </div>
+    <div class="panels">
+      {
+        apps.map((app, i) => (
+          <article class="panel" id={app.slug} role="tabpanel" aria-labelledby={`tab-${app.slug}`} data-active={i === 0 ? '' : undefined}>
+            <div class="shot app-shot">
+              <Screen lang={lang} name={app.shot} alt={c.window(app.name[lang])} sizes="(min-width: 1100px) 760px, 92vw" />
+            </div>
+            <div class="info">
+              <div class="title">
+                <img src={appIcon(app.id).src} width="64" height="64" alt="" loading="lazy" />
+                <div>
+                  <h2>{app.name[lang]}</h2>
+                  <p>{app.summary[lang]}</p>
+                </div>
+              </div>
+              <ul>
+                {app.features[lang].map((feature) => <li>{feature}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="block wrap bundled" data-reveal>
+    <h2>{c.bundledTitle}</h2>
+    <p>{c.bundled}</p>
+    <p class="muted">{c.hidden}</p>
+  </section>
+</Base>
+
+<style>
+  .browser { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(var(--space-5), 4vw, var(--space-7)); align-items: start; }
+  .list { position: sticky; top: calc(var(--header-h) + var(--space-5)); display: grid; gap: 2px; }
+  .list a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 8px 12px 8px 8px;
+    border-radius: var(--radius-card);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 540;
+    transition: background-color var(--dur-state) ease, color var(--dur-state) ease;
+  }
+  .list a img { width: 36px; height: 36px; transition: transform 300ms var(--ease-out-expo); }
+  .list a:hover { color: var(--text-primary); background: var(--border-subtle); }
+  .list a:hover img { transform: scale(1.08); }
+  .list a[aria-selected='true'] { color: var(--text-primary); background: var(--accent-subtle); }
+
+  .panel { display: grid; gap: var(--space-6); scroll-margin-top: calc(var(--header-h) + var(--space-5)); }
+  .panel + .panel { margin-top: var(--space-9); }
+  :global(.js) .panel:not([data-active]) { display: none; }
+  :global(.js) .panel + .panel { margin-top: 0; }
+  :global(.js) .panel[data-active] { animation: panel-in 520ms var(--ease-out-expo); }
+  @keyframes panel-in { from { opacity: 0; transform: translateY(14px); } }
+  .app-shot { display: flex; justify-content: center; background: transparent; box-shadow: none; outline: none; border-radius: var(--radius-dialog); }
+  .app-shot :global(img) { width: auto; max-width: 100%; height: auto; max-height: min(68vh, 660px); border-radius: var(--radius-dialog); box-shadow: var(--shadow-window); }
+  .title { display: flex; gap: var(--space-4); align-items: center; margin-bottom: var(--space-5); }
+  .title img { width: 64px; height: 64px; flex: none; filter: drop-shadow(0 8px 14px rgb(0 0 0 / 0.25)); }
+  .title h2 { font-size: var(--fs-h3); font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem); }
+  .title p { color: var(--text-secondary); }
+  .info ul { display: grid; gap: var(--space-3); padding: 0; list-style: none; }
+  .info li { position: relative; padding-left: 22px; }
+  .info li::before { content: ''; position: absolute; left: 4px; top: 0.62em; width: 7px; height: 7px; border-radius: 2px; transform: rotate(45deg); background: var(--accent); }
+  .bundled { max-width: 760px; display: grid; gap: var(--space-3); margin-top: var(--space-8); }
+
+  @media (max-width: 900px) {
+    .browser { grid-template-columns: 1fr; }
+    .list {
+      position: sticky;
+      top: var(--header-h);
+      z-index: 5;
+      display: flex;
+      gap: var(--space-1);
+      overflow-x: auto;
+      margin-inline: calc(-1 * var(--gutter));
+      padding: var(--space-2) var(--gutter);
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      scrollbar-width: none;
+    }
+    .list a { flex: none; flex-direction: column; gap: 4px; padding: 8px; font-size: var(--fs-xs); min-width: 84px; text-align: center; }
+  }
+</style>
+
+<script>
+  for (const browser of document.querySelectorAll<HTMLElement>('[data-app-browser]')) {
+    const tabs = [...browser.querySelectorAll<HTMLAnchorElement>('[role="tab"]')];
+    const panels = [...browser.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    const select = (slug: string, focus = false) => {
+      if (!panels.some((panel) => panel.id === slug)) return;
+      tabs.forEach((tab) => {
+        const on = tab.dataset.slug === slug;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        if (on) {
+          if (focus) tab.focus();
+          tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+        }
+      });
+      panels.forEach((panel) => panel.toggleAttribute('data-active', panel.id === slug));
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', (event) => {
+        event.preventDefault();
+        const slug = tab.dataset.slug ?? '';
+        select(slug);
+        history.replaceState(null, '', `#${slug}`);
+      });
+      tab.addEventListener('keydown', (event) => {
+        const step = ['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 0;
+        if (!step) return;
+        event.preventDefault();
+        const next = tabs[(i + step + tabs.length) % tabs.length];
+        select(next.dataset.slug ?? '', true);
+      });
+    });
+    const initial = location.hash.slice(1);
+    if (initial) select(initial);
+  }
+</script>

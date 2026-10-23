@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { htmlLang, ogLocale, route, type Lang } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
+import logoUrl from '@data/icons/hicolor/scalable/apps/asena-logo.svg?url';
+import socialImage from '@data/wallpapers/asena-gece.jpg';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Path of the same page in the other language. */
+  alternate: string;
+  /** Header sits over a full-bleed image at the top of the page. */
+  overlayHeader?: boolean;
+  /** Keeps the page out of the search index and search engines (404). */
+  noSearch?: boolean;
+}
+
+const { lang, title, description, alternate, overlayHeader = false, noSearch = false } = Astro.props;
+const t = useTranslations(lang);
+const fullTitle = title ? `${title} · ${t('site.name')}` : t('site.name');
+const pageDescription = description ?? t('site.description');
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+const alternates = { [lang]: canonical.href, [other]: new URL(alternate, Astro.site).href } as Record<Lang, string>;
+const og = await getImage({ src: socialImage, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 82 });
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]} data-overlay-header={overlayHeader ? '' : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={pageDescription} />
+    {
+      noSearch ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link rel="canonical" href={canonical.href} />
+          <link rel="alternate" hreflang="tr" href={alternates.tr} />
+          <link rel="alternate" hreflang="en" href={alternates.en} />
+          <link rel="alternate" hreflang="x-default" href={alternates.tr} />
+        </>
+      )
+    }
+    <link rel="alternate" type="application/rss+xml" title={t('footer.rss')} href={`${route('news', lang)}rss.xml`} />
+    <link rel="icon" href={logoUrl} type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14181d" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t('site.name')} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content={ogLocale[lang]} />
+    <meta property="og:image" content={new URL(og.src, Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add('js');
+        try {
+          const theme = localStorage.getItem('asena-theme');
+          if (theme === 'light' || theme === 'dark') root.dataset.theme = theme;
+          const accent = localStorage.getItem('asena-accent');
+          if (accent && /^(blue|green|yellow|orange|red|pink|purple|slate)$/.test(accent)) root.dataset.accent = accent;
+        } catch {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t('skip')}</a>
+    <Header lang={lang} alternate={alternate} overlay={overlayHeader} />
+    <main id="main" tabindex="-1" data-pagefind-body={noSearch ? undefined : ''}>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>

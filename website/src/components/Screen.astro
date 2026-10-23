@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { screen } from '../lib/media';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang?: Lang;
+  name?: string;
+  src?: ImageMetadata;
+  alt: string;
+  sizes?: string;
+  class?: string;
+  priority?: boolean;
+}
+
+const { lang = 'tr', name, src, alt, sizes = '(min-width: 1240px) 1160px, 92vw', class: className, priority = false } = Astro.props;
+const image = src ?? screen(lang, name ?? '');
+const widths = [480, 768, 1080, 1440, 1920, 2880].filter((width) => width <= image.width);
+---
+
+<Image
+  src={image}
+  alt={alt}
+  format="webp"
+  widths={widths.length ? widths : [image.width]}
+  sizes={sizes}
+  class={className}
+  loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : 'auto'}
+  decoding="async"
+/>

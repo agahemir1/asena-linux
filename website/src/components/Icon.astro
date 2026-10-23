@@ -1,0 +1,27 @@
+---
+// Asena's own symbolic icon set (data/icons/Asena/symbolic), recoloured to currentColor.
+const icons = import.meta.glob('../../../data/icons/Asena/symbolic/*/*-symbolic.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+  label?: string;
+}
+
+const { name, size = 16, class: className = '', label } = Astro.props;
+const path = Object.keys(icons).find((key) => key.endsWith(`/${name}-symbolic.svg`));
+if (!path) throw new Error(`Unknown symbolic icon: ${name}`);
+
+const a11y = label ? `role="img" aria-label="${label}"` : 'aria-hidden="true" focusable="false"';
+const svg = icons[path]
+  .replace(/\s(width|height)="[^"]*"/g, '')
+  .replace(/fill="#[0-9a-fA-F]{3,8}"/g, 'fill="currentColor"')
+  .replace('<svg ', `<svg class="icon ${className}" width="${size}" height="${size}" ${a11y} `);
+---
+
+<Fragment set:html={svg} />

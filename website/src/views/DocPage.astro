@@ -1,0 +1,142 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { docsFor, translationOf } from '../lib/content';
+import { docPath, route, type Lang } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  entry: CollectionEntry<'docs'>;
+}
+
+const { lang, entry } = Astro.props;
+const t = useTranslations(lang);
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+const docs = await docsFor(lang);
+const index = docs.findIndex((doc) => doc.id === entry.id);
+const previous = docs[index - 1];
+const next = docs[index + 1];
+const { Content, headings } = await render(entry);
+const toc = headings.filter((heading) => heading.depth === 2);
+const alternate = await translationOf('docs', entry.data.key, other);
+---
+
+<Base lang={lang} title={entry.data.title} description={entry.data.description} alternate={alternate}>
+  <div class="wrap docs">
+    <nav class="sidebar" aria-label={t('docs.sections')}>
+      <details open>
+        <summary><a href={route('docs', lang)}>{t('docs.sections')}</a></summary>
+        <ol>
+          {
+            docs.map((doc) => (
+              <li>
+                <a href={docPath(lang, doc.data.permalink)} aria-current={doc.id === entry.id ? 'page' : undefined}>
+                  {doc.data.title}
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </details>
+    </nav>
+
+    <article class="content">
+      <header>
+        <h1>{entry.data.title}</h1>
+        <p class="lead">{entry.data.description}</p>
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+      <nav class="pager" aria-label={`${t('docs.previous')} / ${t('docs.next')}`}>
+        {
+          previous ? (
+            <a class="prev" href={docPath(lang, previous.data.permalink)}>
+              <span><Icon name="go-previous" size={14} />{t('docs.previous')}</span>
+              <strong>{previous.data.title}</strong>
+            </a>
+          ) : <span />
+        }
+        {
+          next && (
+            <a class="next" href={docPath(lang, next.data.permalink)}>
+              <span>{t('docs.next')}<Icon name="go-next" size={14} /></span>
+              <strong>{next.data.title}</strong>
+            </a>
+          )
+        }
+      </nav>
+    </article>
+
+    {
+      toc.length > 1 && (
+        <aside class="toc" aria-label={t('docs.onThisPage')} data-toc>
+          <strong>{t('docs.onThisPage')}</strong>
+          <ol>
+            {toc.map((heading) => (
+              <li>
+                <a href={`#${heading.slug}`} data-target={heading.slug}>{heading.text}</a>
+              </li>
+            ))}
+          </ol>
+        </aside>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .docs { display: grid; grid-template-columns: 230px minmax(0, 1fr) 210px; gap: clamp(var(--space-5), 4vw, var(--space-8)); padding-top: var(--space-8); align-items: start; }
+  .sidebar, .toc { position: sticky; top: calc(var(--header-h) + var(--space-6)); font-size: var(--fs-small); }
+  .sidebar summary { list-style: none; margin-bottom: var(--space-3); font-weight: 650; }
+  .sidebar summary::-webkit-details-marker { display: none; }
+  .sidebar summary a { color: var(--text-primary); text-decoration: none; }
+  .sidebar ol, .toc ol { list-style: none; padding: 0; display: grid; gap: 2px; }
+  .sidebar li a { display: block; padding: 7px 12px; border-radius: var(--radius-control); color: var(--text-secondary); text-decoration: none; transition: background-color var(--dur-state) ease, color var(--dur-state) ease; }
+  .sidebar li a:hover { background: var(--border-subtle); color: var(--text-primary); }
+  .sidebar li a[aria-current] { background: var(--accent-subtle); color: var(--text-primary); font-weight: 600; }
+  .content header { margin-bottom: var(--space-7); }
+  .content h1 { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); }
+  .content .lead { margin-top: var(--space-4); }
+  .toc strong { display: block; margin-bottom: var(--space-3); font-size: var(--fs-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+  .toc ol { border-left: 1px solid var(--border-subtle); }
+  .toc a { display: block; padding: 5px 0 5px 14px; margin-left: -1px; border-left: 2px solid transparent; color: var(--text-secondary); text-decoration: none; transition: color var(--dur-state) ease, border-color var(--dur-state) ease; }
+  .toc a:hover { color: var(--text-primary); }
+  .toc a[aria-current] { color: var(--accent-text); border-color: var(--accent); }
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-9); }
+  .pager a { display: grid; gap: 4px; padding: var(--space-4) var(--space-5); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); text-decoration: none; color: var(--text-primary); transition: border-color var(--dur-state) ease, transform var(--dur-state) var(--ease-out-cubic); }
+  .pager a:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .pager span { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); color: var(--text-secondary); }
+  .pager .next { text-align: right; justify-items: end; }
+  @media (max-width: 1180px) { .docs { grid-template-columns: 220px minmax(0, 1fr); } .toc { display: none; } }
+  @media (max-width: 820px) {
+    .docs { grid-template-columns: 1fr; padding-top: var(--space-5); }
+    .sidebar { position: static; padding: var(--space-3) var(--space-4); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); }
+    .sidebar details:not([open]) summary { margin: 0; }
+    .sidebar summary { cursor: pointer; }
+  }
+</style>
+
+<script>
+  // On narrow screens the document list starts folded.
+  if (matchMedia('(max-width: 820px)').matches) document.querySelector('.sidebar details')?.removeAttribute('open');
+
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc] a')];
+  if (links.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          links.forEach((link) => (link.dataset.target === entry.target.id ? link.setAttribute('aria-current', 'true') : link.removeAttribute('aria-current')));
+        }
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    );
+    links.forEach((link) => {
+      const target = document.getElementById(link.dataset.target ?? '');
+      if (target) observer.observe(target);
+    });
+  }
+</script>

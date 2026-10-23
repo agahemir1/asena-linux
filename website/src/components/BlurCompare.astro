@@ -1,0 +1,100 @@
+---
+import Screen from './Screen.astro';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  before: { shot: string; label: string; alt: string };
+  after: { shot: string; label: string; alt: string };
+  sliderLabel: string;
+  /** Zoom into part of the frame: scale and the point kept in view, in percent. */
+  focus: { scale: number; x: number; y: number };
+}
+
+const { lang, before, after, sliderLabel, focus } = Astro.props;
+---
+
+<div class="compare shot" data-compare style={`--zoom:${focus.scale};--fx:${focus.x}%;--fy:${focus.y}%;--split:50%`}>
+  <div class="layer">
+    <Screen lang={lang} name={after.shot} alt={after.alt} sizes="(min-width: 1240px) 1160px, 92vw" />
+  </div>
+  <div class="layer top">
+    <Screen lang={lang} name={before.shot} alt={before.alt} sizes="(min-width: 1240px) 1160px, 92vw" />
+  </div>
+  <span class="tag left">{before.label}</span>
+  <span class="tag right">{after.label}</span>
+  <div class="handle" aria-hidden="true"><span></span></div>
+  <input type="range" min="0" max="100" value="50" aria-label={sliderLabel} />
+</div>
+
+<style>
+  .compare { position: relative; aspect-ratio: 4 / 3; touch-action: pan-y; user-select: none; }
+  .layer { position: absolute; inset: 0; overflow: hidden; }
+  .layer :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: var(--fx) var(--fy); transform: scale(var(--zoom)); transform-origin: var(--fx) var(--fy); }
+  .top { clip-path: inset(0 calc(100% - var(--split)) 0 0); }
+  .tag {
+    position: absolute;
+    top: var(--space-4);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--on-image-glass);
+    color: var(--on-image);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+  }
+  .tag.left { left: var(--space-4); }
+  .tag.right { right: var(--space-4); }
+  .handle { position: absolute; top: 0; bottom: 0; left: var(--split); width: 2px; margin-left: -1px; background: var(--on-image); pointer-events: none; box-shadow: 0 0 12px color-mix(in srgb, var(--scrim) 40%, transparent); }
+  .handle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--on-image);
+    transform: translate(-50%, -50%);
+    box-shadow: var(--shadow-soft);
+  }
+  .handle span::before, .handle span::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid var(--scrim);
+    border-bottom: 2px solid var(--scrim);
+  }
+  .handle span::before { left: 11px; transform: translateY(-50%) rotate(45deg); }
+  .handle span::after { right: 11px; transform: translateY(-50%) rotate(-135deg); }
+  input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+  input:focus-visible + .handle, .compare:has(input:focus-visible) .handle span { outline: 3px solid var(--accent); }
+</style>
+
+<script>
+  for (const compare of document.querySelectorAll<HTMLElement>('[data-compare]')) {
+    const input = compare.querySelector<HTMLInputElement>('input');
+    const set = () => compare.style.setProperty('--split', `${input?.value ?? 50}%`);
+    input?.addEventListener('input', set);
+    // A short sweep shows that the divider moves, once it scrolls into view.
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && input) {
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        const start = performance.now();
+        const sweep = (now: number) => {
+          const t = Math.min(1, (now - start) / 1600);
+          const value = 50 + Math.sin(t * Math.PI * 2) * 22 * (1 - t);
+          input.value = String(value);
+          set();
+          if (t < 1) requestAnimationFrame(sweep);
+        };
+        requestAnimationFrame(sweep);
+      }, { threshold: 0.6 });
+      observer.observe(compare);
+    }
+  }
+</script>

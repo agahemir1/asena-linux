@@ -1,0 +1,88 @@
+import type { Lang } from './routes';
+
+const strings = {
+  tr: {
+    'site.name': 'Asena Linux',
+    'site.description': 'Debian 13 üzerinde, Türkçe öncelikli bir Wayland masaüstü.',
+    'skip': 'İçeriğe geç',
+    'nav.label': 'Ana gezinme',
+    'nav.desktop': 'Masaüstü',
+    'nav.apps': 'Uygulamalar',
+    'nav.story': 'Hikâye',
+    'nav.why': 'Neden Asena',
+    'nav.docs': 'Belgeler',
+    'nav.news': 'Haberler',
+    'nav.download': 'İndir',
+    'nav.menu': 'Menü',
+    'nav.close': 'Kapat',
+    'search.open': 'Ara',
+    'search.title': 'Sitede ara',
+    'search.unavailable': 'Arama dizini yalnız derlenmiş sitede bulunur.',
+    'theme.label': 'Görünüm',
+    'theme.system': 'Sistem',
+    'theme.light': 'Açık',
+    'theme.dark': 'Koyu',
+    'lang.switch': 'English',
+    'lang.label': 'Dil',
+    'footer.code': 'Kaynak kodu GPL-3.0-or-later.',
+    'footer.wallpapers': 'Duvar kâğıtları CC BY-SA 4.0.',
+    'footer.debian': 'Debian, Software in the Public Interest, Inc. kuruluşunun tescilli markasıdır. Asena, Debian projesinin bir parçası değildir.',
+    'footer.rss': 'Haber akışı (RSS)',
+    'footer.status': 'Geliştiriliyor. Henüz yayımlanmış bir sürüm yok.',
+    'docs.onThisPage': 'Bu sayfada',
+    'docs.previous': 'Önceki',
+    'docs.next': 'Sonraki',
+    'docs.sections': 'Belgeler',
+    'news.all': 'Bütün haberler',
+    'news.back': 'Haberler',
+    'date.locale': 'tr-TR',
+    'notFound.title': 'Sayfa bulunamadı',
+  },
+  en: {
+    'site.name': 'Asena Linux',
+    'site.description': 'A Wayland desktop on Debian 13, built Turkish-first.',
+    'skip': 'Skip to content',
+    'nav.label': 'Main navigation',
+    'nav.desktop': 'Desktop',
+    'nav.apps': 'Apps',
+    'nav.story': 'Story',
+    'nav.why': 'Why Asena',
+    'nav.docs': 'Docs',
+    'nav.news': 'News',
+    'nav.download': 'Download',
+    'nav.menu': 'Menu',
+    'nav.close': 'Close',
+    'search.open': 'Search',
+    'search.title': 'Search the site',
+    'search.unavailable': 'The search index exists only in the built site.',
+    'theme.label': 'Appearance',
+    'theme.system': 'System',
+    'theme.light': 'Light',
+    'theme.dark': 'Dark',
+    'lang.switch': 'Türkçe',
+    'lang.label': 'Language',
+    'footer.code': 'Source code GPL-3.0-or-later.',
+    'footer.wallpapers': 'Wallpapers CC BY-SA 4.0.',
+    'footer.debian': 'Debian is a registered trademark of Software in the Public Interest, Inc. Asena is not part of the Debian project.',
+    'footer.rss': 'News feed (RSS)',
+    'footer.status': 'In development. No release has been published yet.',
+    'docs.onThisPage': 'On this page',
+    'docs.previous': 'Previous',
+    'docs.next': 'Next',
+    'docs.sections': 'Docs',
+    'news.all': 'All news',
+    'news.back': 'News',
+    'date.locale': 'en-US',
+    'notFound.title': 'Page not found',
+  },
+} as const;
+
+export type UiKey = keyof (typeof strings)['tr'];
+
+export function useTranslations(lang: Lang) {
+  return (key: UiKey): string => strings[lang][key];
+}
+
+export function formatDate(date: Date, lang: Lang): string {
+  return date.toLocaleDateString(strings[lang]['date.locale'], { day: 'numeric', month: 'long', year: 'numeric' });
+}

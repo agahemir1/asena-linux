@@ -1,0 +1,150 @@
+---
+import Screen from './Screen.astro';
+import type { Lang } from '../i18n/routes';
+
+export interface Step {
+  shot: string;
+  title: string;
+  text: string;
+  alt: string;
+  /** Where the pointer would click, in percent of the frame. */
+  spot?: { x: number; y: number };
+  keys?: string[];
+}
+
+interface Props {
+  lang: Lang;
+  steps: Step[];
+}
+
+const { lang, steps } = Astro.props;
+---
+
+<div class="story" data-desktop-story>
+  <ol class="steps">
+    {
+      steps.map((step, index) => (
+        <li class="step" data-step={index} aria-current={index === 0 ? 'step' : undefined}>
+          <span class="count">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+          {step.keys && (
+            <p class="keys">
+              {step.keys.map((key, i) => (
+                <>
+                  {i > 0 && <span aria-hidden="true">+</span>}
+                  <kbd>{key}</kbd>
+                </>
+              ))}
+            </p>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+  <div class="stage-wrap">
+    <div class="stage shot" data-active="0">
+      {
+        steps.map((step, index) => (
+          <div class="layer" data-layer={index}>
+            <Screen lang={lang} name={step.shot} alt={step.alt} sizes="(min-width: 960px) 62vw, 92vw" priority={index === 0} />
+          </div>
+        ))
+      }
+      {
+        steps.map(
+          (step, index) =>
+            step.spot && (
+              <span class="spot" data-spot={index} style={`--x:${step.spot.x}%;--y:${step.spot.y}%`} aria-hidden="true" />
+            ),
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+    gap: clamp(var(--space-6), 5vw, var(--space-8));
+    align-items: start;
+  }
+  .steps { list-style: none; padding: 0; display: grid; }
+  .step {
+    min-height: 62vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-3);
+    opacity: 0.32;
+    transition: opacity 400ms var(--ease-out-cubic);
+  }
+  .step[aria-current] { opacity: 1; }
+  .step:first-child { min-height: 46vh; justify-content: flex-start; padding-top: 10vh; }
+  .step:last-child { min-height: 70vh; }
+  .count { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent-text); letter-spacing: 0.08em; }
+  .step h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem); }
+  .step p { color: var(--text-secondary); max-width: 40ch; }
+  .keys { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); }
+
+  .stage-wrap { position: sticky; top: calc(var(--header-h) + (100dvh - var(--header-h)) / 2); transform: translateY(-50%); }
+  .stage { position: relative; aspect-ratio: 16 / 9; }
+  .layer { position: absolute; inset: 0; opacity: 0; filter: blur(6px); transition: opacity 420ms var(--ease-out-cubic), filter 420ms var(--ease-out-cubic); }
+  .layer :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .layer[data-layer='0'] { opacity: 1; filter: none; }
+  .stage[data-active] .layer[data-layer='0'] { opacity: 1; filter: none; }
+  .stage[data-active='1'] .layer[data-layer='1'],
+  .stage[data-active='2'] .layer[data-layer='2'],
+  .stage[data-active='3'] .layer[data-layer='3'],
+  .stage[data-active='4'] .layer[data-layer='4'] { opacity: 1; filter: none; }
+
+  .spot {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 3.2%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 22%, transparent);
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0;
+    transition: opacity 240ms ease, transform 420ms var(--ease-out-expo);
+  }
+  .stage[data-active='1'] .spot[data-spot='1'],
+  .stage[data-active='2'] .spot[data-spot='2'],
+  .stage[data-active='3'] .spot[data-spot='3'],
+  .stage[data-active='4'] .spot[data-spot='4'] { opacity: 1; transform: translate(-50%, -50%) scale(1); animation: pulse 1.8s 400ms var(--ease-out-cubic) infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 22%, transparent); }
+    50% { box-shadow: 0 0 0 14px color-mix(in oklab, var(--accent) 0%, transparent); }
+  }
+
+  @media (max-width: 959px) {
+    .story { grid-template-columns: 1fr; gap: 0; }
+    .stage-wrap { order: -1; top: calc(var(--header-h) + var(--space-3)); transform: none; z-index: 2; }
+    .step { min-height: 52vh; position: relative; z-index: 1; }
+    .step:first-child { padding-top: var(--space-6); min-height: 40vh; }
+    .step > * { background: var(--surface-base); }
+    .step h3, .step p { padding-inline: 2px; }
+  }
+</style>
+
+<script>
+  for (const story of document.querySelectorAll<HTMLElement>('[data-desktop-story]')) {
+    const stage = story.querySelector<HTMLElement>('.stage');
+    const steps = [...story.querySelectorAll<HTMLElement>('.step')];
+    const activate = (index: number) => {
+      stage?.setAttribute('data-active', String(index));
+      steps.forEach((step, i) => (i === index ? step.setAttribute('aria-current', 'step') : step.removeAttribute('aria-current')));
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) if (entry.isIntersecting) activate(Number((entry.target as HTMLElement).dataset.step));
+      },
+      { rootMargin: '-45% 0px -45% 0px' },
+    );
+    steps.forEach((step) => observer.observe(step));
+  }
+</script>

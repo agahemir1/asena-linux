@@ -1,0 +1,342 @@
+---
+import Icon from './Icon.astro';
+import { route, type Lang, type RouteKey } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
+import logo from '@data/icons/hicolor/scalable/apps/asena-logo.svg';
+
+interface Props {
+  lang: Lang;
+  alternate: string;
+  overlay: boolean;
+}
+
+const { lang, alternate, overlay } = Astro.props;
+const t = useTranslations(lang);
+const items: { key: RouteKey; label: string }[] = [
+  { key: 'desktop', label: t('nav.desktop') },
+  { key: 'apps', label: t('nav.apps') },
+  { key: 'story', label: t('nav.story') },
+  { key: 'why', label: t('nav.why') },
+  { key: 'docs', label: t('nav.docs') },
+  { key: 'news', label: t('nav.news') },
+  { key: 'download', label: t('nav.download') },
+];
+const path = Astro.url.pathname;
+const current = (key: RouteKey) => path.startsWith(route(key, lang));
+const other = lang === 'tr' ? 'en' : 'tr';
+---
+
+<header class="site-header" data-overlay={overlay ? '' : undefined}>
+  <div class="bar wrap">
+    <a class="brand" href={route('home', lang)} aria-label={t('site.name')}>
+      <img src={logo.src} width="30" height="30" alt="" />
+      <span>Asena</span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label={t('nav.label')}>
+      <ul>
+        {
+          items.map(({ key, label }) => (
+            <li>
+              <a href={route(key, lang)} aria-current={current(key) ? 'page' : undefined}>
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="actions">
+      <button class="icon-button" type="button" data-search-open aria-label={t('search.open')}>
+        <Icon name="edit-find" size={18} />
+      </button>
+      <button
+        class="icon-button"
+        type="button"
+        data-theme-toggle
+        data-label-system={t('theme.system')}
+        data-label-light={t('theme.light')}
+        data-label-dark={t('theme.dark')}
+        aria-label={`${t('theme.label')}: ${t('theme.system')}`}
+      >
+        <span class="theme-icon" data-for="system"><Icon name="video-display" size={18} /></span>
+        <span class="theme-icon" data-for="light"><Icon name="weather-clear" size={18} /></span>
+        <span class="theme-icon" data-for="dark"><Icon name="dark-mode" size={18} /></span>
+      </button>
+      <a class="lang" href={alternate} hreflang={other} lang={other}>{other.toUpperCase()}</a>
+      <button class="icon-button menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+        <span class="visually-hidden">{t('nav.menu')}</span>
+        <span class="burger" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog class="search-dialog" data-search-dialog aria-label={t('search.title')}>
+  <div class="search-panel">
+    <div class="search-head">
+      <strong>{t('search.title')}</strong>
+      <button class="icon-button" type="button" data-search-close aria-label={t('nav.close')}>
+        <Icon name="window-close" size={16} />
+      </button>
+    </div>
+    <div id="search" data-unavailable={t('search.unavailable')}></div>
+  </div>
+</dialog>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    height: var(--header-h);
+    view-transition-name: site-header;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
+  }
+  /* Over a full-bleed image the bar starts clear and turns to glass once scrolled. */
+  .site-header[data-overlay]:not(.scrolled):not(.open) {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: transparent;
+    color: var(--on-image);
+  }
+  .site-header[data-overlay]:not(.scrolled):not(.open) .nav a { color: var(--on-image-2); }
+  .site-header[data-overlay]:not(.scrolled):not(.open) .nav a:hover,
+  .site-header[data-overlay]:not(.scrolled):not(.open) .nav a[aria-current] { color: var(--on-image); }
+
+  .bar { height: 100%; display: flex; align-items: center; gap: var(--space-5); }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: inherit;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.12rem;
+    letter-spacing: -0.02em;
+  }
+  .brand img { filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.25)); }
+
+  .nav { margin-inline: auto; }
+  .nav ul { display: flex; gap: 2px; list-style: none; padding: 0; }
+  .nav a {
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    color: var(--text-secondary);
+    font-size: var(--fs-small);
+    font-weight: 540;
+    text-decoration: none;
+    transition: color var(--dur-state) ease, background-color var(--dur-state) ease;
+  }
+  .nav a:hover { color: var(--text-primary); background: var(--border-subtle); }
+  .nav a[aria-current] { color: var(--text-primary); }
+  .nav a[aria-current]::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 1px;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+
+  .actions { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .nav + .actions { margin-left: 0; }
+  .icon-button {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: inherit;
+    transition: background-color var(--dur-state) ease;
+  }
+  .icon-button:hover { background: var(--border-subtle); }
+  .theme-icon { display: none; }
+  .lang {
+    display: grid;
+    place-items: center;
+    min-width: 40px;
+    height: 40px;
+    padding-inline: 8px;
+    border-radius: var(--radius-pill);
+    color: inherit;
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .lang:hover { background: var(--border-subtle); }
+
+  .menu-button { display: none; }
+  .burger { position: relative; width: 18px; height: 12px; }
+  .burger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.6px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 240ms var(--ease-out-cubic), top 240ms var(--ease-out-cubic);
+  }
+  .burger span:first-child { top: 2px; }
+  .burger span:last-child { top: 8.5px; }
+  .open .burger span:first-child { top: 5.2px; transform: rotate(45deg); }
+  .open .burger span:last-child { top: 5.2px; transform: rotate(-45deg); }
+
+  @media (max-width: 1060px) {
+    .menu-button { display: grid; }
+    .nav {
+      position: fixed;
+      inset: var(--header-h) 0 auto;
+      height: calc(100dvh - var(--header-h));
+      margin: 0;
+      padding: var(--space-5) var(--gutter);
+      background: var(--surface-base);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity var(--dur-close) var(--ease-in-cubic), transform var(--dur-close) var(--ease-in-cubic),
+        visibility 0s linear var(--dur-close);
+    }
+    .open .nav {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition: opacity var(--dur-open) var(--ease-out-cubic), transform var(--dur-open) var(--ease-out-cubic);
+    }
+    .nav ul { flex-direction: column; gap: var(--space-1); }
+    .nav a { padding: 14px 4px; border-radius: 0; font-size: 1.6rem; font-weight: 640; letter-spacing: -0.02em; color: var(--text-primary); border-bottom: 1px solid var(--border-subtle); }
+    .nav a:hover { background: none; color: var(--accent-text); }
+    .nav a[aria-current] { color: var(--accent-text); }
+    .nav a[aria-current]::after { display: none; }
+    .open .nav li { animation: nav-in 420ms var(--ease-out-expo) both; }
+    .open .nav li:nth-child(2) { animation-delay: 30ms; }
+    .open .nav li:nth-child(3) { animation-delay: 60ms; }
+    .open .nav li:nth-child(4) { animation-delay: 90ms; }
+    .open .nav li:nth-child(5) { animation-delay: 120ms; }
+    .open .nav li:nth-child(6) { animation-delay: 150ms; }
+    .open .nav li:nth-child(7) { animation-delay: 180ms; }
+  }
+  @keyframes nav-in { from { opacity: 0; transform: translateY(12px); } }
+
+  .search-dialog {
+    width: min(100% - 2 * var(--gutter), 720px);
+    max-height: min(80dvh, 720px);
+    margin: 10dvh auto auto;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-dialog);
+    background: var(--surface-overlay);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-window);
+  }
+  .search-dialog[open] { animation: dialog-in var(--dur-open) var(--ease-out-cubic); }
+  .search-dialog::backdrop { background: rgb(0 0 0 / 0.42); backdrop-filter: blur(6px); }
+  @keyframes dialog-in { from { opacity: 0; transform: translateY(8px); } }
+  .search-panel { padding: var(--space-4) var(--space-5) var(--space-5); }
+  .search-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); }
+  #search {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: var(--accent-text);
+    --pagefind-ui-text: var(--text-primary);
+    --pagefind-ui-background: var(--surface-overlay);
+    --pagefind-ui-border: var(--border-strong);
+    --pagefind-ui-tag: var(--surface-sunken);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 10px;
+    --pagefind-ui-font: var(--font-sans);
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+
+  if (header) {
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  toggle?.addEventListener('click', () => {
+    const open = !header?.classList.contains('open');
+    header?.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && header?.classList.contains('open')) toggle?.click();
+  });
+
+  // Theme: system, light, dark. The choice is a per-browser convenience.
+  const themeButton = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const order = ['system', 'light', 'dark'] as const;
+  type Theme = (typeof order)[number];
+  const root = document.documentElement;
+  const showTheme = (theme: Theme) => {
+    themeButton?.querySelectorAll<HTMLElement>('.theme-icon').forEach((icon) => {
+      icon.style.display = icon.dataset.for === theme ? 'contents' : 'none';
+    });
+    const label = themeButton?.dataset[`label${theme[0].toUpperCase()}${theme.slice(1)}` as 'labelSystem'];
+    const prefix = themeButton?.getAttribute('aria-label')?.split(':')[0];
+    themeButton?.setAttribute('aria-label', `${prefix}: ${label}`);
+  };
+  const currentTheme = (): Theme => (root.dataset.theme === 'light' || root.dataset.theme === 'dark' ? root.dataset.theme : 'system');
+  showTheme(currentTheme());
+  themeButton?.addEventListener('click', () => {
+    const next = order[(order.indexOf(currentTheme()) + 1) % order.length];
+    if (next === 'system') delete root.dataset.theme;
+    else root.dataset.theme = next;
+    try {
+      if (next === 'system') localStorage.removeItem('asena-theme');
+      else localStorage.setItem('asena-theme', next);
+    } catch {}
+    showTheme(next);
+    document.dispatchEvent(new CustomEvent('asena:theme'));
+  });
+
+  // Search: Pagefind is loaded on first use; it only exists in the built site.
+  const dialog = document.querySelector<HTMLDialogElement>('[data-search-dialog]');
+  const container = document.getElementById('search');
+  let loaded = false;
+  const openSearch = async () => {
+    dialog?.showModal();
+    if (loaded || !container) return;
+    loaded = true;
+    try {
+      const pagefind = '/pagefind/pagefind-ui.js';
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/pagefind/pagefind-ui.css';
+      document.head.append(link);
+      await import(/* @vite-ignore */ pagefind);
+      const PagefindUI = (window as unknown as { PagefindUI: new (options: object) => unknown }).PagefindUI;
+      new PagefindUI({ element: '#search', showSubResults: true, showImages: false, resetStyles: false, autofocus: true });
+    } catch {
+      container.textContent = container.dataset.unavailable ?? '';
+    }
+  };
+  document.querySelectorAll('[data-search-open]').forEach((button) => button.addEventListener('click', openSearch));
+  document.querySelector('[data-search-close]')?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  document.addEventListener('keydown', (event) => {
+    const typing = event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement;
+    if (!typing && (event.key === '/' || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k'))) {
+      event.preventDefault();
+      openSearch();
+    }
+  });
+</script>

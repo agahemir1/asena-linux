@@ -1,0 +1,243 @@
+---
+import Base from '../layouts/Base.astro';
+import Screen from '../components/Screen.astro';
+import FoldDemo from '../components/FoldDemo.astro';
+import { route, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+
+interface Point {
+  title: string;
+  body: string[];
+  status: string;
+  shot?: string;
+  alt?: string;
+  demo?: boolean;
+}
+
+const c = {
+  tr: {
+    title: 'Neden Asena',
+    description: 'Asena Linux’un kullanıcıya getirdikleri: Türkçe, tanıdık düzen, Debian 13 tabanı, tek yerden yazılım, yeniden başlatmada güncelleme, güvenli varsayılanlar ve hız hedefleri.',
+    heading: 'Bana ne kazandırır?',
+    lead: 'Kısa cevap: tanıdık bir düzen, gerçekten Türkçe bir sistem ve Debian’ın sağlamlığı. Aşağıda her birini, neyin bugün çalıştığını ve neyin hedef olduğunu ayırarak anlatıyoruz.',
+    statusLabel: 'Durum',
+    points: [
+      {
+        title: 'Türkçe, ilk günden',
+        body: [
+          'Arama büyük İ ile küçük i’yi, büyük I ile küçük ı’yı doğru eşler; “oynatici” yazınca Oynatıcı gelir. Listeler Türk alfabesine göre sıralanır: Ç, C’den sonra; Ş, S’den sonra gelir.',
+          'Canlı sistem Türkçe ve TR-Q klavyeyle açılır. Harfli kısayollar ilk klavye düzeninde o harfi yazan tuşa bağlandığı için TR-F klavyede de doğru yerdedir.',
+        ],
+        status: 'Arama, sıralama ve kısayollar geliştirme sürümünde çalışıyor. Canlı sistemin dil ayarı ilk ISO ile gelecek.',
+        demo: true,
+      },
+      {
+        title: 'Bildiğiniz düzen',
+        body: [
+          'Windows’tan geliyorsanız ilk gün kaybolmazsınız: alt panel, başlat menüsü, sağ altta saat. Alışınca paneli başka bir kenara, menüyü ızgaraya ya da kategorili klasik görünüme alabilirsiniz.',
+        ],
+        status: 'Çalışıyor. Gerçek monitörlerde kabul testi sürüyor.',
+        shot: 'menu-dark',
+        alt: 'Başlat menüsü açık Asena masaüstü',
+      },
+      {
+        title: 'Debian 13’ün üstünde',
+        body: [
+          'Asena, Debian 13 (trixie) üzerine kurulur. Paketlerin ve güvenlik güncellemelerinin çoğu doğrudan Debian’dan gelir; Debian için yazılmış talimatlar Asena’da da işler.',
+          'Asena’nın kendi masaüstü paketleri ayrı, imzalı bir depodan gelecek. Varsayılan çekirdek XanMod LTS; Debian’ın imzalı çekirdeği her zaman yedekte kurulu durur ve Secure Boot açıkken o açılır.',
+        ],
+        status: 'Çekirdek düzeni sanal makinede denendi. Asena deposu henüz yayında değil.',
+      },
+      {
+        title: 'Yazılım tek yerde',
+        body: [
+          'Debian arşivi ve isterseniz Flathub aynı katalogda. Bir Debian paketi kurmadan önce sistemde neyin değişeceğini görürsünüz; bir Flatpak uygulamasının hangi izinleri istediği de kurulumdan önce yazılır.',
+        ],
+        status: 'Çalışıyor.',
+        shot: 'app-store',
+        alt: 'Yazılım uygulaması: kategoriler ve uygulama sayıları',
+      },
+      {
+        title: 'Güncellemeler sizi bölmez',
+        body: [
+          'Sistem güncellemeleri arka planda iner ve bir sonraki yeniden başlatmada kurulur, açık işinizin altından paket değişmez. Bilgisayar kendiliğinden yeniden başlamaz. Yarım kalan bir paket işlemi olursa Yazılım onarmayı önerir.',
+        ],
+        status: 'Çalışıyor; hatalı paket senaryosu sanal makinede denendi.',
+      },
+      {
+        title: 'Ayarlar gerçekten ayar',
+        body: [
+          'On yedi bölümün her biri gerçek sisteme bağlı. Ekran çözünürlüğünü ya da ölçeğini değiştirdiğinizde 15 saniye içinde onaylamazsanız eski düzen geri gelir; görüntüsüz kalmazsınız.',
+        ],
+        status: 'Çalışıyor. Çoklu monitör ve gerçek ekranlarla kabul sürüyor.',
+        shot: 'app-settings',
+        alt: 'Ayarlar › Görünüm: renk şeması, vurgu rengi, saydamlık ve metin ölçeği',
+      },
+      {
+        title: 'Güvenli varsayılanlar',
+        body: [
+          'Kurulu sistemde root hesabı kilitli olacak, ilk kullanıcı yönetici olacak. Ağdan bağlantı bekleyen hiçbir servis kurulmayacak. Yetki gerektiren işlemler kabuk betikleriyle değil, polkit’in parola sorduğu sistem servisleriyle yapılır.',
+        ],
+        status: 'Polkit ile paket kurma çalışıyor. Hesap ve servis kararları kurulum aracıyla gelecek.',
+      },
+      {
+        title: 'Hız bir özellik',
+        body: [
+          'Hedefler açık: oturum açıldıktan sonra panel 1,5 saniyede görünür, başlat menüsü tuşa bastıktan sonra 100 milisaniyede açılır, aramada sonuç 50 milisaniyede gelir. Boşta kabuk işlemciyi uyandırmaz; bütün Asena süreçleri birlikte 300 MB’ı geçmez.',
+        ],
+        status: 'Bunlar kabul ölçütleri. Gerçek donanımda ölçüm henüz yapılmadı.',
+      },
+      {
+        title: 'Özgür yazılım',
+        body: [
+          'Asena’nın kaynak kodu GPL-3.0-or-later, duvar kâğıtları CC BY-SA 4.0 lisanslı. Asena’nın kendi bileşenleri kullanım verisi toplamaz.',
+        ],
+        status: 'Herkese açık kaynak deposu henüz açılmadı.',
+      },
+    ] satisfies Point[],
+  },
+  en: {
+    title: 'Why Asena',
+    description: 'What Asena Linux gives you: real Turkish support, a familiar layout, a Debian 13 base, software in one place, updates on restart, safe defaults and speed targets.',
+    heading: 'What’s in it for me?',
+    lead: 'The short answer: a familiar layout, a system that really speaks Turkish, and Debian’s solid base. Below is each point, with what works today kept apart from what is a goal.',
+    statusLabel: 'Status',
+    points: [
+      {
+        title: 'Turkish from day one',
+        body: [
+          'Search matches capital İ with small i and capital I with small ı correctly; typing “oynatici” finds Oynatıcı. Lists follow the Turkish alphabet: Ç after C, Ş after S.',
+          'The live system starts in Turkish with a Turkish Q keyboard. Letter shortcuts are bound to whichever key types that letter in the first layout, so they land right on a Turkish F keyboard too.',
+        ],
+        status: 'Search, sorting and shortcuts work in the development build. The live system’s language setup arrives with the first ISO.',
+        demo: true,
+      },
+      {
+        title: 'A layout you already know',
+        body: [
+          'Coming from Windows, you will not be lost on day one: a bottom panel, a start menu, the clock in the corner. Once settled, you can move the panel to another edge or switch the menu to a grid or a classic menu with categories.',
+        ],
+        status: 'Works. Acceptance testing on real monitors is under way.',
+        shot: 'menu-dark',
+        alt: 'The Asena desktop with the start menu open',
+      },
+      {
+        title: 'Built on Debian 13',
+        body: [
+          'Asena installs on top of Debian 13 (trixie). Most packages and security updates come straight from Debian, and instructions written for Debian work on Asena too.',
+          'Asena’s own desktop packages will come from a separate, signed repository. The default kernel is XanMod LTS; Debian’s signed kernel always stays installed as a fallback and is the one that boots when Secure Boot is on.',
+        ],
+        status: 'The kernel setup was tested in a virtual machine. The Asena repository is not online yet.',
+      },
+      {
+        title: 'Software in one place',
+        body: [
+          'The Debian archive and, if you want it, Flathub sit in one catalog. Before a Debian package is installed you see what will change on the system; the permissions a Flatpak app asks for are listed before you install it.',
+        ],
+        status: 'Works.',
+        shot: 'app-store',
+        alt: 'The Software app: categories and app counts',
+      },
+      {
+        title: 'Updates that do not interrupt',
+        body: [
+          'System updates download in the background and install on the next restart, so packages never change under your open work. The computer never restarts on its own. If a package operation is left half done, Software offers to repair it.',
+        ],
+        status: 'Works; the failing package case was tested in a virtual machine.',
+      },
+      {
+        title: 'Settings that are real',
+        body: [
+          'Each of the seventeen sections is wired to the real system. Change the screen resolution or scale and the old layout comes back unless you confirm within 15 seconds, so you are never left without a picture.',
+        ],
+        status: 'Works. Acceptance with several and real monitors is under way.',
+        shot: 'app-settings',
+        alt: 'Settings › Appearance: color scheme, accent color, transparency and text scale',
+      },
+      {
+        title: 'Safe defaults',
+        body: [
+          'On an installed system the root account will be locked and the first user will be the administrator. No service that listens on the network will be installed. Privileged work is done by system services that ask for your password through polkit, never by shell scripts.',
+        ],
+        status: 'Installing packages through polkit works. The account and service decisions arrive with the installer.',
+      },
+      {
+        title: 'Speed is a feature',
+        body: [
+          'The targets are explicit: the panel appears 1.5 seconds after login, the start menu opens 100 milliseconds after the key press, search results arrive in 50 milliseconds. An idle shell does not wake the processor, and all Asena processes together stay under 300 MB.',
+        ],
+        status: 'These are acceptance criteria. Nothing has been measured on real hardware yet.',
+      },
+      {
+        title: 'Free software',
+        body: [
+          'Asena’s source code is licensed GPL-3.0-or-later and the wallpapers CC BY-SA 4.0. Asena’s own components collect no usage data.',
+        ],
+        status: 'The public source repository has not been opened yet.',
+      },
+    ] satisfies Point[],
+  },
+}[lang];
+---
+
+<Base lang={lang} title={c.title} description={c.description} alternate={route('why', other)}>
+  <header class="page-intro wrap">
+    <span class="eyebrow" data-reveal>{c.title}</span>
+    <h1 data-reveal>{c.heading}</h1>
+    <p class="lead" data-reveal style="--reveal-i:1">{c.lead}</p>
+  </header>
+
+  <ol class="points wrap">
+    {
+      c.points.map((point, i) => (
+        <li class:list={['point', { media: point.shot || point.demo }]}>
+          <div class="text" data-reveal>
+            <span class="number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h2>{point.title}</h2>
+            {point.body.map((paragraph) => <p>{paragraph}</p>)}
+            <p class="status"><span>{c.statusLabel}:</span> {point.status}</p>
+          </div>
+          {point.shot && (
+            <div class="visual" data-reveal="scale" style="--reveal-i:1">
+              <div class:list={['shot', { full: !point.shot.startsWith('app-') }]}>
+                <Screen lang={lang} name={point.shot} alt={point.alt ?? ''} sizes="(min-width: 960px) 620px, 92vw" />
+              </div>
+            </div>
+          )}
+          {point.demo && (
+            <div class="visual" data-reveal="scale" style="--reveal-i:1">
+              <FoldDemo lang={lang} />
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</Base>
+
+<style>
+  .points { list-style: none; padding: 0; }
+  .point { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); padding-block: clamp(var(--space-7), 7vw, var(--space-9)); border-top: 1px solid var(--border-subtle); }
+  .point.media { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(var(--space-6), 5vw, var(--space-8)); }
+  .point.media:nth-child(even) .visual { order: -1; }
+  .text { display: grid; gap: var(--space-3); max-width: 62ch; }
+  .number { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent-text); letter-spacing: 0.08em; }
+  .text h2 { font-size: clamp(1.6rem, 1.25rem + 1.4vw, 2.4rem); margin-bottom: var(--space-2); }
+  .text p { color: var(--text-secondary); }
+  .text p:not(.status) { color: var(--text-primary); opacity: 0.88; }
+  .status { margin-top: var(--space-2); padding-top: var(--space-3); border-top: 1px dashed var(--border-strong); font-size: var(--fs-small); }
+  .status span { font-weight: 620; color: var(--text-primary); }
+  .visual .shot { border-radius: var(--radius-dialog); }
+  .visual .shot:not(.full) { background: transparent; box-shadow: none; outline: none; }
+  .visual .shot:not(.full) :global(img) { border-radius: var(--radius-dialog); box-shadow: var(--shadow-window); }
+  @media (max-width: 900px) {
+    .point.media { grid-template-columns: 1fr; }
+    .point.media:nth-child(even) .visual { order: 0; }
+  }
+</style>

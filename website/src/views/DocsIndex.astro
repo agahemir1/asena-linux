@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { docsFor } from '../lib/content';
+import { docPath, route, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+const docs = await docsFor(lang);
+const c = {
+  tr: {
+    title: 'Belgeler',
+    description: 'Asena Linux’u kullanma rehberi: başlarken, sistem gereksinimleri, masaüstü, kısayollar, kişiselleştirme, yazılım ve güncellemeler, Türkçe ve klavye, sık sorulanlar.',
+    lead: 'Asena’yı tanımak ve günlük kullanmak için gereken her şey. Arama için sağ üstteki büyütece ya da / tuşuna basın.',
+  },
+  en: {
+    title: 'Docs',
+    description: 'A guide to using Asena Linux: getting started, system requirements, the desktop, shortcuts, personalization, software and updates, Turkish and keyboards, FAQ.',
+    lead: 'Everything you need to get to know Asena and use it every day. To search, press the magnifier at the top right or the / key.',
+  },
+}[lang];
+---
+
+<Base lang={lang} title={c.title} description={c.description} alternate={route('docs', other)}>
+  <header class="page-intro wrap">
+    <h1 data-reveal>{c.title}</h1>
+    <p class="lead" data-reveal style="--reveal-i:1">{c.lead}</p>
+  </header>
+  <ol class="wrap list">
+    {
+      docs.map((doc, i) => (
+        <li data-reveal style={`--reveal-i:${i % 4}`}>
+          <a href={docPath(lang, doc.data.permalink)}>
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <span class="text">
+              <strong>{doc.data.title}</strong>
+              <span>{doc.data.description}</span>
+            </span>
+            <Icon name="go-next" size={18} />
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</Base>
+
+<style>
+  .list { list-style: none; padding: 0; border-top: 1px solid var(--border-subtle); }
+  .list a { display: grid; grid-template-columns: 48px 1fr auto; gap: var(--space-4); align-items: center; padding: var(--space-5) var(--space-2); border-bottom: 1px solid var(--border-subtle); color: inherit; text-decoration: none; transition: background-color var(--dur-state) ease, padding var(--dur-open) var(--ease-out-cubic); }
+  .list a:hover { background: var(--border-subtle); padding-inline: var(--space-4); }
+  .list a:hover strong { color: var(--accent-text); }
+  .n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-secondary); }
+  .text { display: grid; gap: 4px; }
+  strong { font-size: 1.2rem; font-weight: 640; transition: color var(--dur-state) ease; }
+  .text span { color: var(--text-secondary); font-size: var(--fs-small); }
+  .list :global(.icon) { color: var(--text-secondary); }
+</style>

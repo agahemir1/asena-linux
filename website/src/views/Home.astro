@@ -1,0 +1,350 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Emblem from '../components/Emblem.astro';
+import DesktopStory, { type Step } from '../components/DesktopStory.astro';
+import FoldDemo from '../components/FoldDemo.astro';
+import Icon from '../components/Icon.astro';
+import { apps, appIcon } from '../lib/apps';
+import { wallpaper } from '../lib/media';
+import { route, newsPath, langFromId, type Lang } from '../i18n/routes';
+import { formatDate } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+const news = (await getCollection('news', (entry) => langFromId(entry.id) === lang))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const c = {
+  tr: {
+    lead: 'Debian 13 üzerinde çalışan, Türkçe öncelikli bir masaüstü. Alt panel, başlat menüsü, sağ altta saat: bildiğiniz düzen, yeni baştan çizildi.',
+    tour: 'Masaüstünü gez',
+    status: 'Ne durumda?',
+    note: 'Geliştiriliyor. Henüz indirilebilir bir sürüm yok.',
+    heroAlt: 'Asena Gece duvar kâğıdı: yıldızlı gökyüzü altında bozkır, tepede bir kurt',
+    desktopEyebrow: 'Masaüstü',
+    desktopTitle: 'Her şey bir tık uzakta, hiçbiri yolunuzda değil.',
+    steps: [
+      {
+        shot: 'desktop-dark',
+        title: 'Panel',
+        text: 'Uygulamalar solda, durum ve saat sağda. Çalışan uygulamanın altında kısa bir çizgi, öndeki pencerenin altında vurgu renginde daha geniş bir çizgi durur.',
+        alt: 'Asena masaüstü: Asena Gece duvar kâğıdı ve alttaki panel',
+      },
+      {
+        shot: 'menu-dark',
+        title: 'Başlat menüsü',
+        text: 'Sabitlediğiniz uygulamalar üstte, bütün uygulamalar harf başlıklarıyla altta. Arama kutusu panele bakan kenarda; ayarları da bulur.',
+        alt: 'Açık başlat menüsü: sabitlenen uygulamalar, harf başlıklı liste ve arama kutusu',
+        spot: { x: 1.5, y: 97.8 },
+        keys: ['Super', 'Boşluk'],
+      },
+      {
+        shot: 'quick-dark',
+        title: 'Denetim merkezi',
+        text: 'Ses, rahatsız etme, koyu stil, gece ışığı ve güç profili. Wi-Fi ve Bluetooth listeleri yerinde açılır. Bilgisayarda olmayan donanımın satırı hiç görünmez.',
+        alt: 'Açık denetim merkezi: ses sürgüsü, Rahatsız etme ve Koyu stil düğmeleri',
+        spot: { x: 95.4, y: 97.8 },
+        keys: ['Super', 'A'],
+      },
+      {
+        shot: 'notifications-dark',
+        title: 'Bildirimler ve takvim',
+        text: 'Saate tıklayınca sağdan bir panel kayar: gün, takvim, çalan medya ve bütün bildirimler aynı yerde.',
+        alt: 'Sağdan açılan panel: tarih, ay takvimi ve bir ekran görüntüsü bildirimi',
+        spot: { x: 98.4, y: 97.8 },
+        keys: ['Super', 'N'],
+      },
+    ] satisfies Step[],
+    appsEyebrow: 'Uygulamalar',
+    appsTitle: 'Dosyalardan hesap makinesine, on iki uygulama.',
+    appsLead: 'Hepsi aynı çatıyla yazıldı, aynı tasarım dilini konuşur ve gerçek verinizle çalışır.',
+    appsLink: 'Uygulamaları tanı',
+    trEyebrow: 'Türkçe',
+    trTitle: 'Türkçe, sonradan eklenmiş bir çeviri değil.',
+    trLead: 'Büyük İ ile küçük i, büyük I ile küçük ı aramada birbirini bulur. Aşağıya yazın: solda Asena’nın araması, sağda birçok programın yaptığı sıradan küçük harf karşılaştırması.',
+    storyEyebrow: 'Hikâye',
+    storyTitle: 'Adı bir söylenceden geliyor.',
+    storyText: 'Göktürklerin kökenini anlatan Çin kaynaklarında, yok edilen bir boydan sağ kalan çocuğu bir dişi kurt besler. Bugün o kurdu Asena diye anıyoruz. Logo, duvar kâğıtları ve renkler bu mirastan beslenir.',
+    storyAlt: 'Asena Bozkurt duvar kâğıdı: kayalık bir tepede oturan kurt, arkada sisli vadiler',
+    storyLink: 'Hikâyeyi oku',
+    statusEyebrow: 'Durum',
+    statusTitle: 'Neredeyiz?',
+    statusLines: [
+      'Masaüstü, oturum açma ve kilit ekranı, Ayarlar ve on iki uygulama geliştirme sanal makinesinde çalışıyor.',
+      'Canlı ISO’nun iskeleti hazır, ilk ISO henüz derlenmedi.',
+      'Gerçek donanım ve görsel kabul testleri sürüyor.',
+    ],
+    statusLink: 'Ayrıntılar ve yol haritası',
+    newsTitle: 'Son haberler',
+    allNews: 'Bütün haberler',
+  },
+  en: {
+    lead: 'A Turkish-first desktop that runs on Debian 13. Bottom panel, start menu, clock in the corner: the layout you know, drawn again from scratch.',
+    tour: 'Tour the desktop',
+    status: 'Where is it at?',
+    note: 'In development. There is no release to download yet.',
+    heroAlt: 'The Asena Night wallpaper: steppe under a starry sky, a wolf on the hill',
+    desktopEyebrow: 'Desktop',
+    desktopTitle: 'Everything one click away, nothing in the way.',
+    steps: [
+      {
+        shot: 'desktop-dark',
+        title: 'Panel',
+        text: 'Apps on the left, status and clock on the right. A running app gets a short line beneath it; the window in front gets a wider one in the accent color.',
+        alt: 'The Asena desktop: the Asena Night wallpaper and the panel along the bottom',
+      },
+      {
+        shot: 'menu-dark',
+        title: 'Start menu',
+        text: 'Pinned apps on top, every app below under letter headings. The search box sits on the edge facing the panel and finds settings too.',
+        alt: 'The open start menu: pinned apps, a list with letter headings and the search box',
+        spot: { x: 1.5, y: 97.8 },
+        keys: ['Super', 'Space'],
+      },
+      {
+        shot: 'quick-dark',
+        title: 'Control center',
+        text: 'Volume, do not disturb, dark style, night light and power profile. Wi-Fi and Bluetooth lists open in place. Hardware the computer does not have simply has no row.',
+        alt: 'The open control center: a volume slider and the Do not disturb and Dark style buttons',
+        spot: { x: 95.4, y: 97.8 },
+        keys: ['Super', 'A'],
+      },
+      {
+        shot: 'notifications-dark',
+        title: 'Notifications and calendar',
+        text: 'Click the clock and a panel slides in from the right: the day, a calendar, what is playing and every notification in one place.',
+        alt: 'The panel from the right: the date, a month calendar and a screenshot notification',
+        spot: { x: 98.4, y: 97.8 },
+        keys: ['Super', 'N'],
+      },
+    ] satisfies Step[],
+    appsEyebrow: 'Apps',
+    appsTitle: 'From files to the calculator, twelve apps.',
+    appsLead: 'All written on one framework, sharing one design language and working with your real data.',
+    appsLink: 'Meet the apps',
+    trEyebrow: 'Turkish',
+    trTitle: 'Turkish is not a translation added at the end.',
+    trLead: 'Capital İ and small i, capital I and small ı find each other in search. Type below: on the left Asena’s search, on the right the plain lowercase match many programs use.',
+    storyEyebrow: 'Story',
+    storyTitle: 'The name comes from a legend.',
+    storyText: 'In the Chinese records of the Türks’ origin, a she-wolf feeds the one boy left alive when his people were wiped out. Today she is remembered as Asena. The logo, the wallpapers and the colors draw on that heritage.',
+    storyAlt: 'The Asena Grey Wolf wallpaper: a wolf sitting on a rocky ridge above misty valleys',
+    storyLink: 'Read the story',
+    statusEyebrow: 'Status',
+    statusTitle: 'Where are we?',
+    statusLines: [
+      'The desktop, login and lock screens, Settings and twelve apps run in the development virtual machine.',
+      'The live ISO is scaffolded; the first ISO has not been built yet.',
+      'Testing on real hardware and visual review are under way.',
+    ],
+    statusLink: 'Details and roadmap',
+    newsTitle: 'Latest news',
+    allNews: 'All news',
+  },
+}[lang];
+
+const heroImage = wallpaper('asena-gece');
+const storyImage = wallpaper('asena-bozkurt');
+---
+
+<Base lang={lang} alternate={route('home', other)} overlayHeader>
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <Image src={heroImage} alt="" format="webp" quality={78} widths={[768, 1280, 1920, 2560, 3840]} sizes="100vw" priority />
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-content wrap">
+      <Emblem />
+      <h1>Asena Linux</h1>
+      <p class="hero-lead">{c.lead}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={route('desktop', lang)}>{c.tour}<Icon name="go-next" size={16} /></a>
+        <a class="btn btn-quiet" href={route('download', lang)}>{c.status}</a>
+      </div>
+      <p class="hero-note">{c.note}</p>
+    </div>
+    <span class="visually-hidden">{c.heroAlt}</span>
+  </section>
+
+  <section class="section desktop">
+    <div class="wrap">
+      <header class="section-head" data-reveal>
+        <span class="eyebrow">{c.desktopEyebrow}</span>
+        <h2>{c.desktopTitle}</h2>
+      </header>
+      <DesktopStory lang={lang} steps={c.steps} />
+    </div>
+  </section>
+
+  <section class="section apps">
+    <div class="wrap">
+      <header class="section-head" data-reveal>
+        <span class="eyebrow">{c.appsEyebrow}</span>
+        <h2>{c.appsTitle}</h2>
+        <p class="lead">{c.appsLead}</p>
+      </header>
+      <ul class="app-icons">
+        {
+          apps.map((app, i) => (
+            <li data-reveal="scale" style={`--reveal-i:${i % 6}`}>
+              <a href={`${route('apps', lang)}#${app.slug}`}>
+                <img src={appIcon(app.id).src} width="96" height="96" alt="" loading="lazy" />
+                <span>{app.name[lang]}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="more" data-reveal><a href={route('apps', lang)}>{c.appsLink}<Icon name="go-next" size={14} /></a></p>
+    </div>
+  </section>
+
+  <section class="section turkish">
+    <div class="wrap turkish-grid">
+      <header class="section-head" data-reveal>
+        <span class="eyebrow">{c.trEyebrow}</span>
+        <h2>{c.trTitle}</h2>
+        <p class="lead">{c.trLead}</p>
+      </header>
+      <div data-reveal><FoldDemo lang={lang} /></div>
+    </div>
+  </section>
+
+  <section class="story-teaser">
+    <div class="story-bg" aria-hidden="true">
+      <Image src={storyImage} alt="" format="webp" quality={78} widths={[768, 1280, 1920, 2560]} sizes="100vw" loading="lazy" />
+    </div>
+    <div class="wrap story-content" data-reveal>
+      <span class="eyebrow">{c.storyEyebrow}</span>
+      <h2>{c.storyTitle}</h2>
+      <p>{c.storyText}</p>
+      <a class="btn btn-quiet" href={route('story', lang)}>{c.storyLink}<Icon name="go-next" size={16} /></a>
+    </div>
+    <span class="visually-hidden">{c.storyAlt}</span>
+  </section>
+
+  <section class="section status">
+    <div class="wrap status-grid">
+      <div data-reveal>
+        <span class="eyebrow">{c.statusEyebrow}</span>
+        <h2>{c.statusTitle}</h2>
+        <ul class="status-lines">
+          {c.statusLines.map((line) => <li>{line}</li>)}
+        </ul>
+        <a class="more-link" href={route('download', lang)}>{c.statusLink}<Icon name="go-next" size={14} /></a>
+      </div>
+      <div data-reveal style="--reveal-i:1">
+        <h3 class="news-title">{c.newsTitle}</h3>
+        <ol class="news">
+          {
+            news.map((entry) => (
+              <li>
+                <a href={newsPath(lang, entry.data.permalink)}>
+                  <time datetime={entry.data.date.toISOString().slice(0, 10)}>{formatDate(entry.data.date, lang)}</time>
+                  <strong>{entry.data.title}</strong>
+                  <span>{entry.data.description}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+        <a class="more-link" href={route('news', lang)}>{c.allNews}<Icon name="go-next" size={14} /></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: max(640px, 100svh);
+    display: grid;
+    align-items: end;
+    overflow: clip;
+    color: var(--on-image);
+    isolation: isolate;
+  }
+  .hero-bg, .hero-shade { position: absolute; inset: 0; z-index: -1; }
+  .hero-bg :global(img) { width: 100%; height: 115%; object-fit: cover; object-position: 72% 40%; transform-origin: 50% 30%; }
+  .hero-shade {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--scrim) 55%, transparent) 0%, transparent 22%),
+      linear-gradient(90deg, color-mix(in srgb, var(--scrim) 72%, transparent) 0%, color-mix(in srgb, var(--scrim) 25%, transparent) 55%, transparent 80%),
+      linear-gradient(0deg, var(--surface-base) 0%, transparent 28%);
+  }
+  .hero-content { padding-block: calc(var(--header-h) + var(--space-8)) clamp(var(--space-8), 14vh, var(--space-10)); display: grid; justify-items: start; gap: var(--space-5); }
+  .hero h1 {
+    font-size: var(--fs-display);
+    font-weight: 760;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    animation: rise 1100ms var(--ease-out-expo) 900ms both;
+  }
+  .hero-lead { max-width: 34ch; font-size: var(--fs-lead); line-height: 1.5; color: var(--on-image-2); animation: rise 1100ms var(--ease-out-expo) 1050ms both; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); animation: rise 1100ms var(--ease-out-expo) 1200ms both; }
+  .hero .btn-quiet { color: var(--on-image); background: var(--on-image-glass); border-color: var(--on-image-line); }
+  .hero-note { font-size: var(--fs-xs); color: var(--on-image-3); animation: rise 1100ms var(--ease-out-expo) 1350ms both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(22px); } }
+
+  @supports (animation-timeline: scroll()) {
+    .hero-bg :global(img) { animation: drift linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    .hero-content { animation: lift linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+    @keyframes drift { to { transform: translateY(14%) scale(1.06); } }
+    @keyframes lift { to { opacity: 0; transform: translateY(-8vh); } }
+  }
+
+  .section-head { display: grid; gap: var(--space-3); max-width: 760px; margin-bottom: clamp(var(--space-6), 6vw, var(--space-8)); }
+
+  .app-icons { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: var(--space-5) var(--space-3); }
+  .app-icons a { display: grid; justify-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-1); border-radius: var(--radius-card); color: var(--text-primary); text-decoration: none; font-size: var(--fs-small); text-align: center; transition: background-color var(--dur-state) ease; }
+  .app-icons img { width: 80px; height: 80px; transition: transform 360ms var(--ease-out-expo), filter 360ms ease; filter: drop-shadow(0 8px 14px rgb(0 0 0 / 0.22)); }
+  .app-icons a:hover { background: var(--border-subtle); }
+  .app-icons a:hover img { transform: translateY(-6px) scale(1.06); filter: drop-shadow(0 14px 20px rgb(0 0 0 / 0.3)); }
+  .more { margin-top: var(--space-6); }
+  .more a, .more-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; }
+  .more a:hover, .more-link:hover { text-decoration: underline; }
+
+  .turkish { background: var(--surface-sunken); }
+  .turkish-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(var(--space-6), 5vw, var(--space-8)); align-items: center; }
+  .turkish-grid .section-head { margin: 0; }
+  @media (max-width: 900px) { .turkish-grid { grid-template-columns: 1fr; } }
+
+  .story-teaser { position: relative; min-height: min(92vh, 860px); display: grid; align-items: center; overflow: clip; color: var(--on-image); isolation: isolate; }
+  .story-bg { position: absolute; inset: 0; z-index: -1; }
+  .story-bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 38% 50%; }
+  .story-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(270deg, color-mix(in srgb, var(--scrim) 82%, transparent) 0%, color-mix(in srgb, var(--scrim) 55%, transparent) 45%, transparent 75%); }
+  .story-content { display: grid; justify-items: start; gap: var(--space-4); padding-block: var(--space-9); }
+  .story-content > * { margin-left: auto; width: min(100%, 520px); }
+  .story-content .btn { width: auto; }
+  .story-content .eyebrow { color: var(--brand-glaze-1); }
+  .story-content p { font-size: var(--fs-lead); line-height: 1.55; color: var(--on-image-2); }
+  .story-content .btn-quiet { color: var(--on-image); background: var(--on-image-glass); border-color: var(--on-image-line); }
+  @supports (animation-timeline: view()) {
+    .story-bg :global(img) { animation: story-pan linear both; animation-timeline: view(); }
+    @keyframes story-pan { from { transform: scale(1.12) translateY(-3%); } to { transform: scale(1) translateY(3%); } }
+  }
+  @media (max-width: 760px) {
+    .story-bg::after { background: linear-gradient(0deg, color-mix(in srgb, var(--scrim) 90%, transparent) 0%, color-mix(in srgb, var(--scrim) 50%, transparent) 60%, color-mix(in srgb, var(--scrim) 20%, transparent) 100%); }
+    .story-teaser { align-items: end; }
+  }
+
+  .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(var(--space-6), 6vw, var(--space-9)); }
+  .status h2 { margin-bottom: var(--space-5); }
+  .status-lines { padding-left: 1.1em; display: grid; gap: var(--space-3); color: var(--text-secondary); margin-bottom: var(--space-5); }
+  .status-lines li::marker { color: var(--accent); }
+  .news-title { margin-bottom: var(--space-4); }
+  .news { list-style: none; padding: 0; margin-bottom: var(--space-5); border-top: 1px solid var(--border-subtle); }
+  .news a { display: grid; gap: 2px; padding-block: var(--space-4); border-bottom: 1px solid var(--border-subtle); color: inherit; text-decoration: none; }
+  .news a:hover strong { color: var(--accent-text); }
+  .news time { font-size: var(--fs-xs); color: var(--text-secondary); }
+  .news strong { font-weight: 620; transition: color var(--dur-state) ease; }
+  .news span { font-size: var(--fs-small); color: var(--text-secondary); }
+  @media (max-width: 860px) { .status-grid { grid-template-columns: 1fr; } }
+</style>

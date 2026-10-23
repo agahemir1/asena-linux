@@ -1,0 +1,166 @@
+---
+import Icon from './Icon.astro';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+// Real names from the Turkish desktop: application names, Settings sections
+// (docs/apps/APP_CATALOG.md) and the home folders.
+const items = [
+  'Dosyalar', 'Ayarlar', 'Yazılım', 'Metin Düzenleyici', 'Notlar', 'Takvim', 'Saat', 'Hesap Makinesi',
+  'Fotoğraflar', 'Oynatıcı', 'Arşiv', 'Ekran Görüntüsü',
+  'Görünüm', 'Masaüstü ve panel', 'Bildirimler', 'Ağ', 'Bluetooth', 'Ekranlar', 'Ses', 'Klavye',
+  'Fare ve dokunmatik yüzey', 'Güç', 'Kullanıcılar', 'Bölge ve dil', 'Tarih ve saat', 'Varsayılan uygulamalar',
+  'Gizlilik', 'Erişilebilirlik', 'Hakkında',
+  'Masaüstü', 'Belgeler', 'İndirilenler', 'Müzik', 'Resimler', 'Videolar',
+];
+const tries = ['indir', 'OYNATICI', 'erisilebilirlik', 'ARSIV', 'KULLANICILAR', 'görünüm'];
+const copy = {
+  tr: {
+    label: 'Aranacak kelime',
+    placeholder: 'Bir şey yazın',
+    tries: 'Deneyin',
+    asena: 'Asena araması',
+    plain: 'Sıradan küçük harf karşılaştırması',
+    none: 'Sonuç yok',
+    count: (n: number) => `${n} sonuç`,
+  },
+  en: {
+    label: 'Search term',
+    placeholder: 'Type something',
+    tries: 'Try',
+    asena: 'Asena search',
+    plain: 'Plain lowercase match',
+    none: 'No results',
+    count: (n: number) => `${n} result${n === 1 ? '' : 's'}`,
+  },
+}[lang];
+---
+
+<div class="fold-demo" data-fold-demo data-items={JSON.stringify(items)} data-none={copy.none} data-count-one={copy.count(1)} data-count-many={copy.count(2)}>
+  <label class="field">
+    <span class="visually-hidden">{copy.label}</span>
+    <Icon name="edit-find" size={18} />
+    <input type="search" value="indir" placeholder={copy.placeholder} autocomplete="off" spellcheck="false" lang="tr" />
+  </label>
+  <div class="tries">
+    <span>{copy.tries}:</span>
+    {tries.map((term) => <button type="button" data-try={term} lang="tr">{term}</button>)}
+  </div>
+  <div class="columns">
+    <section class="column asena" aria-live="polite">
+      <header><h4>{copy.asena}</h4><span class="count" data-count="fold"></span></header>
+      <ul data-results="fold" lang="tr"></ul>
+    </section>
+    <section class="column plain" aria-live="polite">
+      <header><h4>{copy.plain}</h4><span class="count" data-count="plain"></span></header>
+      <ul data-results="plain" lang="tr"></ul>
+    </section>
+  </div>
+</div>
+
+<style>
+  .fold-demo {
+    padding: clamp(var(--space-4), 3vw, var(--space-6));
+    border-radius: var(--radius-dialog);
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-soft);
+  }
+  .field {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+    min-height: 56px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid color-mix(in oklab, var(--accent) 55%, transparent);
+    background: var(--surface-base);
+    color: var(--text-secondary);
+    transition: border-color var(--dur-state) ease, box-shadow var(--dur-state) ease;
+  }
+  .field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-subtle); }
+  input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 1.25rem; color: var(--text-primary); }
+  .tries { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-block: var(--space-4) var(--space-5); font-size: var(--fs-small); color: var(--text-secondary); }
+  .tries button {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    transition: background-color var(--dur-state) ease, border-color var(--dur-state) ease;
+  }
+  .tries button:hover { border-color: var(--accent); background: var(--accent-subtle); }
+  .columns { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .column { min-width: 0; }
+  .column header { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); padding-bottom: var(--space-2); border-bottom: 1px solid var(--border-subtle); }
+  h4 { font-size: var(--fs-small); font-weight: 620; letter-spacing: 0; }
+  .plain h4 { color: var(--text-secondary); font-weight: 520; }
+  .count { font-size: var(--fs-xs); color: var(--text-secondary); white-space: nowrap; }
+  ul { list-style: none; padding: var(--space-2) 0 0; min-height: 9.5em; display: grid; align-content: start; gap: 2px; }
+  li { padding: 6px 10px; border-radius: var(--radius-control); animation: hit-in 260ms var(--ease-out-cubic) both; }
+  .asena li { background: var(--accent-subtle); }
+  li.none { background: none; color: var(--text-secondary); font-style: italic; }
+  li mark { background: none; color: var(--accent-text); font-weight: 650; }
+  @keyframes hit-in { from { opacity: 0; transform: translateY(4px); } }
+  @media (max-width: 560px) { .columns { grid-template-columns: 1fr; } ul { min-height: 0; } }
+</style>
+
+<script>
+  import { fold, naiveKey } from '../lib/fold';
+
+  for (const demo of document.querySelectorAll<HTMLElement>('[data-fold-demo]')) {
+    const items: string[] = JSON.parse(demo.dataset.items ?? '[]');
+    const input = demo.querySelector<HTMLInputElement>('input');
+    const render = (kind: 'fold' | 'plain', hits: string[], query: string) => {
+      const list = demo.querySelector<HTMLUListElement>(`[data-results="${kind}"]`);
+      const count = demo.querySelector<HTMLElement>(`[data-count="${kind}"]`);
+      if (!list || !count) return;
+      list.replaceChildren();
+      if (!hits.length) {
+        const li = document.createElement('li');
+        li.className = 'none';
+        li.textContent = demo.dataset.none ?? '';
+        list.append(li);
+      }
+      for (const hit of hits.slice(0, 6)) {
+        const li = document.createElement('li');
+        // Mark the matched span; fold keeps one character per letter for these names.
+        const key = kind === 'fold' ? fold(hit) : naiveKey(hit);
+        const needle = kind === 'fold' ? fold(query) : naiveKey(query);
+        const at = needle ? key.indexOf(needle) : -1;
+        if (at >= 0 && key.length === hit.length) {
+          const mark = document.createElement('mark');
+          mark.textContent = hit.slice(at, at + needle.length);
+          li.append(hit.slice(0, at), mark, hit.slice(at + needle.length));
+        } else {
+          li.textContent = hit;
+        }
+        list.append(li);
+      }
+      const many = (demo.dataset.countMany ?? '').replace(/\d+/, String(hits.length));
+      count.textContent = hits.length === 1 ? demo.dataset.countOne ?? '' : many;
+    };
+    const update = () => {
+      const query = input?.value.trim() ?? '';
+      const folded = query ? items.filter((item) => fold(item).includes(fold(query))) : [];
+      const plain = query ? items.filter((item) => naiveKey(item).includes(naiveKey(query))) : [];
+      render('fold', folded, query);
+      render('plain', plain, query);
+    };
+    input?.addEventListener('input', update);
+    demo.querySelectorAll<HTMLButtonElement>('[data-try]').forEach((button) =>
+      button.addEventListener('click', () => {
+        if (!input) return;
+        input.value = button.dataset.try ?? '';
+        input.focus();
+        update();
+      }),
+    );
+    update();
+  }
+</script>

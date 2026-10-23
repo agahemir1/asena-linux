@@ -1,0 +1,106 @@
+---
+import Screen from './Screen.astro';
+import type { Lang } from '../i18n/routes';
+
+interface Option {
+  label: string;
+  shot: string;
+  alt: string;
+}
+
+interface Props {
+  lang: Lang;
+  label: string;
+  options: Option[];
+  /** Zoom into part of the frame: scale and the point kept in view, in percent. */
+  focus?: { scale: number; x: number; y: number };
+}
+
+const { lang, label, options, focus } = Astro.props;
+const id = `switch-${Math.random().toString(36).slice(2, 8)}`;
+const style = focus ? `--zoom:${focus.scale};--fx:${focus.x}%;--fy:${focus.y}%` : undefined;
+---
+
+<div class="switcher" data-shot-switcher>
+  <div class="segmented" role="tablist" aria-label={label}>
+    {
+      options.map((option, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`${id}-tab-${index}`}
+          aria-controls={`${id}-panel-${index}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          tabindex={index === 0 ? 0 : -1}
+          data-index={index}
+        >
+          {option.label}
+        </button>
+      ))
+    }
+  </div>
+  <div class:list={['frame shot', { zoomed: focus }]} style={style}>
+    {
+      options.map((option, index) => (
+        <div class="pane" role="tabpanel" id={`${id}-panel-${index}`} aria-labelledby={`${id}-tab-${index}`} data-index={index} data-active={index === 0 ? '' : undefined}>
+          <Screen lang={lang} name={option.shot} alt={option.alt} sizes="(min-width: 1240px) 1160px, 92vw" />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .segmented {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 3px;
+    margin-bottom: var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-subtle);
+  }
+  .segmented button {
+    border: 0;
+    border-radius: var(--radius-pill);
+    padding: 8px 18px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: var(--fs-small);
+    font-weight: 560;
+    transition: background-color var(--dur-state) ease, color var(--dur-state) ease, box-shadow var(--dur-state) ease;
+  }
+  .segmented button:hover { color: var(--text-primary); }
+  .segmented button[aria-selected='true'] { background: var(--surface-raised); color: var(--text-primary); box-shadow: var(--shadow-soft); }
+  .frame { position: relative; aspect-ratio: 16 / 9; }
+  .pane { position: absolute; inset: 0; opacity: 0; transform: scale(1.012); transition: opacity 420ms var(--ease-out-cubic), transform 600ms var(--ease-out-expo); }
+  .pane[data-active] { opacity: 1; transform: none; }
+  .pane :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .zoomed { aspect-ratio: 4 / 3; }
+  .zoomed .pane :global(img) { object-position: var(--fx) var(--fy); transform: scale(var(--zoom)); transform-origin: var(--fx) var(--fy); }
+</style>
+
+<script>
+  for (const switcher of document.querySelectorAll<HTMLElement>('[data-shot-switcher]')) {
+    const tabs = [...switcher.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panes = [...switcher.querySelectorAll<HTMLElement>('.pane')];
+    const select = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+      });
+      panes.forEach((pane, i) => pane.toggleAttribute('data-active', i === index));
+      if (focus) tabs[index]?.focus();
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i));
+      tab.addEventListener('keydown', (event) => {
+        const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+        if (!step) return;
+        event.preventDefault();
+        select((i + step + tabs.length) % tabs.length, true);
+      });
+    });
+  }
+</script>

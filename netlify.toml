@@ -1,0 +1,25 @@
+# The website (K29). Netlify clones the whole repository because the site reads
+# the logo, wallpapers and icons from data/ and boot evidence from docs/.
+[build]
+  base = "website"
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  ASTRO_TELEMETRY_DISABLED = "1"
+
+# Hashed build output never changes under the same name.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    # Pagefind runs WebAssembly; small inline scripts set the theme before first paint.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'"
