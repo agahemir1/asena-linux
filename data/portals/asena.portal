@@ -1,4 +1,4 @@
 [portal]
 DBusName=org.freedesktop.impl.portal.desktop.asena
-Interfaces=org.freedesktop.impl.portal.Settings;
+Interfaces=org.freedesktop.impl.portal.Settings;org.freedesktop.impl.portal.Inhibit;org.freedesktop.impl.portal.Background;
 UseIn=Asena

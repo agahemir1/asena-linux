@@ -31,8 +31,9 @@ greetd
 cage
 dbus-user-session
 
-# Portals
+# Portals; gnome-keyring keeps the passwords of sandboxed apps (K22)
 xdg-desktop-portal
+gnome-keyring
 xdg-desktop-portal-gtk
 xdg-desktop-portal-wlr
 

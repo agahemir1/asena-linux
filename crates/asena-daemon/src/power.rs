@@ -15,6 +15,8 @@ pub enum Command {
     Prepare(async_channel::Sender<bool>),
     Resume,
     SleepFinished(Result<(), String>, Reply),
+    /// A portal idle inhibition started (true) or the last one ended.
+    Inhibit(bool),
     Stop,
 }
 struct Controller {
@@ -29,6 +31,7 @@ struct Controller {
     helper: Option<Helper>,
     enabled: bool,
     permitted: bool,
+    inhibited: bool,
 }
 impl Controller {
     async fn lock_held(&mut self) -> Result<(), String> {
@@ -111,7 +114,7 @@ impl Controller {
         self.on().await?;
         self.restore().await?;
         let timeouts = idle::timeouts(settings).map_err(|error| error.to_string())?;
-        if !settings.boolean("idle-enabled") || !self.permitted {
+        if !settings.boolean("idle-enabled") || !self.permitted || self.inhibited {
             return Ok(());
         }
         if (timeouts.lock > 0 || timeouts.off > 0 || timeouts.suspend > 0) && self.locker.is_none()
@@ -198,10 +201,17 @@ pub async fn run(
         helper: None,
         enabled: false,
         permitted,
+        inhibited: false,
     };
     while let Ok(command) = receiver.recv().await {
         match command {
             Command::Stop => break,
+            Command::Inhibit(inhibited) => {
+                state.inhibited = inhibited;
+                if let Err(error) = state.apply(&settings).await {
+                    tracing::warn!(%error, "Idle configuration rejected");
+                }
+            }
             Command::Apply => {
                 if let Err(error) = state.apply(&settings).await {
                     tracing::warn!(%error,"Idle configuration rejected");

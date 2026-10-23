@@ -55,6 +55,7 @@ crates/asena-daemon/src/locale.rs
 crates/asena-daemon/src/main.rs
 crates/asena-daemon/src/night_light.rs
 crates/asena-daemon/src/portal.rs
+crates/asena-daemon/src/portal_inhibit.rs
 crates/asena-daemon/src/power.rs
 crates/asena-daemon/src/sleep.rs
 crates/asena-daemon/src/wayfire.rs

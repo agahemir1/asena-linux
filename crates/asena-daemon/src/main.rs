@@ -14,6 +14,7 @@ mod idle;
 mod locale;
 mod night_light;
 mod portal;
+mod portal_inhibit;
 mod power;
 mod sleep;
 mod wayfire;
@@ -249,6 +250,7 @@ fn main() -> anyhow::Result<()> {
         })
         .await
         .unwrap_or(None);
+        let inhibit = portal_inhibit::Inhibit::new(power_commands.clone());
         let connection = match async {
             let connection = zbus::connection::Builder::session()?
                 .serve_at(
@@ -264,6 +266,8 @@ fn main() -> anyhow::Result<()> {
                     },
                 )?
                 .serve_at(portal::PATH, settings_portal)?
+                .serve_at(portal::PATH, inhibit.clone())?
+                .serve_at(portal::PATH, portal_inhibit::Background)?
                 .build()
                 .await?;
             asena_core::dbus::claim_name(&connection, asena_core::dbus::DAEMON_ID).await?;
@@ -280,6 +284,7 @@ fn main() -> anyhow::Result<()> {
         };
         appearance::start(&desktop);
         portal::start(&connection, &desktop, portal_state).await;
+        glib::spawn_future_local(inhibit.watcher(connection.clone()));
         // Runs until the process exits; a pending change ends with the session.
         glib::spawn_future_local(displays::run(
             display_receiver,
