@@ -5,7 +5,9 @@
 # then boots the disk with OVMF twice, Secure Boot off and Secure Boot on with
 # Microsoft keys, captures the screen during boot and reports the running
 # kernel, Secure Boot, preemption, identity, swap and boot splash on the serial
-# console. Covers K20, K23, K24 and the boot branding of K07.
+# console. Covers K20, K23, K24 and the boot branding of K07. With
+# ASENA_BOOT_TEST_OFFLINE=1 it then applies upgrades while restarting (K28),
+# once successfully and once with a package whose postinst fails.
 # Uses sudo, a loop device and about 4 GB in target/boot-test.
 # Results: target/evidence/boot-test.
 # Tools: sudo apt-get install debootstrap qemu-system-x86 qemu-utils ovmf gdisk dosfstools \
@@ -102,6 +104,12 @@ splash=$(plymouth-set-default-theme 2>/dev/null)
 printf 'ASENA-BOOT-TEST kernel=%s sb="%s" lockdown="%s" preempt="%s" os="%s" swap="%s" swappiness=%s splash=%s cmdline="%s"\n' \
     "$(uname -r)" "$sb" "$(cat /sys/kernel/security/lockdown 2>/dev/null)" "$preempt" "$os" \
     "$swap" "$(sysctl -n vm.swappiness)" "$splash" "$(cat /proc/cmdline)" >/dev/ttyS0
+# Upgrades applied while restarting (scripts/test-boot-vm.sh, offline scenarios).
+printf 'ASENA-UPGRADE-TEST result=%s packages="%s" interrupted="%s"\n' \
+    "$(cat /var/lib/asena/packages/last-upgrade.json 2>/dev/null)" \
+    "$(dpkg-query -W -f='${Package}=${Version} ' tzdata asena-offline-test 2>/dev/null)" \
+    "$(dpkg-query -W -f='${Package}:${db:Status-Status} ' 2>/dev/null | tr ' ' '\n' | grep -v ':installed$\|:not-installed$\|:config-files$' | tr '\n' ' ')" \
+    >/dev/ttyS0
 systemctl poweroff
 EOF
 sudo chmod 0755 "$root/usr/local/sbin/boot-test-report"
@@ -217,7 +225,7 @@ for name in sys.argv[2:]:
     if path.exists() and path.stat().st_size:
         GdkPixbuf.Pixbuf.new_from_file(str(path)).savev(str(target / (path.stem + ".png")), "png", [], [])
 PY
-    report=$(grep -a -m 1 'ASENA-BOOT-TEST' "$log" | tr -d '\r' || true)
+    report=$(grep -a -m 1 -o 'ASENA-BOOT-TEST.*' "$log" | tr -d '\r' || true)
     printf 'secure-boot=%s %s\n' "$mode" "${report:-no report}" | tee -a "$evidence/summary.txt"
     case $mode:$report in
         off:*kernel=*xanmod*'os="Asena Linux'*'swap="/dev/zram0'*splash=asena*) ;;
@@ -225,4 +233,113 @@ PY
         *) status=1 ;;
     esac
 done
+
+# Upgrades applied while restarting (K28, Phase 6F-D), with
+# ASENA_BOOT_TEST_OFFLINE=1. The service's offline mode runs from
+# asena-offline-update.service exactly as packaged; the download and the
+# /system-update marker that ScheduleUpgrade would make are made by hand.
+[[ ${ASENA_BOOT_TEST_OFFLINE:-} == 1 ]] || exit "$status"
+packages_binary=$repo/target/debug/asena-packages
+[[ -x $packages_binary ]] || { printf '%s\n' 'Build it first: cargo build -p asena-packages' >&2; exit 1; }
+
+mount_root() {
+    loop=$(sudo losetup -P --show -f "$disk")
+    sudo mount "${loop}p2" "$root"
+    sudo mount "${loop}p1" "$root/boot/efi"
+    for fs in proc sys dev dev/pts run; do
+        sudo mount --bind "/$fs" "$root/$fs"
+    done
+}
+unmount_root() {
+    sudo umount -R "$root"
+    sudo losetup -d "$loop"
+    loop=
+}
+# Secure Boot off; -no-reboot ends QEMU when the offline update restarts.
+boot() {
+    cp "$ovmf/OVMF_VARS_4M.fd" "$work/vars-offline.fd"
+    timeout 1500 qemu-system-x86_64 -machine q35,smm=on -accel kvm -accel tcg -cpu max -m 2048 -smp 2 \
+        -global driver=cfi.pflash01,property=secure,value=on \
+        -drive "if=pflash,format=raw,unit=0,readonly=on,file=$ovmf/OVMF_CODE_4M.secboot.fd" \
+        -drive "if=pflash,format=raw,unit=1,file=$work/vars-offline.fd" \
+        -drive "file=$disk,format=raw,if=virtio" -vga std \
+        -display none -serial "file:$1" -net none -no-reboot || true
+}
+# A tiny package whose 1.1 postinst fails, in a local archive of the test disk.
+make_test_package() {
+    local version=$1 fail=$2 directory=$work/package-$1
+    mkdir -p "$directory/DEBIAN" "$work/archive"
+    printf 'Package: asena-offline-test\nVersion: %s\nArchitecture: all\nMaintainer: Asena <asena@localhost>\nDescription: Offline upgrade test package\n' \
+        "$version" >"$directory/DEBIAN/control"
+    if [[ $fail == 1 ]]; then
+        printf '#!/bin/sh\nexit 1\n' >"$directory/DEBIAN/postinst"
+        chmod 0755 "$directory/DEBIAN/postinst"
+    fi
+    dpkg-deb --root-owner-group --build "$directory" "$work/archive/asena-offline-test_${version}_all.deb" >/dev/null
+}
+scenario() {
+    local name=$1 log=$evidence/offline-$1
+    mount_root
+    if ! in_root apt-get -d -y upgrade >"$log-download.log" 2>&1; then
+        unmount_root
+        printf 'offline-%s download failed\n' "$name" | tee -a "$evidence/summary.txt"
+        return
+    fi
+    sudo ln -sfn /var/cache/apt/archives "$root/system-update"
+    unmount_root
+    boot "$log-update.log"
+    boot "$log-after.log"
+    local report
+    report=$(grep -a -m 1 -o 'ASENA-UPGRADE-TEST.*' "$log-after.log" | tr -d '\r' || true)
+    printf 'offline-%s %s\n' "$name" "${report:-no report}" | tee -a "$evidence/summary.txt"
+    printf '%s\n' "$report"
+}
+
+mount_root
+sudo install -D -m 0755 "$packages_binary" "$root/usr/libexec/asena-packages"
+sudo install -D -m 0644 "$repo/data/systemd/system/asena-offline-update.service" \
+    "$root/etc/systemd/system/asena-offline-update.service"
+in_root systemctl enable asena-offline-update.service >/dev/null 2>&1
+make_test_package 1.0 0
+make_test_package 1.1 1
+sudo install -m 0644 "$work/archive/asena-offline-test_1.0_all.deb" "$root/tmp/"
+in_root dpkg -i /tmp/asena-offline-test_1.0_all.deb >"$evidence/offline-setup.log" 2>&1
+unmount_root
+
+# Success: the pending Debian upgrades (tzdata in October 2026).
+report=$(scenario success | tail -n 1)
+case $report in
+    *'"success":true'*) ;;
+    *) status=1 ;;
+esac
+
+# Failure: version 1.1 of the test package fails in its postinst.
+mount_root
+sudo mkdir -p "$root/srv/asena-test"
+sudo install -m 0644 "$work/archive/asena-offline-test_1.1_all.deb" "$root/srv/asena-test/"
+(cd "$root/srv/asena-test" && apt-ftparchive packages . | sudo tee Packages >/dev/null)
+printf 'deb [trusted=yes] file:/srv/asena-test ./\n' |
+    sudo tee "$root/etc/apt/sources.list.d/asena-test.list" >/dev/null
+in_root apt-get update >"$evidence/offline-failure-sources.log" 2>&1
+unmount_root
+report=$(scenario failure | tail -n 1)
+case $report in
+    *'"success":false'*'interrupted="asena-offline-test:half-configured'*) ;;
+    *) status=1 ;;
+esac
+
+# What the update service logged in both update boots.
+mount_root
+for boot in $(sudo journalctl -D "$root/var/log/journal" --list-boots --no-pager -q | awk '{print $1}'); do
+    [[ -n $(sudo journalctl -D "$root/var/log/journal" -b "$boot" -u asena-offline-update.service \
+        --no-pager -q) ]] || continue
+    printf '== boot %s\n' "$boot"
+    sudo journalctl -D "$root/var/log/journal" -b "$boot" --no-pager -q -o cat \
+        _SYSTEMD_UNIT=asena-offline-update.service + UNIT=asena-offline-update.service
+done >"$evidence/offline-journal.txt"
+unmount_root
+if grep -q 'Failed to connect\|Failed with result' "$evidence/offline-journal.txt"; then
+    printf '%s\n' 'the offline update service failed; see offline-journal.txt' | tee -a "$evidence/summary.txt"
+    status=1
+fi
 exit "$status"

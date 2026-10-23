@@ -94,21 +94,31 @@ pub fn run() -> anyhow::Result<()> {
             error: None,
         },
         Err(error) => {
-            tracing::error!(?error, "Offline upgrade failed");
+            tracing::error!(%error, "Offline upgrade failed");
             UpgradeResult {
                 finished,
                 success: false,
                 packages: 0,
-                error: Some(format!("{error:?}")),
+                error: Some(error.to_string()),
             }
         }
     };
     if let Err(error) = write_result(&result) {
         tracing::error!(%error, "Could not record the upgrade result");
     }
+    // `systemctl reboot` would ask logind over D-Bus first, which this boot
+    // does not start; systemd itself takes the reboot job.
     let status = std::process::Command::new("systemctl")
-        .arg("reboot")
+        .args([
+            "--no-block",
+            "start",
+            "reboot.target",
+            "--job-mode=replace-irreversibly",
+        ])
         .status()?;
-    anyhow::ensure!(status.success(), "systemctl reboot failed: {status}");
+    anyhow::ensure!(
+        status.success(),
+        "systemctl could not start reboot.target: {status}"
+    );
     Ok(())
 }

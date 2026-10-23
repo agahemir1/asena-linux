@@ -1,0 +1,21 @@
+== refresh
+Refresh ok ()
+== install hello
+plan ok [{'name': 'hello', 'action': 'install', 'version': '2.10-5', 'requested': True}]
+commit ok ()
+hello 2.10-5 install ok installed
+== remove hello
+plan ok [{'name': 'hello', 'action': 'remove', 'version': '2.10-5', 'requested': True}]
+commit ok ()
+dpkg-query: no packages found matching hello
+== upgrades
+Upgrades ok ('[{"name":"tzdata","from":"2026c-0+deb13u1","to":"2026e-0+deb13u1","security":false}]',)
+== schedule and cancel
+ScheduleUpgrade ok ()
+lrwxrwxrwx 1 root root 23 Oct 23 08:25 /system-update -> /var/cache/apt/archives
+CancelUpgrade ok ()
+ls: cannot access '/system-update': No such file or directory
+== properties
+b false
+b false
+b false

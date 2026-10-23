@@ -172,6 +172,36 @@ pub fn installed_packages(status: &str) -> std::collections::HashSet<String> {
         .collect()
 }
 
+/// Packages a dpkg run left half done, for example after a failing
+/// maintainer script; `dpkg --configure -a` has to finish or undo them.
+pub fn interrupted_packages(status: &str) -> Vec<String> {
+    const STATES: [&str; 5] = [
+        "half-installed",
+        "half-configured",
+        "unpacked",
+        "triggers-awaited",
+        "triggers-pending",
+    ];
+    status
+        .split("\n\n")
+        .filter_map(|stanza| {
+            let mut name = None;
+            let mut broken = false;
+            for line in stanza.lines() {
+                if let Some(value) = line.strip_prefix("Package: ") {
+                    name = Some(value.trim());
+                } else if let Some(value) = line.strip_prefix("Status: ") {
+                    broken = value
+                        .split_whitespace()
+                        .last()
+                        .is_some_and(|state| STATES.contains(&state));
+                }
+            }
+            broken.then_some(name?.to_owned())
+        })
+        .collect()
+}
+
 #[zbus::proxy(
     interface = "org.asenalinux.Packages",
     default_service = "org.asenalinux.Packages",
@@ -282,6 +312,9 @@ mod tests {
         let installed = installed_packages(status);
         assert!(installed.contains("hello") && installed.contains("bash"));
         assert!(!installed.contains("cowsay") && !installed.contains("sl"));
+        assert_eq!(interrupted_packages(status), ["sl"]);
+        assert!(interrupted_packages("Package: a\nStatus: install ok unpacked\n").len() == 1);
+        assert!(interrupted_packages("Package: a\nStatus: deinstall ok config-files\n").is_empty());
     }
 
     #[test]

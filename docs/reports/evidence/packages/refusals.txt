@@ -1,0 +1,9 @@
+== unauthorized refresh (no rule, no agent)
+Refresh error org.asenalinux.Packages.Error.NotAuthorized
+== bad names
+plan error org.asenalinux.Packages.Error.InvalidName
+plan error org.asenalinux.Packages.Error.InvalidName
+== protected removal
+plan error org.asenalinux.Packages.Error.Protected
+== unknown package
+plan error org.asenalinux.Packages.Error.UnknownPackage

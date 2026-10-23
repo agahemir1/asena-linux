@@ -29,6 +29,16 @@ pub enum Error {
     Apt(String),
 }
 
+impl std::fmt::Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Plan(error) => write!(f, "{error}"),
+            Self::Stale => f.write_str("the package state changed"),
+            Self::Apt(message) => f.write_str(message.trim()),
+        }
+    }
+}
+
 impl From<AptErrors> for Error {
     fn from(error: AptErrors) -> Self {
         Self::Apt(error.to_string())
@@ -254,10 +264,13 @@ pub fn install_upgrades(reporter: &Reporter) -> Result<u32, Error> {
     Ok(count)
 }
 
-/// dpkg leaves files in its updates directory when a run was interrupted;
-/// APT refuses to work until `dpkg --configure -a` finished it.
+/// dpkg leaves files in its updates directory when a run was interrupted, and
+/// a failing maintainer script leaves its package half configured; APT
+/// refuses to work until `dpkg --configure -a` finished them.
 pub fn needs_repair() -> bool {
     std::fs::read_dir("/var/lib/dpkg/updates").is_ok_and(|mut entries| entries.next().is_some())
+        || std::fs::read_to_string("/var/lib/dpkg/status")
+            .is_ok_and(|status| !asena_core::packages::interrupted_packages(&status).is_empty())
 }
 
 pub fn repair(reporter: &Reporter) -> Result<(), Error> {

@@ -3,8 +3,11 @@
 # as a D-Bus activated system service for the length of the test, then talks
 # to it on the system bus: unauthorized calls, a temporary polkit rule for the
 # calling user, installing and removing `hello`, refusals for protected
-# packages, bad names and foreign plans, the upgrade list and scheduling.
+# packages, bad names and foreign plans, the upgrade list and scheduling, and
+# repairing a package whose maintainer script failed.
 # Everything it installs is removed on exit; it never restarts the machine.
+# With --hold it only installs the service and a polkit rule for the calling
+# user and waits until it is stopped, so Software can be tried in a session.
 # Results: target/evidence/packages-test.
 # Tools: cargo build -p asena-packages; sudo apt-get install python3-gi
 set -euo pipefail
@@ -26,6 +29,8 @@ busconf=/etc/dbus-1/system.d/org.asenalinux.Packages.conf
 actions=/usr/share/polkit-1/actions/org.asenalinux.packages.policy
 rule=/etc/polkit-1/rules.d/49-asena-packages-test.rules
 unit=/run/systemd/system/asena-packages.service
+# The postinst of asena-repair-test fails while this file exists.
+repair_flag=/run/asena-repair-test-fail
 for path in "$activation" "$busconf" "$actions" "$rule" "$unit"; do
     [[ ! -e $path ]] || { printf 'Refusing to replace %s.\n' "$path" >&2; exit 1; }
 done
@@ -34,6 +39,10 @@ done
 cleanup() {
     trap - EXIT
     sudo systemctl stop asena-packages.service 2>/dev/null || true
+    sudo rm -f "$repair_flag"
+    if dpkg-query -W asena-repair-test >/dev/null 2>&1; then
+        sudo dpkg --purge asena-repair-test >/dev/null 2>&1 || true
+    fi
     sudo rm -f "$libexec" "$activation" "$busconf" "$actions" "$rule" "$unit"
     sudo systemctl daemon-reload
     sudo busctl call org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus ReloadConfig >/dev/null
@@ -51,6 +60,19 @@ sed "s|/usr/libexec/asena-packages|$libexec|" "$repo/data/systemd/system/asena-p
     sudo install -D -m 0644 /dev/stdin "$unit"
 sudo systemctl daemon-reload
 sudo busctl call org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus ReloadConfig >/dev/null
+allow_caller() {
+    printf 'polkit.addRule(function(action, subject) {\n    if (action.id.indexOf("org.asenalinux.packages.") == 0 && subject.user == "%s") {\n        return polkit.Result.YES;\n    }\n});\n' \
+        "$(id -un)" | sudo install -D -m 0644 /dev/stdin "$rule"
+}
+if [[ ${1:-} == --hold ]]; then
+    allow_caller
+    printf '%s\n' 'The package service is installed; stop this script to remove it.'
+    trap 'exit 0' INT TERM
+    while true; do
+        sleep 3600 &
+        wait $!
+    done
+fi
 if dpkg-query -W -f='${Status}' hello 2>/dev/null | grep -q 'ok installed'; then
     printf '%s\n' 'hello is already installed; remove it before the test.' >&2
     exit 1
@@ -109,8 +131,7 @@ PY
 plan_id=$(client plan hello '' | sed -n 's/^plan ok //p' | python3 -I -c 'import json,sys; print(json.load(sys.stdin)["id"])')
 client commit "$plan_id" >"$evidence/foreign-plan.txt" 2>&1
 
-printf 'polkit.addRule(function(action, subject) {\n    if (action.id.indexOf("org.asenalinux.packages.") == 0 && subject.user == "%s") {\n        return polkit.Result.YES;\n    }\n});\n' \
-    "$(id -un)" | sudo install -D -m 0644 /dev/stdin "$rule"
+allow_caller
 {
     printf '== refresh\n'
     client Refresh
@@ -130,5 +151,29 @@ printf 'polkit.addRule(function(action, subject) {\n    if (action.id.indexOf("o
     printf '== properties\n'
     busctl get-property org.asenalinux.Packages /org/asenalinux/Packages org.asenalinux.Packages Busy NeedsRepair UpgradeScheduled
 } >"$evidence/authorized.txt" 2>&1
+
+# A failing postinst leaves its package half configured; Repair finishes it
+# once the cause is gone.
+package=$(mktemp -d)
+mkdir -p "$package/DEBIAN"
+printf 'Package: asena-repair-test\nVersion: 1.0\nArchitecture: all\nMaintainer: Asena <asena@localhost>\nDescription: Repair test package\n' \
+    >"$package/DEBIAN/control"
+printf '#!/bin/sh\n[ ! -e %s ]\n' "$repair_flag" >"$package/DEBIAN/postinst"
+chmod 0755 "$package/DEBIAN/postinst"
+dpkg-deb --root-owner-group --build "$package" "$package.deb" >/dev/null
+{
+    printf '== failing postinst\n'
+    sudo touch "$repair_flag"
+    sudo dpkg -i "$package.deb" 2>&1 | tail -n 2 || true
+    dpkg-query -W -f='${Package} ${db:Status-Status}\n' asena-repair-test
+    busctl get-property org.asenalinux.Packages /org/asenalinux/Packages org.asenalinux.Packages NeedsRepair
+    printf '== repair\n'
+    sudo rm -f "$repair_flag"
+    client Repair
+    dpkg-query -W -f='${Package} ${db:Status-Status}\n' asena-repair-test
+    busctl get-property org.asenalinux.Packages /org/asenalinux/Packages org.asenalinux.Packages NeedsRepair
+} >"$evidence/repair.txt" 2>&1
+rm -rf -- "$package" "$package.deb"
+sudo dpkg --purge asena-repair-test >/dev/null
 journalctl -u asena-packages.service --since '-15 min' --no-pager >"$evidence/journal.txt" 2>&1 || true
-cat "$evidence/refusals.txt" "$evidence/foreign-plan.txt" "$evidence/authorized.txt"
+cat "$evidence/refusals.txt" "$evidence/foreign-plan.txt" "$evidence/authorized.txt" "$evidence/repair.txt"

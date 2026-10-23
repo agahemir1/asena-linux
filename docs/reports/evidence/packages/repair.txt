@@ -1,0 +1,9 @@
+== failing postinst
+Errors were encountered while processing:
+ asena-repair-test
+asena-repair-test half-configured
+b true
+== repair
+Repair ok ()
+asena-repair-test installed
+b false
