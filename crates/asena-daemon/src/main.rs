@@ -17,6 +17,7 @@ mod portal;
 mod portal_inhibit;
 mod power;
 mod sleep;
+mod updates;
 mod wayfire;
 struct DaemonBus {
     status: Arc<night_light::Status>,
@@ -284,6 +285,7 @@ fn main() -> anyhow::Result<()> {
         };
         appearance::start(&desktop);
         portal::start(&connection, &desktop, portal_state).await;
+        glib::spawn_future_local(updates::run(connection.clone()));
         glib::spawn_future_local(inhibit.watcher(connection.clone()));
         // Runs until the process exits; a pending change ends with the session.
         glib::spawn_future_local(displays::run(

@@ -58,6 +58,7 @@ crates/asena-daemon/src/portal.rs
 crates/asena-daemon/src/portal_inhibit.rs
 crates/asena-daemon/src/power.rs
 crates/asena-daemon/src/sleep.rs
+crates/asena-daemon/src/updates.rs
 crates/asena-daemon/src/wayfire.rs
 crates/asena-documents/src/main.rs
 crates/asena-files/src/main.rs

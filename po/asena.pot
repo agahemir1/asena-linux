@@ -938,8 +938,39 @@ msgstr ""
 msgid "Lock the session before sleeping."
 msgstr ""
 
-#: crates/asena-store/src/main.rs:22 crates/asena-store/src/window.rs:240 crates/asena-store/src/window.rs:247 crates/asena-store/src/window.rs:260
+#: crates/asena-daemon/src/updates.rs:98
+msgid "Open Software"
+msgstr ""
+
+#: crates/asena-daemon/src/updates.rs:101 crates/asena-store/src/main.rs:22
+#: crates/asena-store/src/window.rs:240 crates/asena-store/src/window.rs:247
+#: crates/asena-store/src/window.rs:260
 msgid "Software"
+msgstr ""
+
+#: crates/asena-daemon/src/updates.rs:159
+msgid "{count} update is ready"
+msgid_plural "{count} updates are ready"
+msgstr[0] ""
+msgstr[1] ""
+
+#: crates/asena-daemon/src/updates.rs:165
+msgid ""
+"Includes security updates. They are installed while the computer restarts."
+msgstr ""
+
+#: crates/asena-daemon/src/updates.rs:167
+msgid "They are installed while the computer restarts."
+msgstr ""
+
+#: crates/asena-daemon/src/updates.rs:191
+msgid "{count} package was updated"
+msgid_plural "{count} packages were updated"
+msgstr[0] ""
+msgstr[1] ""
+
+#: crates/asena-daemon/src/updates.rs:200
+msgid "The system update could not be installed"
 msgstr ""
 
 #: crates/asena-documents/src/main.rs:11 crates/asena-documents/src/main.rs:21

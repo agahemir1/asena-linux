@@ -195,6 +195,7 @@ dependencies = [
  "futures-lite",
  "gio",
  "glib",
+ "serde_json",
  "tracing",
  "zbus",
 ]
