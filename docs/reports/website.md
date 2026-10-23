@@ -78,9 +78,23 @@ Yol üstünde:
 Tarayıcı denemeleri uygulamanın tarayıcı panelinde (Chromium) `npm run preview` ile yapıldı. Panel gizliyken
 animasyonlar duraklatıldığı için animasyonlu durumlar ekran görüntüsüyle değil DOM ölçümüyle denetlendi.
 
+## Yayın
+
+23 Ekim 2026'da proje sahibinin isteğiyle Netlify CLI 27.14.2 ile, onun hesabında (ekip `agahemir986`)
+`asenalinux` projesi oluşturuldu ve site <https://asenalinux.netlify.app> adresine yayınlandı. Depo
+Netlify'a bağlı değil; CLI `netlify.toml`'daki komutla yerelde derleyip yükler (ilk yayında 663 dosya).
+
+- Önce taslak adreste denendi: 18 adres 200, olmayan adres 404 sayfası, RSS ve sitemap doğru tür,
+  güvenlik başlıkları ve `/_astro/*` için bir yıllık önbellek geçerli. Arama CSP altında çalışıyor.
+- Taslakta CSP, Vite'ın CSS'e `data:` adresi olarak gömdüğü 4 KB altı bir yazı tipi alt kümesini
+  engelledi; `font-src` buna izin verecek şekilde düzeltildi, yeniden denendi, konsolda hata kalmadı ve
+  Inter ile JetBrains Mono yüklendi. Ardından asıl adrese alındı; asıl adreste de sayfalar 200, 404 ve
+  düzeltilmiş CSP doğrulandı.
+- Yayından önce `npm ci`, açık bıraktığım önizleme sunucusu `node_modules` dosyalarını kilitlediği için
+  yarıda kalmıştı; sunucu kapatılıp kurulum yenilendi.
+
 ## Doğrulanmadı
 
-- Netlify'a yayın yapılmadı; `netlify.toml` ile gerçek derleme ve başlıklar (CSP dahil) Netlify'da denenmedi.
 - Safari, Firefox ve gerçek telefonlar denenmedi. Kaydırmaya bağlı CSS animasyonları ve sayfalar arası
   View Transitions desteklemeyen tarayıcıda devre dışı kalır; içerik etkilenmez, bu da denenmedi.
 - Ekran görüntüleri VM'de yazılımla çizimle (llvmpipe) alındı; arayüzün görsel kabulü ve hacimli
@@ -102,5 +116,5 @@ animasyonlar duraklatıldığı için animasyonlu durumlar ekran görüntüsüyl
   düzenini bu yeniden yüklemeden sonra yeniden uygulayıp uygulamadığı gerçek bir ekranda denenmeli.
 - **VM disk alanı:** 32 GB'lık VM'de `target/debug` 21 GB. Önyükleme ve paket testleriyle birlikte disk
   doluyor.
-- Sitenin Netlify'a bağlanması ve ilk ISO çıktığında İndir sayfasının gerçek indirme bağlantısı ve
-  SHA-256 özetiyle güncellenmesi.
+- Depo herkese açık olunca Netlify'ın depoya bağlanması (her `main` push'unda yayın). İlk ISO çıktığında
+  İndir sayfasının gerçek indirme bağlantısı ve SHA-256 özetiyle güncellenmesi.

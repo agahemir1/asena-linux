@@ -67,5 +67,24 @@ uygulamanın kaynak dili gibi ABD yazımıyla yazılır.
 
 ## Yayın
 
-`../netlify.toml` Netlify'a `website/` klasörünü derlemesini söyler. Yayına alma proje sahibinin Netlify
-hesabıyla yapılır.
+Site <https://asenalinux.netlify.app> adresinde, proje sahibinin Netlify hesabındaki `asenalinux`
+projesindedir (ekip `agahemir986`). Depo Netlify'a bağlı değildir; güncellemeler yerelden Netlify CLI ile
+yayınlanır. CLI, depo kökündeki `netlify.toml`'u okur: derleme komutu, güvenlik başlıkları ve önbellek
+ayarları oradadır. Bağlantı bilgisi `.netlify/` altında tutulur ve depoya girmez.
+
+PowerShell'de, depo kökünden (Windows PowerShell 5.1'de `&&` yoktur; `.cmd` sürümleri betik izni
+kapalı kabukta da çalışır):
+
+```powershell
+npx.cmd --yes netlify-cli deploy --dir website/dist
+```
+
+Bu komut siteyi `netlify.toml`'daki komutla yeniden derler ve geçici bir adrese yükler. Taslak doğruysa:
+
+```powershell
+npx.cmd --yes netlify-cli deploy --dir website/dist --prod
+```
+
+İlk kez başka bir makinede: `npx.cmd netlify-cli login` ile giriş, ardından `npx.cmd netlify-cli link --name
+asenalinux`. Önizleme sunucusu (`npm run preview`) açıkken `npm ci` çalıştırılmamalı: Windows'ta açık
+dosyalar silinemediği için `node_modules` yarım kalır.

@@ -22,6 +22,6 @@ Wayfire OpenGL ES ister; GPU yoksa `WLR_RENDERER_ALLOW_SOFTWARE=1 bash scripts/d
 [Geliştirme](docs/DEVELOPMENT.md), [Faz 0 raporu](docs/reports/phase-00.md),
 [yol haritası](docs/ROADMAP.md), [tasarım](docs/DESIGN.md).
 
-Web sitesi `website/` altında ([website/README.md](website/README.md)); adresi
-`asenalinux.netlify.app` olacak, henüz yayımlanmadı.
+Web sitesi: <https://asenalinux.netlify.app>, kaynağı `website/` altında
+([website/README.md](website/README.md)).
 GPL-3.0-or-later; [lisans](LICENSE).
