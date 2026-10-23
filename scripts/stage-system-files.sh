@@ -17,6 +17,9 @@ put 0644 data/apt/preferences.d/asena-xanmod.pref /etc/apt/preferences.d/asena-x
 put 0644 data/grub/default/asena.cfg /etc/default/grub.d/asena.cfg
 put 0755 data/grub/grub.d/42_asena_kernel /etc/grub.d/42_asena_kernel
 
+# Application icons of the Debian catalog in Software (K21)
+put 0644 data/apt/apt.conf.d/50asena-appstream-icons /etc/apt/apt.conf.d/50asena-appstream-icons
+
 # Swap in RAM (K24) and the live session (K26)
 put 0644 data/zram/zram-generator.conf /etc/systemd/zram-generator.conf
 put 0644 data/sysctl/90-asena-zram.conf /etc/sysctl.d/90-asena-zram.conf

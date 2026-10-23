@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 22:05+0000\n"
+"POT-Creation-Date: 2026-10-23 08:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,13 +42,15 @@ msgstr ""
 #: crates/asena-settings/src/displays.rs:716
 #: crates/asena-settings/src/pages.rs:1041
 #: crates/asena-shell/src/desktop.rs:149 crates/asena-shell/src/power.rs:207
-#: crates/asena-shell/src/taskbar.rs:167 crates/asena-text/src/window.rs:462
+#: crates/asena-shell/src/taskbar.rs:167 crates/asena-store/src/window.rs:536
+#: crates/asena-store/src/window.rs:742 crates/asena-store/src/window.rs:1021
+#: crates/asena-store/src/window.rs:1094 crates/asena-text/src/window.rs:462
 #: crates/asena-widgets/src/wireless.rs:240
 msgid "Cancel"
 msgstr ""
 
 #: crates/asena-app/src/headerbar.rs:45 crates/asena-files/src/window.rs:260
-#: crates/asena-player/src/window.rs:64
+#: crates/asena-player/src/window.rs:64 crates/asena-store/src/window.rs:200
 msgid "Search"
 msgstr ""
 
@@ -79,7 +81,7 @@ msgstr ""
 
 #: crates/asena-archive/src/window.rs:52 crates/asena-files/src/window.rs:817
 #: crates/asena-player/src/window.rs:59 crates/asena-shell/src/desktop.rs:248
-#: crates/asena-text/src/window.rs:76
+#: crates/asena-store/src/window.rs:533 crates/asena-text/src/window.rs:76
 msgid "Open"
 msgstr ""
 
@@ -92,7 +94,8 @@ msgstr ""
 #: crates/asena-calendar/src/window.rs:119 crates/asena-clock/src/window.rs:217
 #: crates/asena-files/src/window.rs:255 crates/asena-notes/src/window.rs:104
 #: crates/asena-photos/src/window.rs:99 crates/asena-player/src/window.rs:75
-#: crates/asena-screenshot/src/window.rs:85 crates/asena-text/src/window.rs:96
+#: crates/asena-screenshot/src/window.rs:85
+#: crates/asena-store/src/window.rs:214 crates/asena-text/src/window.rs:96
 msgid "Main menu"
 msgstr ""
 
@@ -523,7 +526,8 @@ msgstr ""
 msgid "h"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:396
+#: crates/asena-clock/src/window.rs:396 crates/asena-store/src/window.rs:618
+#: crates/asena-store/src/window.rs:782 crates/asena-store/src/window.rs:886
 msgid "Remove"
 msgstr ""
 
@@ -605,6 +609,7 @@ msgid "Accessories"
 msgstr ""
 
 #: crates/asena-core/src/launcher.rs:65 crates/asena-core/src/panels.rs:19
+#: crates/asena-store/src/window.rs:963
 msgid "System"
 msgstr ""
 
@@ -833,58 +838,58 @@ msgstr ""
 msgid "The display change was already reverted."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:35
+#: crates/asena-daemon/src/main.rs:37
 msgid "This request comes from another session."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:42
+#: crates/asena-daemon/src/main.rs:44
 msgid "Too many display requests."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:57
+#: crates/asena-daemon/src/main.rs:59
 msgid "Display settings are unavailable."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:64
+#: crates/asena-daemon/src/main.rs:66
 msgid "The display request timed out."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:82 crates/asena-daemon/src/main.rs:123
+#: crates/asena-daemon/src/main.rs:84 crates/asena-daemon/src/main.rs:125
 #: crates/asena-lock/src/bus.rs:106 crates/asena-lock/src/bus.rs:133
 msgid "Run this command in the session you want to lock."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:90 crates/asena-daemon/src/power.rs:171
+#: crates/asena-daemon/src/main.rs:92 crates/asena-daemon/src/power.rs:174
 msgid "Unknown idle action."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:96
+#: crates/asena-daemon/src/main.rs:98
 msgid "Too many power requests."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:103
+#: crates/asena-daemon/src/main.rs:105
 msgid "Power management is unavailable."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:110
+#: crates/asena-daemon/src/main.rs:112
 msgid "The power request timed out."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:128 crates/asena-daemon/src/power.rs:44
-#: crates/asena-daemon/src/power.rs:119 crates/asena-daemon/src/power.rs:154
+#: crates/asena-daemon/src/main.rs:130 crates/asena-daemon/src/power.rs:47
+#: crates/asena-daemon/src/power.rs:122 crates/asena-daemon/src/power.rs:157
 #: crates/asena-shell/src/power.rs:71
 msgid "A verified session locker is not available."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:137
+#: crates/asena-daemon/src/main.rs:139
 msgid "A lock request is already in progress."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:176
+#: crates/asena-daemon/src/main.rs:178
 msgid "The display layout is invalid."
 msgstr ""
 
-#: crates/asena-daemon/src/main.rs:183
+#: crates/asena-daemon/src/main.rs:185
 msgid "The display request has no owner."
 msgstr ""
 
@@ -913,24 +918,28 @@ msgstr ""
 msgid "Night light did not become ready."
 msgstr ""
 
-#: crates/asena-daemon/src/power.rs:76
+#: crates/asena-daemon/src/power.rs:79
 msgid "Screen power control failed."
 msgstr ""
 
-#: crates/asena-daemon/src/power.rs:129
+#: crates/asena-daemon/src/power.rs:132
 msgid "Idle actions are disabled."
 msgstr ""
 
-#: crates/asena-daemon/src/power.rs:213 crates/asena-daemon/src/sleep.rs:121
+#: crates/asena-daemon/src/power.rs:223 crates/asena-daemon/src/sleep.rs:121
 msgid "Suspend is unavailable in this session."
 msgstr ""
 
-#: crates/asena-daemon/src/power.rs:215
+#: crates/asena-daemon/src/power.rs:225
 msgid "A sleep request is already in progress."
 msgstr ""
 
 #: crates/asena-daemon/src/sleep.rs:23
 msgid "Lock the session before sleeping."
+msgstr ""
+
+#: crates/asena-store/src/main.rs:22 crates/asena-store/src/window.rs:240 crates/asena-store/src/window.rs:247 crates/asena-store/src/window.rs:260
+msgid "Software"
 msgstr ""
 
 #: crates/asena-documents/src/main.rs:11 crates/asena-documents/src/main.rs:21
@@ -1185,6 +1194,7 @@ msgid "Caps Lock is on"
 msgstr ""
 
 #: crates/asena-greeter/src/main.rs:275 crates/asena-shell/src/power.rs:140
+#: crates/asena-store/src/window.rs:1060
 msgid "Restart"
 msgstr ""
 
@@ -1455,6 +1465,7 @@ msgid "Authenticate"
 msgstr ""
 
 #: crates/asena-polkit-agent/src/main.rs:144
+#: crates/asena-store/src/window.rs:1165
 msgid "Try again"
 msgstr ""
 
@@ -2445,7 +2456,7 @@ msgstr ""
 msgid "Could not open the application"
 msgstr ""
 
-#: crates/asena-shell/src/main.rs:141
+#: crates/asena-shell/src/main.rs:141 crates/asena-store/src/window.rs:1014
 msgid "Applications"
 msgstr ""
 
@@ -2652,18 +2663,285 @@ msgstr[1] ""
 msgid "More applications"
 msgstr ""
 
-#: crates/asena-store/src/main.rs:11 crates/asena-store/src/main.rs:21
-msgid "Software"
-msgstr ""
-
-#: crates/asena-store/src/main.rs:12
-msgid "Install and update applications"
+#: crates/asena-store/src/catalog.rs:39
+msgid "{remote} (system)"
 msgstr ""
 
 #: crates/asena-store/src/main.rs:23
+msgid "Install and update applications"
+msgstr ""
+
+#: crates/asena-store/src/main.rs:30
+msgid "Show the available updates"
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:31
+msgid "You are not allowed to change the installed software."
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:33
+msgid "This package is not in the configured archives."
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:35
+msgid "This change would remove a part of the system."
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:36
+msgid "There is nothing to change."
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:37
+msgid "The installed software changed in the meantime. Try again."
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:38
+msgid "Another software change is running."
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:41
+msgid "The software change failed."
+msgstr ""
+
+#: crates/asena-store/src/packages.rs:43
+msgid "The package service is unavailable."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:96
+msgid "Uses the network"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:97
+msgid "Can read and change all your files"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:98
+msgid "Can read and change files in your home folder"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:99
+msgid "Can use all devices, including cameras"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:100
+msgid "Can play sound and use microphones"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:102
+msgid "Uses the X11 window system and can see other windows"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:104
+msgid "Talks to other applications in your session"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:105
+msgid "Talks to system services"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:120
+msgid "{count} package to install or update"
+msgid_plural "{count} packages to install or update"
+msgstr[0] ""
+msgstr[1] ""
+
+#: crates/asena-store/src/window.rs:129
+msgid "{size} to download"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:134
+msgid "To remove: {packages}"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:156
+msgid "Explore"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:165 crates/asena-store/src/window.rs:406
+msgid "Installed"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:170
+msgid "Updates"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:182
+msgid "Loading the catalog"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:188
+msgid "Search applications"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:207
+msgid "Check for new software and updates"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:210
+msgid "Enable Flathub"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:211
+msgid "About Software"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:227
+msgid "An interrupted software change must be finished."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:228
+msgid "Repair"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:464
+msgid "The catalog is empty"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:466
 msgid ""
-"Asena Software is not ready yet. Install applications with the system "
-"package manager."
+"Refresh to download the application lists, or enable Flathub in the main "
+"menu."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:530
+msgid "Source"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:571
+msgid "License"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:582
+msgid "Website"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:587
+msgid "Open the website"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:620 crates/asena-store/src/window.rs:780
+#: crates/asena-store/src/window.rs:877
+msgid "Install"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:773
+msgid "The change cannot be prepared"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:780 crates/asena-store/src/window.rs:875
+msgid "Install {name}?"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:782 crates/asena-store/src/window.rs:883
+msgid "Remove {name}?"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:821 crates/asena-store/src/window.rs:921
+msgid "{name} is installed"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:823 crates/asena-store/src/window.rs:923
+msgid "{name} is removed"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:825 crates/asena-store/src/window.rs:926
+#: crates/asena-store/src/window.rs:1076
+msgid "The change failed"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:859
+msgid "The application cannot be installed"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:867
+msgid "It asks for no access outside its sandbox."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:884
+msgid "Its data in your home folder stays."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:956
+msgid "The last system update could not be installed"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:967
+msgid "Restart now"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:969
+msgid "Restart and install"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:978
+msgid "The updates are installed during the next restart."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:981
+msgid "Do not install while restarting"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:993
+msgid "Security"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1000
+msgid "The system is up to date"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1006
+msgid "Updates cannot be checked"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1017
+msgid "The applications are up to date"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1023
+msgid "Update"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1049
+msgid "The updates cannot be prepared"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1058
+msgid "Restart now?"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1059
+msgid ""
+"The updates are installed while the computer restarts. Save your work first."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1066
+msgid "The computer cannot restart"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1107
+msgid "The applications cannot be updated"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1135
+msgid "Enable Flathub?"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1136
+msgid ""
+"Flathub is a third-party catalog of Flatpak applications. Asena does not "
+"review them; each one shows the access it asks for before you install it."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1137
+msgid "Enable"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1163
+msgid "Flathub cannot be enabled"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:1195
+msgid "The repair failed"
 msgstr ""
 
 #: crates/asena-terminal/src/main.rs:12

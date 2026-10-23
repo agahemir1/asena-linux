@@ -12,7 +12,8 @@ asena-widgets.workspace = true
 adw.workspace = true
 gtk.workspace = true
 gio.workspace = true
-glib.workspace = true
+# g_time_zone_new_identifier; Debian 13 has GLib 2.84.
+glib = { workspace = true, features = ["v2_68"] }
 gettext-rs.workspace = true
 anyhow.workspace = true
 tracing.workspace = true

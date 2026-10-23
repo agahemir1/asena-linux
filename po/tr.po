@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: asena 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 22:05+0000\n"
+"POT-Creation-Date: 2026-10-23 08:40+0000\n"
 "PO-Revision-Date: 2026-10-21 18:00+0300\n"
 "Last-Translator: Asena contributors\n"
 "Language-Team: Turkish\n"
@@ -36,13 +36,15 @@ msgstr "Tamam"
 #: crates/asena-settings/src/displays.rs:716
 #: crates/asena-settings/src/pages.rs:1041
 #: crates/asena-shell/src/desktop.rs:149 crates/asena-shell/src/power.rs:207
-#: crates/asena-shell/src/taskbar.rs:167 crates/asena-text/src/window.rs:462
+#: crates/asena-shell/src/taskbar.rs:167 crates/asena-store/src/window.rs:536
+#: crates/asena-store/src/window.rs:742 crates/asena-store/src/window.rs:1021
+#: crates/asena-store/src/window.rs:1094 crates/asena-text/src/window.rs:462
 #: crates/asena-widgets/src/wireless.rs:240
 msgid "Cancel"
 msgstr "İptal"
 
 #: crates/asena-app/src/headerbar.rs:45 crates/asena-files/src/window.rs:260
-#: crates/asena-player/src/window.rs:64
+#: crates/asena-player/src/window.rs:64 crates/asena-store/src/window.rs:200
 msgid "Search"
 msgstr "Ara"
 
@@ -73,7 +75,7 @@ msgstr "Arşiv okunamadı."
 
 #: crates/asena-archive/src/window.rs:52 crates/asena-files/src/window.rs:817
 #: crates/asena-player/src/window.rs:59 crates/asena-shell/src/desktop.rs:248
-#: crates/asena-text/src/window.rs:76
+#: crates/asena-store/src/window.rs:533 crates/asena-text/src/window.rs:76
 msgid "Open"
 msgstr "Aç"
 
@@ -86,7 +88,8 @@ msgstr "Arşiv Hakkında"
 #: crates/asena-calendar/src/window.rs:119 crates/asena-clock/src/window.rs:217
 #: crates/asena-files/src/window.rs:255 crates/asena-notes/src/window.rs:104
 #: crates/asena-photos/src/window.rs:99 crates/asena-player/src/window.rs:75
-#: crates/asena-screenshot/src/window.rs:85 crates/asena-text/src/window.rs:96
+#: crates/asena-screenshot/src/window.rs:85
+#: crates/asena-store/src/window.rs:214 crates/asena-text/src/window.rs:96
 msgid "Main menu"
 msgstr "Ana menü"
 
@@ -517,7 +520,8 @@ msgstr "Aynı saat"
 msgid "h"
 msgstr "sa"
 
-#: crates/asena-clock/src/window.rs:396
+#: crates/asena-clock/src/window.rs:396 crates/asena-store/src/window.rs:618
+#: crates/asena-store/src/window.rs:782 crates/asena-store/src/window.rs:886
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -599,6 +603,7 @@ msgid "Accessories"
 msgstr "Donatılar"
 
 #: crates/asena-core/src/launcher.rs:65 crates/asena-core/src/panels.rs:19
+#: crates/asena-store/src/window.rs:963
 msgid "System"
 msgstr "Sistem"
 
@@ -831,58 +836,58 @@ msgstr "Başka bir ekran değişikliği onay bekliyor."
 msgid "The display change was already reverted."
 msgstr "Ekran değişikliği zaten geri alındı."
 
-#: crates/asena-daemon/src/main.rs:35
+#: crates/asena-daemon/src/main.rs:37
 msgid "This request comes from another session."
 msgstr "Bu istek başka bir oturumdan geliyor."
 
-#: crates/asena-daemon/src/main.rs:42
+#: crates/asena-daemon/src/main.rs:44
 msgid "Too many display requests."
 msgstr "Çok fazla ekran isteği var."
 
-#: crates/asena-daemon/src/main.rs:57
+#: crates/asena-daemon/src/main.rs:59
 msgid "Display settings are unavailable."
 msgstr "Ekran ayarları kullanılamıyor."
 
-#: crates/asena-daemon/src/main.rs:64
+#: crates/asena-daemon/src/main.rs:66
 msgid "The display request timed out."
 msgstr "Ekran isteği zaman aşımına uğradı."
 
-#: crates/asena-daemon/src/main.rs:82 crates/asena-daemon/src/main.rs:123
+#: crates/asena-daemon/src/main.rs:84 crates/asena-daemon/src/main.rs:125
 #: crates/asena-lock/src/bus.rs:106 crates/asena-lock/src/bus.rs:133
 msgid "Run this command in the session you want to lock."
 msgstr "Bu komutu kilitlemek istediğiniz oturumda çalıştırın."
 
-#: crates/asena-daemon/src/main.rs:90 crates/asena-daemon/src/power.rs:171
+#: crates/asena-daemon/src/main.rs:92 crates/asena-daemon/src/power.rs:174
 msgid "Unknown idle action."
 msgstr "Bilinmeyen boşta kalma eylemi."
 
-#: crates/asena-daemon/src/main.rs:96
+#: crates/asena-daemon/src/main.rs:98
 msgid "Too many power requests."
 msgstr "Çok fazla güç isteği var."
 
-#: crates/asena-daemon/src/main.rs:103
+#: crates/asena-daemon/src/main.rs:105
 msgid "Power management is unavailable."
 msgstr "Güç yönetimi kullanılamıyor."
 
-#: crates/asena-daemon/src/main.rs:110
+#: crates/asena-daemon/src/main.rs:112
 msgid "The power request timed out."
 msgstr "Güç isteği zaman aşımına uğradı."
 
-#: crates/asena-daemon/src/main.rs:128 crates/asena-daemon/src/power.rs:44
-#: crates/asena-daemon/src/power.rs:119 crates/asena-daemon/src/power.rs:154
+#: crates/asena-daemon/src/main.rs:130 crates/asena-daemon/src/power.rs:47
+#: crates/asena-daemon/src/power.rs:122 crates/asena-daemon/src/power.rs:157
 #: crates/asena-shell/src/power.rs:71
 msgid "A verified session locker is not available."
 msgstr "Doğrulanmış bir oturum kilitleyici kullanılamıyor."
 
-#: crates/asena-daemon/src/main.rs:137
+#: crates/asena-daemon/src/main.rs:139
 msgid "A lock request is already in progress."
 msgstr "Bir kilitleme isteği zaten sürüyor."
 
-#: crates/asena-daemon/src/main.rs:176
+#: crates/asena-daemon/src/main.rs:178
 msgid "The display layout is invalid."
 msgstr "Ekran düzeni geçersiz."
 
-#: crates/asena-daemon/src/main.rs:183
+#: crates/asena-daemon/src/main.rs:185
 msgid "The display request has no owner."
 msgstr "Ekran isteğinin sahibi bulunamadı."
 
@@ -911,25 +916,29 @@ msgstr "Gece ışığı durdu."
 msgid "Night light did not become ready."
 msgstr "Gece ışığı hazır duruma gelmedi."
 
-#: crates/asena-daemon/src/power.rs:76
+#: crates/asena-daemon/src/power.rs:79
 msgid "Screen power control failed."
 msgstr "Ekran gücü değiştirilemedi."
 
-#: crates/asena-daemon/src/power.rs:129
+#: crates/asena-daemon/src/power.rs:132
 msgid "Idle actions are disabled."
 msgstr "Boşta kalma eylemleri kapalı."
 
-#: crates/asena-daemon/src/power.rs:213 crates/asena-daemon/src/sleep.rs:121
+#: crates/asena-daemon/src/power.rs:223 crates/asena-daemon/src/sleep.rs:121
 msgid "Suspend is unavailable in this session."
 msgstr "Bu oturumda askıya alma kullanılamıyor."
 
-#: crates/asena-daemon/src/power.rs:215
+#: crates/asena-daemon/src/power.rs:225
 msgid "A sleep request is already in progress."
 msgstr "Bir uyku isteği zaten sürüyor."
 
 #: crates/asena-daemon/src/sleep.rs:23
 msgid "Lock the session before sleeping."
 msgstr "Uyumadan önce oturumu kilitle."
+
+#: crates/asena-store/src/main.rs:22 crates/asena-store/src/window.rs:240 crates/asena-store/src/window.rs:247 crates/asena-store/src/window.rs:260
+msgid "Software"
+msgstr "Yazılım"
 
 #: crates/asena-documents/src/main.rs:11 crates/asena-documents/src/main.rs:21
 #: crates/asena-files/src/window.rs:561
@@ -1185,6 +1194,7 @@ msgid "Caps Lock is on"
 msgstr "Caps Lock açık"
 
 #: crates/asena-greeter/src/main.rs:275 crates/asena-shell/src/power.rs:140
+#: crates/asena-store/src/window.rs:1060
 msgid "Restart"
 msgstr "Yeniden başlat"
 
@@ -1455,6 +1465,7 @@ msgid "Authenticate"
 msgstr "Kimlik doğrula"
 
 #: crates/asena-polkit-agent/src/main.rs:144
+#: crates/asena-store/src/window.rs:1165
 msgid "Try again"
 msgstr "Yeniden dene"
 
@@ -2447,7 +2458,7 @@ msgstr "Uygulama artık kurulu değil."
 msgid "Could not open the application"
 msgstr "Uygulama açılamadı"
 
-#: crates/asena-shell/src/main.rs:141
+#: crates/asena-shell/src/main.rs:141 crates/asena-store/src/window.rs:1014
 msgid "Applications"
 msgstr "Uygulamalar"
 
@@ -2659,21 +2670,292 @@ msgstr[1] "{name}, {count} pencere"
 msgid "More applications"
 msgstr "Diğer uygulamalar"
 
-#: crates/asena-store/src/main.rs:11 crates/asena-store/src/main.rs:21
-msgid "Software"
-msgstr "Yazılım"
+#: crates/asena-store/src/catalog.rs:39
+msgid "{remote} (system)"
+msgstr "{remote} (sistem)"
 
-#: crates/asena-store/src/main.rs:12
+#: crates/asena-store/src/main.rs:23
 msgid "Install and update applications"
 msgstr "Uygulama kurun ve güncelleyin"
 
-#: crates/asena-store/src/main.rs:23
+#: crates/asena-store/src/main.rs:30
+msgid "Show the available updates"
+msgstr "Kullanılabilir güncellemeleri göster"
+
+#: crates/asena-store/src/packages.rs:31
+msgid "You are not allowed to change the installed software."
+msgstr "Kurulu yazılımı değiştirme izniniz yok."
+
+#: crates/asena-store/src/packages.rs:33
+msgid "This package is not in the configured archives."
+msgstr "Bu paket yapılandırılmış arşivlerde yok."
+
+#: crates/asena-store/src/packages.rs:35
+msgid "This change would remove a part of the system."
+msgstr "Bu değişiklik sistemin bir parçasını kaldırır."
+
+#: crates/asena-store/src/packages.rs:36
+msgid "There is nothing to change."
+msgstr "Değiştirilecek bir şey yok."
+
+#: crates/asena-store/src/packages.rs:37
+msgid "The installed software changed in the meantime. Try again."
+msgstr "Kurulu yazılım bu arada değişti. Yeniden deneyin."
+
+#: crates/asena-store/src/packages.rs:38
+msgid "Another software change is running."
+msgstr "Başka bir yazılım değişikliği sürüyor."
+
+#: crates/asena-store/src/packages.rs:41
+msgid "The software change failed."
+msgstr "Yazılım değişikliği yapılamadı."
+
+#: crates/asena-store/src/packages.rs:43
+msgid "The package service is unavailable."
+msgstr "Paket servisine ulaşılamıyor."
+
+#: crates/asena-store/src/window.rs:96
+msgid "Uses the network"
+msgstr "Ağı kullanır"
+
+#: crates/asena-store/src/window.rs:97
+msgid "Can read and change all your files"
+msgstr "Bütün dosyalarınızı okuyup değiştirebilir"
+
+#: crates/asena-store/src/window.rs:98
+msgid "Can read and change files in your home folder"
+msgstr "Ev klasörünüzdeki dosyaları okuyup değiştirebilir"
+
+#: crates/asena-store/src/window.rs:99
+msgid "Can use all devices, including cameras"
+msgstr "Kameralar dahil bütün aygıtları kullanabilir"
+
+#: crates/asena-store/src/window.rs:100
+msgid "Can play sound and use microphones"
+msgstr "Ses çalabilir ve mikrofonları kullanabilir"
+
+#: crates/asena-store/src/window.rs:102
+msgid "Uses the X11 window system and can see other windows"
+msgstr "X11 pencere sistemini kullanır ve diğer pencereleri görebilir"
+
+#: crates/asena-store/src/window.rs:104
+msgid "Talks to other applications in your session"
+msgstr "Oturumunuzdaki diğer uygulamalarla iletişim kurar"
+
+#: crates/asena-store/src/window.rs:105
+msgid "Talks to system services"
+msgstr "Sistem servisleriyle iletişim kurar"
+
+#: crates/asena-store/src/window.rs:120
+msgid "{count} package to install or update"
+msgid_plural "{count} packages to install or update"
+msgstr[0] "Kurulacak veya güncellenecek {count} paket"
+msgstr[1] "Kurulacak veya güncellenecek {count} paket"
+
+#: crates/asena-store/src/window.rs:129
+msgid "{size} to download"
+msgstr "İndirilecek: {size}"
+
+#: crates/asena-store/src/window.rs:134
+msgid "To remove: {packages}"
+msgstr "Kaldırılacak: {packages}"
+
+#: crates/asena-store/src/window.rs:156
+msgid "Explore"
+msgstr "Keşfet"
+
+#: crates/asena-store/src/window.rs:165 crates/asena-store/src/window.rs:406
+msgid "Installed"
+msgstr "Kurulu"
+
+#: crates/asena-store/src/window.rs:170
+msgid "Updates"
+msgstr "Güncellemeler"
+
+#: crates/asena-store/src/window.rs:182
+msgid "Loading the catalog"
+msgstr "Katalog yükleniyor"
+
+#: crates/asena-store/src/window.rs:188
+msgid "Search applications"
+msgstr "Uygulama ara"
+
+#: crates/asena-store/src/window.rs:207
+msgid "Check for new software and updates"
+msgstr "Yeni yazılım ve güncellemeleri denetle"
+
+#: crates/asena-store/src/window.rs:210
+msgid "Enable Flathub"
+msgstr "Flathub'ı etkinleştir"
+
+#: crates/asena-store/src/window.rs:211
+msgid "About Software"
+msgstr "Yazılım Hakkında"
+
+#: crates/asena-store/src/window.rs:227
+msgid "An interrupted software change must be finished."
+msgstr "Yarıda kalan bir yazılım değişikliğinin tamamlanması gerekiyor."
+
+#: crates/asena-store/src/window.rs:228
+msgid "Repair"
+msgstr "Onar"
+
+#: crates/asena-store/src/window.rs:464
+msgid "The catalog is empty"
+msgstr "Katalog boş"
+
+#: crates/asena-store/src/window.rs:466
 msgid ""
-"Asena Software is not ready yet. Install applications with the system "
-"package manager."
+"Refresh to download the application lists, or enable Flathub in the main "
+"menu."
 msgstr ""
-"Asena Yazılım henüz hazır değil. Uygulamaları sistem paket yöneticisiyle "
-"kurun."
+"Uygulama listelerini indirmek için yenileyin ya da ana menüden Flathub'ı "
+"etkinleştirin."
+
+#: crates/asena-store/src/window.rs:530
+msgid "Source"
+msgstr "Kaynak"
+
+#: crates/asena-store/src/window.rs:571
+msgid "License"
+msgstr "Lisans"
+
+#: crates/asena-store/src/window.rs:582
+msgid "Website"
+msgstr "Web sitesi"
+
+#: crates/asena-store/src/window.rs:587
+msgid "Open the website"
+msgstr "Web sitesini aç"
+
+#: crates/asena-store/src/window.rs:620 crates/asena-store/src/window.rs:780
+#: crates/asena-store/src/window.rs:877
+msgid "Install"
+msgstr "Kur"
+
+#: crates/asena-store/src/window.rs:773
+msgid "The change cannot be prepared"
+msgstr "Değişiklik hazırlanamıyor"
+
+#: crates/asena-store/src/window.rs:780 crates/asena-store/src/window.rs:875
+msgid "Install {name}?"
+msgstr "{name} kurulsun mu?"
+
+#: crates/asena-store/src/window.rs:782 crates/asena-store/src/window.rs:883
+msgid "Remove {name}?"
+msgstr "{name} kaldırılsın mı?"
+
+#: crates/asena-store/src/window.rs:821 crates/asena-store/src/window.rs:921
+msgid "{name} is installed"
+msgstr "{name} kuruldu"
+
+#: crates/asena-store/src/window.rs:823 crates/asena-store/src/window.rs:923
+msgid "{name} is removed"
+msgstr "{name} kaldırıldı"
+
+#: crates/asena-store/src/window.rs:825 crates/asena-store/src/window.rs:926
+#: crates/asena-store/src/window.rs:1076
+msgid "The change failed"
+msgstr "Değişiklik yapılamadı"
+
+#: crates/asena-store/src/window.rs:859
+msgid "The application cannot be installed"
+msgstr "Uygulama kurulamıyor"
+
+#: crates/asena-store/src/window.rs:867
+msgid "It asks for no access outside its sandbox."
+msgstr "Korumalı alanının dışında erişim istemiyor."
+
+#: crates/asena-store/src/window.rs:884
+msgid "Its data in your home folder stays."
+msgstr "Ev klasörünüzdeki verileri silinmez."
+
+#: crates/asena-store/src/window.rs:956
+msgid "The last system update could not be installed"
+msgstr "Son sistem güncellemesi kurulamadı"
+
+#: crates/asena-store/src/window.rs:967
+msgid "Restart now"
+msgstr "Şimdi yeniden başlat"
+
+#: crates/asena-store/src/window.rs:969
+msgid "Restart and install"
+msgstr "Yeniden başlat ve kur"
+
+#: crates/asena-store/src/window.rs:978
+msgid "The updates are installed during the next restart."
+msgstr "Güncellemeler bir sonraki yeniden başlatmada kurulacak."
+
+#: crates/asena-store/src/window.rs:981
+msgid "Do not install while restarting"
+msgstr "Yeniden başlarken kurma"
+
+#: crates/asena-store/src/window.rs:993
+msgid "Security"
+msgstr "Güvenlik"
+
+#: crates/asena-store/src/window.rs:1000
+msgid "The system is up to date"
+msgstr "Sistem güncel"
+
+#: crates/asena-store/src/window.rs:1006
+msgid "Updates cannot be checked"
+msgstr "Güncellemeler denetlenemiyor"
+
+#: crates/asena-store/src/window.rs:1017
+msgid "The applications are up to date"
+msgstr "Uygulamalar güncel"
+
+#: crates/asena-store/src/window.rs:1023
+msgid "Update"
+msgstr "Güncelle"
+
+#: crates/asena-store/src/window.rs:1049
+msgid "The updates cannot be prepared"
+msgstr "Güncellemeler hazırlanamıyor"
+
+#: crates/asena-store/src/window.rs:1058
+msgid "Restart now?"
+msgstr "Şimdi yeniden başlatılsın mı?"
+
+#: crates/asena-store/src/window.rs:1059
+msgid ""
+"The updates are installed while the computer restarts. Save your work first."
+msgstr ""
+"Güncellemeler bilgisayar yeniden başlarken kurulur. Önce çalışmanızı "
+"kaydedin."
+
+#: crates/asena-store/src/window.rs:1066
+msgid "The computer cannot restart"
+msgstr "Bilgisayar yeniden başlatılamıyor"
+
+#: crates/asena-store/src/window.rs:1107
+msgid "The applications cannot be updated"
+msgstr "Uygulamalar güncellenemiyor"
+
+#: crates/asena-store/src/window.rs:1135
+msgid "Enable Flathub?"
+msgstr "Flathub etkinleştirilsin mi?"
+
+#: crates/asena-store/src/window.rs:1136
+msgid ""
+"Flathub is a third-party catalog of Flatpak applications. Asena does not "
+"review them; each one shows the access it asks for before you install it."
+msgstr ""
+"Flathub, Flatpak uygulamalarının üçüncü taraf kataloğudur. Asena bu "
+"uygulamaları incelemez; her biri kurulmadan önce istediği erişimi gösterir."
+
+#: crates/asena-store/src/window.rs:1137
+msgid "Enable"
+msgstr "Etkinleştir"
+
+#: crates/asena-store/src/window.rs:1163
+msgid "Flathub cannot be enabled"
+msgstr "Flathub etkinleştirilemiyor"
+
+#: crates/asena-store/src/window.rs:1195
+msgid "The repair failed"
+msgstr "Onarım yapılamadı"
 
 #: crates/asena-terminal/src/main.rs:12
 msgid "Use the command line"

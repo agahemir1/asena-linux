@@ -67,5 +67,7 @@ foot
 firefox-esr
 firefox-esr-l10n-tr
 flatpak
+# APT downloads Debian's application catalog for Software through it (K21)
+appstream
 locales
 libc-l10n

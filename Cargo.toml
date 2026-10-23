@@ -48,6 +48,11 @@ quick-xml = "=0.37.5"
 # libapt-pkg bindings for asena-packages (K21); GPL-3.0-or-later. cxx stays at
 # 1.0.198 through the MSRV-aware resolver, later releases need rustc 1.88.
 rust-apt = "=0.11.3"
+# Software (K21, K22): Flatpak and AppStream on glib 0.20; MIT.
+libflatpak = "=0.6.0"
+libappstream = "=0.3.0"
+# Software screenshots over HTTPS through the system libsoup 3; MIT.
+soup3 = "=0.7.0"
 
 glib-build-tools = "=0.20.0"
 

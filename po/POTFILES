@@ -146,7 +146,12 @@ crates/asena-shell/src/surface.rs
 crates/asena-shell/src/taskbar.rs
 crates/asena-shell/src/taskbar_strip.rs
 crates/asena-shell/src/tray.rs
+crates/asena-store/src/catalog.rs
+crates/asena-store/src/flatpak.rs
 crates/asena-store/src/main.rs
+crates/asena-store/src/packages.rs
+crates/asena-store/src/screenshots.rs
+crates/asena-store/src/window.rs
 crates/asena-terminal/src/main.rs
 crates/asena-text/src/document.rs
 crates/asena-text/src/main.rs

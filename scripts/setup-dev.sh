@@ -20,6 +20,7 @@ fi
     build-essential pkg-config rustc cargo rustfmt rust-clippy meson ninja-build curl libpam0g-dev \
     libpulse-dev libgtk-4-dev libadwaita-1-dev libgtk4-layer-shell-dev libglib2.0-dev-bin \
     libpolkit-agent-1-dev libpolkit-gobject-1-dev \
+    libapt-pkg-dev libflatpak-dev libappstream-dev libsoup-3.0-dev appstream \
     libwayland-dev wayland-protocols wayland-utils blueprint-compiler \
     gettext libgettextpo-dev wayfire xwayland dbus-daemon dbus-user-session \
     xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk \

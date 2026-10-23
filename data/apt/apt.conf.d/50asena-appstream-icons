@@ -1,0 +1,5 @@
+// Installed as /etc/apt/apt.conf.d/50asena-appstream-icons (K21).
+// Debian's appstream package downloads the DEP-11 catalog but leaves its
+// icons to software centers; Software shows the 64 px and 128 px icons.
+Acquire::IndexTargets::deb::DEP-11-icons::DefaultEnabled "true";
+Acquire::IndexTargets::deb::DEP-11-icons-hidpi::DefaultEnabled "true";

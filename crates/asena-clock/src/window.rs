@@ -345,14 +345,8 @@ impl ClockWindow {
 
     fn zone_row(&self, id: Option<&str>) -> Option<adw::ActionRow> {
         let zone = match id {
-            Some(id) => {
-                // Unknown identifiers fall back to UTC in GLib; skip those.
-                let zone = glib::TimeZone::new(Some(id));
-                if zone.identifier() != id {
-                    return None;
-                }
-                zone
-            }
+            // Unknown identifiers have no zone; skip those.
+            Some(id) => glib::TimeZone::from_identifier(Some(id))?,
             None => glib::TimeZone::local(),
         };
         let now = glib::DateTime::now(&zone).ok()?;
