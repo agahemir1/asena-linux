@@ -68,6 +68,16 @@ Bu katalog yalnız kodda bulunan ve çalışan işlevleri listeler. Planlanan i�
 - `~/Resimler/Ekran Görüntüleri` altına kaydetme, panoya kopyalama, farklı kaydetme.
 - Aynı servis `asenactl screenshot` ve Print tuşu tarafından kullanılır.
 
+### Yazılım (`crates/asena-store`, kimlik `org.asenalinux.Store`)
+- Keşfet (kategoriler), arama, Kurulu, Güncellemeler ve uygulama ayrıntısı; dar pencerede tek sütun.
+- Katalog: Debian DEP-11 ve etkinse Flathub (AppStream). AppStream bileşeni olmayan paket listelenmez;
+  arama `asena_core::text::fold`, listeler yerel ayara göre sıralı.
+- Debian paketleri `org.asenalinux.Packages` servisiyle kurulur ve kaldırılır: önce değişiklik özeti,
+  sonra polkit parolası. Flatpak uygulamaları kullanıcı kurulumudur; önce istedikleri izinler gösterilir.
+- Sistem güncellemeleri indirilir ve yeniden başlatmada kurulur; Flatpak güncellemeleri oturum içinde.
+  Yarım kalan dpkg işi için onarım şeridi.
+- Ekran görüntüleri yalnız ayrıntı sayfasında, HTTPS ile indirilip önbelleğe alınır.
+
 ## Gizli uygulamalar
-Uçbirim, Kamera, Belgeler, Hava Durumu ve Yazılım menüde görünmez (`NoDisplay=true`). Elle
+Uçbirim, Kamera, Belgeler ve Hava Durumu menüde görünmez (`NoDisplay=true`). Elle
 başlatılırsa yalnız uygulamanın henüz hazır olmadığını ve varsa alternatifi söyleyen bir pencere açar.

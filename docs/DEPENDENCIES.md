@@ -146,6 +146,23 @@ Yeni Rust crate'i eklenmedi. Kullanıcı onayıyla Debian 13'ün `libwlroots-0.1
 geliştirme VM'sine `apt-get build-dep wlroots`, `devscripts` ve `quilt` kuruldu; bunlar çalışma zamanı
 bağımlılığı değildir. Faz 6'da paket Asena deposundan dağıtılır ve sürümü Debian'ın aynı sürümünü geçer.
 
+## Faz 6F paket servisi ve Yazılım (23 Ekim 2026)
+libflatpak, libappstream ve soup3 GNOME World altında bakımı süren glib 0.20 ailesi crate'leridir;
+daha yeni sürümleri glib 0.21 istediği için seçilmedi. rust-apt'in bakımını Nala'nın geliştiricileri
+(Volian) sürdürür. Dördü de Debian 13 C kitaplıklarına bağlanır.
+
+| Bağımlılık | Seçim | Kullanım gerekçesi | Yayımlanmış lisans |
+|---|---|---|---|
+| rust-apt | =0.11.3 | `asena-packages`: libapt-pkg 3.0 ile plan, kurulum, güncelleme ve ilerleme. `apt-get` çıktısını ayrıştırmaya göre plan ile uygulama aynı çözücüden geçer. cxx 1.0.198'de kalır: MSRV duyarlı çözücü sonraki sürümleri (rustc 1.88) seçmez | GPL-3.0-or-later |
+| libflatpak | =0.6.0 | Yazılım: Flatpak kurulumları, uzak depolar, izin metaverisi ve güncellemeler | MIT |
+| libappstream | =0.3.0 | Yazılım: Debian DEP-11 ve Flatpak AppStream kataloğu | MIT |
+| soup3 | =0.7.0 | Yazılım: ekran görüntülerini sistem libsoup 3 ile HTTPS üzerinden indirme | MIT |
+
+Geliştirme paketleri: `libapt-pkg-dev`, `libflatpak-dev`, `libappstream-dev`, `libsoup-3.0-dev`
+(`scripts/setup-dev.sh`). Çalışma zamanında `appstream` paketi DEP-11 kataloğunu APT ile indirir,
+`gnome-keyring` Flatpak uygulamalarına Secret portalını sağlar; ikisi ISO paket listesindedir.
+`asena-daemon` var olan `serde_json` bağımlılığını güncelleme sonucunu okumak için kullanır.
+
 ## Web sitesi (23 Ekim 2026, K29)
 Site `website/` altında, Rust çalışma alanından ayrıdır; Netlify'da ve geliştirmede Node 24 ile derlenir.
 Sürümler `website/package.json` içinde tam sabittir, geçişli sürümler `package-lock.json`'dadır.

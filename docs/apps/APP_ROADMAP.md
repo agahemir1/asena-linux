@@ -37,13 +37,13 @@ penceresi gösterir.
 | Kamera | `org.asenalinux.Camera` | ⬜ Gizli | GStreamer kamera/PipeWire yolu gerekiyor |
 | Belgeler | `org.asenalinux.Documents` | ⬜ Gizli | PDF işleme kitaplığı (poppler veya benzeri) kararı gerekiyor |
 | Hava Durumu | `org.asenalinux.Weather` | ⬜ Gizli | HTTP istemcisi ve veri sağlayıcı kararı gerekiyor |
-| Yazılım | `org.asenalinux.Store` | ⬜ Gizli | Kendi APT/Flatpak arka ucu (K21); plan [06f-yazilim.md](../../prompts/06f-yazilim.md) onay bekliyor |
+| Yazılım | `org.asenalinux.Store` | 🟨 Gerçek, temel kapsam | Kendi APT/Flatpak arka ucu (K21, [Faz 6F](../reports/phase-06f.md)); Asena deposu kataloğu 6B'yi bekliyor |
 
 Durum: ⬜ başlamadı veya gizli · 🟨 sürüyor · ✅ kabul edildi. Hiçbir uygulama kullanıcı görsel kabulünden
 geçmediği için ✅ yoktur.
 
 ## Açık işler
-1. Gizli beş uygulama için bağımlılık kararları (CLAUDE.md kural 10; her yeni crate için bakım ve
+1. Gizli dört uygulama için bağımlılık kararları (CLAUDE.md kural 10; her yeni crate için bakım ve
    GPL-3.0 uyumluluk denetimi).
 2. Dosyalar: kopyala/kes/yapıştır, sürükle-bırak, ızgara görünümü, özellikler penceresi.
 3. Oynatıcı: MPRIS sunucusu (kenar paneli medya kartı için).

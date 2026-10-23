@@ -22,7 +22,7 @@ sürer; görsel, fiziksel donanım ve normal giriş kabulü açık tutulur. GitH
 | 3 | Hızlı ayarlar ve sistem servisleri | [03-hizli-ayarlar.md](../prompts/03-hizli-ayarlar.md) | Ses/ağ/güç, medya/tepsi ve daemon kaynakları; 34 Rust + 8 Python testi geçti, donanım/görsel kabul açık | 🟨 |
 | 4 | Oturum ve güvenlik | [04-oturum-guvenlik.md](../prompts/04-oturum-guvenlik.md) | Kilit/PAM, idle, greeter ve polkit ajanı; 56 Rust + 8 Python testi geçti, gerçek giriş/uyku açık | 🟨 |
 | 5 | Ayarlar Merkezi | [05-ayarlar.md](../prompts/05-ayarlar.md) | 17 panel gruplu ve gerçek veriye bağlı; klavye/fare/dil daemon'la uygulanıyor; ekran düzeni (5D) VM'de geçti, gerçek monitörler açık; görsel kabul açık | 🟨 |
-| 6 | Dağıtım | [06-dagitim.md](../prompts/06-dagitim.md) | Depo git'te (22 Ekim); `iso/` live-build iskeleti ve `scripts/build-iso.sh` hazır, ISO derlenmedi; .deb paketleri, APT deposu, Calamares ve Hoş geldin başlamadı (ISO kullanıcının isteğiyle sonraya ertelendi) | ⬜ |
+| 6 | Dağıtım | [06-dagitim.md](../prompts/06-dagitim.md), [06f-yazilim.md](../prompts/06f-yazilim.md) | Depo git'te (22 Ekim); `iso/` live-build iskeleti ve `scripts/build-iso.sh` hazır, ISO derlenmedi. 23 Ekim: XanMod çekirdeği, markalama ve sistem yapısı kararları VM önyükleme testinde geçti; Yazılım ve paket servisi (6F) VM'de çalışıyor ([rapor](reports/phase-06f.md)). .deb paketleri, APT deposu, Calamares ve Hoş geldin başlamadı | 🟨 |
 | 7 | Cila | [07-cila.md](../prompts/07-cila.md) | Ekran görüntüsü portal yoluyla erken eklendi (21 Ekim); erişilebilirlik ve performans başlamadı | 🟨 |
 
 Durum: ⬜ başlamadı · 🟨 sürüyor · ✅ bitti
@@ -43,7 +43,7 @@ Durum: ⬜ başlamadı · 🟨 sürüyor · ✅ bitti
 | 3 | 3A servis modelleri → 3B ses/güç/parlaklık → 3C ağ/BT → 3D hızlı ayarlar/medya/tepsi → 3E daemon |
 | 4 | 4A kilit/PAM → 4B boşta kalma/uyku → 4C greetd → 4D polkit/oturum |
 | 5 | 5A uygulama/arama → 5B tercihler → 5C bağlantılar/ses → 5D ekran geri alma → 5E sistem |
-| 6 | 6A paketler → 6B test deposu → 6C canlı ISO → 6D kurulum → 6E Hoş geldin/belgeler |
+| 6 | 6A paketler → 6B test deposu → 6C canlı ISO → 6D kurulum → 6E Hoş geldin/belgeler; 6F Yazılım ve paket servisi sürüm adayına girer |
 | 7 | 7A ekran görüntüsü → 7B erişilebilirlik → 7C performans → 7D paketlenmiş sürüm kapanışı |
 
 Pano geçmişi 1.0 kapsamı dışındadır; Faz 7'nin pano işi görüntüyü kopyalamaktır. Bir faz, kabul kriterleri ve gerekli donanım/ortam kanıtları tamamlanmadan ✅ yapılmaz. Raporlar uygulama başladığında `docs/reports/phase-NN.md` altında tutulur.

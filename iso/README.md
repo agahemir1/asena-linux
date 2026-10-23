@@ -12,7 +12,7 @@ değişiklikler ISO'ya geçmez.
 |---|---|
 | `auto/config` | `lb config` seçenekleri: Debian 13, amd64, UEFI, Debian'ın imzalı shim ve GRUB'u, firmware politikası, canlı çekirdek satırı (dil, klavye, saat dilimi, kullanıcı) |
 | `auto/build`, `auto/clean` | live-build'in standart sarmalayıcıları |
-| `config/package-lists/asena-desktop.list.chroot` | Debian'dan gelen masaüstü çalışma zamanı paketleri, XanMod LTS, mikro kod, zram |
+| `config/package-lists/asena-desktop.list.chroot` | Debian'dan gelen masaüstü çalışma zamanı paketleri, XanMod LTS, mikro kod, zram, `appstream` ve `gnome-keyring` (K21, K22) |
 | `config/package-lists/installer.list.chroot` | Calamares için yer (6D) |
 | `config/archives/xanmod.list.chroot` | Derleme sırasında XanMod deposu (K20) |
 | `config/bootloaders/grub-pc/grub.cfg` | Canlı önyükleme menüsü: Asena Linux, İngilizce girdi, gelişmiş seçenekler ve araçlar |
@@ -30,7 +30,7 @@ değişiklikler ISO'ya geçmez.
   derleme chroot'unda ve geçici olarak güvenilir sayar, chroot aşamasının sonunda kaynakla
   birlikte kaldırır.
 - `config/includes.chroot_after_packages/` altına `scripts/stage-system-files.sh` ile imajın sistem
-  dosyaları: XanMod kaynağı, anahtarı ve pin'i (`data/apt`), GRUB ayarları (`data/grub`), zram
+  dosyaları: XanMod kaynağı, anahtarı ve pin'i, Debian kataloğunun uygulama simgeleri (`data/apt`), GRUB ayarları (`data/grub`), zram
   (`data/zram`, `data/sysctl`), canlı sisteme özgü live-config bileşeni (`data/live`), os-release,
   `/etc/issue`, fastfetch yapılandırması ve logosu, `asena-logo` simgeleri, Plymouth teması
   (`data/branding`, `data/fastfetch`, `data/icons`, `data/plymouth`). live-build bunları rsync ile
@@ -85,6 +85,12 @@ Sonuçlar [docs/reports/evidence/boot-test](../docs/reports/evidence/boot-test):
   `if` ve `set` kullanır. Hangi komutun reddedildiği ayrıca ayrılmadı.
 - Deneme iç içe QEMU'da TCG ile yapıldı; gerçek donanım ve gerçek firmware değildir.
 
+`ASENA_BOOT_TEST_OFFLINE=1` ile aynı disk yeniden başlatmada güncellemeyi de dener (K28): paket
+servisinin çevrimdışı modu ve `asena-offline-update.service` diske kurulur, güncellemeler indirilir
+ve `/system-update` işareti konur. Bekleyen Debian güncellemeleri (7 paket, tzdata 2026c → 2026e)
+kuruldu ve sonuç `success: true` yazıldı. Postinst'i hata veren bir test paketinde sistem yine açıldı,
+paket `half-configured` kaldı ve sonuç `success: false` ile APT'nin hata satırını taşıdı.
+
 ## Markalama ve sistem kimliği (K07, K23)
 
 Logo, kullanıcının 23 Ekim'de seçtiği çini plaka taslağıdır; kaynağı `scripts/icons/brand.py`.
@@ -126,15 +132,20 @@ kullanmalıdır.
 | K09 | Kurulum kapsamı | Karar: amd64 ve UEFI, boş diske tek sistem; BIOS, dual boot ve şifreleme yok. Secure Boot zinciri Debian'ın imzalı paketleriyle açık, destek beyanı yok |
 | K19 | Firmware politikası | Karar: `main non-free-firmware`, firmware canlı sistemde, mikro kod paketleri |
 | K20 | Çekirdek | Uygulandı: XanMod LTS varsayılan, Debian imzalı çekirdeği yedek |
+| K21 | Yazılım ve paket servisi | Uygulandı: `appstream` ve simge hedefleri imajda; servis, polkit ve D-Bus dosyaları 6A paketini bekliyor |
+| K22 | Flatpak | Uygulandı: `gnome-keyring`; Flathub Yazılım'da açık seçimle |
 | K23 | Sistem kimliği | Uygulandı: Asena os-release, `ID_LIKE=debian`, `VERSION_CODENAME=trixie` |
 | K24 | Dosya sistemi ve takas | Uygulandı: zram VM açılışında etkin; ext4 bölümlemesi Calamares'te (6D) |
 | K25 | Yerel ayar ve klavye | Uygulandı: Türkçe canlı sistem, İngilizce girdi, iki yerel ayar üretilir |
 | K26 | Canlı kullanıcı | Uygulandı: `asena`/`live`, greetd ile bir kez otomatik giriş (6A paketleri bekleniyor) |
 | K27 | Yetki ve ağ güvenliği | Karar: root kilitli, ilk kullanıcı `sudo`; güvenlik duvarı yok, dinleyen servis yok |
+| K28 | Güncelleme politikası | Uygulandı: `unattended-upgrades` yok, yeniden başlatmada güncelleme (aşağıda) |
 
 ## Henüz eksik olanlar
 
 - Asena paketleri ve `asena-desktop` metapaketi (6A): shell, daemon, kilit, greeter, polkit ajanı,
-  uygulamalar, şemalar, simgeler, portal ve oturum dosyaları, gtk4-layer-shell 1.3.0 backport'u.
+  uygulamalar, şemalar, simgeler, portal ve oturum dosyaları, gtk4-layer-shell 1.3.0 backport'u;
+  paket servisi `asena-packages` (`/usr/libexec`), polkit politikası, sistem D-Bus dosyaları ve
+  `asena-packages.service` ile `asena-offline-update.service` (etkin).
 - greetd yapılandırması ve asena-greeter paketi (6A); canlı otomatik giriş bileşeni hazır.
 - Calamares yapılandırması (6D) ve Hoş geldin (6E).

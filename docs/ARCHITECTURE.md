@@ -91,17 +91,24 @@ asena/
 │   ├── asena-lock/             # bin
 │   ├── asena-greeter/          # bin
 │   ├── asena-polkit-agent/     # bin
+│   ├── asena-packages/         # bin, sistem servisi: APT işleri (K21)
+│   ├── asena-store/            # bin (libadwaita): Yazılım
 │   ├── asena-settings/         # bin (libadwaita)
 │   ├── asena-welcome/          # bin (libadwaita)
 │   └── asena-screenshot/       # bin (libadwaita)
 ├── data/
-│   ├── apt/                    # XanMod kaynağı, anahtarı ve pin'i (K20)
+│   ├── apt/                    # XanMod kaynağı, anahtarı, pin'i (K20); AppStream simgeleri (K21)
 │   ├── grub/                   # /etc/default/grub.d ve /etc/grub.d dosyaları (K20)
+│   ├── branding/, plymouth/, fastfetch/  # sistem kimliği ve marka (K07, K23)
+│   ├── zram/, sysctl/          # RAM'de takas (K24)
+│   ├── live/                   # live-config bileşeni (K26)
+│   ├── polkit/, dbus-1/        # paket servisinin polkit eylemleri ve D-Bus dosyaları
+│   ├── flatpak/                # flathub.flatpakrepo (Yazılım'a gömülü)
 │   ├── schemas/                # org.asenalinux.*.gschema.xml
 │   ├── wayfire/                # wayfire.ini: eklentiler, kısayollar, blur, başlık, girdi
 │   ├── sessions/               # asena.desktop  → /usr/share/wayland-sessions/
-│   ├── systemd/                # asena-session.target ve user servisleri
-│   ├── portals/                # asena-portals.conf
+│   ├── systemd/                # asena-session.target ve user servisleri; system/ paket servisi
+│   ├── portals/                # asena-portals.conf, asena.portal
 │   ├── style/                  # shell CSS (gresource ile gömülür)
 │   ├── icons/
 │   └── wallpapers/
@@ -189,6 +196,50 @@ Daemon'un D-Bus sözleşmesi `asena-core::dbus` içindedir (`org.asenalinux.Daem
 Uygulayan D-Bus bağlantısı veri yolundan ayrılırsa (Ayarlar kapanır veya çöker), süre dolarsa ya da bağlı ekran takımı değişirse daemon önceki düzeni hâlâ bağlı ekranlara geri yükler. Bekleyen bir değişiklik varken ikinci istek reddedilir. Ekran kimliği üretici, model ve seri numarasıdır; seri yoksa bağlantı noktası da eklenir. Onaylanan düzen ekran takımı başına `~/.config/asena/displays.json` dosyasına atomik yazılır (en çok 16 takım; geliştirmede geçici yapılandırma dizini) ve daemon başlarken ya da tam o ekranlar bağlanınca yeniden uygulanır. Birincil ekran shell'in `panel-monitor` tercihidir: masaüstü simgeleri ve geçici yüzeyler orada açılır.
 
 Ayarlar için ayrı IPC yazılmaz: GSettings değişiklik sinyalleri yeterli.
+
+### D-Bus (sistem veri yolu): paket servisi (Faz 6F, K21)
+
+`asena-packages` root olarak çalışan, GTK içermeyen ve `org.asenalinux.Packages` (`/org/asenalinux/Packages`) adını alan servistir. D-Bus ile etkinleşir (`data/dbus-1/system-services/`, `data/systemd/system/asena-packages.service`), 5 dakika boşta kalınca kapanır. Veri yolu politikası (`data/dbus-1/system.d/`) adı yalnız root'a verir, çağrıyı herkese açar; yetki kararı her yöntemde polkit'indir. Sözleşme `asena_core::packages` içindedir. Planlar ve listeler JSON taşınır: `busctl` ile okunur, kitaplık sürümünden bağımsız kalır. APT'ye libapt-pkg (`rust-apt`) ile erişilir; aynı anda tek APT işi çalışır, ikincisi `Busy` hatası alır.
+
+| Yöntem | polkit eylemi (`org.asenalinux.packages.*`) | İş |
+|---|---|---|
+| `Refresh()` | `refresh` (etkin oturumda sorulmaz) | `apt update` |
+| `Plan(install, remove) → s` | yok, sistemi değiştirmez | JSON `Plan`: değişiklikler, indirilecek boyut, disk farkı ve plan kimliği |
+| `Commit(plan_id)` | `install`; kaldırma varsa önce `remove` | Planı yalnız onu alan veri yolu adına uygular; paket durumu değiştiyse `StalePlan` |
+| `Upgrades() → s` | yok | JSON `Upgrade` listesi; güvenlik arşivinden gelenler işaretli |
+| `DownloadUpgrades() → u` | `download` (etkin oturumda sorulmaz) | Bekleyen güncellemeleri APT önbelleğine indirir |
+| `ScheduleUpgrade()` / `CancelUpgrade()` | `upgrade` | `/system-update` işaretini koyar veya kaldırır |
+| `LastUpgrade() → s` | yok | Son çevrimdışı güncellemenin JSON `UpgradeResult` sonucu |
+| `Repair()` | `repair` | `dpkg --configure -a`, ardından bozuk bağımlılıkları düzeltir |
+| `Busy`, `UpgradeScheduled`, `NeedsRepair` | | Özellikler |
+| `Progress(operation, percent, detail)` | | refresh, download, install veya repair ilerlemesi; bilinmiyorsa `-1` |
+
+- polkit'e çağıranın veri yolu adı `system-bus-name` öznesiyle sorulur; kur, kaldır, güncelle ve onar `auth_admin_keep` ister (`data/polkit/org.asenalinux.packages.policy`).
+- Paket adları Debian Policy 5.6.1'e göre doğrulanır ve katalogda bulunmalıdır; seçenek benzeri girdi APT'ye ulaşmaz. `PROTECTED` listesindeki paketleri (`asena-desktop`, `apt`, `systemd`, shim/GRUB, Debian çekirdeği …), Essential ve `required` öncelikli paketleri kaldıran planlar `Protected` ile reddedilir.
+- Plan, sahibinin veri yolu adı ayrılınca unutulur. Debconf etkileşimsizdir; dpkg değiştirilmiş yapılandırma dosyalarını korur, kalanında varsayılanı alır (`--force-confdef`, `--force-confold`).
+- `NeedsRepair`, dpkg'nin `updates` dizininde dosya kaldığında ya da bir paket yarım kurulu, yarım yapılandırılmış, açılmış veya tetik bekler durumda kaldığında doğrudur. Durum dosyası yetkisiz okunur; Yazılım kurulu paketleri servise sormadan `/var/lib/dpkg/status`'tan alır.
+- **Yeniden başlatmada güncelleme (K28):** `ScheduleUpgrade` `/system-update` → `/var/cache/apt/archives` bağını kurar; systemd açılışta `system-update.target`'a girer ve `asena-offline-update.service` `asena-packages --offline-update` çalıştırır. Mod önce işareti siler (başarısız güncelleme her açılışta yinelenmez), indirilmiş güncellemeleri kurar, ilerlemeyi Plymouth'a yazar, sonucu `/var/lib/asena/packages/last-upgrade.json` dosyasına atomik yazar ve yeniden başlatma işini doğrudan systemd'ye verir (`reboot.target`). Bu açılışta D-Bus ve logind başlamaz; mod onları kullanmaz. Başka bir güncelleyicinin işareti varsa `ScheduleUpgrade` reddeder.
+- **Günlük denetim:** `asena-daemon`'un `updates` modülü oturumda ilk denetimi 5 dakika sonra, sonra günde bir yapar; ağ yoksa veya ölçülüyse (`GNetworkMonitor`) atlar. `Refresh`, `Upgrades` ve `DownloadUpgrades` sonrası tek bildirim gösterir; bildirime tıklanınca `asena-store --updates` açılır. Kurulum her zaman kullanıcının Yazılım'daki onayıyla olur, otomatik yeniden başlatma yoktur. Çevrimdışı güncellemenin sonucu bir kez bildirilir. Zaman damgaları `$XDG_STATE_HOME/asena/` altındadır; geliştirme oturumunda (`ASENA_DEV`) çalışmaz.
+
+### Yazılım (Faz 6F)
+
+`asena-store` (`org.asenalinux.Store`) AppStream kataloğunu, Flatpak'ı ve paket servisini birleştirir; sistem paketlerine yalnız `org.asenalinux.Packages` üzerinden dokunur.
+
+- **Katalog:** Debian DEP-11 `libappstream` ile işletim sistemi kataloğu olarak okunur. Debian simgeleri varsayılan indirmez; `data/apt/apt.conf.d/50asena-appstream-icons` 64 ve 128 piksellik simge hedeflerini açar. Flatpak kataloğu her uzak depo için ayrı okunur (`appstream.xml.gz`), çünkü AppStream'in kendi yükleyicisi bütün uzak depolara aynı adı verir. AppStream bileşeni olmayan paketler listelenmez. Yükleme `gio::spawn_blocking` içindedir, listeler boşta parçalar halinde doldurulur.
+- **Arama ve sıra:** arama `asena_core::text::fold` ile yapılır; ad eşleşmesi önce, anahtar sözcük ve özet sonra gelir, dağınık harf eşleşmeleri gösterilmez. Eşit sonuçlar ve bütün listeler `glib::CollationKey` ile yerel ayara göre sıralanır.
+- **Kaynak:** aynı uygulama birden çok kaynakta varsa ayrıntı sayfası kaynak seçtirir; Debian, Asena, Flathub ve diğer uzak depolar ayrı yazılır.
+- **Flatpak:** kullanıcı kurulumları `libflatpak` ile uygulama sürecinde, yetki istemeden yapılır; sistem kurulumlarında Flatpak kendi polkit yardımcısını kullanır. Kurulumdan önce uygulamanın uzak depodaki metaverisinden izinleri (dosya sistemi, ağ, aygıtlar, ses, X11, oturum ve sistem veri yolu) gösterilir. Flathub yalnız kullanıcı onayıyla, kullanıcı kurulumuna eklenir; depo dosyası `data/flatpak/flathub.flatpakrepo` ikili dosyaya gömülüdür. Ağ hatasında yeniden deneme veya vazgeçme sunulur.
+- **Sistem paketleri:** kurulum ve kaldırma önce `Plan` ile özet gösterir, sonra `Commit` çağrılır; plan ve uygulama aynı veri yolu bağlantısından gider. Güncellemeler sayfası sistem güncellemelerini indirip yeniden başlatmaya zamanlar ve Flatpak güncellemelerini oturum içinde uygular.
+- **Ekran görüntüleri:** yalnız ayrıntı sayfası açılınca, libsoup 3 ile HTTPS üzerinden indirilir (en çok 8 MB) ve `~/.cache/asena/store/screenshots` altında saklanır.
+- **Hata:** paket servisi yoksa veya hata verirse D-Bus hata adı kullanıcıya çevrilmiş tek cümle olarak gösterilir; yarım kalan dpkg işi için onarım şeridi çıkar.
+
+### Portal arka uçları
+
+`asena-daemon` `org.freedesktop.impl.portal.desktop.asena` adıyla Settings (yukarıda), Inhibit ve Background arka uçlarını sunar (`data/portals/asena.portal`). Secret `gnome-keyring`'e gider.
+
+- **Inhibit:** boşta kalma bayrağı (8) daemon'un boşta kilit ve uyku zamanlayıcısını durdurur; askıya alma bayrağı (4) logind'den `sleep` engelleme tanıtıcısı alır. İstek `handle` yolunda bir `Request` nesnesidir ve `Close` ile biter. Çağıran veri yolundan ayrılınca engel kaldırılır; çağıran istek gelmeden ayrıldıysa engel hemen bırakılır.
+- **Background:** Flatpak uygulamalarının arka planda çalışmasına izin verir. Otomatik başlatma dosyasını xdg-desktop-portal 1.20 kendisi yazar; arka ucun eski `EnableAutostart` yöntemi bir şey yapmaz. Penceresiz çalışan uygulamaların listesi (`GetAppState`) boş döner; listeyi izlemek ve kullanıcıya soran arayüz sonraki adaydır.
+- GlobalShortcuts arka ucu yoktur: Wayfire 0.9.0'da bunu karşılayan protokol yok.
 
 ### Wayland protokolleri
 19 Ekim Debian labwc 0.8.3 iç içe oturumunda `wayland-info` alındı: [kanıt](reports/evidence/phase-00/protocols.txt). 21 Ekim Wayfire 0.9.0 envanteri ve labwc ile farkı: [protocols-compare.txt](reports/evidence/k13-wayfire/protocols-compare.txt). Asena'nın kullandığı protokollerin hepsi Wayfire'da vardır; `xdg-activation-v1` için `xdg-activation` eklentisi yüklenir. Wayfire'da `wp-security-context-v1` yoktur (Flatpak notu aşağıda). Aşağıdaki sürümler ilan edilen global sürümleridir; donanım yeteneği veya kilit güvenlik kabulü değildir. [Araştırma ve kaynaklar](research/blur-and-lock.md).
