@@ -145,3 +145,25 @@ Yeni Rust crate'i eklenmedi. Kullanıcı onayıyla Debian 13'ün `libwlroots-0.1
 `scripts/build-wlroots.sh`; MIT lisanslı, yama yukarı akıştan değiştirilmeden alındı). Derleme için
 geliştirme VM'sine `apt-get build-dep wlroots`, `devscripts` ve `quilt` kuruldu; bunlar çalışma zamanı
 bağımlılığı değildir. Faz 6'da paket Asena deposundan dağıtılır ve sürümü Debian'ın aynı sürümünü geçer.
+
+## Web sitesi (23 Ekim 2026, K29)
+Site `website/` altında, Rust çalışma alanından ayrıdır; Netlify'da ve geliştirmede Node 24 ile derlenir.
+Sürümler `website/package.json` içinde tam sabittir, geçişli sürümler `package-lock.json`'dadır.
+Derleme çıktısı statik HTML, CSS, az miktarda JS ve görseldir; aşağıdakilerin hiçbiri ziyaretçinin
+tarayıcısında üçüncü taraf isteği yapmaz. Astro'nun anonim kullanım telemetrisi Netlify'da
+`netlify.toml` içindeki `ASTRO_TELEMETRY_DISABLED=1` ile kapalıdır; yerelde aynı değişken komuta
+verilir (`website/README.md`).
+
+| Bağımlılık | Seçim | Kullanım gerekçesi | Yayımlanmış lisans |
+|---|---|---|---|
+| astro | =7.4.2 | Statik site üretimi, iki dil yönlendirmesi, Markdown içerik koleksiyonları, derlemede görsel boyutlandırma (sharp, Apache-2.0) | MIT |
+| @astrojs/sitemap | =3.7.4 | İki dilli site haritası | MIT |
+| @astrojs/rss | =4.0.19 | Haberler için dil başına RSS | MIT |
+| pagefind | =1.5.2 (geliştirme) | Derleme sonrası statik arama dizini; arama tarayıcıda, sunucusuz | MIT |
+| @fontsource-variable/inter | =5.3.0 | Inter değişken yazı tipi, siteyle birlikte sunulur | OFL-1.1 |
+| @fontsource-variable/jetbrains-mono | =5.3.0 | Belgelerdeki komutlar ve fastfetch çıktısı | OFL-1.1 |
+| @astrojs/check, typescript | =0.9.12, =6.0.3 (geliştirme) | `npm run check` tür denetimi. TypeScript 7 seçilmedi: @astrojs/check en fazla 6 istiyor | MIT, Apache-2.0 |
+
+`website/scripts/convert-screens.mjs` ekran görüntülerini Astro ile gelen sharp'la dönüştürür; ayrı
+bağımlılık eklemez. Ekran görüntüsü betikleri (`capture-screens.sh`, `take-shots.sh`) geliştirme
+VM'sinde zaten kurulu `grim`, `wlr-randr`, `wlrctl` ve `bsdtar` kullanır.

@@ -109,9 +109,15 @@ asena/
 ├── scripts/                    # setup-dev.sh, dev-session.sh, update-po.sh
 ├── packaging/                  # wlroots/ yaması (K17); debian/ Faz 6A'da
 ├── iso/                        # live-build iskeleti (Faz 6C); iso/README.md
+├── website/                    # asenalinux.netlify.app (K29): Astro, iki dil; website/README.md
+├── netlify.toml                # sitenin Netlify derlemesi ve başlıkları
 ├── docs/
 └── prompts/
 ```
+
+Site Rust çalışma alanının parçası değildir ve sistem imajına girmez. Logo, duvar kâğıtları ve simgeleri
+`data/` altından okur; kendi tek varlığı geliştirme VM'sinden `website/scripts/take-shots.sh` ile çekilen
+ekran görüntüleridir.
 
 ## Süreç modeli
 
