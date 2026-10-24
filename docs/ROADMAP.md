@@ -7,7 +7,8 @@ Bir fazın bitmesi, sonraki fazın ihtiyaç duyduğu zeminin hazır olması deme
 paket işlemleri kaynakta; son VM kontrolleri raporlarda kayıtlıdır.
 GitHub `asena-linux` deposu için yerel dosyalar ve ilk yükleme rehberi hazırlandı.
 [Uzak depo](https://github.com/agahemir1/asena-linux) kullanıcı tarafından açıldı;
-ilk kaynak yüklemesi hazırlanıyor. Debian paketleri, imzalı Asena APT deposu, gerçek ISO
+ilk kaynak yüklemesi tamamlandı ve uzak `main` doğrulandı.
+Debian paketleri, imzalı Asena APT deposu, gerçek ISO
 ve Calamares kurulumu henüz yoktur. Görsel, fiziksel donanım ve normal giriş
 kabulü açık tutulur. GitHub Actions yalnız elle başlatılacak şekilde hazırdır;
 dış koşu yapılmadı. [Uygulama raporu](reports/apps-recovery.md),
@@ -120,3 +121,7 @@ katkı rehberi, issue ve pull request şablonları, yayın dosyası/geçmiş den
 ilk yükleme rehberi ve paket dağıtım planı eklendi. Manuel Debian CI hazır;
 GitHub'da çalıştırılmadı. Faz 6A/6B tamamlandı sayılmaz.
 [Hazırlık raporu](reports/github-preparation.md).
+
+Aynı gün kullanıcı uzak adresi paylaştı; güncel uygulama kaynakları ve GitHub
+hazırlığı ayrı commit'lerle `main` dalına yüklendi. Geçici aktarım etiketleri
+temizlendi. Dış CI elle başlatılmayı bekler.

@@ -9,7 +9,7 @@ Kapsam [Faz 6](../prompts/06-dagitim.md), kararlar
 
 | İçerik | Yer | Durum |
 |---|---|---|
-| Kaynak, belgeler ve sorun takibi | [agahemir1/asena-linux](https://github.com/agahemir1/asena-linux) | Depo kullanıcı tarafından açıldı; ilk yükleme hazırlanıyor |
+| Kaynak, belgeler ve sorun takibi | [agahemir1/asena-linux](https://github.com/agahemir1/asena-linux) | `main` ilk kaynak yüklemesi 25 Ekim'de tamamlandı |
 | Proje sitesi | `https://asenalinux.netlify.app` | Mevcut Netlify sitesi |
 | Asena sistem ve uygulama paketleri | Ayrı imzalı APT arşivi | Barındırma ve anahtar işlemleri açık |
 | ISO ve sürüm indirmeleri | Ayrı indirme alanı | ISO yok; barındırma seçilmedi |

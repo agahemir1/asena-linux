@@ -4,6 +4,8 @@ Bu rehber mevcut yerel Git deposunu `asena-linux` adıyla GitHub'a taşır.
 Projenin sitesi [asenalinux.netlify.app](https://asenalinux.netlify.app) adresindedir.
 Kaynak deposu [agahemir1/asena-linux](https://github.com/agahemir1/asena-linux),
 Git adresi `https://github.com/agahemir1/asena-linux.git` olarak belirlendi.
+İlk kaynak yüklemesi 25 Ekim 2026'da tamamlandı. Aşağıdaki adımlar başka bir
+çalışma kopyası veya sonraki güncellemeler için başvuru olarak korunur.
 
 ## Yerel hazırlığı denetle
 

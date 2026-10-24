@@ -28,7 +28,7 @@ Windows'ta yalnız taşınabilir kaynak/dosya kontrolleri çalıştırıldı:
 
 | Kontrol | Sonuç |
 |---|---|
-| Yayın adayları ve Git geçmişi | Geçti; 1182 dosya adayı ve geçmişteki 1083 blob denetlendi |
+| İlk hazırlıkta yayın adayları ve Git geçmişi | Geçti; 1182 dosya adayı ve geçmişteki 1083 blob denetlendi |
 | Yayın denetiminin geçici Git depolarıyla testleri | 9 test geçti |
 | `python scripts/check-source.py` | Geçti; 34 crate, 200 Rust dosyası, XML/kaynak/çeviri listesi/LF |
 | GitHub YAML dosyalarının ayrıştırılması | Geçti; iş akışı yalnız elle başlatılır, depo izni salt okunurdur |
@@ -48,11 +48,23 @@ Rust kaynakları ve ürün arayüzü bu çalışmada değiştirilmedi. Linux bui
 Clippy, fmt, workspace testleri ve canlı masaüstü denemesi yeniden çalıştırılmadı.
 Önceki sonuçlar ilgili uygulama/arayüz raporlarında kalır.
 
+## İlk kaynak yüklemesi
+
+Kullanıcının verdiği uzak depo boş olarak doğrulandı. Yükleme öncesi yayın
+denetimi, kaynak denetimi, 9 yayın testi ve `git diff --check` tekrar geçti.
+Önceki uygulama çalışmaları `7bf6b19`, GitHub hazırlığı `ccc8f04` commit'lerinde
+kaydedildi ve birlikte `main` dalına yüklendi. Yükleme öncesi son tarama 1182
+dosya adayı ve geçmişteki 1212 blob üzerinde geçti.
+
+Tek büyük aktarım iki kez HTTP 408 ile kesildi. Büyük Git blob'ları küçük
+gruplar halinde geçici etiketlere aktarıldı, ardından asıl `main` geçmişi
+yüklendi. Uzak dalın `ccc8f04` ile eşleşmesi doğrulandı ve 13 geçici etiket
+silindi. Kaynak commit geçmişi korunur. Aktarım yardımcısı ve durum kaydı
+yalnız ignore edilen `target/github-transfer/` altında kalır.
+
 ## Açık işler
 
-Uzak GitHub deposu kullanıcı tarafından açıldı. `git push --dry-run origin main`
-başarılı oldu; ilk gerçek push hazırlanıyor. Mevcut çalışma kopyasındaki önceki
-uygulama değişiklikleri ilk kaynak yüklemesine dahil edilir. Dış CI koşusu yapılmadı.
+Dış CI koşusu yapılmadı. Debian iş akışı yalnız elle başlatılır.
 Üretilmiş `.deb`, Asena APT arşivi veya ISO yoktur.
 
 ## Sonraki adaylar
