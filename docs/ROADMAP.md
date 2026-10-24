@@ -3,16 +3,20 @@
 Her faz `prompts/` altındaki bir prompt dosyasıyla başlar ve kabul kriterleri sağlanınca kapanır.
 Bir fazın bitmesi, sonraki fazın ihtiyaç duyduğu zeminin hazır olması demektir.
 
-**Mevcut aşama: Faz 4A–4C doğrulaması ve Faz 4D hazırlığı.** Faz 0 yerel kalite
-ve iç içe panel denemesi geçti. Faz 1 toplevel/görev çubuğu, arka plan ve CLI
-kaynakları mevcut; yerel kalite ve temel pencere işlemleri geçti. Menü, bildirim
-sunucusu/merkezi ve OSD eklendi. Kullanıcı diğer fazların kaynak uygulamasına devam
-edilmesini ve elle denemeyi daha sonra yapmayı seçti. Yerel otomatik kontroller
-sürer; görsel, fiziksel donanım ve normal giriş kabulü açık tutulur. GitHub Actions
-şimdilik çalıştırılmayacak. [Faz 0](reports/phase-00.md),
-[Faz 1](reports/phase-01.md), [Faz 2](reports/phase-02.md).
+**Mevcut aşama, 25 Ekim 2026:** 19 uygulama, 20 Ayarlar paneli ve Yazılım'ın
+paket işlemleri kaynakta; son VM kontrolleri raporlarda kayıtlıdır.
+GitHub `asena-linux` deposu için yerel dosyalar ve ilk yükleme rehberi hazırlandı.
+[Uzak depo](https://github.com/agahemir1/asena-linux) kullanıcı tarafından açıldı;
+ilk kaynak yüklemesi hazırlanıyor. Debian paketleri, imzalı Asena APT deposu, gerçek ISO
+ve Calamares kurulumu henüz yoktur. Görsel, fiziksel donanım ve normal giriş
+kabulü açık tutulur. GitHub Actions yalnız elle başlatılacak şekilde hazırdır;
+dış koşu yapılmadı. [Uygulama raporu](reports/apps-recovery.md),
+[arayüz raporu](reports/ui-polish-2026-10-25.md),
+[GitHub hazırlığı](reports/github-preparation.md).
 
-**T0:** [Odak tasarımı](../prompts/T0-tasarim.md) ayrıntıları, nihai simgeler ve blur yolu açık. Kullanıcı Faz 0 altyapısının T0 tamamlanmadan uygulanmasına açıkça izin verdi; bu istisna nihai görsel kabul veya compositor değişikliği onayı değildir.
+**T0:** [Odak tasarımı](../prompts/T0-tasarim.md) seçildi; blur yolu onaylı
+Wayfire'dır. Uygulama simgelerinin ve nihai ekranların kullanıcı görsel kabulü,
+gerçek GPU ölçümleri açıktır.
 
 | Faz | Başlık | Prompt | Çıktı | Durum |
 |---|---|---|---|---|
@@ -21,7 +25,7 @@ sürer; görsel, fiziksel donanım ve normal giriş kabulü açık tutulur. GitH
 | 2 | Başlat menüsü, bildirimler, OSD | [02-menu-bildirim.md](../prompts/02-menu-bildirim.md) | Menü/arama, Notifications 1.2, merkez ve OSD kaynakları; doğrulama sürüyor | 🟨 |
 | 3 | Hızlı ayarlar ve sistem servisleri | [03-hizli-ayarlar.md](../prompts/03-hizli-ayarlar.md) | Ses/ağ/güç, medya/tepsi ve daemon kaynakları; 34 Rust + 8 Python testi geçti, donanım/görsel kabul açık | 🟨 |
 | 4 | Oturum ve güvenlik | [04-oturum-guvenlik.md](../prompts/04-oturum-guvenlik.md) | Kilit/PAM, idle, greeter ve polkit ajanı; 56 Rust + 8 Python testi geçti, gerçek giriş/uyku açık | 🟨 |
-| 5 | Ayarlar Merkezi | [05-ayarlar.md](../prompts/05-ayarlar.md) | 17 panel gruplu ve gerçek veriye bağlı; klavye/fare/dil daemon'la uygulanıyor; ekran düzeni (5D) VM'de geçti, gerçek monitörler açık; görsel kabul açık | 🟨 |
+| 5 | Ayarlar Merkezi | [05-ayarlar.md](../prompts/05-ayarlar.md) | 20 panel kaynakta; klavye/fare/dil daemon'la uygulanıyor; ekran düzeni (5D) VM'de geçti, gerçek monitörler açık; görsel kabul açık | 🟨 |
 | 6 | Dağıtım | [06-dagitim.md](../prompts/06-dagitim.md), [06f-yazilim.md](../prompts/06f-yazilim.md) | Depo git'te (22 Ekim); `iso/` live-build iskeleti ve `scripts/build-iso.sh` hazır, ISO derlenmedi. 23 Ekim: XanMod çekirdeği, markalama ve sistem yapısı kararları VM önyükleme testinde geçti; Yazılım ve paket servisi (6F) VM'de çalışıyor ([rapor](reports/phase-06f.md)). .deb paketleri, APT deposu, Calamares ve Hoş geldin başlamadı | 🟨 |
 | 7 | Cila | [07-cila.md](../prompts/07-cila.md) | Ekran görüntüsü portal yoluyla erken eklendi (21 Ekim); erişilebilirlik ve performans başlamadı | 🟨 |
 
@@ -43,7 +47,7 @@ Durum: ⬜ başlamadı · 🟨 sürüyor · ✅ bitti
 | 3 | 3A servis modelleri → 3B ses/güç/parlaklık → 3C ağ/BT → 3D hızlı ayarlar/medya/tepsi → 3E daemon |
 | 4 | 4A kilit/PAM → 4B boşta kalma/uyku → 4C greetd → 4D polkit/oturum |
 | 5 | 5A uygulama/arama → 5B tercihler → 5C bağlantılar/ses → 5D ekran geri alma → 5E sistem |
-| 6 | 6A paketler → 6B test deposu → 6C canlı ISO → 6D kurulum → 6E Hoş geldin/belgeler; 6F Yazılım ve paket servisi sürüm adayına girer |
+| 6 | 6A paketler → 6B test deposu → 6C canlı ISO → 6D kurulum → 6E Hoş geldin/belgeler; 6F Yazılım ve paket servisi sürüm adayına girer; kurtarma bölümü ve sıfırlama (K30) 6D'nin bölüm düzeniyle gelir |
 | 7 | 7A ekran görüntüsü → 7B erişilebilirlik → 7C performans → 7D paketlenmiş sürüm kapanışı |
 
 Pano geçmişi 1.0 kapsamı dışındadır; Faz 7'nin pano işi görüntüyü kopyalamaktır. Bir faz, kabul kriterleri ve gerekli donanım/ortam kanıtları tamamlanmadan ✅ yapılmaz. Raporlar uygulama başladığında `docs/reports/phase-NN.md` altında tutulur.
@@ -103,3 +107,16 @@ bulundu; shell geometriyi compositor'dan okur. Gerçek monitör ve takıp çıka
 vurgu canlı); klasörler ile Dosyalar ve Ayarlar simgeleri vurguyu izler (`Asena-<vurgu>` temaları, simge
 incelemesi açık); harf kısayolları ilk klavye düzeninde o harfi yazan tuşa taşınır (TR-F). wlroots 0.18'in
 modsuz çıkış çökmesine yukarı akış yaması `0.18.2-3+asena1` paketiyle VM'de doğrulandı (K17).
+
+## 23 Ekim 2026 uygulamalar ve sıfırlama devamı
+
+Claude oturumu `059b1f01-e91b-4ea5-84d5-e042b896d9cc` kaynakları tamamlandı; 24 Ekim’de 215 Rust + 32 Python testi, derleme/Clippy/fmt ve çalışan oturum açılışları geçti: 19 uygulama, Ayarlar için üç yeni panel, Yazılım paket dosyası açma ve K30 kurtarma servisi. Faz 6D/ISO tamamlandı sayılmaz; kurulum bölüm düzeni, gerçek kurtarma açılışı ve Secure Boot kabulü açıktır. Durum ve kanıt [apps-recovery raporundadır](reports/apps-recovery.md).
+
+## 25 Ekim 2026 kaynak deposu hazırlığı
+
+Kullanıcı GitHub deposu için dosyaların hazırlanmasını istedi ve `asena-linux`
+adını uygun buldu. Site `asenalinux.netlify.app` olarak korundu. README,
+katkı rehberi, issue ve pull request şablonları, yayın dosyası/geçmiş denetimi,
+ilk yükleme rehberi ve paket dağıtım planı eklendi. Manuel Debian CI hazır;
+GitHub'da çalıştırılmadı. Faz 6A/6B tamamlandı sayılmaz.
+[Hazırlık raporu](reports/github-preparation.md).

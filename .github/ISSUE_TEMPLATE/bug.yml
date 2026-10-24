@@ -1,0 +1,54 @@
+name: Hata bildir
+description: Asena veya web sitesindeki yeniden üretilebilir bir sorunu bildir.
+title: "[Hata] "
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Bileşen
+      options:
+        - Masaüstü ve panel
+        - Ayarlar
+        - Asena uygulaması
+        - Yazılım ve güncellemeler
+        - Oturum ve kilit
+        - ISO ve kurulum
+        - Web sitesi
+        - Diğer
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Sürüm veya kaynak commit'i
+      description: Uygulama adını ve kullandığın kaynak sürümünü yaz.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Yeniden üretme adımları
+      placeholder: |
+        1. ... ekranını aç.
+        2. ... işlemini yap.
+        3. Sorunu gözle.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Beklenen ve gerçekleşen davranış
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ortam
+      description: Debian sürümü, VM veya gerçek cihaz, GPU, ekran ölçeği ve dil.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Günlükler ve ekran görüntüleri
+      description: Parola, erişim anahtarı ve kişisel bilgileri kaldırdıktan sonra ekle.

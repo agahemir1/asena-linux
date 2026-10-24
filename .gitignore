@@ -5,3 +5,14 @@ website/node_modules/
 website/dist/
 website/.astro/
 .netlify/
+.claude/
+.env
+.env.*
+!.env.example
+*.key
+*.p12
+*.pfx
+*.iso
+*.qcow2
+*.vdi
+*.vmdk

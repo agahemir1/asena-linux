@@ -1,0 +1,20 @@
+name: Özellik öner
+description: Çözülecek ihtiyacı ve beklediğin davranışı anlat.
+title: "[Öneri] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Hangi işi yapmakta zorlanıyorsun?
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Nasıl çalışmasını bekliyorsun?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Denediğin yollar ve ilgili ekranlar

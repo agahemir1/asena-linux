@@ -1,7 +1,6 @@
 name: Debian 13
 on:
-  push:
-  pull_request:
+  # External CI stays manual until its first Debian run is reviewed.
   workflow_dispatch:
 
 permissions:
@@ -19,6 +18,11 @@ jobs:
       - name: Bootstrap checkout dependencies
         run: apt-get update && apt-get install -y --no-install-recommends ca-certificates git
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Check publication files and history
+        run: apt-get install -y --no-install-recommends python3 && python3 scripts/check-publication.py
       - name: Install Debian development dependencies
         run: bash scripts/setup-dev.sh
       - name: Record package versions
