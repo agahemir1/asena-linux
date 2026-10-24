@@ -1,0 +1,15 @@
+[Unit]
+Description=Asena recovery service
+
+[Service]
+Type=dbus
+BusName=org.asenalinux.Recovery
+ExecStart=/usr/bin/asena-recovery --service
+User=root
+UMask=0077
+PrivateTmp=yes
+ProtectHome=read-only
+# The offline worker must mount the target and restore its /home.
+# ProtectHome is disabled by the recovery live-config drop-in, never on the
+# installed system. This process only accepts an allowlisted operation/mode.
+TimeoutStartSec=30

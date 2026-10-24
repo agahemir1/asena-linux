@@ -1,0 +1,29 @@
+#!/bin/sh
+# live-config component. Only the dedicated recovery GRUB entry enables it.
+set -eu
+case " $(cat /proc/cmdline) " in *' asena.recovery=1 '*) ;; *) exit 0 ;; esac
+mkdir -p /etc/greetd /etc/systemd/system/asena-recovery.service.d /etc/polkit-1/rules.d
+cat > /etc/greetd/config.toml <<'EOF'
+[terminal]
+vt = 1
+[default_session]
+command = "cage -s -- asena-recovery"
+user = "asena"
+[initial_session]
+command = "cage -s -- asena-recovery"
+user = "asena"
+EOF
+cat > /etc/systemd/system/asena-recovery.service.d/offline.conf <<'EOF'
+[Service]
+ProtectHome=no
+EOF
+# The recovery environment is entered at the console, with its own final
+# destructive confirmation. Do not ask for the live user's public password.
+cat > /etc/polkit-1/rules.d/49-asena-recovery.rules <<'EOF'
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.asenalinux.recovery.reset" && subject.user == "asena" && subject.local && subject.active) {
+        return polkit.Result.YES;
+    }
+});
+EOF
+systemctl daemon-reload

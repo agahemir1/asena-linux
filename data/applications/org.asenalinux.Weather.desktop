@@ -11,4 +11,3 @@ Icon=org.asenalinux.Weather
 Terminal=false
 Categories=Utility;GTK;
 StartupNotify=true
-NoDisplay=true

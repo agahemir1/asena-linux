@@ -70,3 +70,7 @@ Her uygulama bağımsız bir Rust binary crate'idir (`crates/asena-*`). Tekil uy
 1. **Ana Thread Asla Bloklanamaz:** Dosya kopyalama, disk tarama, arşiv çıkarma, paket sorgulama ve HTTP istekleri daima `gio::spawn_blocking` veya arka plan thread havuzunda koşturulur; sonuçlar GLib ana döngüsüne (`glib::spawn_future_local`) sinyallerle iletilir.
 2. **Panik Yasaktır:** `unwrap()` ve `expect()` test kodları haricinde kesinlikle yasaktır. Kütüphanelerde `thiserror`, binary'lerde `anyhow` ile hata güvenli biçimde yakalanıp arayüzde `AsenaErrorState` veya toast olarak gösterilir.
 3. **Bellek Bütçesi:** Hiçbir yardımcı uygulama boştayken 80MB RSS bellek eşiğini aşamaz. Gereksiz kütüphane bağlantılarından ve sızıntılardan kaçınılır.
+
+## 23 Ekim 2026 uygulama bağlantıları
+
+Yazılım APT için `org.asenalinux.Packages` sistem servisini, Flatpak için libflatpak kullanıcı kurulumunu kullanır. Sistem İzleyici `/proc`, Diskler UDisks2, Yedekleme rsync ve systemd kullanıcı zamanlayıcısına bağlıdır. Uçbirim VTE GTK4, Kamera GStreamer, Belgeler poppler-utils, Hava Durumu soup3/Open-Meteo kullanır. Kurtarma güvenlik/veri sözleşmesi [RECOVERY.md](RECOVERY.md) içindedir.

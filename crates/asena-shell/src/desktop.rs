@@ -88,7 +88,7 @@ fn launch_command(command: &str) {
 fn open_terminal(directory: &Path) {
     let terminal = asena_core::settings::load("org.asenalinux.desktop")
         .map(|settings| settings.string("terminal").to_string())
-        .unwrap_or_else(|_| "foot".into());
+        .unwrap_or_else(|_| "asena-terminal".into());
     let launcher = gio::SubprocessLauncher::new(gio::SubprocessFlags::NONE);
     launcher.set_cwd(directory);
     for (name, value) in crate::launch::language_environment() {

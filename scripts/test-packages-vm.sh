@@ -31,6 +31,7 @@ rule=/etc/polkit-1/rules.d/49-asena-packages-test.rules
 unit=/run/systemd/system/asena-packages.service
 # The postinst of asena-repair-test fails while this file exists.
 repair_flag=/run/asena-repair-test-fail
+local_package=''
 for path in "$activation" "$busconf" "$actions" "$rule" "$unit"; do
     [[ ! -e $path ]] || { printf 'Refusing to replace %s.\n' "$path" >&2; exit 1; }
 done
@@ -43,6 +44,8 @@ cleanup() {
     if dpkg-query -W asena-repair-test >/dev/null 2>&1; then
         sudo dpkg --purge asena-repair-test >/dev/null 2>&1 || true
     fi
+    sudo dpkg --purge asena-local-file-test >/dev/null 2>&1 || true
+    if [[ -n $local_package ]]; then rm -rf -- "$local_package" "$local_package.deb"; fi
     sudo rm -f "$libexec" "$activation" "$busconf" "$actions" "$rule" "$unit"
     sudo systemctl daemon-reload
     sudo busctl call org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus ReloadConfig >/dev/null
@@ -98,7 +101,20 @@ def call(method, args=None, signature=None):
         return "error", Gio.DBusError.get_remote_error(error) or error.message
 
 command = sys.argv[1]
-if command == "plan-commit":
+if command == "plan-file":
+    descriptors = Gio.UnixFDList.new()
+    with open(sys.argv[2], 'rb') as package:
+        handle = descriptors.append(package.fileno())
+    reply, _ = bus.call_with_unix_fd_list_sync(
+        "org.asenalinux.Packages", "/org/asenalinux/Packages", "org.asenalinux.Packages",
+        "PlanFile", GLib.Variant('(h)', (handle,)), None, Gio.DBusCallFlags.NONE,
+        600000, descriptors, None)
+    plan = json.loads(reply.unpack()[0])
+    assert any(change['name'] == 'asena-local-file-test' for change in plan['changes']), plan
+    status, value = call('Commit', (plan['id'],), '(s)')
+    assert status == 'ok', value
+    print('local file install passed', plan['changes'])
+elif command == "plan-commit":
     install, remove = sys.argv[2].split(",") if sys.argv[2] else [], sys.argv[3].split(",") if sys.argv[3] else []
     status, value = call("Plan", (install, remove), "(asas)")
     print("plan", status, value if status == "error" else json.loads(value[0])["changes"])
@@ -132,6 +148,15 @@ plan_id=$(client plan hello '' | sed -n 's/^plan ok //p' | python3 -I -c 'import
 client commit "$plan_id" >"$evidence/foreign-plan.txt" 2>&1
 
 allow_caller
+local_package=$(mktemp -d)
+mkdir -p "$local_package/DEBIAN" "$local_package/usr/share/asena-local-file-test"
+printf 'Package: asena-local-file-test\nVersion: 1.0\nArchitecture: all\nMaintainer: Asena <asena@localhost>\nDescription: Local file installation test\n' >"$local_package/DEBIAN/control"
+printf '%s\n' 'local package installed' >"$local_package/usr/share/asena-local-file-test/proof"
+dpkg-deb --root-owner-group --build "$local_package" "$local_package.deb" >/dev/null
+client plan-file "$local_package.deb" >"$evidence/local-file.txt" 2>&1
+[[ $(cat /usr/share/asena-local-file-test/proof) == 'local package installed' ]]
+client plan-commit '' asena-local-file-test >>"$evidence/local-file.txt" 2>&1
+[[ ! -e /usr/share/asena-local-file-test/proof ]]
 {
     printf '== refresh\n'
     client Refresh
@@ -176,4 +201,4 @@ dpkg-deb --root-owner-group --build "$package" "$package.deb" >/dev/null
 rm -rf -- "$package" "$package.deb"
 sudo dpkg --purge asena-repair-test >/dev/null
 journalctl -u asena-packages.service --since '-15 min' --no-pager >"$evidence/journal.txt" 2>&1 || true
-cat "$evidence/refusals.txt" "$evidence/foreign-plan.txt" "$evidence/authorized.txt" "$evidence/repair.txt"
+cat "$evidence/refusals.txt" "$evidence/foreign-plan.txt" "$evidence/local-file.txt" "$evidence/authorized.txt" "$evidence/repair.txt"

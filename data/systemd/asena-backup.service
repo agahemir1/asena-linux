@@ -1,0 +1,11 @@
+[Unit]
+Description=Asena daily backup
+Documentation=https://asenalinux.netlify.app/
+
+[Service]
+Type=oneshot
+# The program exits at once unless daily backups are on, the drive is
+# connected and the last backup is older than 20 hours.
+ExecStart=/usr/bin/asena-backup --scheduled
+Nice=10
+IOSchedulingClass=idle

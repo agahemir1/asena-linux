@@ -142,6 +142,38 @@ impl Service {
     }
 }
 
+/// Package files waiting for a commit; emptied when the service starts.
+const FILES: &str = "/var/cache/asena-packages/files";
+/// Larger files are not packages a person installs by hand.
+const FILE_LIMIT: u64 = 4 * 1024 * 1024 * 1024;
+
+fn copy_package(source: std::os::fd::OwnedFd) -> std::io::Result<std::path::PathBuf> {
+    use std::{
+        io::{Read, Seek},
+        os::unix::fs::DirBuilderExt,
+    };
+    let mut source = std::fs::File::from(source);
+    let metadata = source.metadata()?;
+    if !metadata.is_file() || metadata.len() > FILE_LIMIT {
+        return Err(std::io::Error::other(
+            "not a regular package file within the size limit",
+        ));
+    }
+    source.rewind()?;
+    std::fs::DirBuilder::new()
+        .recursive(true)
+        .mode(0o700)
+        .create(FILES)?;
+    let path = std::path::Path::new(FILES).join(format!("{}.deb", glib::uuid_string_random()));
+    let mut target = std::fs::File::create_new(&path)?;
+    let copied = std::io::copy(&mut source.take(FILE_LIMIT + 1), &mut target)?;
+    if copied > FILE_LIMIT {
+        let _ = std::fs::remove_file(&path);
+        return Err(std::io::Error::other("the file is too large"));
+    }
+    Ok(path)
+}
+
 #[zbus::interface(name = "org.asenalinux.Packages")]
 impl Service {
     async fn refresh(
@@ -170,6 +202,7 @@ impl Service {
                 apt::plan(&apt::Request {
                     install: &install_names,
                     remove: &remove_names,
+                    files: &[],
                 })
             })
             .await?;
@@ -181,6 +214,7 @@ impl Service {
                 owner,
                 install,
                 remove,
+                files: Vec::new(),
                 changes: plan.changes.clone(),
                 created: now,
             },
@@ -216,17 +250,74 @@ impl Service {
         {
             self.authorize(connection, &owner, ACTION_INSTALL).await?;
         }
-        self.run(&emitter, move |reporter| {
-            apt::commit(
-                &apt::Request {
-                    install: &stored.install,
-                    remove: &stored.remove,
-                },
-                &stored.changes,
-                &reporter,
-            )
-        })
-        .await
+        let files = stored.files.clone();
+        let result = self
+            .run(&emitter, move |reporter| {
+                apt::commit(
+                    &apt::Request {
+                        install: &stored.install,
+                        remove: &stored.remove,
+                        files: &stored.files,
+                    },
+                    &stored.changes,
+                    &reporter,
+                )
+            })
+            .await;
+        for file in files {
+            let _ = std::fs::remove_file(file);
+        }
+        result
+    }
+
+    /// Plans installing a `.deb` the caller opened. The service copies it into
+    /// its own directory, so the caller cannot change it before the commit.
+    async fn plan_file(
+        &self,
+        package: zbus::zvariant::OwnedFd,
+        #[zbus(header)] header: zbus::message::Header<'_>,
+        #[zbus(connection)] connection: &zbus::Connection,
+        #[zbus(signal_emitter)] emitter: SignalEmitter<'_>,
+    ) -> Result<String, Error> {
+        let owner = sender(&header)?;
+        self.authorize(connection, &owner, ACTION_INSTALL).await?;
+        let path = gio::spawn_blocking(move || copy_package(std::os::fd::OwnedFd::from(package)))
+            .await
+            .map_err(|_| Error::Failed("the copy stopped".into()))?
+            .map_err(|error| Error::Failed(error.to_string()))?;
+        let files = vec![path.clone()];
+        let planned = files.clone();
+        let mut plan = match self
+            .run(&emitter, move |_| {
+                apt::plan(&apt::Request {
+                    install: &[],
+                    remove: &[],
+                    files: &planned,
+                })
+            })
+            .await
+        {
+            Ok(plan) => plan,
+            Err(error) => {
+                let _ = std::fs::remove_file(&path);
+                return Err(error);
+            }
+        };
+        plan.id = glib::uuid_string_random().to_string();
+        let now = Instant::now();
+        self.lock()?.plans.insert(
+            plan.id.clone(),
+            plans::Stored {
+                owner,
+                install: Vec::new(),
+                remove: Vec::new(),
+                files,
+                changes: plan.changes.clone(),
+                created: now,
+            },
+            now,
+        );
+        serde_json::to_string(&plan).map_err(|error| Error::Failed(error.to_string()))
     }
 
     async fn upgrades(
@@ -329,6 +420,8 @@ impl Service {
 /// Serves until the service has been idle for five minutes; D-Bus activation
 /// starts it again on the next call.
 pub fn run() -> anyhow::Result<()> {
+    // Files of plans that expired with the previous run.
+    let _ = std::fs::remove_dir_all(FILES);
     let main_loop = glib::MainLoop::new(None, false);
     let (reporter, progress) = async_channel::unbounded::<apt::Progress>();
     let service = Service {

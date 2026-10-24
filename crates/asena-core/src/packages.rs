@@ -212,6 +212,8 @@ pub trait Packages {
     fn refresh(&self) -> zbus::Result<()>;
     /// JSON `Plan` for the given installs and removals; changes nothing.
     fn plan(&self, install: &[&str], remove: &[&str]) -> zbus::Result<String>;
+    /// Plans installing a package file the caller opened for reading.
+    fn plan_file(&self, package: zbus::zvariant::Fd<'_>) -> zbus::Result<String>;
     /// Applies a plan returned to the same caller.
     fn commit(&self, plan_id: &str) -> zbus::Result<()>;
     /// JSON list of `Upgrade`.

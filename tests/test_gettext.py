@@ -21,3 +21,14 @@ class GettextTests(unittest.TestCase):
         source = '''let c = 'İ'; let quote = '\\''; // 'lifetime
 /* 'static */ gettext("Close");'''
         self.assertEqual(module.prepare(source), source)
+
+    def test_raw_json_fixtures_do_not_confuse_the_c_scanner(self):
+        source = 'let fixture = r#"{\n "title": "Asena"\n}"#; gettext("Weather");'
+        result = module.prepare(source)
+        self.assertNotIn('"title"', result)
+        self.assertIn('gettext("Weather")', result)
+        self.assertEqual(result.count('\n'), source.count('\n'))
+
+    def test_line_continuations_do_not_hide_later_messages(self):
+        source = 'let attributes = "standard::name,\\\nstandard::file"; gettext("Folder");'
+        self.assertEqual(module.prepare(source), source)

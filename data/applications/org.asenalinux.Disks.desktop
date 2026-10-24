@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Disks
+Name[tr]=Diskler
+Comment=Manage drives and volumes
+Comment[tr]=Diskleri ve birimleri yönetin
+Exec=asena-disks
+Icon=org.asenalinux.Disks
+Terminal=false
+Categories=System;Filesystem;GTK;
+StartupNotify=true

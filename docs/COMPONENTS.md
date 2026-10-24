@@ -166,7 +166,7 @@ asenactl reload-style            # geliştirme: CSS'i canlı yeniden yükle
 | Varsayılan Uygulamalar | Web, e-posta, müzik, video, fotoğraf, dosyalar, terminal |
 | Hakkında | hostnamed, `/etc/os-release`, donanım özeti, Asena sürümü |
 
-**Sonra:** Yazıcılar, Erişilebilirlik, Gizlilik, Uygulamalar (Flatpak izinleri), Paylaşım, Kısayol düzenleyici.
+**Sonra:** Yazıcılar, Erişilebilirlik, Gizlilik, Uygulamalar (Flatpak izinleri), Paylaşım, Kısayol düzenleyici, Kurtarma (2.16).
 
 ### 2.13 Hoş geldin (`asena-welcome`)
 İlk oturum açılışında başlar. Adımlar: Görünüm (açık/koyu, vurgu) → Panel hizası → Flathub'ı etkinleştir → Temel kısayollar → Bitti.
@@ -180,6 +180,13 @@ asenactl reload-style            # geliştirme: CSS'i canlı yeniden yükle
 1.0 kapsamına dahil değildir. Faz 7'deki pano işi ekran görüntüsünü panoya kopyalamaktır; geçmiş için ayrı kapsam kararı ve prompt gerekir.
 
 Super+V ile açılır. `ext-data-control` (veya `wlr-data-control`) kullanır; metin ve görsel tutar, en fazla 50 öğe. Parola yöneticisinden gelen içerik kaydedilmez. Geçmiş yalnızca bellekte tutulur, diske yazılmaz.
+
+### 2.16 Kurtarma ve sıfırlama (planlandı, K30)
+1.0 kapsamındadır; bölüm düzeni 6D kurulumunda gelir. Karar ve açık sorular [PLANNING.md](PLANNING.md) K30 kaydındadır.
+- Ayarlar › Sistem › Kurtarma: Asena ayarlarını sıfırla (yetkisiz, kullanıcı başına), Bu bilgisayarı sıfırla ("Dosyalarımı koru" veya "Her şeyi kaldır"), sistem raporu.
+- Kurtarma bölümü: ISO'nun canlı imajı; GRUB'da her zaman "Asena Kurtarma" girdisi, kurulu sistem açılmasa da sıfırlama yapılabilir.
+- Oturumdan başlatma polkit korumalı sistem servisiyle yapılır (öneri `org.asenalinux.Recovery`); sıfırlamayı kurtarma ortamındaki araç yapar.
+- Disk arızasına karşı koruma değildir; o iş Yedekleme uygulamasınındır (K31).
 
 ---
 
@@ -216,11 +223,11 @@ Shell olgunlaşana kadar uygulamaları yeniden yazmıyoruz; GNOME'un GTK4 uygula
 | Video | Celluloid | — |
 | Hesap makinesi | GNOME Calculator | — |
 | Yazılım merkezi | Asena Yazılım: kendi APT ve Flatpak arka ucu, PackageKit yok (K21, [Faz 6F](../prompts/06f-yazilim.md)) | — |
-| Sistem izleyici | GNOME System Monitor | — |
+| Sistem izleyici | Asena Sistem İzleyici (K31, planlandı) | — |
 | Arşiv | File Roller | — |
 | Tarayıcı | Firefox ESR | — |
 
-**Kendi yazılabilecek uygulama adayları (Faz 7 sonrası):** dosya yöneticisi, GTK4 kurulum sihirbazı. Yazılım merkezi 23 Ekim'de 1.0 kapsamına alındı (K21).
+**Kendi yazılabilecek uygulama adayları (Faz 7 sonrası):** dosya yöneticisi, GTK4 kurulum sihirbazı. Yazılım merkezi 23 Ekim'de 1.0 kapsamına alındı (K21). Sistem İzleyici, Yedekleme ve Diskler 23 Ekim'de K31 ile kendi uygulamalarımız olarak planlandı; kendi tarayıcı, güvenlik ve sürücü yöneticisi uygulaması yapılmaz.
 
 18 Ekim 2026 resmî trixie/main amd64 indeksi kontrolü: bütün aday ve yedek paketler
 mevcut. Bu, uygulamaların kurulup çalıştırıldığı anlamına gelmez.

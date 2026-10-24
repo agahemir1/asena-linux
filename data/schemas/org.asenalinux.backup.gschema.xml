@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="asena">
+  <schema id="org.asenalinux.backup" path="/org/asenalinux/backup/">
+    <key name="destination" type="s"><default>''</default><summary>Backup folder</summary><description>A folder on the drive that receives the backups.</description></key>
+    <key name="automatic" type="b"><default>false</default><summary>Daily backup</summary><description>Back up once a day while the backup drive is connected.</description></key>
+    <key name="last-backup" type="x"><default>0</default><summary>Last backup</summary><description>Unix time of the last complete backup.</description></key>
+  </schema>
+</schemalist>

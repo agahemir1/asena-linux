@@ -17,6 +17,8 @@ pub struct Stored {
     pub owner: String,
     pub install: Vec<String>,
     pub remove: Vec<String>,
+    /// Local package files the service copied for this plan.
+    pub files: Vec<std::path::PathBuf>,
     pub changes: Vec<Change>,
     pub created: Instant,
 }
@@ -89,6 +91,7 @@ mod tests {
             owner: owner.into(),
             install: vec!["hello".into()],
             remove: Vec::new(),
+            files: Vec::new(),
             changes: vec![Change {
                 name: "hello".into(),
                 action: Action::Install,

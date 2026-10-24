@@ -1,0 +1,24 @@
+.store-card {
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid alpha(currentColor, 0.08);
+  background: @card_bg_color;
+  color: @card_fg_color;
+  box-shadow: 0 2px 6px alpha(@shade_color, 0.12);
+  transition: background 150ms ease, box-shadow 150ms ease;
+}
+.store-card:hover {
+  background: color-mix(in srgb, @card_bg_color 96%, currentColor);
+  box-shadow: 0 4px 12px alpha(@shade_color, 0.2);
+}
+.store-card:active { background: alpha(@accent_bg_color, 0.12); }
+.store-card:focus-visible {
+  outline: 2px solid @accent_color;
+  outline-offset: -3px;
+}
+.store-preview {
+  border-radius: 12px 12px 0 0;
+  background: alpha(currentColor, 0.04);
+}
+.store-metadata { padding: 16px; }
+.store-feature .store-metadata { padding: 16px 20px; }

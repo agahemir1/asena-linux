@@ -37,7 +37,7 @@ Debian 13 amd64 üzerinde Asena paketleri kurulup yükseltilebilir; test deposun
 12. Kullanılan kaynak/araç/paket sürümleri, kaynak commit'i ve ISO SHA-256 özetini kaydet. Aynı girdilerle yeniden üretim deneyini yap; bit düzeyinde aynı değilse sebep ve sınırlar raporlanır. Doğrulanmadan tam yeniden üretilebilirlik iddiası yoktur.
 
 ### D. Calamares ve kurulu sistem (6D)
-13. Calamares için dil, klavye, saat dilimi, boş disk bölümleme, kullanıcı oluşturma, özet ve kurulum akışını yapılandır. Desteklenmeyen senaryolar kurulumun başarıyla tamamlanacağı izlenimini vermemeli. Disk seçimi ve silme özeti açık olmalı.
+13. Calamares için dil, klavye, saat dilimi, boş disk bölümleme (ESP, kurtarma bölümü ve ext4 kök; K24, K30), kullanıcı oluşturma, özet ve kurulum akışını yapılandır. Kurulumun sonunda canlı imaj kurtarma bölümüne kopyalanır ve GRUB'a "Asena Kurtarma" girdisi eklenir. Desteklenmeyen senaryolar kurulumun başarıyla tamamlanacağı izlenimini vermemeli. Disk seçimi ve silme özeti açık olmalı.
 14. Kurulum işlemini yalnız geçici VM'nin açıkça tanımlı boş sanal diskinde dene. Hata ve iptal günlüklerini koru; host diski, bağlı kişisel disk veya gerçek kullanıcının sistemini kurulum hedefi yapma.
 15. Kurulumdan sonra canlı kullanıcı, geçici parolalar/kurallar, canlı otomatik giriş, kurulum günlüklerindeki sırlar ve canlı ortama özel APT kayıtları temizlenir. UEFI önyükleme ve kurulan kullanıcının greetd → Asena oturumu doğrulanır.
 16. Ağa bağlı ve çevrimdışı kurulumun destek durumunu açıkla. MVP ISO gerekli masaüstü paketlerini taşıyarak çevrimdışı temel kurulumu tamamlamalı; depo güncellemesi ağ olduğunda ayrı yapılır.

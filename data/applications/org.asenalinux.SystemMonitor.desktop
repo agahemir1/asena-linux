@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=System Monitor
+Name[tr]=Sistem İzleyici
+Comment=View processes and resource use
+Comment[tr]=Süreçleri ve kaynak kullanımını görüntüleyin
+Exec=asena-monitor
+Icon=org.asenalinux.SystemMonitor
+Terminal=false
+Categories=System;Monitor;GTK;
+StartupNotify=true

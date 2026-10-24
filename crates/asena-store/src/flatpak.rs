@@ -240,6 +240,38 @@ pub fn install(
     )
 }
 
+/// Installs the application a `.flatpakref` file describes, for the user.
+pub fn install_ref_file(
+    contents: &glib::Bytes,
+    progress: &async_channel::Sender<i32>,
+    cancellable: &gio::Cancellable,
+) -> Result<(), glib::Error> {
+    run(
+        &user()?,
+        |transaction| transaction.add_install_flatpakref(contents),
+        progress,
+        cancellable,
+    )
+}
+
+/// `Title` (or `Name`) and `Url` of a `.flatpakref` file.
+pub fn describe_ref_file(contents: &[u8]) -> Option<(String, String)> {
+    let file = glib::KeyFile::new();
+    file.load_from_bytes(&glib::Bytes::from(contents), glib::KeyFileFlags::NONE)
+        .ok()?;
+    let group = "Flatpak Ref";
+    let title = file
+        .locale_string(group, "Title", None)
+        .or_else(|_| file.string(group, "Name"))
+        .ok()?
+        .to_string();
+    let url = file
+        .string(group, "Url")
+        .map(|url| url.to_string())
+        .unwrap_or_default();
+    Some((title, url))
+}
+
 pub fn uninstall(
     reference: &str,
     user_installation: bool,

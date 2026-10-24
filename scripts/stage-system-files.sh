@@ -16,6 +16,19 @@ put 0644 data/apt/keyrings/xanmod-archive-keyring.asc /usr/share/keyrings/xanmod
 put 0644 data/apt/preferences.d/asena-xanmod.pref /etc/apt/preferences.d/asena-xanmod.pref
 put 0644 data/grub/default/asena.cfg /etc/default/grub.d/asena.cfg
 put 0755 data/grub/grub.d/42_asena_kernel /etc/grub.d/42_asena_kernel
+put 0755 data/grub/grub.d/43_asena_recovery /etc/grub.d/43_asena_recovery
+put 0644 data/recovery/recovery.py /usr/lib/asena/recovery.py
+put 0644 data/systemd/system/asena-recovery.service /usr/lib/systemd/system/asena-recovery.service
+put 0644 data/dbus-1/system-services/org.asenalinux.Recovery.service /usr/share/dbus-1/system-services/org.asenalinux.Recovery.service
+put 0644 data/dbus-1/system.d/org.asenalinux.Recovery.conf /usr/share/dbus-1/system.d/org.asenalinux.Recovery.conf
+put 0644 data/polkit/org.asenalinux.recovery.policy /usr/share/polkit-1/actions/org.asenalinux.recovery.policy
+put 0755 data/live/0126-asena-recovery /usr/lib/live/config/0126-asena-recovery
+put 0755 scripts/install-recovery.sh /usr/lib/asena/install-recovery
+put 0644 data/systemd/asena-backup.service /usr/lib/systemd/user/asena-backup.service
+put 0644 data/systemd/asena-backup.timer /usr/lib/systemd/user/asena-backup.timer
+put 0644 data/cups/cupsd.conf /etc/cups/cupsd.conf
+mkdir -p "$root/usr/lib/systemd/user/timers.target.wants"
+ln -sfn ../asena-backup.timer "$root/usr/lib/systemd/user/timers.target.wants/asena-backup.timer"
 
 # Application icons of the Debian catalog in Software (K21)
 put 0644 data/apt/apt.conf.d/50asena-appstream-icons /etc/apt/apt.conf.d/50asena-appstream-icons

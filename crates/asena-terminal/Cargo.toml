@@ -16,6 +16,7 @@ glib.workspace = true
 gettext-rs.workspace = true
 anyhow.workspace = true
 tracing.workspace = true
+vte4.workspace = true
 
 [lints]
 workspace = true

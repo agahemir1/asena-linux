@@ -10,7 +10,10 @@ use rust_apt::{
     progress::{AcquireProgress, DynAcquireProgress, DynInstallProgress, InstallProgress},
     Cache,
 };
-use std::collections::HashSet;
+use std::{
+    collections::HashSet,
+    path::{Path, PathBuf},
+};
 
 /// One progress update for the `Progress` signal.
 pub struct Progress {
@@ -60,10 +63,39 @@ impl From<std::io::Error> for Error {
 pub struct Request<'a> {
     pub install: &'a [String],
     pub remove: &'a [String],
+    /// Local `.deb` files, in the service's own directory.
+    pub files: &'a [PathBuf],
 }
 
 fn open() -> Result<Cache, Error> {
     Ok(new_cache!()?)
+}
+
+/// The archives plus the request's local files.
+fn open_for(request: &Request<'_>) -> Result<Cache, Error> {
+    if request.files.is_empty() {
+        return open();
+    }
+    let files: Vec<String> = request
+        .files
+        .iter()
+        .map(|file| file.to_string_lossy().into_owned())
+        .collect();
+    Ok(new_cache!(&files)?)
+}
+
+/// The package name in a `.deb` file's control data.
+pub fn deb_name(path: &Path) -> Result<String, Error> {
+    let output = std::process::Command::new("dpkg-deb")
+        .arg("--field")
+        .arg(path)
+        .arg("Package")
+        .output()?;
+    let name = String::from_utf8_lossy(&output.stdout).trim().to_owned();
+    if !output.status.success() || !valid_package_name(&name) {
+        return Err(PlanError::InvalidName(name).into());
+    }
+    Ok(name)
 }
 
 /// Upgrades install new dependencies but never remove packages, like `apt upgrade`.
@@ -94,11 +126,30 @@ fn mark(cache: &Cache, request: &Request<'_>) -> Result<(), Error> {
         package.mark_delete(false);
         package.protect();
     }
+    for file in request.files {
+        // The version from the file, even when an archive has a newer one.
+        let name = deb_name(file)?;
+        let wanted = file.to_string_lossy();
+        let package = cache
+            .get(&name)
+            .ok_or_else(|| PlanError::Unknown(name.clone()))?;
+        let version = package
+            .versions()
+            .find(|version| {
+                version
+                    .package_files()
+                    .any(|source| source.filename() == Some(wanted.as_ref()))
+            })
+            .ok_or_else(|| PlanError::Unknown(name.clone()))?;
+        version.set_candidate();
+        package.mark_install(true, true);
+        package.protect();
+    }
     cache.resolve(false)?;
     Ok(())
 }
 
-fn changes(cache: &Cache, requested: &HashSet<&str>) -> Vec<Change> {
+fn changes(cache: &Cache, requested: &HashSet<String>) -> Vec<Change> {
     cache
         .get_changes(true)
         .map(|package| {
@@ -139,20 +190,24 @@ fn essential(cache: &Cache, name: &str) -> bool {
     })
 }
 
-fn requested<'a>(request: &'a Request<'_>) -> HashSet<&'a str> {
-    request
+fn requested(request: &Request<'_>) -> Result<HashSet<String>, Error> {
+    let mut names: HashSet<String> = request
         .install
         .iter()
         .chain(request.remove)
-        .map(String::as_str)
-        .collect()
+        .cloned()
+        .collect();
+    for file in request.files {
+        names.insert(deb_name(file)?);
+    }
+    Ok(names)
 }
 
 /// What the request would change, without changing anything.
 pub fn plan(request: &Request<'_>) -> Result<Plan, Error> {
-    let cache = open()?;
+    let cache = open_for(request)?;
     mark(&cache, request)?;
-    let changes = changes(&cache, &requested(request));
+    let changes = changes(&cache, &requested(request)?);
     if changes.is_empty() {
         return Err(PlanError::Empty.into());
     }
@@ -186,9 +241,9 @@ pub fn commit(
     expected: &[Change],
     reporter: &Reporter,
 ) -> Result<(), Error> {
-    let cache = open()?;
+    let cache = open_for(request)?;
     mark(&cache, request)?;
-    let changes = changes(&cache, &requested(request));
+    let changes = changes(&cache, &requested(request)?);
     if changes != expected {
         return Err(Error::Stale);
     }

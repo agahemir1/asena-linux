@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 08:40+0000\n"
+"POT-Creation-Date: 2026-10-24 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,22 +35,25 @@ msgid "OK"
 msgstr ""
 
 #: crates/asena-app/src/dialogs.rs:76 crates/asena-calendar/src/window.rs:363
-#: crates/asena-files/src/window.rs:902 crates/asena-greeter/src/main.rs:313
-#: crates/asena-greeter/src/main.rs:362 crates/asena-lock/src/main.rs:140
+#: crates/asena-disks/src/window.rs:483 crates/asena-files/src/window.rs:902
+#: crates/asena-greeter/src/main.rs:313 crates/asena-greeter/src/main.rs:362
+#: crates/asena-lock/src/main.rs:140 crates/asena-monitor/src/window.rs:653
 #: crates/asena-polkit-agent/src/main.rs:91
 #: crates/asena-polkit-agent/src/main.rs:201
+#: crates/asena-recovery/src/window.rs:83
 #: crates/asena-settings/src/displays.rs:716
-#: crates/asena-settings/src/pages.rs:1041
+#: crates/asena-settings/src/pages.rs:1042
+#: crates/asena-settings/src/recovery.rs:22
 #: crates/asena-shell/src/desktop.rs:149 crates/asena-shell/src/power.rs:207
-#: crates/asena-shell/src/taskbar.rs:167 crates/asena-store/src/window.rs:536
-#: crates/asena-store/src/window.rs:742 crates/asena-store/src/window.rs:1021
-#: crates/asena-store/src/window.rs:1094 crates/asena-text/src/window.rs:462
+#: crates/asena-shell/src/taskbar.rs:167 crates/asena-store/src/window.rs:531
+#: crates/asena-store/src/window.rs:868 crates/asena-store/src/window.rs:1147
+#: crates/asena-store/src/window.rs:1220 crates/asena-text/src/window.rs:462
 #: crates/asena-widgets/src/wireless.rs:240
 msgid "Cancel"
 msgstr ""
 
 #: crates/asena-app/src/headerbar.rs:45 crates/asena-files/src/window.rs:260
-#: crates/asena-player/src/window.rs:64 crates/asena-store/src/window.rs:200
+#: crates/asena-player/src/window.rs:64 crates/asena-store/src/window.rs:203
 msgid "Search"
 msgstr ""
 
@@ -62,7 +65,7 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: crates/asena-app/src/states.rs:106
+#: crates/asena-app/src/states.rs:106 crates/asena-weather/src/window.rs:233
 msgid "Try Again"
 msgstr ""
 
@@ -79,9 +82,11 @@ msgstr ""
 msgid "The archive could not be read."
 msgstr ""
 
-#: crates/asena-archive/src/window.rs:52 crates/asena-files/src/window.rs:817
+#: crates/asena-archive/src/window.rs:52 crates/asena-backup/src/window.rs:317
+#: crates/asena-disks/src/window.rs:556 crates/asena-documents/src/window.rs:59
+#: crates/asena-documents/src/window.rs:91 crates/asena-files/src/window.rs:817
 #: crates/asena-player/src/window.rs:59 crates/asena-shell/src/desktop.rs:248
-#: crates/asena-store/src/window.rs:533 crates/asena-text/src/window.rs:76
+#: crates/asena-store/src/window.rs:528 crates/asena-text/src/window.rs:76
 msgid "Open"
 msgstr ""
 
@@ -95,7 +100,7 @@ msgstr ""
 #: crates/asena-files/src/window.rs:255 crates/asena-notes/src/window.rs:104
 #: crates/asena-photos/src/window.rs:99 crates/asena-player/src/window.rs:75
 #: crates/asena-screenshot/src/window.rs:85
-#: crates/asena-store/src/window.rs:214 crates/asena-text/src/window.rs:96
+#: crates/asena-store/src/window.rs:217 crates/asena-text/src/window.rs:96
 msgid "Main menu"
 msgstr ""
 
@@ -160,6 +165,135 @@ msgstr ""
 msgid "Could not extract the archive"
 msgstr ""
 
+#: crates/asena-backup/src/main.rs:57 crates/asena-backup/src/window.rs:444
+msgid "Backup failed"
+msgstr ""
+
+#: crates/asena-backup/src/main.rs:58
+msgid "Check that the backup drive has free space."
+msgstr ""
+
+#: crates/asena-backup/src/main.rs:72 crates/asena-backup/src/main.rs:105
+#: crates/asena-backup/src/main.rs:118 crates/asena-backup/src/window.rs:201
+#: crates/asena-backup/src/window.rs:208
+msgid "Backup"
+msgstr ""
+
+#: crates/asena-backup/src/main.rs:106
+msgid "Back up personal files to another drive"
+msgstr ""
+
+#: crates/asena-backup/src/main.rs:120
+msgid "Backup settings are unavailable"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:38
+msgid "Never"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:125
+msgid "No backup drive"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:127
+msgid "Connect an external drive and choose a folder on it for the backups."
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:130
+msgid "Choose folder"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:140
+#: data/schemas/org.asenalinux.backup.gschema.xml:4
+msgid "Backup folder"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:142
+msgid "Change"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:148
+#: data/schemas/org.asenalinux.backup.gschema.xml:6
+msgid "Last backup"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:155
+msgid "Back up daily"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:156
+msgid "While the backup drive is connected"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:162
+msgid "Back up now"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:166
+msgid "Stop"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:184
+msgid "Backups"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:189
+msgid "The backup drive is not connected"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:199
+msgid "About Backup"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:308
+msgid ""
+"This drive keeps only the newest backup. Drives formatted for Linux keep "
+"earlier ones too."
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:328 crates/asena-backup/src/window.rs:458
+#: crates/asena-files/src/window.rs:811
+msgid "Restore"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:344
+msgid "Choose a folder for backups"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:363
+msgid "Choose a folder on another drive"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:437
+msgid "Backup complete"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:439
+msgid "Backup stopped"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:445
+msgid "Check that the backup drive is connected and has free space."
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:456
+msgid "Restore files from {date}?"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:457
+msgid ""
+"Files in your home folder that changed since this backup are replaced with "
+"the backed up copies. Files added since then stay."
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:468
+msgid "Files restored"
+msgstr ""
+
+#: crates/asena-backup/src/window.rs:473
+msgid "Could not restore the files"
+msgstr ""
+
 #: crates/asena-calculator/src/calc.rs:343
 #: crates/asena-calculator/src/window.rs:428
 msgid "Error"
@@ -214,10 +348,12 @@ msgid "Ounces"
 msgstr ""
 
 #: crates/asena-calculator/src/calc.rs:374
+#: crates/asena-weather/src/window.rs:271
 msgid "Celsius"
 msgstr ""
 
 #: crates/asena-calculator/src/calc.rs:374
+#: crates/asena-weather/src/window.rs:272
 msgid "Fahrenheit"
 msgstr ""
 
@@ -275,6 +411,7 @@ msgid "Mass"
 msgstr ""
 
 #: crates/asena-calculator/src/window.rs:130
+#: crates/asena-disks/src/window.rs:286
 msgid "Temperature"
 msgstr ""
 
@@ -311,7 +448,7 @@ msgid "No calculations yet"
 msgstr ""
 
 #: crates/asena-calculator/src/window.rs:209
-#: crates/asena-settings/src/pages.rs:1015
+#: crates/asena-settings/src/pages.rs:1016
 msgid "History"
 msgstr ""
 
@@ -352,6 +489,7 @@ msgid "Add event"
 msgstr ""
 
 #: crates/asena-calendar/src/window.rs:108
+#: crates/asena-weather/src/window.rs:588
 msgid "Today"
 msgstr ""
 
@@ -401,6 +539,7 @@ msgid "Ends (HH:MM)"
 msgstr ""
 
 #: crates/asena-calendar/src/window.rs:329
+#: crates/asena-settings/src/applications.rs:144
 msgid "Location"
 msgstr ""
 
@@ -408,7 +547,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: crates/asena-calendar/src/window.rs:368 crates/asena-text/src/window.rs:99
+#: crates/asena-calendar/src/window.rs:368
+#: crates/asena-settings/src/recovery.rs:45 crates/asena-text/src/window.rs:99
 #: crates/asena-text/src/window.rs:464
 msgid "Save"
 msgstr ""
@@ -439,16 +579,85 @@ msgstr ""
 msgid "Could not export the events"
 msgstr ""
 
-#: crates/asena-camera/src/main.rs:11 crates/asena-camera/src/main.rs:21
+#: crates/asena-camera/src/capture.rs:19 crates/asena-camera/src/main.rs:16
+#: crates/asena-camera/src/main.rs:31 crates/asena-camera/src/window.rs:154
+#: crates/asena-camera/src/window.rs:174
+#: crates/asena-settings/src/applications.rs:143
 msgid "Camera"
 msgstr ""
 
-#: crates/asena-camera/src/main.rs:12
+#: crates/asena-camera/src/capture.rs:25
+msgid "Photo {date}"
+msgstr ""
+
+#: crates/asena-camera/src/capture.rs:26
+msgid "Video {date}"
+msgstr ""
+
+#: crates/asena-camera/src/main.rs:17
 msgid "Take photos and videos"
 msgstr ""
 
-#: crates/asena-camera/src/main.rs:23
-msgid "Asena Camera is not ready yet."
+#: crates/asena-camera/src/main.rs:33 crates/asena-camera/src/window.rs:139
+msgid "The camera could not be started"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:84 crates/asena-photos/src/window.rs:164
+msgid "Photo"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:89 crates/asena-settings/src/pages.rs:989
+msgid "Video"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:102 crates/asena-camera/src/window.rs:296
+msgid "Take photo"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:109
+msgid "Open last capture"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:135
+msgid "No camera found"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:158
+msgid "Open photos folder"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:162
+msgid "Open videos folder"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:165
+msgid "About Camera"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:297
+msgid "Start recording"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:298
+msgid "Stop recording"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:429
+msgid ""
+"Another application may be using it. Close that application and open Camera "
+"again."
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:534
+msgid "Could not save the photo"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:576 crates/asena-camera/src/window.rs:633
+msgid "Could not start recording"
+msgstr ""
+
+#: crates/asena-camera/src/window.rs:706
+msgid "Video saved"
 msgstr ""
 
 #: crates/asena-clock/src/main.rs:16 crates/asena-clock/src/window.rs:228
@@ -459,7 +668,7 @@ msgstr ""
 msgid "World clocks, stopwatch and timers"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:86 crates/asena-clock/src/window.rs:424
+#: crates/asena-clock/src/window.rs:86 crates/asena-clock/src/window.rs:422
 msgid "Add city"
 msgstr ""
 
@@ -468,8 +677,8 @@ msgid "World"
 msgstr ""
 
 #: crates/asena-clock/src/window.rs:115 crates/asena-clock/src/window.rs:186
-#: crates/asena-clock/src/window.rs:496 crates/asena-clock/src/window.rs:620
-#: crates/asena-clock/src/window.rs:637 crates/asena-settings/src/pages.rs:262
+#: crates/asena-clock/src/window.rs:494 crates/asena-clock/src/window.rs:618
+#: crates/asena-clock/src/window.rs:635 crates/asena-settings/src/pages.rs:262
 msgid "Start"
 msgstr ""
 
@@ -478,7 +687,11 @@ msgid "Lap"
 msgstr ""
 
 #: crates/asena-clock/src/window.rs:120 crates/asena-clock/src/window.rs:189
+#: crates/asena-recovery/src/window.rs:37
+#: crates/asena-recovery/src/window.rs:83
 #: crates/asena-settings/src/pages.rs:314
+#: crates/asena-settings/src/recovery.rs:12
+#: crates/asena-settings/src/recovery.rs:23
 msgid "Reset"
 msgstr ""
 
@@ -490,7 +703,7 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:165 crates/asena-clock/src/window.rs:377
+#: crates/asena-clock/src/window.rs:165 crates/asena-clock/src/window.rs:375
 msgid "min"
 msgstr ""
 
@@ -506,48 +719,50 @@ msgstr ""
 msgid "About Clocks"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:363
+#: crates/asena-clock/src/window.rs:361
 msgid "Local time"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:369
+#: crates/asena-clock/src/window.rs:367
 msgid "Tomorrow"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:371
+#: crates/asena-clock/src/window.rs:369
 msgid "Yesterday"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:375
+#: crates/asena-clock/src/window.rs:373
 msgid "Same time"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:376
+#: crates/asena-clock/src/window.rs:374
 msgid "h"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:396 crates/asena-store/src/window.rs:618
-#: crates/asena-store/src/window.rs:782 crates/asena-store/src/window.rs:886
+#: crates/asena-clock/src/window.rs:394
+#: crates/asena-settings/src/printers.rs:291
+#: crates/asena-store/src/window.rs:613 crates/asena-store/src/window.rs:908
+#: crates/asena-store/src/window.rs:1012 crates/asena-weather/src/window.rs:422
 msgid "Remove"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:428
+#: crates/asena-clock/src/window.rs:426
 msgid "Search cities"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:494 crates/asena-clock/src/window.rs:585
+#: crates/asena-clock/src/window.rs:492 crates/asena-clock/src/window.rs:583
 msgid "Pause"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:498 crates/asena-clock/src/window.rs:568
+#: crates/asena-clock/src/window.rs:496 crates/asena-clock/src/window.rs:566
 msgid "Resume"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:531
+#: crates/asena-clock/src/window.rs:529
 msgid "Lap {number}"
 msgstr ""
 
-#: crates/asena-clock/src/window.rs:621 crates/asena-clock/src/window.rs:626
+#: crates/asena-clock/src/window.rs:619 crates/asena-clock/src/window.rs:624
 msgid "Timer finished"
 msgstr ""
 
@@ -609,7 +824,7 @@ msgid "Accessories"
 msgstr ""
 
 #: crates/asena-core/src/launcher.rs:65 crates/asena-core/src/panels.rs:19
-#: crates/asena-store/src/window.rs:963
+#: crates/asena-store/src/window.rs:1089
 msgid "System"
 msgstr ""
 
@@ -646,7 +861,9 @@ msgstr ""
 msgid "menu position icons clock monitors"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:78 crates/asena-settings/src/pages.rs:334
+#: crates/asena-core/src/panels.rs:78
+#: crates/asena-settings/src/applications.rs:146
+#: crates/asena-settings/src/pages.rs:334
 #: crates/asena-shell/src/notifications.rs:107
 msgid "Notifications"
 msgstr ""
@@ -655,7 +872,9 @@ msgstr ""
 msgid "do not disturb applications"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:85 crates/asena-settings/src/pages.rs:356
+#: crates/asena-core/src/panels.rs:85 crates/asena-monitor/src/window.rs:310
+#: crates/asena-settings/src/applications.rs:125
+#: crates/asena-settings/src/pages.rs:356
 msgid "Network"
 msgstr ""
 
@@ -706,70 +925,98 @@ msgstr ""
 msgid "pointer speed scrolling tapping"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:127 crates/asena-settings/src/pages.rs:696
+#: crates/asena-core/src/panels.rs:127
+#: crates/asena-settings/src/printers.rs:188
+#: crates/asena-settings/src/printers.rs:192
+msgid "Printers"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:129
+msgid "print printing queue scanner"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:134 crates/asena-settings/src/pages.rs:696
 #: crates/asena-shell/src/menu.rs:370
 #: crates/asena-shell/src/quick_settings.rs:794
 msgid "Power"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:129
+#: crates/asena-core/src/panels.rs:136
 msgid "battery idle sleep brightness"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:134 crates/asena-settings/src/pages.rs:760
+#: crates/asena-core/src/panels.rs:141 crates/asena-settings/src/pages.rs:760
 msgid "Users"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:136
+#: crates/asena-core/src/panels.rs:143
 msgid "name photo password"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:141 crates/asena-settings/src/pages.rs:789
+#: crates/asena-core/src/panels.rs:148 crates/asena-settings/src/pages.rs:789
 msgid "Region and language"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:143
+#: crates/asena-core/src/panels.rs:150
 msgid "locale formats system language"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:148 crates/asena-settings/src/pages.rs:816
+#: crates/asena-core/src/panels.rs:155 crates/asena-settings/src/pages.rs:816
 #: crates/asena-settings/src/pages.rs:819
 msgid "Date and time"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:150
+#: crates/asena-core/src/panels.rs:157
 msgid "timezone automatic time format"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:155 crates/asena-settings/src/pages.rs:962
+#: crates/asena-core/src/panels.rs:162 crates/asena-settings/src/pages.rs:962
 msgid "Default applications"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:157
+#: crates/asena-core/src/panels.rs:164
 msgid "browser mail music video photos files terminal"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:162 crates/asena-settings/src/pages.rs:1012
-msgid "Privacy and security"
-msgstr ""
-
-#: crates/asena-core/src/panels.rs:164
-msgid "location camera microphone history lock permissions"
-msgstr ""
-
-#: crates/asena-core/src/panels.rs:169 crates/asena-settings/src/pages.rs:1101
-msgid "Accessibility"
+#: crates/asena-core/src/panels.rs:169
+#: crates/asena-settings/src/applications.rs:261
+#: crates/asena-shell/src/main.rs:141 crates/asena-store/src/window.rs:1140
+msgid "Applications"
 msgstr ""
 
 #: crates/asena-core/src/panels.rs:171
-msgid "contrast zoom reader text animation visual hearing"
+msgid "apps flatpak permissions sandbox camera location"
 msgstr ""
 
-#: crates/asena-core/src/panels.rs:176 crates/asena-settings/src/pages.rs:1130
-msgid "About"
+#: crates/asena-core/src/panels.rs:176 crates/asena-settings/src/pages.rs:1013
+msgid "Privacy and security"
 msgstr ""
 
 #: crates/asena-core/src/panels.rs:178
+msgid "location camera microphone history lock permissions"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:183 crates/asena-settings/src/pages.rs:1102
+msgid "Accessibility"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:185
+msgid "contrast zoom reader text animation visual hearing"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:190 crates/asena-settings/src/recovery.rs:8
+msgid "Recovery"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:192
+msgid "reset restore defaults reinstall factory"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:197 crates/asena-settings/src/pages.rs:1131
+msgid "About"
+msgstr ""
+
+#: crates/asena-core/src/panels.rs:199
 msgid "system computer name version"
 msgstr ""
 
@@ -806,19 +1053,19 @@ msgstr ""
 msgid "The screenshot is not a local file."
 msgstr ""
 
-#: crates/asena-core/src/settings.rs:21
+#: crates/asena-core/src/settings.rs:22
 msgid ""
 "No settings schemas are available. Run scripts/compile-data.sh and set "
 "GSETTINGS_SCHEMA_DIR."
 msgstr ""
 
-#: crates/asena-core/src/settings.rs:22
+#: crates/asena-core/src/settings.rs:23
 msgid ""
 "The settings schema is missing. Run scripts/compile-data.sh and set "
 "GSETTINGS_SCHEMA_DIR to target/schemas."
 msgstr ""
 
-#: crates/asena-core/src/settings.rs:23
+#: crates/asena-core/src/settings.rs:24
 msgid "The settings schema has no fixed path."
 msgstr ""
 
@@ -942,9 +1189,9 @@ msgstr ""
 msgid "Open Software"
 msgstr ""
 
-#: crates/asena-daemon/src/updates.rs:101 crates/asena-store/src/main.rs:22
-#: crates/asena-store/src/window.rs:240 crates/asena-store/src/window.rs:247
-#: crates/asena-store/src/window.rs:260
+#: crates/asena-daemon/src/updates.rs:101 crates/asena-store/src/main.rs:23
+#: crates/asena-store/src/window.rs:243 crates/asena-store/src/window.rs:250
+#: crates/asena-store/src/window.rs:263
 msgid "Software"
 msgstr ""
 
@@ -973,20 +1220,246 @@ msgstr[1] ""
 msgid "The system update could not be installed"
 msgstr ""
 
-#: crates/asena-documents/src/main.rs:11 crates/asena-documents/src/main.rs:21
+#: crates/asena-disks/src/main.rs:16 crates/asena-disks/src/window.rs:84
+#: crates/asena-disks/src/window.rs:101 crates/asena-disks/src/window.rs:111
+msgid "Disks"
+msgstr ""
+
+#: crates/asena-disks/src/main.rs:17
+msgid "Manage drives and volumes"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:47
+msgid ""
+"The volume is in use. Close the files and applications using it and try "
+"again."
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:49
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:53
+msgid "The operation failed."
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:88
+msgid "About Disks"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:106 crates/asena-disks/src/window.rs:252
+#: crates/asena-monitor/src/window.rs:311
+#: crates/asena-settings/src/pages.rs:1159
+msgid "Disk"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:208
+msgid "The disk reports that it is failing"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:246
+msgid "No disks"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:248
+msgid "Disk service is unavailable"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:268
+msgid "Size"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:270
+msgid "Solid state disk"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:271
+msgid "Hard disk"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:272
+msgid "Removable drive"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:273
+msgid "Optical drive"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:275
+msgid "Type"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:277 crates/asena-disks/src/window.rs:279
+msgid "Health"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:277
+msgid "Good"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:280
+msgid "Failing. Back up its files now."
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:287
+msgid "{value} °C"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:292
+msgid "Powered on"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:294
+msgid "{count} hour"
+msgid_plural "{count} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: crates/asena-disks/src/window.rs:304
+msgid "Safely remove"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:310
+msgid "Eject"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:317
+msgid "Format disk"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:332
+msgid "Volumes"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:407
+msgid "The drive can be unplugged"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:455
+msgid "No formatting tools are installed"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:470
+msgid "Format {name}?"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:471
+msgid "Everything on it will be erased."
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:474 crates/asena-monitor/src/window.rs:207
+#: crates/asena-settings/src/pages.rs:769
+msgid "Name"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:478 crates/asena-disks/src/window.rs:484
+#: crates/asena-disks/src/window.rs:571
+msgid "Format"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:525
+msgid "Formatted"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:560
+msgid "Unmount"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:565
+msgid "Mount"
+msgstr ""
+
+#: crates/asena-disks/src/window.rs:580
+msgid "Volume actions"
+msgstr ""
+
+#: crates/asena-documents/src/main.rs:17
+#: crates/asena-documents/src/window.rs:89
+#: crates/asena-documents/src/window.rs:135
 #: crates/asena-files/src/window.rs:561
 msgid "Documents"
 msgstr ""
 
-#: crates/asena-documents/src/main.rs:12
+#: crates/asena-documents/src/main.rs:18
 msgid "View documents"
 msgstr ""
 
-#: crates/asena-documents/src/main.rs:24
-msgid ""
-"Asena Documents is not ready yet. Open documents with another installed "
-"viewer."
+#: crates/asena-documents/src/window.rs:57
+msgid "No document"
 msgstr ""
+
+#: crates/asena-documents/src/window.rs:67
+msgid "The document could not be opened"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:94
+#: crates/asena-terminal/src/window.rs:62
+msgid "Zoom out"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:97
+msgid "Fit width"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:101
+#: crates/asena-terminal/src/window.rs:61
+msgid "Zoom in"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:111
+msgid "Open with another application"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:114
+msgid "About Documents"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:123
+msgid "Search in document"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:236
+msgid "PDF documents"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:241
+msgid "Open document"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:275
+msgid "PDF support is not installed."
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:277
+msgid "This document is protected with a password."
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:280
+msgid "The file is damaged or is not a PDF document."
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:309
+msgid "Page {number}"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:359
+#: crates/asena-settings/src/pages.rs:225
+msgid "Fit"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:442
+msgid "Page {page} of {pages}"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:522
+msgid "No matches"
+msgstr ""
+
+#: crates/asena-documents/src/window.rs:535
+msgid "Found on {count} page"
+msgid_plural "Found on {count} pages"
+msgstr[0] ""
+msgstr[1] ""
 
 #: crates/asena-files/src/main.rs:16 crates/asena-files/src/window.rs:222
 #: crates/asena-files/src/window.rs:282 crates/asena-files/src/window.rs:289
@@ -1002,7 +1475,7 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: crates/asena-files/src/window.rs:136
+#: crates/asena-files/src/window.rs:136 crates/asena-weather/src/window.rs:265
 msgid "Places"
 msgstr ""
 
@@ -1053,7 +1526,7 @@ msgid "About Files"
 msgstr ""
 
 #: crates/asena-files/src/window.rs:269 crates/asena-files/src/window.rs:1083
-#: crates/asena-settings/src/pages.rs:1042
+#: crates/asena-settings/src/pages.rs:1043
 msgid "Empty trash"
 msgstr ""
 
@@ -1071,8 +1544,8 @@ msgid "Home"
 msgstr ""
 
 #: crates/asena-files/src/window.rs:482 crates/asena-files/src/window.rs:596
-#: crates/asena-settings/src/pages.rs:1030
 #: crates/asena-settings/src/pages.rs:1031
+#: crates/asena-settings/src/pages.rs:1032
 msgid "Trash"
 msgstr ""
 
@@ -1081,7 +1554,7 @@ msgid "Computer"
 msgstr ""
 
 #: crates/asena-files/src/window.rs:556 crates/asena-settings/src/pages.rs:304
-#: crates/asena-settings/src/pages.rs:1150
+#: crates/asena-settings/src/pages.rs:1151
 msgid "Desktop"
 msgstr ""
 
@@ -1103,10 +1576,6 @@ msgstr ""
 
 #: crates/asena-files/src/window.rs:736
 msgid "Location copied"
-msgstr ""
-
-#: crates/asena-files/src/window.rs:811
-msgid "Restore"
 msgstr ""
 
 #: crates/asena-files/src/window.rs:814
@@ -1176,12 +1645,12 @@ msgid "Could not restore the item"
 msgstr ""
 
 #: crates/asena-files/src/window.rs:1081
-#: crates/asena-settings/src/pages.rs:1036
+#: crates/asena-settings/src/pages.rs:1037
 msgid "Empty the trash?"
 msgstr ""
 
 #: crates/asena-files/src/window.rs:1082
-#: crates/asena-settings/src/pages.rs:1038
+#: crates/asena-settings/src/pages.rs:1039
 msgid "All items in the trash will be deleted permanently."
 msgstr ""
 
@@ -1201,11 +1670,13 @@ msgstr ""
 #: crates/asena-greeter/src/main.rs:140 crates/asena-lock/src/main.rs:134
 #: crates/asena-lock/src/main.rs:308 crates/asena-polkit-agent/src/main.rs:87
 #: crates/asena-polkit-agent/src/main.rs:119
+#: crates/asena-recovery/src/window.rs:30
 #: crates/asena-widgets/src/wireless.rs:238
 msgid "Password"
 msgstr ""
 
 #: crates/asena-greeter/src/main.rs:155 crates/asena-greeter/src/main.rs:170
+#: crates/asena-store/src/window.rs:785
 msgid "Continue"
 msgstr ""
 
@@ -1224,8 +1695,9 @@ msgstr ""
 msgid "Caps Lock is on"
 msgstr ""
 
-#: crates/asena-greeter/src/main.rs:275 crates/asena-shell/src/power.rs:140
-#: crates/asena-store/src/window.rs:1060
+#: crates/asena-greeter/src/main.rs:275 crates/asena-recovery/src/window.rs:39
+#: crates/asena-settings/src/recovery.rs:159
+#: crates/asena-shell/src/power.rs:140 crates/asena-store/src/window.rs:1186
 msgid "Restart"
 msgstr ""
 
@@ -1306,6 +1778,105 @@ msgstr ""
 #: crates/asena-services/src/lock_client.rs:42
 #: crates/asena-services/src/lock_client.rs:77
 msgid "The session lock did not become ready."
+msgstr ""
+
+#: crates/asena-monitor/src/main.rs:18 crates/asena-monitor/src/window.rs:348
+msgid "System Monitor"
+msgstr ""
+
+#: crates/asena-monitor/src/main.rs:19
+msgid "Processes and resource use"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:57
+msgid "{value}%"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:61
+msgid "{size}/s"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:222
+msgid "User"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:230
+#: crates/asena-monitor/src/window.rs:308
+#: crates/asena-settings/src/pages.rs:1157
+msgid "Processor"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:245
+#: crates/asena-monitor/src/window.rs:309
+#: crates/asena-settings/src/pages.rs:1158
+msgid "Memory"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:258
+msgid "ID"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:272
+msgid "Search processes"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:280
+#: crates/asena-monitor/src/window.rs:655
+msgid "End process"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:298
+msgid "Processes"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:323
+msgid "Resources"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:333
+msgid "Show all processes"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:336
+msgid "About System Monitor"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:582
+msgid "{count} processor"
+msgid_plural "{count} processors"
+msgstr[0] ""
+msgstr[1] ""
+
+#: crates/asena-monitor/src/window.rs:595
+msgid "{used} of {total}"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:601
+msgid "Swap {used} of {total}"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:626
+msgid "Received {received} · Sent {sent}"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:636
+msgid "Read {read} · Written {written}"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:650
+msgid "End {name}?"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:651
+msgid "Unsaved work in this process may be lost."
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:654
+msgid "Force stop"
+msgstr ""
+
+#: crates/asena-monitor/src/window.rs:684
+msgid "Could not end the process"
 msgstr ""
 
 #: crates/asena-notes/src/main.rs:16 crates/asena-notes/src/window.rs:119
@@ -1412,10 +1983,6 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: crates/asena-photos/src/window.rs:164
-msgid "Photo"
-msgstr ""
-
 #: crates/asena-photos/src/window.rs:330
 msgid "Background changed"
 msgstr ""
@@ -1496,7 +2063,7 @@ msgid "Authenticate"
 msgstr ""
 
 #: crates/asena-polkit-agent/src/main.rs:144
-#: crates/asena-store/src/window.rs:1165
+#: crates/asena-store/src/window.rs:1291
 msgid "Try again"
 msgstr ""
 
@@ -1519,6 +2086,90 @@ msgstr ""
 
 #: crates/asena-polkit-agent/src/main.rs:328
 msgid "Authorization is unavailable in this development session."
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:24
+#: crates/asena-settings/src/recovery.rs:81
+#: data/polkit/org.asenalinux.recovery.policy:7
+msgid "Reset this computer"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:25
+#: crates/asena-settings/src/recovery.rs:86
+msgid "Keep my files"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:25
+#: crates/asena-settings/src/recovery.rs:87
+msgid "Remove everything"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:28
+msgid "New account"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:29
+msgid "Username"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:31
+msgid "Confirm password"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:50
+msgid "Asena Recovery"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:67
+msgid "Recovery is unavailable"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:67
+msgid ""
+"Start Asena Recovery from the boot menu or use an Asena installation drive."
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:75
+msgid "Check the new account"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:75
+msgid "Enter a username and matching passwords of at least eight characters."
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:78
+msgid "Reset this computer?"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:79
+msgid ""
+"All accounts, applications and personal files on this system will be "
+"removed. This cannot be undone."
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:81
+msgid ""
+"The system will be reinstalled. Installed applications, including user "
+"Flatpak applications, will be removed. Personal files and accounts will "
+"stay. Keep the computer connected to power."
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:91
+msgid "Resetting…"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:100
+msgid "Retry"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:100
+msgid "Reset could not be completed"
+msgstr ""
+
+#: crates/asena-recovery/src/window.rs:100
+msgid ""
+"The recovery image and saved account information are kept. Retry from Asena "
+"Recovery. Do not delete the recovery partition."
 msgstr ""
 
 #: crates/asena-screenshot/src/main.rs:15
@@ -1544,6 +2195,7 @@ msgid "Take screenshot"
 msgstr ""
 
 #: crates/asena-screenshot/src/window.rs:46
+#: crates/asena-terminal/src/window.rs:56
 msgid "Copy"
 msgstr ""
 
@@ -1756,6 +2408,50 @@ msgstr ""
 msgid "This tray item has no menu."
 msgstr ""
 
+#: crates/asena-settings/src/applications.rs:126
+msgid "Sound and microphone"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:127
+msgid "All devices, such as cameras"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:128
+msgid "Home folder or host files"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:145
+msgid "Run in the background"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:265
+msgid "Flatpak applications"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:269
+msgid "No Flatpak applications are installed"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:327
+msgid "Access"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:330
+msgid "Asked permissions"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:334
+msgid "Reset permissions"
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:391
+msgid "Changes apply the next time the application starts."
+msgstr ""
+
+#: crates/asena-settings/src/applications.rs:441
+msgid "Permissions reset"
+msgstr ""
+
 #: crates/asena-settings/src/displays.rs:221
 msgid "Primary display"
 msgstr ""
@@ -1838,7 +2534,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: crates/asena-settings/src/main.rs:194 crates/asena-shell/src/menu.rs:354
+#: crates/asena-settings/src/main.rs:200 crates/asena-shell/src/menu.rs:354
 #: crates/asena-shell/src/menu.rs:736
 #: crates/asena-shell/src/quick_settings.rs:779 data/ui/settings.blp:30
 msgid "Settings"
@@ -1916,7 +2612,7 @@ msgid "Transparency effects"
 msgstr ""
 
 #: crates/asena-settings/src/pages.rs:183
-#: crates/asena-settings/src/pages.rs:1113
+#: crates/asena-settings/src/pages.rs:1114
 #: data/schemas/org.asenalinux.desktop.gschema.xml:9
 msgid "Text scale"
 msgstr ""
@@ -1945,10 +2641,6 @@ msgstr ""
 
 #: crates/asena-settings/src/pages.rs:224
 msgid "Fill"
-msgstr ""
-
-#: crates/asena-settings/src/pages.rs:225
-msgid "Fit"
 msgstr ""
 
 #: crates/asena-settings/src/pages.rs:226
@@ -2256,10 +2948,6 @@ msgstr ""
 msgid "Your account"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:769
-msgid "Name"
-msgstr ""
-
 #: crates/asena-settings/src/pages.rs:780
 msgid "Home folder"
 msgstr ""
@@ -2329,97 +3017,286 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:989
-msgid "Video"
-msgstr ""
-
-#: crates/asena-settings/src/pages.rs:999 crates/asena-terminal/src/main.rs:11
-#: crates/asena-terminal/src/main.rs:21
+#: crates/asena-settings/src/pages.rs:999 crates/asena-terminal/src/main.rs:14
+#: crates/asena-terminal/src/window.rs:67
+#: crates/asena-terminal/src/window.rs:96
+#: crates/asena-terminal/src/window.rs:164
+#: crates/asena-terminal/src/window.rs:330
 #: data/schemas/org.asenalinux.desktop.gschema.xml:10
 msgid "Terminal"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1016
+#: crates/asena-settings/src/pages.rs:1001
+msgid "Asena Terminal"
+msgstr ""
+
+#: crates/asena-settings/src/pages.rs:1017
 msgid "Recently used files"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1016
+#: crates/asena-settings/src/pages.rs:1017
+#: crates/asena-weather/src/forecast.rs:237
 msgid "Clear"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1021
+#: crates/asena-settings/src/pages.rs:1022
 msgid "{count} item removed"
 msgid_plural "{count} items removed"
 msgstr[0] ""
 msgstr[1] ""
 
-#: crates/asena-settings/src/pages.rs:1031
+#: crates/asena-settings/src/pages.rs:1032
 msgid "Empty"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1077
+#: crates/asena-settings/src/pages.rs:1078
 msgid "Trash emptied"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1086
+#: crates/asena-settings/src/pages.rs:1087
 msgid "Screen lock"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1088
+#: crates/asena-settings/src/pages.rs:1089
 msgid "Lock and idle times"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1105
+#: crates/asena-settings/src/pages.rs:1106
 msgid "Accessibility settings are unavailable"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1108
+#: crates/asena-settings/src/pages.rs:1109
 msgid "Seeing"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1118
+#: crates/asena-settings/src/pages.rs:1119
 msgid "Motion"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1123
+#: crates/asena-settings/src/pages.rs:1124
 #: data/schemas/org.asenalinux.desktop.gschema.xml:17
 msgid "Animations"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1145
+#: crates/asena-settings/src/pages.rs:1146
 msgid "Device"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1146
+#: crates/asena-settings/src/pages.rs:1147
 msgid "Device name"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1147
+#: crates/asena-settings/src/pages.rs:1148
 msgid "Operating system"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1153
+#: crates/asena-settings/src/pages.rs:1154
 msgid "Kernel"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1155
+#: crates/asena-settings/src/pages.rs:1156
 msgid "Hardware"
 msgstr ""
 
-#: crates/asena-settings/src/pages.rs:1156
-msgid "Processor"
-msgstr ""
-
-#: crates/asena-settings/src/pages.rs:1157
-msgid "Memory"
-msgstr ""
-
-#: crates/asena-settings/src/pages.rs:1158
-msgid "Disk"
-msgstr ""
-
-#: crates/asena-settings/src/pages.rs:1205
+#: crates/asena-settings/src/pages.rs:1206
 msgid "{free} free of {size}"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:196
+#: crates/asena-settings/src/printers.rs:384
+msgid "Add printer"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:219
+msgid "Printing is not installed"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:225
+msgid "No printers"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:255
+msgid "Stopped"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:257
+msgid "Printing"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:259
+msgid "Ready"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:264
+msgid "{count} job"
+msgid_plural "{count} jobs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: crates/asena-settings/src/printers.rs:270
+msgid "Default"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:285
+msgid "Use as default"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:287
+msgid "Print test page"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:289
+msgid "Cancel jobs"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:296
+msgid "Printer actions"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:320
+msgid "The printer did not respond"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:331
+msgid "Default printer changed"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:347
+msgid "Test page sent"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:352
+msgid "Jobs cancelled"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:366
+msgid "Printer removed"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:371
+msgid "Could not remove the printer"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:388
+msgid "Found printers"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:391
+msgid "Looking for printers"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:396
+msgid "Printer address"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:398
+msgid "For example 192.168.1.20 or ipp://printer.local/ipp/print"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:401
+msgid "Address"
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:457
+msgid ""
+"The printer could not be added. Check that it supports driverless printing."
+msgstr ""
+
+#: crates/asena-settings/src/printers.rs:488
+msgid "No printers found on the network"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:12
+msgid "Asena settings"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:17
+msgid "Reset Asena settings?"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:19
+msgid ""
+"Appearance, panel, menu, notification, power, mouse and touchpad settings "
+"return to their defaults. The session language changes at the next login. "
+"Keyboard layouts, files and applications stay as they are."
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:36
+msgid "Asena settings are unavailable"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:38
+msgid "Asena settings reset"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:45
+msgid "System report"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:49
+msgid "Save system report"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:72
+msgid "Could not save the system report"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:74
+msgid "System report saved"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:84
+msgid "Reset option"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:93
+msgid "Restart into recovery"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:94
+msgid "Prepare"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:99
+msgid "Pending reset"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:101
+msgid "Cancel reset"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:112
+msgid "Checking recovery…"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:135
+msgid ""
+"The final confirmation appears in recovery. Applications will be removed."
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:137
+msgid "Recovery is unavailable. Start from an Asena installation drive."
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:158
+msgid "Recovery is ready"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:158
+msgid ""
+"Restart to continue. No files are removed until you confirm in recovery."
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:159
+msgid "Later"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:166
+msgid "Recovery could not be prepared"
+msgstr ""
+
+#: crates/asena-settings/src/recovery.rs:183
+msgid "The reset could not be cancelled"
 msgstr ""
 
 #: crates/asena-settings/src/rows.rs:113
@@ -2487,10 +3364,6 @@ msgstr ""
 msgid "Could not open the application"
 msgstr ""
 
-#: crates/asena-shell/src/main.rs:141 crates/asena-store/src/window.rs:1014
-msgid "Applications"
-msgstr ""
-
 #: crates/asena-shell/src/main.rs:247
 msgid "Layer shell is unavailable. Start Asena in a supported Wayland session."
 msgstr ""
@@ -2507,7 +3380,7 @@ msgstr ""
 msgid "Account settings"
 msgstr ""
 
-#: crates/asena-shell/src/menu.rs:550
+#: crates/asena-shell/src/menu.rs:550 crates/asena-weather/src/window.rs:739
 msgid "No results"
 msgstr ""
 
@@ -2698,11 +3571,50 @@ msgstr ""
 msgid "{remote} (system)"
 msgstr ""
 
-#: crates/asena-store/src/main.rs:23
+#: crates/asena-store/src/discovery.rs:186 crates/asena-store/src/window.rs:168
+#: crates/asena-store/src/window.rs:409
+msgid "Installed"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:214
+msgid "In the spotlight"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:217
+msgid "Previous application"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:218
+msgid "Next application"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:288
+msgid "See all"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:293
+msgid "Scroll back"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:294
+msgid "Scroll forward"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:343
+msgid "The catalog is empty"
+msgstr ""
+
+#: crates/asena-store/src/discovery.rs:345
+msgid ""
+"Refresh to download the application lists, or enable Flathub in the main "
+"menu."
+msgstr ""
+
+#: crates/asena-store/src/main.rs:24
 msgid "Install and update applications"
 msgstr ""
 
-#: crates/asena-store/src/main.rs:30
+#: crates/asena-store/src/main.rs:31
 msgid "Show the available updates"
 msgstr ""
 
@@ -2784,205 +3696,256 @@ msgstr ""
 msgid "To remove: {packages}"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:156
+#: crates/asena-store/src/window.rs:158
 msgid "Explore"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:165 crates/asena-store/src/window.rs:406
-msgid "Installed"
-msgstr ""
-
-#: crates/asena-store/src/window.rs:170
+#: crates/asena-store/src/window.rs:173
 msgid "Updates"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:182
+#: crates/asena-store/src/window.rs:185
 msgid "Loading the catalog"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:188
+#: crates/asena-store/src/window.rs:191
 msgid "Search applications"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:207
+#: crates/asena-store/src/window.rs:210
 msgid "Check for new software and updates"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:210
+#: crates/asena-store/src/window.rs:213
 msgid "Enable Flathub"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:211
+#: crates/asena-store/src/window.rs:214
 msgid "About Software"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:227
+#: crates/asena-store/src/window.rs:230
 msgid "An interrupted software change must be finished."
 msgstr ""
 
-#: crates/asena-store/src/window.rs:228
+#: crates/asena-store/src/window.rs:231
 msgid "Repair"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:464
-msgid "The catalog is empty"
-msgstr ""
-
-#: crates/asena-store/src/window.rs:466
-msgid ""
-"Refresh to download the application lists, or enable Flathub in the main "
-"menu."
-msgstr ""
-
-#: crates/asena-store/src/window.rs:530
+#: crates/asena-store/src/window.rs:525
 msgid "Source"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:571
+#: crates/asena-store/src/window.rs:566
 msgid "License"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:582
+#: crates/asena-store/src/window.rs:577
 msgid "Website"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:587
+#: crates/asena-store/src/window.rs:582
 msgid "Open the website"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:620 crates/asena-store/src/window.rs:780
-#: crates/asena-store/src/window.rs:877
+#: crates/asena-store/src/window.rs:615 crates/asena-store/src/window.rs:737
+#: crates/asena-store/src/window.rs:801 crates/asena-store/src/window.rs:906
+#: crates/asena-store/src/window.rs:1003
 msgid "Install"
 msgstr ""
 
+#: crates/asena-store/src/window.rs:704 crates/asena-store/src/window.rs:721
 #: crates/asena-store/src/window.rs:773
-msgid "The change cannot be prepared"
+msgid "The file cannot be installed"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:780 crates/asena-store/src/window.rs:875
+#: crates/asena-store/src/window.rs:705
+msgid "It is not a software package."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:722
+msgid "It is not a valid Flatpak reference."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:726
+msgid "Install applications only from sources you trust."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:730
+msgid "Source: {url}"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:734 crates/asena-store/src/window.rs:782
+#: crates/asena-store/src/window.rs:906 crates/asena-store/src/window.rs:1001
 msgid "Install {name}?"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:782 crates/asena-store/src/window.rs:883
-msgid "Remove {name}?"
+#: crates/asena-store/src/window.rs:745 crates/asena-store/src/window.rs:809
+msgid "Installing {name}"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:821 crates/asena-store/src/window.rs:921
+#: crates/asena-store/src/window.rs:757 crates/asena-store/src/window.rs:816
+#: crates/asena-store/src/window.rs:947 crates/asena-store/src/window.rs:1047
 msgid "{name} is installed"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:823 crates/asena-store/src/window.rs:923
-msgid "{name} is removed"
-msgstr ""
-
-#: crates/asena-store/src/window.rs:825 crates/asena-store/src/window.rs:926
-#: crates/asena-store/src/window.rs:1076
+#: crates/asena-store/src/window.rs:758 crates/asena-store/src/window.rs:817
+#: crates/asena-store/src/window.rs:951 crates/asena-store/src/window.rs:1052
+#: crates/asena-store/src/window.rs:1202
 msgid "The change failed"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:859
+#: crates/asena-store/src/window.rs:774
+msgid "It is not a valid Debian package."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:780
+msgid ""
+"This package does not come from the Asena or Debian archives and is not "
+"updated with the system. Install it only if you trust its source."
+msgstr ""
+
+#: crates/asena-store/src/window.rs:794 crates/asena-store/src/window.rs:899
+msgid "The change cannot be prepared"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:908 crates/asena-store/src/window.rs:1009
+msgid "Remove {name}?"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:949 crates/asena-store/src/window.rs:1049
+msgid "{name} is removed"
+msgstr ""
+
+#: crates/asena-store/src/window.rs:985
 msgid "The application cannot be installed"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:867
+#: crates/asena-store/src/window.rs:993
 msgid "It asks for no access outside its sandbox."
 msgstr ""
 
-#: crates/asena-store/src/window.rs:884
+#: crates/asena-store/src/window.rs:1010
 msgid "Its data in your home folder stays."
 msgstr ""
 
-#: crates/asena-store/src/window.rs:956
+#: crates/asena-store/src/window.rs:1082
 msgid "The last system update could not be installed"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:967
+#: crates/asena-store/src/window.rs:1093
 msgid "Restart now"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:969
+#: crates/asena-store/src/window.rs:1095
 msgid "Restart and install"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:978
+#: crates/asena-store/src/window.rs:1104
 msgid "The updates are installed during the next restart."
 msgstr ""
 
-#: crates/asena-store/src/window.rs:981
+#: crates/asena-store/src/window.rs:1107
 msgid "Do not install while restarting"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:993
+#: crates/asena-store/src/window.rs:1119
 msgid "Security"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1000
+#: crates/asena-store/src/window.rs:1126
 msgid "The system is up to date"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1006
+#: crates/asena-store/src/window.rs:1132
 msgid "Updates cannot be checked"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1017
+#: crates/asena-store/src/window.rs:1143
 msgid "The applications are up to date"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1023
+#: crates/asena-store/src/window.rs:1149
 msgid "Update"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1049
+#: crates/asena-store/src/window.rs:1175
 msgid "The updates cannot be prepared"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1058
+#: crates/asena-store/src/window.rs:1184
 msgid "Restart now?"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1059
+#: crates/asena-store/src/window.rs:1185
 msgid ""
 "The updates are installed while the computer restarts. Save your work first."
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1066
+#: crates/asena-store/src/window.rs:1192
 msgid "The computer cannot restart"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1107
+#: crates/asena-store/src/window.rs:1233
 msgid "The applications cannot be updated"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1135
+#: crates/asena-store/src/window.rs:1261
 msgid "Enable Flathub?"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1136
+#: crates/asena-store/src/window.rs:1262
 msgid ""
 "Flathub is a third-party catalog of Flatpak applications. Asena does not "
 "review them; each one shows the access it asks for before you install it."
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1137
+#: crates/asena-store/src/window.rs:1263
 msgid "Enable"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1163
+#: crates/asena-store/src/window.rs:1289
 msgid "Flathub cannot be enabled"
 msgstr ""
 
-#: crates/asena-store/src/window.rs:1195
+#: crates/asena-store/src/window.rs:1321
 msgid "The repair failed"
 msgstr ""
 
-#: crates/asena-terminal/src/main.rs:12
+#: crates/asena-terminal/src/main.rs:15
 msgid "Use the command line"
 msgstr ""
 
-#: crates/asena-terminal/src/main.rs:23
-msgid ""
-"Asena Terminal is not ready yet. Use the terminal chosen in Settings, "
-"Default applications."
+#: crates/asena-terminal/src/window.rs:51
+msgid "New tab"
+msgstr ""
+
+#: crates/asena-terminal/src/window.rs:57
+msgid "Paste"
+msgstr ""
+
+#: crates/asena-terminal/src/window.rs:58
+msgid "Select all"
+msgstr ""
+
+#: crates/asena-terminal/src/window.rs:63
+msgid "Original size"
+msgstr ""
+
+#: crates/asena-terminal/src/window.rs:65
+msgid "About Terminal"
+msgstr ""
+
+#: crates/asena-terminal/src/window.rs:73 crates/asena-text/src/window.rs:86
+msgid "Find"
+msgstr ""
+
+#: crates/asena-terminal/src/window.rs:75 crates/asena-text/src/window.rs:107
+msgid "Previous match"
+msgstr ""
+
+#: crates/asena-terminal/src/window.rs:78 crates/asena-text/src/window.rs:109
+msgid "Next match"
 msgstr ""
 
 #: crates/asena-text/src/main.rs:16 crates/asena-text/src/window.rs:144
@@ -3001,10 +3964,6 @@ msgstr ""
 msgid "New document"
 msgstr ""
 
-#: crates/asena-text/src/window.rs:86
-msgid "Find"
-msgstr ""
-
 #: crates/asena-text/src/window.rs:89
 msgid "Wrap lines"
 msgstr ""
@@ -3015,14 +3974,6 @@ msgstr ""
 
 #: crates/asena-text/src/window.rs:104
 msgid "Find in document"
-msgstr ""
-
-#: crates/asena-text/src/window.rs:107
-msgid "Previous match"
-msgstr ""
-
-#: crates/asena-text/src/window.rs:109
-msgid "Next match"
 msgstr ""
 
 #: crates/asena-text/src/window.rs:241
@@ -3061,16 +4012,225 @@ msgstr ""
 msgid "Some documents have unsaved changes."
 msgstr ""
 
-#: crates/asena-weather/src/main.rs:11 crates/asena-weather/src/main.rs:21
+#: crates/asena-weather/src/forecast.rs:34
+msgid "{speed} km/h"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:35
+msgid "{speed} mph"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:238
+msgid "Mostly clear"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:239
+msgid "Partly cloudy"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:240
+msgid "Overcast"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:241
+msgid "Fog"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:242
+msgid "Drizzle"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:244
+msgid "Freezing drizzle"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:247
+msgid "Light rain"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:248
+msgid "Rain"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:249
+msgid "Heavy rain"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:250
+msgid "Freezing rain"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:251
+msgid "Light snow"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:252
+msgid "Snow"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:253
+msgid "Heavy snow"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:254
+msgid "Snow grains"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:256
+msgid "Rain showers"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:260
+msgid "Heavy rain showers"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:263
+msgid "Snow showers"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:264
+msgid "Thunderstorm"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:265
+msgid "Thunderstorm with hail"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:266
+msgid "Unknown"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:275
+msgid "N"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:276
+msgid "NE"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:277
+msgid "E"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:278
+msgid "SE"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:279
+msgid "S"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:280
+msgid "SW"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:281
+msgid "W"
+msgstr ""
+
+#: crates/asena-weather/src/forecast.rs:282
+msgid "NW"
+msgstr ""
+
+#: crates/asena-weather/src/main.rs:17 crates/asena-weather/src/window.rs:252
+#: crates/asena-weather/src/window.rs:287
+#: crates/asena-weather/src/window.rs:446
 msgid "Weather"
 msgstr ""
 
-#: crates/asena-weather/src/main.rs:12
+#: crates/asena-weather/src/main.rs:18
 msgid "Show the weather forecast"
 msgstr ""
 
-#: crates/asena-weather/src/main.rs:23
-msgid "Asena Weather is not ready yet."
+#: crates/asena-weather/src/window.rs:174
+msgid "Humidity"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:175
+msgid "Wind"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:176
+msgid "Pressure"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:177
+msgid "Sunrise"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:178
+msgid "Sunset"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:194
+msgid "Weather data:"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:202
+msgid "Hourly"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:204
+msgid "7 days"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:206
+msgid "Details"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:221
+msgid "No places"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:223
+#: crates/asena-weather/src/window.rs:255
+#: crates/asena-weather/src/window.rs:655
+msgid "Add place"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:231
+msgid "Could not load the forecast"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:268
+#: crates/asena-widgets/src/wireless.rs:47
+msgid "Refresh"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:275
+msgid "About Weather"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:511
+msgid "Could not refresh the forecast"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:514
+msgid "Check the internet connection and try again."
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:532
+msgid "Feels like {temperature}"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:554
+msgid "Now"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:631
+msgid "{pressure} hPa"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:647
+msgid "Updated {time}"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:659
+msgid "Search for a city"
+msgstr ""
+
+#: crates/asena-weather/src/window.rs:744
+msgid "Could not search"
 msgstr ""
 
 #: crates/asena-welcome/src/main.rs:6
@@ -3083,10 +4243,6 @@ msgstr ""
 
 #: crates/asena-widgets/src/wireless.rs:38
 msgid "Available networks"
-msgstr ""
-
-#: crates/asena-widgets/src/wireless.rs:47
-msgid "Refresh"
 msgstr ""
 
 #: crates/asena-widgets/src/wireless.rs:198
@@ -3124,6 +4280,22 @@ msgstr ""
 
 #: data/ui/settings.blp:44
 msgid "Search settings"
+msgstr ""
+
+#: data/schemas/org.asenalinux.backup.gschema.xml:4
+msgid "A folder on the drive that receives the backups."
+msgstr ""
+
+#: data/schemas/org.asenalinux.backup.gschema.xml:5
+msgid "Daily backup"
+msgstr ""
+
+#: data/schemas/org.asenalinux.backup.gschema.xml:5
+msgid "Back up once a day while the backup drive is connected."
+msgstr ""
+
+#: data/schemas/org.asenalinux.backup.gschema.xml:6
+msgid "Unix time of the last complete backup."
 msgstr ""
 
 #: data/schemas/org.asenalinux.desktop.gschema.xml:6
@@ -3250,4 +4422,16 @@ msgstr ""
 
 #: data/polkit/org.asenalinux.packages.policy:61
 msgid "Authentication is required to repair the package system"
+msgstr ""
+
+#: data/polkit/org.asenalinux.recovery.policy:8
+msgid "Bu bilgisayarı sıfırla"
+msgstr ""
+
+#: data/polkit/org.asenalinux.recovery.policy:9
+msgid "Authentication is required to reset this computer."
+msgstr ""
+
+#: data/polkit/org.asenalinux.recovery.policy:10
+msgid "Bu bilgisayarı sıfırlamak için kimlik doğrulaması gerekiyor."
 msgstr ""

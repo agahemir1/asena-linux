@@ -16,6 +16,9 @@ glib.workspace = true
 gettext-rs.workspace = true
 anyhow.workspace = true
 tracing.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+soup3.workspace = true
 
 [lints]
 workspace = true

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Backup
+Name[tr]=Yedekleme
+Comment=Back up personal files to another drive
+Comment[tr]=Kişisel dosyaları başka bir diske yedekleyin
+Exec=asena-backup
+Icon=org.asenalinux.Backup
+Terminal=false
+Categories=System;Archiving;GTK;
+StartupNotify=true

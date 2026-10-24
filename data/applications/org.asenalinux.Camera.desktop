@@ -11,4 +11,3 @@ Icon=org.asenalinux.Camera
 Terminal=false
 Categories=AudioVideo;Video;GTK;
 StartupNotify=true
-NoDisplay=true

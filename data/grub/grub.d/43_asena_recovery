@@ -1,0 +1,15 @@
+#!/bin/sh
+# Keep this entry available even when the installed system cannot start.
+set -eu
+config=/etc/asena/recovery.json
+[ -f "$config" ] || exit 0
+uuid=$(python3 -I -c 'import json,re,sys; c=json.load(open(sys.argv[1])); u=c["recovery_uuid"]; assert re.fullmatch(r"[0-9a-fA-F-]{8,64}",u); print(u)' "$config")
+cat <<EOF
+menuentry 'Asena Recovery' --id 'asena-recovery' {
+  insmod part_gpt
+  insmod ext2
+  search --no-floppy --fs-uuid --set=recovery ${uuid}
+  linux (\$recovery)/live/vmlinuz boot=live components live-media=/dev/disk/by-uuid/${uuid} live-media-path=/live asena.recovery=1 locales=tr_TR.UTF-8 keyboard-layouts=tr quiet
+  initrd (\$recovery)/live/initrd.img
+}
+EOF

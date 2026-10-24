@@ -69,15 +69,34 @@ Bu katalog yalnız kodda bulunan ve çalışan işlevleri listeler. Planlanan i�
 - Aynı servis `asenactl screenshot` ve Print tuşu tarafından kullanılır.
 
 ### Yazılım (`crates/asena-store`, kimlik `org.asenalinux.Store`)
-- Keşfet (kategoriler), arama, Kurulu, Güncellemeler ve uygulama ayrıntısı; dar pencerede tek sütun.
+- Keşfet: kaydırılabilir vitrin, gerçek ekran görüntülü uygulama rafları ve kategori kısayolları.
+  Kartlar uygulama ayrıntısını, kategori ve “Tümünü gör” düğmeleri tam kategori listesini açar.
+  Arama, Kurulu ve Güncellemeler korunur; dar pencerede alt sekme çubuğu kullanılır.
 - Katalog: Debian DEP-11 ve etkinse Flathub (AppStream). AppStream bileşeni olmayan paket listelenmez;
   arama `asena_core::text::fold`, listeler yerel ayara göre sıralı.
 - Debian paketleri `org.asenalinux.Packages` servisiyle kurulur ve kaldırılır: önce değişiklik özeti,
   sonra polkit parolası. Flatpak uygulamaları kullanıcı kurulumudur; önce istedikleri izinler gösterilir.
 - Sistem güncellemeleri indirilir ve yeniden başlatmada kurulur; Flatpak güncellemeleri oturum içinde.
   Yarım kalan dpkg işi için onarım şeridi.
-- Ekran görüntüleri yalnız ayrıntı sayfasında, HTTPS ile indirilip önbelleğe alınır.
+- Ekran görüntüleri Keşfet ve ayrıntı sayfalarında HTTPS ile indirilip önbelleğe alınır.
+  Eşzamanlı bağlantılar ve yanıt boyutu sınırlıdır; ağ yoksa gerçek uygulama simgesi kalır.
+  Vitrin editoryal seçimdir; indirme, puan veya popülerlik verisi üretilmez.
 
 ## Gizli uygulamalar
 Uçbirim, Kamera, Belgeler ve Hava Durumu menüde görünmez (`NoDisplay=true`). Elle
 başlatılırsa yalnız uygulamanın henüz hazır olmadığını ve varsa alternatifi söyleyen bir pencere açar.
+
+## 23 Ekim 2026 uygulama devamı
+
+- **Sistem İzleyici** (`asena-monitor`, `org.asenalinux.SystemMonitor`): `/proc` üzerinden süreç listesi, CPU/bellek/ağ/disk kullanımı, süreç sonlandırma; Ctrl+Shift+Esc.
+- **Yedekleme** (`asena-backup`, `org.asenalinux.Backup`): harici dizine rsync, Linux dosya sisteminde sabit bağlantılı geçmiş, en yeni on yedek, geri yükleme ve günlük kullanıcı zamanlayıcısı.
+- **Diskler** (`asena-disks`, `org.asenalinux.Disks`): UDisks2 üzerinden diskler, bölümler, sağlık, bağlama/çıkarma ve onaylı biçimlendirme. Bölüm tablosu düzenleme yok.
+- **Uçbirim**: VTE GTK4, gerçek kabuk ve sekmeler.
+- **Belgeler**: poppler-utils, PDF sayfaları, yakınlaştırma ve Türkçe katlamalı arama.
+- **Kamera**: GStreamer kamera seçimi, JPEG fotoğraf ve WebM video; donanım olmadığında boş durum.
+- **Hava Durumu**: Open-Meteo HTTPS tahmin/yer arama, yerel önbellek ve kaynak atfı.
+- **Ayarlar**: Uygulamalar (Flatpak/portal izinleri), Yazıcılar (CUPS/cups-pk-helper), Kurtarma.
+- **Yazılım**: `.deb` dosya tanıtıcısını yetkili paket servisine verir, planı onaylatır; `.flatpakref` kullanıcı kurulumunu destekler.
+
+Kaynak uygulaması, gerçek donanım veya görsel kabulün geçtiği anlamına gelmez.
+Deney sonuçları [apps-recovery raporunda](../reports/apps-recovery.md) tutulur.

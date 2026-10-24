@@ -46,6 +46,13 @@ wireplumber
 polkitd
 accountsservice
 upower
+udisks2
+exfatprogs
+dosfstools
+ntfs-3g
+# Driverless printing; bind only loopback, no cups-browsed.
+cups
+cups-pk-helper
 
 # Helpers the daemon and screenshot tools run
 wlsunset
@@ -60,10 +67,17 @@ adwaita-icon-theme
 librsvg2-common
 libgtk-4-media-gstreamer
 gstreamer1.0-plugins-good
+gstreamer1.0-plugins-base
+gstreamer1.0-gtk4
+gstreamer1.0-pipewire
+libvte-2.91-gtk4-0
+poppler-utils
+rsync
+python3
+squashfs-tools
 libarchive-tools
 
 # Applications and languages
-foot
 firefox-esr
 firefox-esr-l10n-tr
 flatpak

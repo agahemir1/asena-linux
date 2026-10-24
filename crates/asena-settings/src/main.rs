@@ -3,9 +3,12 @@ use asena_core::i18n::gettext;
 use asena_services::system::SystemServices;
 use std::{cell::RefCell, rc::Rc};
 
+mod applications;
 mod content;
 mod displays;
 mod pages;
+mod printers;
+mod recovery;
 mod rows;
 mod system_info;
 
@@ -66,7 +69,7 @@ fn populate_panels(content: &Content, window: &adw::ApplicationWindow, services:
             }
         }),
     };
-    let builders: [(&str, PageBuilder); 17] = [
+    let builders: [(&str, PageBuilder); 20] = [
         ("appearance", pages::appearance),
         ("desktop", pages::desktop),
         ("notifications", pages::notifications),
@@ -76,13 +79,16 @@ fn populate_panels(content: &Content, window: &adw::ApplicationWindow, services:
         ("sound", pages::sound),
         ("keyboard", pages::keyboard),
         ("mouse", pages::mouse),
+        ("printers", printers::page),
         ("power", pages::power),
         ("users", pages::users),
         ("region", pages::region),
         ("datetime", pages::datetime),
         ("defaults", pages::defaults),
+        ("applications", applications::page),
         ("privacy", pages::privacy),
         ("accessibility", pages::accessibility),
+        ("recovery", recovery::page),
         ("about", pages::about),
     ];
     for (id, build) in builders {
@@ -302,9 +308,9 @@ mod tests {
     }
 
     #[test]
-    fn test_all_17_panels_have_valid_metadata() {
+    fn test_all_20_panels_have_valid_metadata() {
         let panels = asena_core::panels::all();
-        assert_eq!(panels.len(), 17);
+        assert_eq!(panels.len(), 20);
         for p in &panels {
             assert!(!p.id.is_empty());
             assert!(!p.name.is_empty());

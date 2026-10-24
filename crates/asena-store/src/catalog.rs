@@ -109,6 +109,13 @@ pub fn merge(apps: Vec<App>) -> Vec<App> {
                 }
                 if existing.screenshots.is_empty() {
                     existing.screenshots = app.screenshots;
+                } else if let Some(alternative) = app.screenshots.first() {
+                    // Keep the primary origin, but retain a second origin's
+                    // cover when a catalog still points at a removed image.
+                    if !existing.screenshots.contains(alternative) {
+                        existing.screenshots.insert(1, alternative.clone());
+                        existing.screenshots.truncate(6);
+                    }
                 }
                 if existing.icon.is_none() {
                     existing.icon = app.icon;
@@ -164,6 +171,81 @@ pub fn sorted<'a>(apps: impl Iterator<Item = &'a App>) -> Vec<&'a App> {
     let mut apps: Vec<&App> = apps.collect();
     apps.sort_by(|a, b| collate(&a.name, &b.name));
     apps
+}
+
+/// Editorial choices, never a claim about downloads, ratings or popularity.
+/// Both IDs and Debian package names are used because catalogs name them
+/// differently. Missing applications simply do not appear in the feed.
+fn editorial_order(app: &App) -> usize {
+    const CHOICES: &[(&str, &str)] = &[
+        ("org.kde.krita", "krita"),
+        ("org.videolan.VLC", "vlc"),
+        ("org.mozilla.firefox", "firefox-esr"),
+        ("org.libreoffice.LibreOffice", "libreoffice-writer"),
+        ("org.blender.Blender", "blender"),
+        ("org.inkscape.Inkscape", "inkscape"),
+        ("org.gimp.GIMP", "gimp"),
+        ("org.kde.kdenlive", "kdenlive"),
+        ("org.audacityteam.Audacity", "audacity"),
+        ("org.gnome.Builder", "gnome-builder"),
+        ("org.supertuxkart.SuperTuxKart", "supertuxkart"),
+        ("org.gnome.Loupe", "loupe"),
+    ];
+    CHOICES
+        .iter()
+        .position(|(id, package)| {
+            app.id.trim_end_matches(".desktop") == *id
+                || app
+                    .sources
+                    .iter()
+                    .any(|source| matches!(source, Source::Package { name, .. } if name == package))
+        })
+        .unwrap_or(CHOICES.len())
+}
+
+/// Bounded previews from the real catalog. Full categories retain every app.
+pub fn discover(apps: &[App], category: Option<Category>, limit: usize) -> Vec<&App> {
+    let mut selected: Vec<_> = apps
+        .iter()
+        .filter(|app| {
+            !app.sources.is_empty() && category.is_none_or(|category| app.category() == category)
+        })
+        .collect();
+    selected.sort_by(|a, b| {
+        editorial_order(a)
+            .cmp(&editorial_order(b))
+            .then_with(|| a.screenshots.is_empty().cmp(&b.screenshots.is_empty()))
+            .then_with(|| a.icon.is_none().cmp(&b.icon.is_none()))
+            .then_with(|| a.summary.is_empty().cmp(&b.summary.is_empty()))
+            .then_with(|| collate(&a.name, &b.name))
+            .then_with(|| a.id.cmp(&b.id))
+    });
+    // Catalogs can use different IDs for the same visible application name.
+    // A rail shows each title once; full category/search results keep all entries.
+    let mut names = HashSet::new();
+    selected.retain(|app| names.insert(fold(&app.name)));
+    selected.truncate(limit);
+    selected
+}
+
+/// A small, diverse showcase. Prefer screenshots and one app per category;
+/// a small or offline catalog still produces usable icon-backed cards.
+pub fn featured(apps: &[App], limit: usize) -> Vec<&App> {
+    let mut candidates = discover(apps, None, apps.len());
+    candidates.sort_by_key(|app| app.screenshots.is_empty());
+    let mut result: Vec<&App> = Vec::new();
+    for app in candidates {
+        if result.len() == limit {
+            break;
+        }
+        if !result
+            .iter()
+            .any(|selected| selected.category() == app.category())
+        {
+            result.push(app);
+        }
+    }
+    result
 }
 
 fn text(value: Option<glib::GString>) -> String {
@@ -408,6 +490,24 @@ mod tests {
     }
 
     #[test]
+    fn merging_retains_an_alternative_cover_from_the_second_origin() {
+        let mut debian = app("org.kde.krita.desktop", "Krita", package("krita"));
+        debian.screenshots = vec!["https://debian.example/removed.png".into(); 6];
+        let mut flathub = app("org.kde.krita", "Krita", flatpak("org.kde.krita"));
+        flathub.screenshots = vec!["https://flathub.example/cover.png".into()];
+        let result = merge(vec![debian, flathub]);
+        assert_eq!(
+            result[0].screenshots[0],
+            "https://debian.example/removed.png"
+        );
+        assert_eq!(
+            result[0].screenshots[1],
+            "https://flathub.example/cover.png"
+        );
+        assert_eq!(result[0].screenshots.len(), 6);
+    }
+
+    #[test]
     fn search_folds_turkish_letters_and_prefers_names() {
         let mut calculator = app("calc", "Hesap Makinesi", package("calc"));
         calculator.summary = "Dört işlem".into();
@@ -440,5 +540,53 @@ mod tests {
             .flatpaks
             .insert("app/org.gnome.Papers/x86_64/stable".into());
         assert!(installed.any(&papers));
+    }
+
+    #[test]
+    fn discovery_uses_available_sources_and_respects_category_and_limit() {
+        let mut krita = app("org.kde.krita.desktop", "Krita", package("krita"));
+        krita.categories = vec!["Graphics".into()];
+        let mut other = app("draw", "Another drawing app", package("draw"));
+        other.categories = krita.categories.clone();
+        let mut missing = app("missing", "Unavailable", package("missing"));
+        missing.sources.clear();
+        let apps = vec![other, missing, krita];
+        let selected = discover(&apps, Some(Category::Graphics), 1);
+        assert_eq!(
+            selected
+                .iter()
+                .map(|app| app.name.as_str())
+                .collect::<Vec<_>>(),
+            ["Krita"]
+        );
+        assert!(discover(&apps, Some(Category::Games), 8).is_empty());
+        assert_eq!(discover(&apps, None, 8).len(), 2);
+        assert!(discover(&apps, None, 0).is_empty());
+        let mut duplicate = apps[2].clone();
+        duplicate.id = "krita-alternative-id".into();
+        duplicate.screenshots = vec!["https://example.org/krita.png".into()];
+        let mut duplicated = apps.clone();
+        duplicated.push(duplicate);
+        let selection = discover(&duplicated, Some(Category::Graphics), 8);
+        assert_eq!(selection.len(), 2);
+        assert_eq!(selection[0].id, "krita-alternative-id");
+    }
+
+    #[test]
+    fn spotlight_prefers_screenshots_and_distinct_categories_without_inventing_apps() {
+        let mut drawing = app("drawing", "Drawing", package("drawing"));
+        drawing.categories = vec!["Graphics".into()];
+        drawing.screenshots = vec!["https://example.org/drawing.png".into()];
+        let mut other_drawing = drawing.clone();
+        other_drawing.id = "drawing2".into();
+        let mut player = app("player", "Player", package("player"));
+        player.categories = vec!["AudioVideo".into()];
+        let apps = vec![player, drawing, other_drawing];
+        let selected = featured(&apps, 4);
+        assert_eq!(selected.len(), 2);
+        assert_eq!(selected[0].id, "drawing");
+        assert_eq!(selected[1].id, "player");
+        assert!(featured(&[], 4).is_empty());
+        assert!(featured(&apps, 0).is_empty());
     }
 }

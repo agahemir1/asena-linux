@@ -4,6 +4,7 @@
 //! user through libflatpak.
 
 mod catalog;
+mod discovery;
 mod flatpak;
 mod packages;
 mod screenshots;
@@ -16,7 +17,7 @@ use window::StoreWindow;
 const APPLICATION_ID: &str = "org.asenalinux.Store";
 
 fn main() -> glib::ExitCode {
-    let app = AsenaApplication::new(APPLICATION_ID, gio::ApplicationFlags::empty());
+    let app = AsenaApplication::new(APPLICATION_ID, gio::ApplicationFlags::HANDLES_OPEN);
     app.setup_default_actions(AppMetadata::new(
         APPLICATION_ID,
         gettext("Software"),
@@ -55,11 +56,21 @@ fn main() -> glib::ExitCode {
         app.activate_action("show-updates", None);
         0
     });
+    let opener = window.clone();
     app.connect_activate(move |app| {
         window
             .borrow_mut()
             .get_or_insert_with(|| StoreWindow::new(app))
             .present();
+    });
+    // `.flatpakref` and `.deb` files from the file manager.
+    app.connect_open(move |app, files| {
+        let mut slot = opener.borrow_mut();
+        let window = slot.get_or_insert_with(|| StoreWindow::new(app));
+        window.present();
+        for path in files.iter().filter_map(|file| file.path()) {
+            window.open_file(path);
+        }
     });
     app.run()
 }

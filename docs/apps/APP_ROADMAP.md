@@ -23,7 +23,7 @@ penceresi gösterir.
 | Uygulama | Kimlik | Durum | Not |
 |---|---|---|---|
 | Dosyalar | `org.asenalinux.Files` | 🟨 Gerçek, temel kapsam | GIO dizin listesi, Çöp, bağlı sürücüler; sürükle-bırak ve kopyala/yapıştır yok |
-| Ayarlar | `org.asenalinux.Settings` | 🟨 Gerçek, temel kapsam | 17 panel gruplu; ekran düzeni daemon'un onay/geri alma akışıyla değişir |
+| Ayarlar | `org.asenalinux.Settings` | 🟨 Gerçek, temel kapsam | 20 panel gruplu; ekran düzeni daemon'un onay/geri alma akışıyla değişir |
 | Metin Düzenleyici | `org.asenalinux.Text` | 🟨 Gerçek, temel kapsam | Düz metin; sözdizimi renklendirme yok |
 | Notlar | `org.asenalinux.Notes` | 🟨 Gerçek, temel kapsam | Markdown dosyaları, otomatik kayıt |
 | Takvim | `org.asenalinux.Calendar` | 🟨 Gerçek, temel kapsam | Yerel ICS; tekrar kuralları açılmaz, hatırlatıcı yok |
@@ -33,18 +33,36 @@ penceresi gösterir.
 | Oynatıcı | `org.asenalinux.Player` | 🟨 Gerçek, temel kapsam | GTK + GStreamer; MPRIS sunucusu yok |
 | Arşiv | `org.asenalinux.Archive` | 🟨 Gerçek, temel kapsam | `bsdtar` ile listeleme ve güvenli çıkarma; arşiv oluşturma yok |
 | Ekran Görüntüsü | `org.asenalinux.Capture` | 🟨 Gerçek, temel kapsam | xdg-desktop-portal Screenshot; açıklama araçları yok |
-| Uçbirim | `org.asenalinux.Terminal` | ⬜ Gizli | VTE (`vte4`) bağımlılığı kararı gerekiyor |
-| Kamera | `org.asenalinux.Camera` | ⬜ Gizli | GStreamer kamera/PipeWire yolu gerekiyor |
-| Belgeler | `org.asenalinux.Documents` | ⬜ Gizli | PDF işleme kitaplığı (poppler veya benzeri) kararı gerekiyor |
-| Hava Durumu | `org.asenalinux.Weather` | ⬜ Gizli | HTTP istemcisi ve veri sağlayıcı kararı gerekiyor |
+| Uçbirim | `org.asenalinux.Terminal` | 🟨 Gerçek, temel kapsam | VTE GTK4 ile kabuk, sekmeler ve kopyala/yapıştır |
+| Kamera | `org.asenalinux.Camera` | 🟨 Gerçek, temel kapsam | GStreamer aygıtı, fotoğraf ve WebM video; gerçek kamera kabulü açık |
+| Belgeler | `org.asenalinux.Documents` | 🟨 Gerçek, temel kapsam | poppler-utils ile PDF gösterme, yakınlaştırma ve arama |
+| Hava Durumu | `org.asenalinux.Weather` | 🟨 Gerçek, temel kapsam | Open-Meteo, yer arama, önbellek, birim seçimi |
 | Yazılım | `org.asenalinux.Store` | 🟨 Gerçek, temel kapsam | Kendi APT/Flatpak arka ucu (K21, [Faz 6F](../reports/phase-06f.md)); Asena deposu kataloğu 6B'yi bekliyor |
 
 Durum: ⬜ başlamadı veya gizli · 🟨 sürüyor · ✅ kabul edildi. Hiçbir uygulama kullanıcı görsel kabulünden
 geçmediği için ✅ yoktur.
 
+## Kapsam (K31, 23 Ekim 2026)
+Yukarıdaki 16 uygulamanın hepsi varsayılan kurulumda gelir. Gizli olanlar bağımlılık kararı verilip
+gerçek veriye bağlanınca menüde görünür. Kararın gerekçesi
+[PLANNING.md](../PLANNING.md) K31 kaydındadır.
+
+23 Ekim devamında eklenen uygulamalar (nihai görsel/donanım kabulü açık):
+
+| Uygulama | Kimlik | Durum | Not |
+|---|---|---|---|
+| Sistem İzleyici | `org.asenalinux.SystemMonitor` | 🟨 Gerçek, temel kapsam | Süreçler/kaynak grafikleri `/proc`'tan; Ctrl+Shift+Esc |
+| Yedekleme | `org.asenalinux.Backup` | 🟨 Gerçek, temel kapsam | rsync, harici hedef, sabit bağlantılı geçmiş ve günlük zamanlayıcı |
+| Diskler | `org.asenalinux.Disks` | 🟨 Gerçek, temel kapsam | UDisks2, bağlama/çıkarma/biçimlendirme/sağlık; bölümleme açık |
+
+Ayrı uygulama yerine Ayarlar paneli olanlar: Yazıcılar, Uygulamalar (Flatpak ve portal izinleri),
+Kurtarma (sıfırlama ve sistem raporu, K30). Güncellemeler Yazılım'da kalır, paket dosyalarını
+Yazılım açar.
+
+Yapılmayacaklar: Tarayıcı, Güvenlik, Sürücü Yöneticisi, Arama uygulaması.
+
 ## Açık işler
-1. Gizli dört uygulama için bağımlılık kararları (CLAUDE.md kural 10; her yeni crate için bakım ve
-   GPL-3.0 uyumluluk denetimi).
+1. Yeni uygulamaların fiziksel kamera/yazıcı, görsel kabul ve gerçek kurtarma ISO kabulü (bkz. [rapor](../reports/apps-recovery.md)).
 2. Dosyalar: kopyala/kes/yapıştır, sürükle-bırak, ızgara görünümü, özellikler penceresi.
 3. Oynatıcı: MPRIS sunucusu (kenar paneli medya kartı için).
 4. Takvim: tekrar kuralları ve hatırlatıcılar (arka planda çalışan bir servis gerekir).

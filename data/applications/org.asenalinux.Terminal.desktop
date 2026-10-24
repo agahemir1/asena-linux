@@ -11,4 +11,3 @@ Icon=org.asenalinux.Terminal
 Terminal=false
 Categories=System;TerminalEmulator;GTK;
 StartupNotify=true
-NoDisplay=true

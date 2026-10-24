@@ -38,7 +38,7 @@ esac
 
 gettext_printf "Found signed fallback kernel: %s\n" "$newest" >&2
 cat <<EOF
-if [ "\${lockdown}" = "y" ]; then
+if [ "\${lockdown}" = "y" -a "\${default}" != "asena-recovery" ]; then
   set default="${entry}"
 fi
 set fallback="${entry}"

@@ -135,11 +135,13 @@ kullanmalıdır.
 | K21 | Yazılım ve paket servisi | Uygulandı: `appstream` ve simge hedefleri imajda; servis, polkit ve D-Bus dosyaları 6A paketini bekliyor |
 | K22 | Flatpak | Uygulandı: `gnome-keyring`; Flathub Yazılım'da açık seçimle |
 | K23 | Sistem kimliği | Uygulandı: Asena os-release, `ID_LIKE=debian`, `VERSION_CODENAME=trixie` |
-| K24 | Dosya sistemi ve takas | Uygulandı: zram VM açılışında etkin; ext4 bölümlemesi Calamares'te (6D) |
+| K24 | Dosya sistemi ve takas | Uygulandı: zram VM açılışında etkin; ext4 bölümlemesi ve K30 kurtarma bölümü Calamares'te (6D) |
 | K25 | Yerel ayar ve klavye | Uygulandı: Türkçe canlı sistem, İngilizce girdi, iki yerel ayar üretilir |
 | K26 | Canlı kullanıcı | Uygulandı: `asena`/`live`, greetd ile bir kez otomatik giriş (6A paketleri bekleniyor) |
 | K27 | Yetki ve ağ güvenliği | Karar: root kilitli, ilk kullanıcı `sudo`; güvenlik duvarı yok, dinleyen servis yok |
 | K28 | Güncelleme politikası | Uygulandı: `unattended-upgrades` yok, yeniden başlatmada güncelleme (aşağıda) |
+| K30 | Sıfırlama ve kurtarma | Servis/işçi/GRUB/kurulum sonu aracı kaynakta; Calamares bağlantısı ve gerçek ISO kabulü açık (6D) |
+| K31 | Asena uygulama kapsamı | Karar: 16 Asena uygulaması varsayılan kurulumda; paket listesi 6A paketlerini bekliyor |
 
 ## Henüz eksik olanlar
 
@@ -149,3 +151,7 @@ kullanmalıdır.
   `asena-packages.service` ile `asena-offline-update.service` (etkin).
 - greetd yapılandırması ve asena-greeter paketi (6A); canlı otomatik giriş bileşeni hazır.
 - Calamares yapılandırması (6D) ve Hoş geldin (6E).
+
+## Kurtarma kurulumu (K30)
+
+Çalışan kaynaklar ve kurulum sonu çağrısı [RECOVERY.md](../docs/architecture/RECOVERY.md) içindedir. `scripts/install-recovery.sh` bağlı ext4 kök/kurtarma bölümleri ve canlı ortamı alır, imajı ve UUID/özet manifestini kurar. Calamares henüz bu çağrıyı ve bölüm düzenini uygulamaz; ISO kurulum/kurtarma kabulü bu yüzden açıktır. İmaj için gereken alan ISO üretildikten sonra ölçülür.

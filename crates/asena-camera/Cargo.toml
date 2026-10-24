@@ -16,6 +16,10 @@ glib.workspace = true
 gettext-rs.workspace = true
 anyhow.workspace = true
 tracing.workspace = true
+async-channel.workspace = true
+futures-lite.workspace = true
+gst.workspace = true
+gst-video.workspace = true
 
 [lints]
 workspace = true

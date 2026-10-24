@@ -21,6 +21,10 @@ fi
     libpulse-dev libgtk-4-dev libadwaita-1-dev libgtk4-layer-shell-dev libglib2.0-dev-bin \
     libpolkit-agent-1-dev libpolkit-gobject-1-dev \
     libapt-pkg-dev libflatpak-dev libappstream-dev libsoup-3.0-dev appstream \
+    libvte-2.91-gtk4-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+    gstreamer1.0-gtk4 gstreamer1.0-pipewire gstreamer1.0-plugins-base \
+    poppler-utils rsync udisks2 exfatprogs dosfstools ntfs-3g cups cups-pk-helper \
+    squashfs-tools \
     libwayland-dev wayland-protocols wayland-utils blueprint-compiler \
     gettext libgettextpo-dev wayfire xwayland dbus-daemon dbus-user-session \
     xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk \

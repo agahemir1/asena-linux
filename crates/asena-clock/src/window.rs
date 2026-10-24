@@ -235,7 +235,11 @@ impl ClockWindow {
             520.0,
             adw::LengthUnit::Sp,
         ));
-        breakpoint.add_setter(&header, "title-widget", None::<&glib::Value>);
+        breakpoint.add_setter(
+            &header,
+            "title-widget",
+            Some(&None::<gtk::Widget>.to_value()),
+        );
         breakpoint.add_setter(&bottom, "reveal", Some(&true.to_value()));
         window.add_breakpoint(breakpoint);
 

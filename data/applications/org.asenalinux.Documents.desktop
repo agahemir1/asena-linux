@@ -11,4 +11,4 @@ Icon=org.asenalinux.Documents
 Terminal=false
 Categories=Office;Viewer;GTK;
 StartupNotify=true
-NoDisplay=true
+MimeType=application/pdf;

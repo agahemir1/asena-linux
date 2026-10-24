@@ -62,7 +62,7 @@ Tüm 16 Asena uygulaması amaçlarına göre aşağıdaki 4 ana mimari desenden 
 |---|---|---|---|---|
 | **Files** | Desen A | 640×480 | 1000×650 | Çift panel (`AdwNavigationSplitView`), Liste/Izgara görünümü, Önizleme çubuğu |
 | **Settings** | Desen A | 500×400 | 980×680 | 17 MVP paneli, Arama alanı, Tercih grupları |
-| **Store** | Desen A | 600×500 | 950×700 | Kategori kenar çubuğu, Öne çıkanlar banner'ı, İndirme ilerleme çubuğu |
+| **Store** | View Switcher + Navigation View | 360×400 | 960×680 | Kaydırılabilir vitrin, yatay uygulama rafları, kategori kısayolları; ayrıntı ve kurulum ilerlemesi |
 | **Terminal** | Desen B | 480×320 | 800×500 | Sekme çubuğu, Yatay/Dikey bölme, Arama çubuğu |
 | **Documents** | Desen B | 500×400 | 900×700 | Sayfa önizleme kenar çubuğu, Yakınlaştırma kaydırıcısı, Vurgulama araçları |
 | **Photos** | Desen C | 500×400 | 960×650 | Adaptif fotoğraf ızgarası, Tam ekran slayt, EXIF bilgi paneli |
@@ -76,3 +76,7 @@ Tüm 16 Asena uygulaması amaçlarına göre aşağıdaki 4 ana mimari desenden 
 | **Capture** | Desen D | 350×250 | 450×320 | Mod seçici (Ekran/Pencere/Alan), Süre sayacı, Çizim araçları |
 | **Camera** | Desen C | 400×350 | 750×550 | Canlı vizör, Çekim butonu, Son çekimler şeridi |
 | **Weather** | Desen D | 400×500 | 500×680 | Güncel hava kartı, Saatlik kaydırma şeridi, 7 günlük tahmin tablosu |
+
+## 23 Ekim 2026 ek uygulamalar
+
+Sistem İzleyici aramalı süreç listesi ve kaynak grafikleri kullanır. Diskler disk listesi ile seçilen diskin bölüm/sağlık ayrıntısını gösterir. Yedekleme hedef dizin, ilerleme ve tarih sıralı yedek satırlarından oluşur. Kurtarma standart tercih satırlarıyla kip seçer; silme etkisini son onayda açıklar. Hepsi ortak pencere/başlık/boş durum dilini kullanır. Yeni üç hacimli simgenin kullanıcı görsel kabulü açıktır.

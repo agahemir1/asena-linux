@@ -49,6 +49,43 @@ pub async fn plan(install: &[&str], remove: &[&str]) -> zbus::Result<Plan> {
     serde_json::from_str(&text).map_err(|error| zbus::Error::Failure(error.to_string()))
 }
 
+/// Plans installing a local `.deb`; the service reads it through the file descriptor.
+pub async fn plan_file(path: std::path::PathBuf) -> zbus::Result<Plan> {
+    let file = gio::spawn_blocking(move || std::fs::File::open(path))
+        .await
+        .map_err(|_| zbus::Error::Failure("stopped".into()))?
+        .map_err(|error| zbus::Error::Failure(error.to_string()))?;
+    use std::os::fd::AsFd;
+    let text = proxy()
+        .await?
+        .plan_file(zbus::zvariant::Fd::from(file.as_fd()))
+        .await?;
+    serde_json::from_str(&text).map_err(|error| zbus::Error::Failure(error.to_string()))
+}
+
+/// Package, version and summary of a `.deb` file, from its control data.
+pub fn describe_deb(path: &std::path::Path) -> Option<(String, String, String)> {
+    let output = std::process::Command::new("dpkg-deb")
+        .arg("--field")
+        .arg(path)
+        .args(["Package", "Version", "Description"])
+        .output()
+        .ok()?;
+    if !output.status.success() {
+        return None;
+    }
+    let text = String::from_utf8_lossy(&output.stdout);
+    let field = |name: &str| {
+        text.lines()
+            .find_map(|line| line.strip_prefix(&format!("{name}: ")))
+            .unwrap_or_default()
+            .trim()
+            .to_owned()
+    };
+    let name = field("Package");
+    (!name.is_empty()).then(|| (name, field("Version"), field("Description")))
+}
+
 pub async fn upgrades() -> zbus::Result<Vec<Upgrade>> {
     let text = proxy().await?.upgrades().await?;
     serde_json::from_str(&text).map_err(|error| zbus::Error::Failure(error.to_string()))

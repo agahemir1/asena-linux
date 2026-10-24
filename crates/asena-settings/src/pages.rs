@@ -998,6 +998,7 @@ pub fn defaults(_context: &Context) -> adw::PreferencesPage {
             "terminal",
             &gettext("Terminal"),
             &[
+                ("asena-terminal", gettext("Asena Terminal")),
                 ("foot", "foot".to_string()),
                 ("ptyxis", "Ptyxis".to_string()),
             ],

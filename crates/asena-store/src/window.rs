@@ -2,7 +2,7 @@
 //! search, and an application page that installs, removes and opens.
 use crate::{
     catalog::{self, App, Icon, Installed, Source},
-    flatpak, packages, screenshots,
+    discovery, flatpak, packages, screenshots,
 };
 use asena_app::prelude::*;
 use asena_core::{
@@ -23,7 +23,7 @@ struct State {
     pages: adw::ViewStack,
     search: gtk::SearchEntry,
     results: gtk::ListBox,
-    categories: gtk::ListBox,
+    explore: gtk::Box,
     installed_list: gtk::ListBox,
     updates: gtk::Box,
     banner: adw::Banner,
@@ -72,7 +72,7 @@ fn column() -> gtk::Box {
     column
 }
 
-fn image(icon: Option<&Icon>, size: i32) -> gtk::Image {
+pub(crate) fn image(icon: Option<&Icon>, size: i32) -> gtk::Image {
     let image = match icon {
         // A file icon goes through the icon theme, which loads it lazily.
         Some(Icon::File(path)) => {
@@ -148,12 +148,15 @@ fn launcher(app: &App) -> Option<gio::DesktopAppInfo> {
 
 impl StoreWindow {
     pub fn new(app: &adw::Application) -> Self {
+        discovery::install_style();
         let pages = adw::ViewStack::new();
-        let categories = boxed_list();
         let explore = column();
-        explore.append(&categories);
         pages
-            .add_titled(&scrolled(&explore), Some("explore"), &gettext("Explore"))
+            .add_titled(
+                &discovery::view(&explore),
+                Some("explore"),
+                &gettext("Explore"),
+            )
             .set_icon_name(Some("system-search-symbolic"));
         let installed_list = boxed_list();
         let installed = column();
@@ -269,7 +272,7 @@ impl StoreWindow {
             pages,
             search,
             results,
-            categories,
+            explore,
             installed_list,
             updates,
             banner,
@@ -373,7 +376,7 @@ impl StoreWindow {
             flatpaks: refs.iter().map(|r| r.reference.clone()).collect(),
         };
         *self.state.flatpak_refs.borrow_mut() = refs;
-        self.fill_categories();
+        self.fill_explore();
         self.fill_installed();
         if let Some(refresh) = self.state.page_refresh.borrow().as_ref() {
             refresh();
@@ -440,33 +443,25 @@ impl StoreWindow {
         self.state.fills.borrow_mut().insert(key, source);
     }
 
-    fn fill_categories(&self) {
-        let list = &self.state.categories;
-        list.remove_all();
+    fn fill_explore(&self) {
         let apps = self.state.apps.borrow().clone();
-        for category in Category::ALL {
-            let count = apps.iter().filter(|app| app.category() == category).count();
-            if count == 0 {
-                continue;
-            }
-            let row = adw::ActionRow::new();
-            row.set_title(&category.name());
-            row.add_prefix(&gtk::Image::from_icon_name(category.icon()));
-            row.add_suffix(&dim(&count.to_string()));
-            row.add_suffix(&gtk::Image::from_icon_name("go-next-symbolic"));
-            row.set_activatable(true);
-            let this = self.clone();
-            row.connect_activated(move |_| this.open_category(category));
-            list.append(&row);
-        }
-        if apps.is_empty() {
-            let row = adw::ActionRow::new();
-            row.set_title(&gettext("The catalog is empty"));
-            row.set_subtitle(&gettext(
-                "Refresh to download the application lists, or enable Flathub in the main menu.",
-            ));
-            list.append(&row);
-        }
+        let weak = Rc::downgrade(&self.state);
+        let category_target = weak.clone();
+        discovery::fill(
+            &self.state.explore,
+            &apps,
+            &self.state.installed.borrow(),
+            Rc::new(move |app| {
+                if let Some(state) = weak.upgrade() {
+                    Self { state }.open(app);
+                }
+            }),
+            Rc::new(move |category| {
+                if let Some(state) = category_target.upgrade() {
+                    Self { state }.open_category(category);
+                }
+            }),
+        );
     }
 
     fn fill_installed(&self) {
@@ -691,6 +686,137 @@ impl StoreWindow {
             });
         }
         self.state.navigation.push(&page);
+    }
+
+    /// Installs a `.flatpakref` or `.deb` file opened from the file manager.
+    pub fn open_file(&self, path: std::path::PathBuf) {
+        let this = self.clone();
+        glib::spawn_future_local(async move {
+            let extension = path
+                .extension()
+                .and_then(|extension| extension.to_str())
+                .map(str::to_ascii_lowercase)
+                .unwrap_or_default();
+            match extension.as_str() {
+                "flatpakref" => this.install_flatpakref(path).await,
+                "deb" => this.install_deb(path).await,
+                _ => this.error(
+                    &gettext("The file cannot be installed"),
+                    &gettext("It is not a software package."),
+                ),
+            }
+        });
+    }
+
+    async fn install_flatpakref(&self, path: std::path::PathBuf) {
+        let contents = gio::spawn_blocking(move || std::fs::read(path).ok())
+            .await
+            .ok()
+            .flatten()
+            .filter(|contents| contents.len() < 1024 * 1024);
+        let Some((contents, (title, url))) = contents
+            .and_then(|contents| flatpak::describe_ref_file(&contents).map(|d| (contents, d)))
+        else {
+            self.error(
+                &gettext("The file cannot be installed"),
+                &gettext("It is not a valid Flatpak reference."),
+            );
+            return;
+        };
+        let mut body = gettext("Install applications only from sources you trust.");
+        if !url.is_empty() {
+            body = format!(
+                "{}\n{}",
+                gettext("Source: {url}").replace("{url}", &url),
+                body
+            );
+        }
+        let heading = gettext("Install {name}?").replace("{name}", &title);
+        if self.state.busy.get()
+            || !self
+                .confirm(&heading, &body, &gettext("Install"), false)
+                .await
+        {
+            return;
+        }
+        self.set_busy(true);
+        self.state
+            .window
+            .show_toast(&gettext("Installing {name}").replace("{name}", &title));
+        let (sender, _receiver) = async_channel::unbounded::<i32>();
+        let cancellable = gio::Cancellable::new();
+        let bytes = glib::Bytes::from_owned(contents);
+        let result =
+            gio::spawn_blocking(move || flatpak::install_ref_file(&bytes, &sender, &cancellable))
+                .await;
+        self.set_busy(false);
+        match result {
+            Ok(Ok(())) => self
+                .state
+                .window
+                .show_toast(&gettext("{name} is installed").replace("{name}", &title)),
+            Ok(Err(error)) => self.error(&gettext("The change failed"), error.message()),
+            Err(_) => {}
+        }
+        self.reload_installed().await;
+    }
+
+    async fn install_deb(&self, path: std::path::PathBuf) {
+        let lookup = path.clone();
+        let Some((name, version, summary)) =
+            gio::spawn_blocking(move || packages::describe_deb(&lookup))
+                .await
+                .ok()
+                .flatten()
+        else {
+            self.error(
+                &gettext("The file cannot be installed"),
+                &gettext("It is not a valid Debian package."),
+            );
+            return;
+        };
+        let warning = format!(
+            "{name} {version}\n{summary}\n\n{}",
+            gettext("This package does not come from the Asena or Debian archives and is not updated with the system. Install it only if you trust its source.")
+        );
+        let heading = gettext("Install {name}?").replace("{name}", &name);
+        if self.state.busy.get()
+            || !self
+                .confirm(&heading, &warning, &gettext("Continue"), false)
+                .await
+        {
+            return;
+        }
+        let plan = match packages::plan_file(path).await {
+            Ok(plan) => plan,
+            Err(error) => {
+                self.error(
+                    &gettext("The change cannot be prepared"),
+                    &packages::message(&error),
+                );
+                return;
+            }
+        };
+        if !self
+            .confirm(&heading, &plan_text(&plan), &gettext("Install"), false)
+            .await
+        {
+            return;
+        }
+        self.set_busy(true);
+        self.state
+            .window
+            .show_toast(&gettext("Installing {name}").replace("{name}", &name));
+        let result = async { packages::proxy().await?.commit(&plan.id).await }.await;
+        self.set_busy(false);
+        match result {
+            Ok(()) => self
+                .state
+                .window
+                .show_toast(&gettext("{name} is installed").replace("{name}", &name)),
+            Err(error) => self.error(&gettext("The change failed"), &packages::message(&error)),
+        }
+        self.reload_installed().await;
     }
 
     fn set_busy(&self, busy: bool) {

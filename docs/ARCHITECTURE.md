@@ -386,3 +386,7 @@ yazısı kapalıdır. [Gerçek kabul durumu](reports/phase-03.md).
   `--accent-bg-color: var(--accent-<renk>)` sağlayıcısıyla uygular.
 - **Kenar paneli:** `Surface::sidebar` ekranın sondaki kenarında tam yükseklikte, `GtkRevealer` ile
   kayan bir yüzeydir; bildirim merkezi bunu kullanır.
+
+## Kurtarma servisi (23 Ekim 2026)
+
+K30 servis/çevrimdışı araç ve kurulum sözleşmesi [architecture/RECOVERY.md](architecture/RECOVERY.md) içindedir.

@@ -123,6 +123,13 @@ pub fn all() -> Vec<Panel> {
             Devices,
         ),
         panel(
+            "printers",
+            gettext("Printers"),
+            "printer-symbolic",
+            gettext("print printing queue scanner"),
+            Devices,
+        ),
+        panel(
             "power",
             gettext("Power"),
             "battery-symbolic",
@@ -158,6 +165,13 @@ pub fn all() -> Vec<Panel> {
             System,
         ),
         panel(
+            "applications",
+            gettext("Applications"),
+            "view-app-grid-symbolic",
+            gettext("apps flatpak permissions sandbox camera location"),
+            System,
+        ),
+        panel(
             "privacy",
             gettext("Privacy and security"),
             "preferences-system-privacy-symbolic",
@@ -169,6 +183,13 @@ pub fn all() -> Vec<Panel> {
             gettext("Accessibility"),
             "preferences-desktop-accessibility-symbolic",
             gettext("contrast zoom reader text animation visual hearing"),
+            System,
+        ),
+        panel(
+            "recovery",
+            gettext("Recovery"),
+            "view-refresh-symbolic",
+            gettext("reset restore defaults reinstall factory"),
             System,
         ),
         panel(

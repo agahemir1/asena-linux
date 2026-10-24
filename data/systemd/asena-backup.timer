@@ -1,0 +1,10 @@
+[Unit]
+Description=Asena daily backup check
+
+[Timer]
+OnStartupSec=15min
+OnUnitActiveSec=1h
+RandomizedDelaySec=5min
+
+[Install]
+WantedBy=timers.target

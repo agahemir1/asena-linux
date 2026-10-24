@@ -701,6 +701,52 @@ def fallback() -> str:
     return svg(body, defs)
 
 
+def system_monitor() -> str:
+    shadow, defs = ground(64, 114, 43, 6)
+    defs += linear("frame", [(0, "#dce4ec", 1), (1, "#788b9e", 1)])
+    defs += linear("screen", [(0, "#1c3f49", 1), (1, "#10252f", 1)])
+    defs += linear("stand", [(0, "#c7d4df", 1), (1, "#788b9e", 1)])
+    body = shadow + rr(53, 82, 22, 24, 4, "url(#stand)")
+    body += '<path d="M42 105h44l9 7H33Z" fill="url(#stand)"/>'
+    body += rr(12, 20, 104, 72, 11, "#596d80")
+    body += rr(12, 14, 104, 72, 11, "url(#frame)")
+    body += rr(18, 20, 92, 57, 6, "url(#screen)")
+    body += '<path d="M22 49h17l8-15 11 29 10-39 12 29 8-10h18" fill="none" stroke="#76e2b8" stroke-width="4" stroke-linejoin="round"/>'
+    body += '<path d="M24 16h78" stroke="#fff" stroke-width="1.4" opacity=".8"/>'
+    return svg(body, defs)
+
+
+def backup_drive() -> str:
+    shadow, defs = ground(64, 114, 42, 6)
+    defs += linear("drive", [(0, "#dce6ed", 1), (1, "#96aaba", 1)])
+    defs += linear("side", [(0, "#71899a", 1), (1, "#4b6275", 1)])
+    body = shadow + rr(23, 25, 82, 85, 14, "url(#side)")
+    body += rr(23, 16, 82, 84, 14, "url(#drive)")
+    body += '<path d="M38 18h52" stroke="#fff" stroke-width="1.5"/>'
+    body += '<circle cx="64" cy="56" r="24" fill="#147c72"/>'
+    body += '<path d="M77 50a15 15 0 1 0 0 14M77 41v12H65" fill="none" stroke="#e0fff1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'
+    body += '<path d="M37 89h32" stroke="#5c7585" stroke-width="3" stroke-linecap="round"/>'
+    body += '<circle cx="91" cy="89" r="3" fill="#36ac93"/>'
+    return svg(body, defs)
+
+
+def disks() -> str:
+    shadow, defs = ground(64, 114, 43, 6)
+    defs += linear("case", [(0, "#d6dce3", 1), (1, "#8a9cab", 1)])
+    defs += linear("platter", [(0, "#f8fbff", 1), (.35, "#a6bed0", 1), (.55, "#e9f1f8", 1), (1, "#839aaf", 1)])
+    body = shadow + rr(22, 20, 84, 91, 10, "#536979")
+    body += rr(22, 14, 84, 91, 10, "url(#case)")
+    body += '<circle cx="63" cy="55" r="30" fill="#5c7181"/>'
+    body += '<circle cx="63" cy="53" r="28" fill="url(#platter)" stroke="#f4f8fb"/>'
+    body += '<circle cx="63" cy="53" r="9" fill="#627d91" stroke="#e9f0f7" stroke-width="3"/>'
+    body += '<path d="M91 91 70 62l-5 2 14 32Z" fill="#435c6d"/>'
+    body += '<path d="m88 85-18-25-5 2 14 29Z" fill="#e4ebf1"/>'
+    body += '<circle cx="87" cy="91" r="7" fill="#8b9ead" stroke="#f1f5f9" stroke-width="2"/>'
+    for x, y in ((29, 22), (99, 22), (29, 97)):
+        body += f'<circle cx="{x}" cy="{y}" r="2" fill="#5b7182"/>'
+    return svg(body, defs)
+
+
 ICONS = {
     "org.asenalinux.Files": files,
     "org.asenalinux.Settings": settings,
@@ -718,6 +764,9 @@ ICONS = {
     "org.asenalinux.Documents": documents,
     "org.asenalinux.Store": store,
     "org.asenalinux.Weather": weather,
+    "org.asenalinux.SystemMonitor": system_monitor,
+    "org.asenalinux.Backup": backup_drive,
+    "org.asenalinux.Disks": disks,
     "org.asenalinux.App": fallback,
 }
 

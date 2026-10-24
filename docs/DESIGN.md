@@ -83,7 +83,7 @@ Kullanıcı arayüzünde kısa adlar, doğrudan eylemler ve gerçek durum bilgis
 
 ## Buzlu cam ve yüzey malzemesi
 - Gerçek blur hedefi panel, başlat menüsü, hızlı ayarlar, bildirim merkezi ve uygun geçici bildirim yüzeyleridir. Ana uygulama içerikleri okunaklı, sakin ve büyük ölçüde opak olur.
-- Cam malzemesi: bulanık arka plan, açık/koyu moda uygun nötr renk örtüsü, hafif kenar aydınlığı ve yumuşak ayrışma gölgesi. Metin, simge ve kontroller bulanıklaştırılmaz.
+- Cam malzemesi: bulanık arka plan, açık/koyu moda uygun nötr renk örtüsü ve hafif kenar aydınlığı. Başlat menüsü, denetim merkezi ve bildirim merkezi dış gölge veya arka plan karartması kullanmaz. Metin, simge ve kontroller bulanıklaştırılmaz.
 - Ayrıntılı veya çok aydınlık duvar kâğıdı üzerinde metin kontrastı korunur. Opaklık/blur değerleri taslaklarda karşılaştırılır; üretim ölçüleri gerçek compositor ve GPU ölçümüyle seçilir.
 - Yüksek kontrast, azaltılmış saydamlık tercihi, desteklenmeyen donanım ve yazılım render yolunda opak malzeme bulunur. Bu erişim/uyumluluk modu, normal görünümdeki gerçek blur hedefini tamamlanmış saydırmaz.
 - Sürekli ekran görüntüsü alıp arka planı bulanıklaştıran taklit çözüm kullanılmaz. Masaüstünün başka pencerelerini bulanıklaştırma işi compositor katmanında ele alınır; GTK içeriğine CSS blur vermekle eşdeğer değildir.

@@ -4,7 +4,8 @@ import re
 import sys
 
 TOKENS = re.compile(
-    r'"(?:\\.|[^"\\])*"|//[^\n]*|/\*[\s\S]*?\*/|'
+    r'(?<![A-Za-z0-9_])r(?P<hashes>\#*)"[\s\S]*?"(?P=hashes)|'
+    r'"(?:\\[\s\S]|[^"\\])*"|//[^\n]*|/\*[\s\S]*?\*/|'
     r"'(?:\\.|[^'\\])'|'[A-Za-z_][A-Za-z0-9_]*"
 )
 
@@ -12,6 +13,10 @@ TOKENS = re.compile(
 def prepare(source):
     def replace(match):
         token = match.group()
+        if token.startswith('r'):
+            # Raw strings hold test fixtures, never gettext messages. Mask
+            # them without changing source locations for the C extractor.
+            return ''.join('\n' if character == '\n' else ' ' for character in token)
         if token.startswith("'") and not token.endswith("'"):
             return " " + token[1:]
         return token
