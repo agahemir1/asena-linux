@@ -1,0 +1,46 @@
+name: Debian packages
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    container: debian:trixie
+    timeout-minutes: 90
+    env:
+      PATH: /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+    steps:
+      - name: Bootstrap checkout dependencies
+        run: apt-get update && apt-get install -y --no-install-recommends ca-certificates git python3
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Check publication inputs
+        run: python3 scripts/check-publication.py
+      - name: Install Debian build tools
+        run: |
+          bash scripts/setup-dev.sh
+          apt-get install -y --no-install-recommends debhelper patchelf lintian devscripts
+      - name: Prepare complete offline source
+        run: python3 scripts/prepare-debian-source.py --version 0.1.0~dev20261025.1 --source-ref "$GITHUB_SHA"
+      - name: Build source and packages
+        run: bash scripts/build-debs.sh target/packages/asena/asena-0.1.0~dev20261025.1
+      - name: Inspect package payloads
+        run: python3 scripts/check-debs.py target/packages/asena --report target/evidence/debian/packages.tsv
+      - name: Check Debian packaging policy
+        run: lintian --fail-on error target/packages/asena/*.changes
+      - uses: actions/upload-artifact@v7
+        with:
+          name: asena-debian-test-packages
+          path: |
+            target/packages/asena/*.deb
+            target/packages/asena/*.dsc
+            target/packages/asena/*.tar.*
+            target/packages/asena/*.buildinfo
+            target/packages/asena/*.changes
+            target/evidence/debian/
+          if-no-files-found: error

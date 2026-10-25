@@ -17,6 +17,13 @@ if [[ ! -f $archive ]]; then
 fi
 printf '%s  %s\n' "$checksum" "$archive" | sha256sum --check
 tar -xzf "$archive" -C "$directory"
+for patch in "$repo"/packaging/native/*.patch; do
+    [[ -f $patch ]] || continue
+    # The archive checksum stays upstream's; these patches only repair its tests.
+    if ! patch -p1 --reverse --dry-run -d "$directory/gtk4-layer-shell-$version" < "$patch" >/dev/null 2>&1; then
+        patch -p1 --forward -d "$directory/gtk4-layer-shell-$version" < "$patch"
+    fi
+done
 meson setup --reconfigure "$directory/build-layer-shell-$version" \
     "$directory/gtk4-layer-shell-$version" --prefix="$prefix" --libdir=lib \
     -Dexamples=false -Ddocs=false -Dintrospection=false -Dvapi=false -Dtests=true -Dsmoke-tests=false

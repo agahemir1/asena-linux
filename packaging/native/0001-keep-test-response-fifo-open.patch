@@ -1,0 +1,21 @@
+Description: Keep the integration test response FIFO alive across writer handoffs
+ A client can reopen the response FIFO while the preceding server response
+ still has its writer open. When that writer closes, the next client read
+ observes EOF before the server opens the next response. Keep a writer on
+ the client side so the read waits for the next command response instead.
+ This changes only test infrastructure, not the installed library.
+Author: Asena Linux contributors
+Forwarded: no
+Last-Update: 2026-10-25
+
+--- a/test/integration-test-common/integration-test-common.c
++++ b/test/integration-test-common/integration-test-common.c
+@@ -46,7 +46,7 @@
+     close(command_fd);
+ 
+     fprintf(stderr, "awaiting response: %s\n", expected_response);
+-    ASSERT((response_fd = open(response_fifo_path, O_RDONLY)) >= 0);
++    ASSERT((response_fd = open(response_fifo_path, O_RDWR)) >= 0);
+ #define BUFFER_SIZE 1024
+     char buffer[BUFFER_SIZE];
+     int length = 0;

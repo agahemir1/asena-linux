@@ -1,0 +1,32 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Asena
+Source: https://github.com/agahemir1/asena-linux
+
+Files: *
+Copyright: 2026 Asena Linux contributors
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify it
+ under the terms of the GNU General Public License as published by the Free
+ Software Foundation, either version 3 of the License, or any later version.
+ .
+ On Debian systems, the complete text of version 3 of the GNU General
+ Public License can be found in /usr/share/common-licenses/GPL-3.
+
+Files: data/wallpapers/*
+Copyright: 2026 Asena Linux contributors
+License: CC-BY-SA-4.0
+ See data/wallpapers/README.md for provenance and the license URL.
+ The complete license text is supplied in third-party-licenses/CC-BY-SA-4.0.txt.
+
+Files: vendor/* third-party/*
+Copyright: See the individual upstream source and license files
+License: Various
+ Third-party dependencies retain their original licensing terms. A package
+ inventory and copies of upstream license files are included in
+ third-party-licenses/ and installed by asena-common.
+
+Files: third-party/gtk4-layer-shell/*
+Copyright: 2023-2026 gtk4-layer-shell contributors
+License: LGPL-3+
+ On Debian systems, the complete text of version 3 of the GNU Lesser General
+ Public License can be found in /usr/share/common-licenses/LGPL-3.

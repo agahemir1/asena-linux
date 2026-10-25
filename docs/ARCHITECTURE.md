@@ -114,7 +114,7 @@ asena/
 │   └── wallpapers/
 ├── po/                         # tr.po (+ diğer diller), POTFILES
 ├── scripts/                    # setup-dev.sh, dev-session.sh, update-po.sh
-├── packaging/                  # wlroots/ yaması (K17); debian/ Faz 6A'da
+├── packaging/                  # Debian paket tarifleri, C test yaması ve wlroots/ (K17)
 ├── iso/                        # live-build iskeleti (Faz 6C); iso/README.md
 ├── website/                    # asenalinux.netlify.app (K29): Astro, iki dil; website/README.md
 ├── netlify.toml                # sitenin Netlify derlemesi ve başlıkları
@@ -390,3 +390,9 @@ yazısı kapalıdır. [Gerçek kabul durumu](reports/phase-03.md).
 ## Kurtarma servisi (23 Ekim 2026)
 
 K30 servis/çevrimdışı araç ve kurulum sözleşmesi [architecture/RECOVERY.md](architecture/RECOVERY.md) içindedir.
+
+## Debian paketleri ve test deposu (25 Ekim 2026)
+
+Dosya sahipliği, çevrimdışı kaynak derlemesi, özel gtk4-layer-shell kitaplığı,
+AppStream ve imza sınırları [architecture/PACKAGING.md](architecture/PACKAGING.md)
+içindedir. Kabul sonuçları [6A/6B raporunda](reports/phase-06ab.md) izlenir.

@@ -1,0 +1,203 @@
+Source: asena
+Section: x11
+Priority: optional
+Maintainer: agahemir1 <projectxurme@gmail.com>
+Build-Depends: debhelper-compat (= 13), build-essential, cargo, rustc (>= 1.85.1), pkg-config, meson, ninja-build, patchelf, python3, blueprint-compiler, gettext, libglib2.0-dev-bin, libgtk-4-dev (>= 4.18), libadwaita-1-dev (>= 1.7), libpulse-dev, libpam0g-dev, libpolkit-agent-1-dev, libpolkit-gobject-1-dev, libapt-pkg-dev, libflatpak-dev, libappstream-dev, libsoup-3.0-dev, libvte-2.91-gtk4-dev, libgstreamer1.0-dev, libgstreamer-plugins-base1.0-dev, libwayland-dev, wayland-protocols, libxml2-utils, desktop-file-utils, appstream, librsvg2-bin, locales, libc-l10n, git, patch
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+Homepage: https://asenalinux.netlify.app
+Vcs-Git: https://github.com/agahemir1/asena-linux.git
+Vcs-Browser: https://github.com/agahemir1/asena-linux
+
+Package: asena-common
+Architecture: all
+Depends: ${misc:Depends}, gsettings-desktop-schemas
+Description: Shared Asena settings and translations
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-artwork
+Architecture: all
+Depends: ${misc:Depends}, adwaita-icon-theme, librsvg2-common
+Description: Asena icons and wallpapers
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-layer-shell
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Private approved GTK layer shell 1.3.0 library
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-shell
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), asenactl, asena-lock, grim, slurp
+Description: Asena desktop shell
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-daemon
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), asena-lock, dbus, systemd, wlsunset, swayidle, procps
+Description: Asena desktop services
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-lock
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Asena session locker
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-greeter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Suggests: greetd, cage
+Description: Asena greetd login screen
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-polkit-agent
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), polkitd
+Description: Asena authorization agent
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-session
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-shell, asena-daemon, asena-polkit-agent, wayfire (>= 0.9), libwlroots-0.18 (>= 0.18.2-3+asena1), xwayland, dbus-user-session, systemd
+Description: Asena Wayland session
+ Part of the Asena desktop for Debian 13.
+
+Package: asenactl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version})
+Description: Command line control for Asena
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-packages
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), apt, dpkg, dbus, polkitd, systemd
+Description: Authorized Asena package service
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-recovery
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), python3, rsync, squashfs-tools, util-linux, grub2-common, dbus, polkitd
+Description: Asena recovery service and offline worker
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-archive
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), libarchive-tools
+Description: Open and extract archives
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-backup
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), rsync, systemd, procps
+Description: Back up personal files to another drive
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-calculator
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Calculate and convert units
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-calendar
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Keep track of your events
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-camera
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), gstreamer1.0-gtk4, gstreamer1.0-pipewire, gstreamer1.0-plugins-good
+Description: Take photos and videos
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-screenshot
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Capture the screen
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-clock
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: World clocks, stopwatch and timers
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-disks
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), udisks2, dosfstools, exfatprogs, ntfs-3g
+Description: Manage drives and volumes
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-documents
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), poppler-utils
+Description: View documents
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-files
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), gvfs, gvfs-backends
+Description: Browse files and folders
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-notes
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Write and organize notes
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-photos
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: View your photos
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-player
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), libgtk-4-media-gstreamer, gstreamer1.0-plugins-good
+Description: Play music and videos
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-settings
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), asena-daemon (= ${binary:Version}), cups-pk-helper, cups-client, accountsservice
+Description: Configure the system and desktop
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-store
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version}), asena-packages (= ${binary:Version}), appstream, flatpak, gnome-keyring
+Description: Install and update applications
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-monitor
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: View processes and resource use
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-terminal
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Use the command line
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-text
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Edit text files
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-weather
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, asena-common (= ${source:Version}), asena-artwork (= ${source:Version})
+Description: Show the weather forecast
+ Part of the Asena desktop for Debian 13.
+
+Package: asena-desktop
+Architecture: all
+Depends: ${misc:Depends}, asena-shell, asena-daemon, asena-lock, asena-greeter, asena-polkit-agent, asena-session, asenactl, asena-packages, asena-recovery, asena-archive, asena-backup, asena-calculator, asena-calendar, asena-camera, asena-screenshot, asena-clock, asena-disks, asena-documents, asena-files, asena-notes, asena-photos, asena-player, asena-settings, asena-store, asena-monitor, asena-terminal, asena-text, asena-weather, network-manager, bluez, upower, pipewire, pipewire-pulse, wireplumber, xdg-desktop-portal, xdg-desktop-portal-wlr, xdg-desktop-portal-gtk, fonts-inter, fonts-jetbrains-mono
+Description: Asena desktop and default applications
+ Part of the Asena desktop for Debian 13.

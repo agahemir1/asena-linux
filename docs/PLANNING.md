@@ -12,10 +12,19 @@ uzak `main` kaynak commit'iyle karşılaştırıldı. Geçici aktarım etiketler
 [İlk yükleme rehberi](GITHUB.md), [paket dağıtım planı](../packaging/README.md)
 ve [doğrulama raporu](reports/github-preparation.md) hazırdır. Debian CI önceki
 tercihle yalnız elle başlatılır. Bu hazırlık, APT barındırmasını veya imza
-anahtarını seçmez; 6A paketleri ve 6B arşivi henüz uygulanmadı. Sitenin mevcut
+anahtarını seçmez. Ardından kullanıcı 6A paketleri ve 6B yerel test arşiviyle
+devam edilmesini onayladı; uygulama ve kabul [raporda](reports/phase-06ab.md)
+izlenir. Sitenin mevcut
 Netlify yayını korunur. Flathub kimliği için Netlify adresi ile mevcut
 `org.asenalinux.*` kimliklerinin farklı alan adlarına karşılık geldiği kaydedildi;
 kimlik değişikliği yapılmadı.
+
+Paketleme, uygulama ve masaüstü bileşenlerinden başlar. Tek `asena` kaynak
+paketi ayrı uygulama paketleri üretir. Onaylı C 1.3.0 kitaplığı özel dizinde
+kalır; sistem paketi değiştirilmez. Yedi günlük yerel test anahtarı ve
+`asena-test-*` güven paketleri ürün anahtarı yerine kullanılmaz. Sistem kimliği,
+canlı ortam ve ISO bağlama işleri açık kalır. Bu onay dış APT/ISO yayını
+anlamına gelmez.
 
 ## Çalışma durumu
 19 Ekim 2026 ek yönlendirmesi: kullanıcı Faz 0'dan sonra diğer fazların da

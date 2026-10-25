@@ -17,7 +17,7 @@ if (( EUID != 0 )); then
 fi
 "${root[@]}" apt-get update
 "${root[@]}" apt-get install -y --no-install-recommends \
-    build-essential pkg-config rustc cargo rustfmt rust-clippy meson ninja-build curl libpam0g-dev \
+    build-essential patch pkg-config rustc cargo rustfmt rust-clippy meson ninja-build curl libpam0g-dev \
     libpulse-dev libgtk-4-dev libadwaita-1-dev libgtk4-layer-shell-dev libglib2.0-dev-bin \
     libpolkit-agent-1-dev libpolkit-gobject-1-dev \
     libapt-pkg-dev libflatpak-dev libappstream-dev libsoup-3.0-dev appstream \

@@ -1,0 +1,50 @@
+#!/usr/bin/make -f
+include /usr/share/dpkg/architecture.mk
+
+export DH_VERBOSE = 1
+export CARGO_HOME = $(CURDIR)/debian/cargo-home
+export CARGO_NET_OFFLINE = true
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export ASENA_NATIVE = $(CURDIR)/debian/native
+export PKG_CONFIG_PATH = $(ASENA_NATIVE)/lib/pkgconfig
+export LD_LIBRARY_PATH = $(ASENA_NATIVE)/lib
+export CARGO_BUILD_JOBS = 2
+export GSETTINGS_SCHEMA_DIR = $(CURDIR)/target/schemas
+export ASENA_LOCALE_DIR = $(CURDIR)/target/locale
+export GSETTINGS_BACKEND = memory
+export LOCPATH = $(CURDIR)/target/locale-data
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	meson setup --reconfigure debian/build-layer-shell third-party/gtk4-layer-shell --prefix=$(ASENA_NATIVE) --libdir=lib -Dexamples=false -Ddocs=false -Dintrospection=false -Dvapi=false -Dtests=true -Dsmoke-tests=false
+	meson compile -C debian/build-layer-shell
+	meson test -C debian/build-layer-shell --print-errorlogs
+	meson install -C debian/build-layer-shell
+
+override_dh_auto_build:
+	bash scripts/compile-data.sh
+	cargo build --workspace --release --locked --offline
+
+override_dh_auto_test:
+	cargo test --workspace --release --locked --offline
+	python3 -m unittest discover -s tests -p 'test_*.py' -v
+
+override_dh_auto_install:
+	python3 packaging/debian/install.py
+
+override_dh_auto_clean:
+	rm -rf target debian/native debian/build-layer-shell debian/cargo-home
+
+override_dh_makeshlibs:
+	dh_makeshlibs -n -V
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l$(CURDIR)/debian/asena-layer-shell/usr/lib/$(DEB_HOST_MULTIARCH)/asena -Lasena-layer-shell
+
+override_dh_installsystemd:
+	dh_installsystemd --no-start
+
+override_dh_installsystemduser:
+	dh_installsystemduser --no-enable

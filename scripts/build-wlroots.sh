@@ -26,10 +26,10 @@ for patch in "$repo"/packaging/wlroots/*.patch; do
     cp -- "$patch" debian/patches/
     printf '%s\n' "${patch##*/}" >>debian/patches/series
 done
-# .invalid marks a placeholder until the Asena archive identity is decided (K08).
-DEBFULLNAME='Asena Linux' DEBEMAIL='packaging@asenalinux.invalid' \
+DEBFULLNAME='agahemir1' DEBEMAIL='projectxurme@gmail.com' \
     dch --local +asena --distribution trixie \
     'Apply upstream output-management fix: filter mode resources by client.'
 dpkg-checkbuilddeps
 dpkg-buildpackage -us -uc -b -j"$(nproc)"
+dpkg-buildpackage -us -uc -S
 ls -1 "$work"/*.deb
