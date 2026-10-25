@@ -59,7 +59,7 @@ def main():
                         path = Path(temporary) / (app + ".metainfo.xml")
                         path.write_bytes(ET.tostring(component))
                         subprocess.run(["appstreamcli", "validate", "--no-net", str(path)], check=True)
-                elif stream.read(4) == b"\x7fELF":
+                elif stream.read(4) == b"\x7fELF" and not name.startswith("usr/lib/debug/"):
                     stream.seek(0)
                     with tempfile.NamedTemporaryFile() as temporary:
                         temporary.write(stream.read())

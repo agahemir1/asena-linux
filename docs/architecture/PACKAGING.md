@@ -64,8 +64,8 @@ C kaynak/yama özetlerini taşır. Hazırlık sırasında ağ kullanılabilir.
 yerine Asena'nın aynı sürüm kaynağı, tarifleri ve kilitli bağımlılıklarını bir
 arada taşır. Yamalı wlroots kendi Debian kaynak paketi olarak ayrıca sunulur.
 
-`build-debs-clean.sh`, temiz Debian 13 köküne yalnız bildirilen derleme
-bağımlılıklarını kurar. Ardından derlemeyi dış ağ arayüzü olmayan ayrı ağ
+`build-debs-clean.sh`, temiz Debian 13 köküne standart derleme araçlarını ve
+bildirilen derleme bağımlılıklarını kurar. Ardından dış ağ arayüzü olmayan ayrı ağ
 alanında, ayrıcalıksız `builder` hesabıyla çalıştırır. Cargo `--locked
 --offline` kullanır. Kaynak paketi, ikili paketlerden önce oluşturulur;
 derleme dizinleri ve üretilen paket ağaçları kaynak arşivine girmez.
@@ -82,6 +82,11 @@ paketlerden DEP-11 kataloğunu ve simge arşivlerini üretir. Katalog dosyaları
 `Release` içindeki SHA-256 ve SHA-512 listelerine katılır; `InRelease` ve
 `Release.gpg` bu son dosyayı imzalar. Böylece katalog da APT'nin doğruladığı
 zincirdedir. Katalog üretimi dışarıdan görsel indirmez.
+
+APT, sıkıştırılmış indeksin yanında açılmış biçimin özetini de ister.
+`expand_indexes`, Sources, DEP-11 ve simge indekslerinin açılmış biçimlerini
+üretir; iki biçim de son Release'e katılır. Arşiv normal APT önceliğini
+kullanır; böylece oturumun gerektirdiği onaylı wlroots yaması çözülebilir.
 
 Araç yapılandırması için birincil kaynak:
 [AppStream Generator yapılandırması](https://github.com/ximion/appstream-generator/blob/master/docs/asgen-config.md).

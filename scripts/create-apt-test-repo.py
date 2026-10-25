@@ -1,7 +1,10 @@
 """Create a local, short-lived, signed Asena test archive with AppStream data."""
 import argparse
+import bz2
+import gzip
 import hashlib
 import json
+import lzma
 import os
 from pathlib import Path
 import shutil
@@ -33,6 +36,22 @@ def release_bytes(directory):
                 digest = hashlib.file_digest(stream, algorithm).hexdigest()
             output += f" {digest} {path.stat().st_size:16d} {path.relative_to(directory).as_posix()}\n"
     return output.encode()
+
+
+def expand_indexes(directory):
+    """APT needs the canonical uncompressed index checksum as well."""
+    formats = {".gz": gzip.decompress, ".xz": lzma.decompress, ".bz2": bz2.decompress}
+    expanded = {}
+    for path in sorted(directory.rglob("*")):
+        if not path.is_file() or path.suffix not in formats:
+            continue
+        target = path.with_suffix("")
+        data = formats[path.suffix](path.read_bytes())
+        if target in expanded and expanded[target] != data:
+            raise ValueError(f"Compressed index variants disagree: {target}")
+        expanded[target] = data
+    for target, data in expanded.items():
+        target.write_bytes(data)
 
 
 def trust_packages(output, fingerprint, public_key, uri):
@@ -142,7 +161,7 @@ def main():
     (conf / "distributions").write_text(
         f"Origin: asena\nLabel: Asena local test archive\nCodename: {SUITE}\nSuite: {SUITE}\n"
         "Architectures: amd64 source\nComponents: main\nDescription: Local Asena acceptance test archive\n"
-        f"SignWith: {fingerprint}\nValidFor: 7d\nNotAutomatic: yes\nButAutomaticUpgrades: yes\n"
+        f"SignWith: {fingerprint}\nValidFor: 7d\n"
     )
     source_packages = sorted(args.packages.glob("*.dsc"))
     binaries = sorted(args.packages.glob("*.deb"))
@@ -163,7 +182,7 @@ def main():
     workspace.mkdir(exist_ok=True)
     config = {
         "ProjectName": "asena", "ArchiveRoot": str(output), "Backend": "debian",
-        "MediaBaseUrl": "http://127.0.0.1/asena-test-media", "MetadataType": "YAML",
+        "MediaBaseUrl": "http://127.0.0.1/asena-test-media", "MetadataType": "YAML", "ImageFormat": "png",
         "Suites": {SUITE: {"sections": ["main"], "architectures": ["amd64"], "useIconTheme": "Asena"}},
         "Features": {"noDownloads": True, "processDesktop": False, "processFonts": False, "processGStreamer": False,
                      "optimizePNGSize": False, "metadataTimestamps": False, "screenshotVideos": False},
@@ -180,6 +199,7 @@ def main():
         if path.is_file():
             shutil.copyfile(path, target / path.name)
     release = output / "dists" / SUITE / "Release"
+    expand_indexes(release.parent)
     release.write_bytes(release_bytes(release.parent))
     run("gpg", "--batch", "--yes", "--local-user", fingerprint, "--digest-algo", "SHA512",
         "--clearsign", "--output", str(release.with_name("InRelease.tmp")), str(release), env=env)

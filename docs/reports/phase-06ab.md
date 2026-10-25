@@ -31,21 +31,73 @@ Komutlar [paketleme rehberinde](../../packaging/README.md), sorumluluklar
 
 ## Doğrulama durumu
 
-Derleme ve kurulum kabulü sürüyor. Sonuçlanmamış adımlar başarılı sayılmaz.
+Yerel paket kurma, yükseltme, kaldırma ve imza kabulü geçti. Bu sonuç gerçek
+ISO, normal giriş veya ürün yayını kabulü değildir.
 
 | Kontrol | Gözlenen sonuç |
 |---|---|
-| Envanter ve imzalı Release içeriği testleri | 6 Python testi geçti |
+| Envanter ve imzalı Release içeriği testleri | 7 Python testi geçti; toplam son Python koşusu 50/50 |
 | Kaynak, XML, çeviri girdileri ve LF denetimi | Geçti; 34 crate, 200 Rust dosyası |
 | AppStream metainfo doğrulaması | 19 uygulama geçti |
 | C 1.3.0 testleri | Test düzeltmesinden sonra 53/53 geçti |
-| Asena temiz paket derlemesi | Sürüyor |
-| Paket dosya sahipliği, ELF yolları ve lintian | Bekliyor |
-| İmzalı arşiv ve katalog | Bekliyor |
-| Temiz kurulum ve kurulu uygulama pencereleri | Bekliyor |
-| İkinci sürüme yükseltme ve veri koruma | Bekliyor |
-| Yanlış anahtar, imzasız/değişmiş kayıt ve bozuk katalog reddi | Bekliyor |
-| Purge ve bağımsız uygulama tekrar kurulumu | Bekliyor |
+| Asena temiz paket derlemesi | Geçti; 218 Rust birim/doc testi, temiz kökte 49 Python testi |
+| Rust Clippy ve fmt | Linux'ta geçti; Rust kaynakları bu çalışmada değişmedi |
+| Paket dosya sahipliği ve ELF yolları | Geçti; 32 ana paket, bir C debug paketi ve yamalı wlroots |
+| Binary lintian | Her iki sürümde sıfır hata; uyarılar aşağıda |
+| Source lintian | Gereksiz build-essential beyanı düzeltildi; son denetim sürüyor |
+| İmzalı arşiv ve katalog | Geçti; Signed-By ile Sources, DEP-11 ve simgeler indirildi; 19 uygulama |
+| Temiz kurulum ve kurulu uygulama pencereleri | Shell ile Hesap Makinesi, Dosyalar, Notlar ve Yazılım açıldı |
+| İkinci sürüme yükseltme ve veri koruma | `.1` → `.2` geçti; tüm Asena paketleri, mor vurgu, kişisel dosya ve giriş yöneticisi yapılandırması doğrulandı |
+| Yanlış anahtar, imzasız/değişmiş kayıt ve bozuk katalog reddi | Dört deneme de APT tarafından reddedildi |
+| Purge ve bağımsız uygulama tekrar kurulumu | Geçti; shell olmadan Hesap Makinesi yeniden kuruldu ve açıldı; tercih ve dosya korundu |
+
+Sürümler `0.1.0~dev20261025.1` ve `0.1.0~dev20261025.2`'dir. İkinci
+sürüm aynı uygulama kodunun paket yükseltme denemesidir; yeni bir ürün sürümü
+ilanı değildir. Derleme önbelleğini kullanmak için hazırlanmış kaynak dizini
+ilk sürüm adında kaldı; ikinci kaynak paketinin sürümü changelog ve `.dsc`
+içinde `.2`'dir.
+
+Test ekranı ayrı headless Wayfire'dır. Programlar chroot içindeki `/usr/bin`
+ve `/usr/share` yollarından, geliştirici kitaplık/şema ortamı temizlenerek
+başlatıldı. Ekran görüntüleri pencere açılışını gösterir; bütün uygulama
+işlevlerinin veya Yazılım'ın yetkili sistem işlemlerinin yeni kabulü sayılmaz.
+
+Kanıtlar `target/evidence/debian/` altındadır: kurulum ve yükseltme paket
+envanterleri, `installed-libraries.log`, `asena-catalog.yml`, dört
+`rejected-*.log`, kaldırma çözüm planı ve uygulama ekran görüntüleri.
+Paketler/kaynaklar `target/packages/asena/`, herkese açık dosyalardan oluşan
+yerel arşiv `target/apt-test/` altındadır. Özel anahtar ayrı
+`target/keys/asena-test/` dizinindedir ve teslim arşivine alınmaz.
+
+### Temiz ortamda bulunan düzeltmeler
+
+- SVG testinin gerektirdiği `librsvg2-common` derleme bağımlılığı eklendi.
+- Debian'ın zaten zorunlu tuttuğu `dpkg`, `util-linux` ve `build-essential`
+  beyanları uygun alanlardan çıkarıldı; standart derleme araçları temiz kök
+  hazırlanırken kurulur.
+- APT'nin sıkıştırılmış dosya kadar açılmış indeksin özetine de ihtiyaç duyduğu
+  doğrulandı. Sources, DEP-11 ve simgelerin açılmış biçimleri imzalı Release'e
+  katıldı; bu durum için regresyon testi eklendi.
+- Test arşivi normal APT önceliğini kullanır. Böylece oturumun istediği
+  onaylı `wlroots +asena1`, Debian'ın eski sürümü yerine çözülebilir.
+- Tekrarda eski debug çıktısı kalmaması için Debhelper durumu sıfırlanır;
+  Cargo/native derleme önbelleği korunur. Rust çıktılarında debug bilgisi
+  olmadığından yalnız C kitaplığının ayrı debug paketi üretilir.
+
+`asena-desktop` bütün varsayılan uygulamalara Depends ile bağlıdır. Notlar'ı
+kaldırmanın simülasyonu metapaketi de kaldırır; shell/session/daemon aynı
+işlemde kaldırılmaz. Otomatik kaldırmadan önce korunacak paketleri elle
+kurulmuş olarak işaretlemek gerekir; farklı metapaket politikası ayrı karardır.
+
+Lintian uyarıları GUI başlatıcılarında man sayfası olmaması, özel C kitaplığı
+adlandırması ve çevrimdışı güncelleme/DPKG erişiminin standart dışı görünmesi
+gibi alanlarda kalır. Kapsayıcı bastırma eklenmedi. Kaynakların bit düzeyinde
+yeniden üretilebilirliği denenmedi.
+
+Çalışma sırasında VM iki kez kapandı; diskteki önbellekten devam edildi.
+Ek debug derlemesi diski doldurunca yalnız derleme önbelleği temizlendi.
+Paket kabulü daha sonra boş alan varken yeniden çalıştırıldı. Bu kesintiler
+başarılı test sonucu olarak sayılmadı.
 
 ### Yukarı akış test yarışının düzeltmesi
 
@@ -76,3 +128,4 @@ barındırma ve yayın adımı K08'de kesinleşir. Dış CI çalıştırılmadı
 - Sistem kimliği, canlı ortam paketleri ve ISO'nun yerel arşivi tüketmesi.
 - K22 için adw-gtk3 paketi ve Flatpak tema kabulü.
 - Uygulamalar için gerçek ekran görüntüleri ve yayın geçmişi.
+- CLI man sayfaları ve isteğe bağlı uygulamaların metapaket politikası.

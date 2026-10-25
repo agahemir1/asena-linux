@@ -36,9 +36,11 @@ def tree(package, source, destination):
 def metadata(package, app):
     component = ET.Element("component", type="desktop-application")
     fields = {"id": app["id"], "metadata_license": "CC0-1.0", "project_license": "GPL-3.0-or-later",
-              "name": app["Name"], "summary": app["Comment"], "developer_name": "Asena Linux contributors"}
+              "name": app["Name"], "summary": app["Comment"]}
     for tag, value in fields.items():
         ET.SubElement(component, tag).text = value
+    developer = ET.SubElement(component, "developer", id="org.asenalinux")
+    ET.SubElement(developer, "name").text = "Asena Linux contributors"
     for tag, key in (("name", "Name[tr]"), ("summary", "Comment[tr]")):
         if key in app:
             ET.SubElement(component, tag, {"{http://www.w3.org/XML/1998/namespace}lang": "tr"}).text = app[key]

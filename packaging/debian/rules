@@ -40,6 +40,10 @@ override_dh_auto_clean:
 override_dh_makeshlibs:
 	dh_makeshlibs -n -V
 
+override_dh_strip:
+	dh_strip -pasena-layer-shell
+	dh_strip --remaining-packages --no-automatic-dbgsym
+
 override_dh_shlibdeps:
 	dh_shlibdeps -l$(CURDIR)/debian/asena-layer-shell/usr/lib/$(DEB_HOST_MULTIARCH)/asena -Lasena-layer-shell
 

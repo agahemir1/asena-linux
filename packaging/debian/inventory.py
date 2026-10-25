@@ -42,8 +42,8 @@ def packages(root):
         "asena-polkit-agent": ("any", BASE + ", polkitd", "Asena authorization agent"),
         "asena-session": ("any", "asena-shell, asena-daemon, asena-polkit-agent, wayfire (>= 0.9), libwlroots-0.18 (>= 0.18.2-3+asena1), xwayland, dbus-user-session, systemd", "Asena Wayland session"),
         "asenactl": ("any", "asena-common (= ${source:Version})", "Command line control for Asena"),
-        "asena-packages": ("any", "asena-common (= ${source:Version}), apt, dpkg, dbus, polkitd, systemd", "Authorized Asena package service"),
-        "asena-recovery": ("any", BASE + ", python3, rsync, squashfs-tools, util-linux, grub2-common, dbus, polkitd", "Asena recovery service and offline worker"),
+        "asena-packages": ("any", "asena-common (= ${source:Version}), apt, dbus, polkitd, systemd", "Authorized Asena package service"),
+        "asena-recovery": ("any", BASE + ", python3, rsync, squashfs-tools, grub2-common, dbus, polkitd", "Asena recovery service and offline worker"),
     }
     for binary, app in applications(root).items():
         deps = BASE + (", " + EXTRA[binary] if binary in EXTRA else "")
@@ -55,8 +55,8 @@ def packages(root):
 
 
 def control(root):
-    build = "debhelper-compat (= 13), build-essential, cargo, rustc (>= 1.85.1), pkg-config, meson, ninja-build, patchelf, python3, blueprint-compiler, gettext, libglib2.0-dev-bin, libgtk-4-dev (>= 4.18), libadwaita-1-dev (>= 1.7), libpulse-dev, libpam0g-dev, libpolkit-agent-1-dev, libpolkit-gobject-1-dev, libapt-pkg-dev, libflatpak-dev, libappstream-dev, libsoup-3.0-dev, libvte-2.91-gtk4-dev, libgstreamer1.0-dev, libgstreamer-plugins-base1.0-dev, libwayland-dev, wayland-protocols, libxml2-utils, desktop-file-utils, appstream, librsvg2-bin, locales, libc-l10n"
-    build += ", git, patch"
+    build = "debhelper-compat (= 13), cargo, rustc (>= 1.85.1), pkg-config, meson, ninja-build, patchelf, python3, blueprint-compiler, gettext, libglib2.0-dev-bin, libgtk-4-dev (>= 4.18), libadwaita-1-dev (>= 1.7), libpulse-dev, libpam0g-dev, libpolkit-agent-1-dev, libpolkit-gobject-1-dev, libapt-pkg-dev, libflatpak-dev, libappstream-dev, libsoup-3.0-dev, libvte-2.91-gtk4-dev, libgstreamer1.0-dev, libgstreamer-plugins-base1.0-dev, libwayland-dev, wayland-protocols, libxml2-utils, desktop-file-utils, appstream, librsvg2-bin, locales, libc-l10n"
+    build += ", git, patch, librsvg2-common"
     text = f"Source: asena\nSection: x11\nPriority: optional\nMaintainer: agahemir1 <projectxurme@gmail.com>\nBuild-Depends: {build}\nStandards-Version: 4.7.2\nRules-Requires-Root: no\nHomepage: https://asenalinux.netlify.app\nVcs-Git: https://github.com/agahemir1/asena-linux.git\nVcs-Browser: https://github.com/agahemir1/asena-linux\n"
     for name, (arch, deps, description) in packages(root).items():
         depends = (["${shlibs:Depends}"] if arch == "any" else []) + ["${misc:Depends}"]

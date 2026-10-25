@@ -53,6 +53,8 @@ case $operation in
         if grep -F 'not found' "$evidence/installed-libraries.log"; then
             printf '%s\n' 'An installed runtime library is missing.' >&2; exit 1
         fi
+        # The CLI sets the test preference; applications use GIO directly.
+        inside apt-get install -y --no-install-recommends libglib2.0-bin
         if ! inside id asena-package-test >/dev/null 2>&1; then
             inside useradd --create-home asena-package-test
         fi
@@ -64,11 +66,26 @@ case $operation in
         inside dpkg-query -W --showformat="\${Package} \${Version}\n" 'asena-*' asenactl > "$evidence/installed-v1.txt"
         # The first update precedes installing AppStream and its APT hooks.
         inside apt-get -o APT::Update::Error-Mode=any update
+        : > "$evidence/asena-catalog.yml"
+        mapfile -t catalogs < <(find "$root/var/lib/apt/lists" -maxdepth 1 -type f -name '*asena-test*Components-amd64*')
+        [[ ${#catalogs[@]} -gt 0 ]]
+        for catalog in "${catalogs[@]}"; do
+            inside /usr/lib/apt/apt-helper cat-file "${catalog#"$root"}" >> "$evidence/asena-catalog.yml"
+        done
+        grep -q '^Origin: asena' "$evidence/asena-catalog.yml"
+        grep -q '^ID: org.asenalinux.Calculator' "$evidence/asena-catalog.yml"
         inside appstreamcli refresh-cache --force
         inside appstreamcli get org.asenalinux.Calculator > "$evidence/catalog-calculator.txt"
+        inside apt-get -s remove asena-notes > "$evidence/remove-one-app.plan"
+        grep -q '^Remv asena-notes ' "$evidence/remove-one-app.plan"
+        grep -q '^Remv asena-desktop ' "$evidence/remove-one-app.plan"
+        ! grep -Eq '^Remv (asena-shell|asena-session|asena-daemon)( |$)' "$evidence/remove-one-app.plan"
         ;;
     upgrade)
         inside apt-get -o APT::Update::Error-Mode=any update
+        previous=$(awk '$1 == "asena-desktop" {print $2}' "$evidence/installed-v1.txt")
+        expected=$(inside apt-cache policy asena-desktop | sed -n 's/ *Candidate: //p')
+        inside dpkg --compare-versions "$expected" gt "$previous"
         inside apt-get install -y --no-install-recommends --only-upgrade asena-desktop
         inside apt-get upgrade -y --no-install-recommends
         [[ $(preference get) == "'purple'" ]]
@@ -76,6 +93,9 @@ case $operation in
         grep -qx existing-display-manager-config "$root/etc/greetd/config.toml"
         inside dpkg-query -W --showformat="\${Package} \${Version}\n" 'asena-*' asenactl > "$evidence/installed-v2.txt"
         ! cmp -s "$evidence/installed-v1.txt" "$evidence/installed-v2.txt"
+        while read -r package version; do
+            [[ $package == asena-test-* ]] || [[ $version == "$expected" ]]
+        done < "$evidence/installed-v2.txt"
         ;;
     purge)
         mapfile -t packages < <(inside dpkg-query -W --showformat="\${Package}\n" 'asena-*' asenactl)
@@ -86,6 +106,8 @@ case $operation in
         inside dpkg -i /opt/asena-trust/asena-test-archive-keyring_0.1.0_all.deb \
             /opt/asena-trust/asena-test-sources_0.1.0_all.deb
         inside apt-get -o APT::Update::Error-Mode=any update
+        inside appstreamcli refresh-cache --force
+        inside appstreamcli get org.asenalinux.Calculator > "$evidence/catalog-before-reinstall.txt"
         inside apt-get install -y --no-install-recommends asena-calculator
         [[ $(preference get) == "'purple'" ]]
         inside test ! -e /usr/bin/asena-shell

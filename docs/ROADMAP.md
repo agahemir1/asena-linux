@@ -8,12 +8,14 @@ paket işlemleri kaynakta; son VM kontrolleri raporlarda kayıtlıdır.
 GitHub `asena-linux` deposu için yerel dosyalar ve ilk yükleme rehberi hazırlandı.
 [Uzak depo](https://github.com/agahemir1/asena-linux) kullanıcı tarafından açıldı;
 ilk kaynak yüklemesi tamamlandı ve uzak `main` doğrulandı.
-Debian paketleri, imzalı Asena APT deposu, gerçek ISO
-ve Calamares kurulumu henüz yoktur. Görsel, fiziksel donanım ve normal giriş
+32 ana Debian paketi ve 19 uygulamalı imzalı yerel APT test deposu üretildi;
+kurma/yükseltme/kaldırma ve dört imza reddi denemesi geçti.
+Gerçek ISO ve Calamares kurulumu henüz yoktur. Görsel, fiziksel donanım ve normal giriş
 kabulü açık tutulur. GitHub Actions yalnız elle başlatılacak şekilde hazırdır;
 dış koşu yapılmadı. [Uygulama raporu](reports/apps-recovery.md),
 [arayüz raporu](reports/ui-polish-2026-10-25.md),
-[GitHub hazırlığı](reports/github-preparation.md).
+[GitHub hazırlığı](reports/github-preparation.md),
+[yerel paket ve depo kabulü](reports/phase-06ab.md).
 
 **T0:** [Odak tasarımı](../prompts/T0-tasarim.md) seçildi; blur yolu onaylı
 Wayfire'dır. Uygulama simgelerinin ve nihai ekranların kullanıcı görsel kabulü,
@@ -27,7 +29,7 @@ gerçek GPU ölçümleri açıktır.
 | 3 | Hızlı ayarlar ve sistem servisleri | [03-hizli-ayarlar.md](../prompts/03-hizli-ayarlar.md) | Ses/ağ/güç, medya/tepsi ve daemon kaynakları; 34 Rust + 8 Python testi geçti, donanım/görsel kabul açık | 🟨 |
 | 4 | Oturum ve güvenlik | [04-oturum-guvenlik.md](../prompts/04-oturum-guvenlik.md) | Kilit/PAM, idle, greeter ve polkit ajanı; 56 Rust + 8 Python testi geçti, gerçek giriş/uyku açık | 🟨 |
 | 5 | Ayarlar Merkezi | [05-ayarlar.md](../prompts/05-ayarlar.md) | 20 panel kaynakta; klavye/fare/dil daemon'la uygulanıyor; ekran düzeni (5D) VM'de geçti, gerçek monitörler açık; görsel kabul açık | 🟨 |
-| 6 | Dağıtım | [06-dagitim.md](../prompts/06-dagitim.md), [06f-yazilim.md](../prompts/06f-yazilim.md) | Depo git'te (22 Ekim); `iso/` live-build iskeleti ve `scripts/build-iso.sh` hazır, ISO derlenmedi. 23 Ekim: XanMod çekirdeği, markalama ve sistem yapısı kararları VM önyükleme testinde geçti; Yazılım ve paket servisi (6F) VM'de çalışıyor ([rapor](reports/phase-06f.md)). .deb paketleri, APT deposu, Calamares ve Hoş geldin başlamadı | 🟨 |
+| 6 | Dağıtım | [06-dagitim.md](../prompts/06-dagitim.md), [06f-yazilim.md](../prompts/06f-yazilim.md) | 32 ana .deb ve 19 uygulamalı yerel imzalı APT arşivi üretildi; kur/yükselt/kaldır ve imza kabulü geçti ([6A/6B](reports/phase-06ab.md)). Yazılım/paket servisi 6F raporunda. Ürün anahtarı, dış APT yayını, ISO/Calamares ve Hoş geldin açık | 🟨 |
 | 7 | Cila | [07-cila.md](../prompts/07-cila.md) | Ekran görüntüsü portal yoluyla erken eklendi (21 Ekim); erişilebilirlik ve performans başlamadı | 🟨 |
 
 Durum: ⬜ başlamadı · 🟨 sürüyor · ✅ bitti
@@ -125,3 +127,9 @@ GitHub'da çalıştırılmadı. Faz 6A/6B tamamlandı sayılmaz.
 Aynı gün kullanıcı uzak adresi paylaştı; güncel uygulama kaynakları ve GitHub
 hazırlığı ayrı commit'lerle `main` dalına yüklendi. Geçici aktarım etiketleri
 temizlendi. Dış CI elle başlatılmayı bekler.
+
+25 Ekim ek sonuç: temiz Debian kökünde çevrimdışı paket derlemesi, 218 Rust ve
+50 Python kontrolü, yerel imzalı APT arşivi ve `.1` → `.2` yükseltmesi
+doğrulandı. Dört paket uygulaması açıldı; yanlış/eksik/değiştirilmiş imza ve
+bozuk katalog reddedildi. Faz 6'nın ISO ve normal giriş kapıları açıktır.
+[Paket raporu](reports/phase-06ab.md).

@@ -45,6 +45,12 @@ Sistem kimliği ve canlı ortam paketlerinin ISO'ya bağlanması ayrı adımdır
 Paket kurulumu mevcut display manager'ı kendiliğinden değiştirmez.
 Greeter etkinleştirmesi yönetici seçimi olarak kalır.
 
+`asena-desktop`, varsayılan uygulamalara `Depends` ile bağlıdır. Bunlardan
+birini kaldırmak bu metapaketi de kaldırır; kalan masaüstü paketleri aynı
+işlemde kaldırılmaz. Sonradan `autoremove` kullanmadan önce korunacak paketler
+elle kurulmuş olarak işaretlenmelidir. Tek uygulama kaldırmanın çözüm planı
+kurulum testinde ayrıca kaydedilir.
+
 ## Uygulamaları Yazılım'da göster
 
 Her masaüstü uygulamasının paketine kimliğiyle eşleşen
@@ -83,6 +89,10 @@ asıl derleme ayrıcalıksız hesapla, dış ağa erişimi olmadan yapılır.
 `.deb`, `.dsc`, `.tar.xz`, `.changes` ve `.buildinfo` dosyaları
 `target/packages/asena/` altında oluşur. Özel anahtarlar bu dosyalara girmez.
 
+Tarif düzeltmesini aynı hazırlanmış ağaçta hızlıca denemek için derleme
+komutuna `--binary-only` eklenebilir. Dağıtım öncesinde normal komutla güncel
+kaynak arşivi de üretilmelidir.
+
 Yamalı wlroots için Debian kaynak depoları açık olmalı ve
 `sudo apt-get build-dep wlroots` tamamlanmış olmalıdır:
 
@@ -110,8 +120,9 @@ sudo bash scripts/test-installed-apps.sh
 İlk komut yedi günlük test anahtarıyla arşivi imzalar; katalog ve simgeleri
 gerçek paketlerden üretip aynı imza zincirine ekler. Güven paketleri
 `target/apt-test-trust/`, özel anahtar `target/keys/asena-test/` altındadır.
-`test-installed-apps.sh`, çalışan geliştirme oturumunun ekranını kullanır;
-uygulamaları temiz test kökündeki `/usr/bin` ve sistem veri yollarından açar.
+`test-installed-apps.sh`, ayrı bir headless Wayfire ekranı açar; kurulu shell
+ve uygulamaları temiz test kökündeki `/usr/bin` ve sistem veri yollarından
+çalıştırır. Geliştirme ikililerine ihtiyaç duymaz.
 
 Yükseltme denemesinde kaynak hazırlığı farklı bir Debian sürümüyle yeniden
 yapılır, yeni paketler aynı arşive aktarılır. Ardından:
