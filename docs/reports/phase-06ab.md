@@ -44,7 +44,7 @@ ISO, normal giriş veya ürün yayını kabulü değildir.
 | Rust Clippy ve fmt | Linux'ta geçti; Rust kaynakları bu çalışmada değişmedi |
 | Paket dosya sahipliği ve ELF yolları | Geçti; 32 ana paket, bir C debug paketi ve yamalı wlroots |
 | Binary lintian | Her iki sürümde sıfır hata; uyarılar aşağıda |
-| Source lintian | Gereksiz build-essential beyanı düzeltildi; son denetim sürüyor |
+| Source lintian | Son `.2` kaynak paketinde sıfır hata; uyarılar aşağıda |
 | İmzalı arşiv ve katalog | Geçti; Signed-By ile Sources, DEP-11 ve simgeler indirildi; 19 uygulama |
 | Temiz kurulum ve kurulu uygulama pencereleri | Shell ile Hesap Makinesi, Dosyalar, Notlar ve Yazılım açıldı |
 | İkinci sürüme yükseltme ve veri koruma | `.1` → `.2` geçti; tüm Asena paketleri, mor vurgu, kişisel dosya ve giriş yöneticisi yapılandırması doğrulandı |
@@ -91,7 +91,11 @@ kurulmuş olarak işaretlemek gerekir; farklı metapaket politikası ayrı karar
 
 Lintian uyarıları GUI başlatıcılarında man sayfası olmaması, özel C kitaplığı
 adlandırması ve çevrimdışı güncelleme/DPKG erişiminin standart dışı görünmesi
-gibi alanlarda kalır. Kapsayıcı bastırma eklenmedi. Kaynakların bit düzeyinde
+gibi alanlarda kalır. Kaynak denetiminde ayrıca `pkg-config` geçiş paketi,
+CC BY-SA metninin DEP-5 paragrafındaki kısa gösterimi, upstream
+`Cargo.toml.orig` ve fazla genel dosya deseni uyarıları vardır. Tam CC BY-SA
+metni kaynakta ve artwork paketinde bulunur. Kapsayıcı bastırma eklenmedi.
+Kaynakların bit düzeyinde
 yeniden üretilebilirliği denenmedi.
 
 Çalışma sırasında VM iki kez kapandı; diskteki önbellekten devam edildi.
@@ -129,3 +133,7 @@ barındırma ve yayın adımı K08'de kesinleşir. Dış CI çalıştırılmadı
 - K22 için adw-gtk3 paketi ve Flatpak tema kabulü.
 - Uygulamalar için gerçek ekran görüntüleri ve yayın geçmişi.
 - CLI man sayfaları ve isteğe bağlı uygulamaların metapaket politikası.
+- Kaynak DEP-5 biçimi ve kalan lintian uyarıları.
+- Hesap Makinesi'nde sanal klavyeyle `2+2` ardından Enter denemesi sonuç
+  ekranına geçmedi; gerçek klavye/Enter yolu ayrıca incelenecek. Bu çalışmanın
+  pencere kabulü aritmetik giriş akışını doğrulamış sayılmaz.
